@@ -1,0 +1,561 @@
+<?xml version="1.0"?>
+<MaterialConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <NurseryLevel1>
+    <Term>
+      <Weeks>
+        <Week>
+          <WeekNum>1</WeekNum>
+          <lessons>
+            <Lesson>
+              <LessonNum>1</LessonNum>
+              <videos>
+                <Video>
+                  <Name>Test video</Name>
+                  <ResourceLocation />
+                </Video>
+                <Video>
+                  <Name>Test video</Name>
+                  <ResourceLocation />
+                </Video>
+              </videos>
+            </Lesson>
+            <Lesson>
+              <LessonNum>2</LessonNum>
+              <videos>
+                <Video>
+                  <Name>Test video</Name>
+                  <ResourceLocation />
+                </Video>
+                <Video>
+                  <Name>Test video</Name>
+                  <ResourceLocation />
+                </Video>
+              </videos>
+            </Lesson>
+            <Lesson>
+              <LessonNum>3</LessonNum>
+              <videos>
+                <Video>
+                  <Name>Test video</Name>
+                  <ResourceLocation />
+                </Video>
+                <Video>
+                  <Name>Test video</Name>
+                  <ResourceLocation />
+                </Video>
+              </videos>
+            </Lesson>
+          </lessons>
+        </Week>
+        <Week>
+          <WeekNum>2</WeekNum>
+          <lessons>
+            <Lesson>
+              <LessonNum>1</LessonNum>
+              <videos>
+                <Video>
+                  <Name>Test video</Name>
+                  <ResourceLocation />
+                </Video>
+                <Video>
+                  <Name>Test video</Name>
+                  <ResourceLocation />
+                </Video>
+              </videos>
+            </Lesson>
+            <Lesson>
+              <LessonNum>2</LessonNum>
+              <videos>
+                <Video>
+                  <Name>Test video</Name>
+                  <ResourceLocation />
+                </Video>
+                <Video>
+                  <Name>Test video</Name>
+                  <ResourceLocation />
+                </Video>
+              </videos>
+            </Lesson>
+            <Lesson>
+              <LessonNum>3</LessonNum>
+              <videos>
+                <Video>
+                  <Name>Test video</Name>
+                  <ResourceLocation />
+                </Video>
+                <Video>
+                  <Name>Test video</Name>
+                  <ResourceLocation />
+                </Video>
+              </videos>
+            </Lesson>
+          </lessons>
+        </Week>
+        <Week>
+          <WeekNum>3</WeekNum>
+          <lessons>
+            <Lesson>
+              <LessonNum>1</LessonNum>
+              <videos>
+                <Video>
+                  <Name>Test video</Name>
+                  <ResourceLocation />
+                </Video>
+                <Video>
+                  <Name>Test video</Name>
+                  <ResourceLocation />
+                </Video>
+              </videos>
+            </Lesson>
+            <Lesson>
+              <LessonNum>2</LessonNum>
+              <videos>
+                <Video>
+                  <Name>Test video</Name>
+                  <ResourceLocation />
+                </Video>
+                <Video>
+                  <Name>Test video</Name>
+                  <ResourceLocation />
+                </Video>
+              </videos>
+            </Lesson>
+            <Lesson>
+              <LessonNum>3</LessonNum>
+              <videos>
+                <Video>
+                  <Name>Test video</Name>
+                  <ResourceLocation />
+                </Video>
+                <Video>
+                  <Name>Test video</Name>
+                  <ResourceLocation />
+                </Video>
+              </videos>
+            </Lesson>
+          </lessons>
+        </Week>
+        <Week>
+          <WeekNum>4</WeekNum>
+          <lessons>
+            <Lesson>
+              <LessonNum>1</LessonNum>
+              <videos>
+                <Video>
+                  <Name>Test video</Name>
+                  <ResourceLocation />
+                </Video>
+                <Video>
+                  <Name>Test video</Name>
+                  <ResourceLocation />
+                </Video>
+              </videos>
+            </Lesson>
+            <Lesson>
+              <LessonNum>2</LessonNum>
+              <videos>
+                <Video>
+                  <Name>Test video</Name>
+                  <ResourceLocation />
+                </Video>
+                <Video>
+                  <Name>Test video</Name>
+                  <ResourceLocation />
+                </Video>
+              </videos>
+            </Lesson>
+            <Lesson>
+              <LessonNum>3</LessonNum>
+              <videos>
+                <Video>
+                  <Name>Test video</Name>
+                  <ResourceLocation />
+                </Video>
+                <Video>
+                  <Name>Test video</Name>
+                  <ResourceLocation />
+                </Video>
+              </videos>
+            </Lesson>
+          </lessons>
+        </Week>
+      </Weeks>
+      <TermNum>1</TermNum>
+    </Term>
+    <Term>
+      <Weeks>
+        <Week>
+          <WeekNum>1</WeekNum>
+          <lessons>
+            <Lesson>
+              <LessonNum>1</LessonNum>
+              <videos>
+                <Video>
+                  <Name>Test video</Name>
+                  <ResourceLocation />
+                </Video>
+                <Video>
+                  <Name>Test video</Name>
+                  <ResourceLocation />
+                </Video>
+              </videos>
+            </Lesson>
+            <Lesson>
+              <LessonNum>2</LessonNum>
+              <videos>
+                <Video>
+                  <Name>Test video</Name>
+                  <ResourceLocation />
+                </Video>
+                <Video>
+                  <Name>Test video</Name>
+                  <ResourceLocation />
+                </Video>
+              </videos>
+            </Lesson>
+            <Lesson>
+              <LessonNum>3</LessonNum>
+              <videos>
+                <Video>
+                  <Name>Test video</Name>
+                  <ResourceLocation />
+                </Video>
+                <Video>
+                  <Name>Test video</Name>
+                  <ResourceLocation />
+                </Video>
+              </videos>
+            </Lesson>
+          </lessons>
+        </Week>
+        <Week>
+          <WeekNum>2</WeekNum>
+          <lessons>
+            <Lesson>
+              <LessonNum>1</LessonNum>
+              <videos>
+                <Video>
+                  <Name>Test video</Name>
+                  <ResourceLocation />
+                </Video>
+                <Video>
+                  <Name>Test video</Name>
+                  <ResourceLocation />
+                </Video>
+              </videos>
+            </Lesson>
+            <Lesson>
+              <LessonNum>2</LessonNum>
+              <videos>
+                <Video>
+                  <Name>Test video</Name>
+                  <ResourceLocation />
+                </Video>
+                <Video>
+                  <Name>Test video</Name>
+                  <ResourceLocation />
+                </Video>
+              </videos>
+            </Lesson>
+            <Lesson>
+              <LessonNum>3</LessonNum>
+              <videos>
+                <Video>
+                  <Name>Test video</Name>
+                  <ResourceLocation />
+                </Video>
+                <Video>
+                  <Name>Test video</Name>
+                  <ResourceLocation />
+                </Video>
+              </videos>
+            </Lesson>
+          </lessons>
+        </Week>
+        <Week>
+          <WeekNum>3</WeekNum>
+          <lessons>
+            <Lesson>
+              <LessonNum>1</LessonNum>
+              <videos>
+                <Video>
+                  <Name>Test video</Name>
+                  <ResourceLocation />
+                </Video>
+                <Video>
+                  <Name>Test video</Name>
+                  <ResourceLocation />
+                </Video>
+              </videos>
+            </Lesson>
+            <Lesson>
+              <LessonNum>2</LessonNum>
+              <videos>
+                <Video>
+                  <Name>Test video</Name>
+                  <ResourceLocation />
+                </Video>
+                <Video>
+                  <Name>Test video</Name>
+                  <ResourceLocation />
+                </Video>
+              </videos>
+            </Lesson>
+            <Lesson>
+              <LessonNum>3</LessonNum>
+              <videos>
+                <Video>
+                  <Name>Test video</Name>
+                  <ResourceLocation />
+                </Video>
+                <Video>
+                  <Name>Test video</Name>
+                  <ResourceLocation />
+                </Video>
+              </videos>
+            </Lesson>
+          </lessons>
+        </Week>
+        <Week>
+          <WeekNum>4</WeekNum>
+          <lessons>
+            <Lesson>
+              <LessonNum>1</LessonNum>
+              <videos>
+                <Video>
+                  <Name>Test video</Name>
+                  <ResourceLocation />
+                </Video>
+                <Video>
+                  <Name>Test video</Name>
+                  <ResourceLocation />
+                </Video>
+              </videos>
+            </Lesson>
+            <Lesson>
+              <LessonNum>2</LessonNum>
+              <videos>
+                <Video>
+                  <Name>Test video</Name>
+                  <ResourceLocation />
+                </Video>
+                <Video>
+                  <Name>Test video</Name>
+                  <ResourceLocation />
+                </Video>
+              </videos>
+            </Lesson>
+            <Lesson>
+              <LessonNum>3</LessonNum>
+              <videos>
+                <Video>
+                  <Name>Test video</Name>
+                  <ResourceLocation />
+                </Video>
+                <Video>
+                  <Name>Test video</Name>
+                  <ResourceLocation />
+                </Video>
+              </videos>
+            </Lesson>
+          </lessons>
+        </Week>
+      </Weeks>
+      <TermNum>2</TermNum>
+    </Term>
+    <Term>
+      <Weeks>
+        <Week>
+          <WeekNum>1</WeekNum>
+          <lessons>
+            <Lesson>
+              <LessonNum>1</LessonNum>
+              <videos>
+                <Video>
+                  <Name>Test video</Name>
+                  <ResourceLocation />
+                </Video>
+                <Video>
+                  <Name>Test video</Name>
+                  <ResourceLocation />
+                </Video>
+              </videos>
+            </Lesson>
+            <Lesson>
+              <LessonNum>2</LessonNum>
+              <videos>
+                <Video>
+                  <Name>Test video</Name>
+                  <ResourceLocation />
+                </Video>
+                <Video>
+                  <Name>Test video</Name>
+                  <ResourceLocation />
+                </Video>
+              </videos>
+            </Lesson>
+            <Lesson>
+              <LessonNum>3</LessonNum>
+              <videos>
+                <Video>
+                  <Name>Test video</Name>
+                  <ResourceLocation />
+                </Video>
+                <Video>
+                  <Name>Test video</Name>
+                  <ResourceLocation />
+                </Video>
+              </videos>
+            </Lesson>
+          </lessons>
+        </Week>
+        <Week>
+          <WeekNum>2</WeekNum>
+          <lessons>
+            <Lesson>
+              <LessonNum>1</LessonNum>
+              <videos>
+                <Video>
+                  <Name>Test video</Name>
+                  <ResourceLocation />
+                </Video>
+                <Video>
+                  <Name>Test video</Name>
+                  <ResourceLocation />
+                </Video>
+              </videos>
+            </Lesson>
+            <Lesson>
+              <LessonNum>2</LessonNum>
+              <videos>
+                <Video>
+                  <Name>Test video</Name>
+                  <ResourceLocation />
+                </Video>
+                <Video>
+                  <Name>Test video</Name>
+                  <ResourceLocation />
+                </Video>
+              </videos>
+            </Lesson>
+            <Lesson>
+              <LessonNum>3</LessonNum>
+              <videos>
+                <Video>
+                  <Name>Test video</Name>
+                  <ResourceLocation />
+                </Video>
+                <Video>
+                  <Name>Test video</Name>
+                  <ResourceLocation />
+                </Video>
+              </videos>
+            </Lesson>
+          </lessons>
+        </Week>
+        <Week>
+          <WeekNum>3</WeekNum>
+          <lessons>
+            <Lesson>
+              <LessonNum>1</LessonNum>
+              <videos>
+                <Video>
+                  <Name>Test video</Name>
+                  <ResourceLocation />
+                </Video>
+                <Video>
+                  <Name>Test video</Name>
+                  <ResourceLocation />
+                </Video>
+              </videos>
+            </Lesson>
+            <Lesson>
+              <LessonNum>2</LessonNum>
+              <videos>
+                <Video>
+                  <Name>Test video</Name>
+                  <ResourceLocation />
+                </Video>
+                <Video>
+                  <Name>Test video</Name>
+                  <ResourceLocation />
+                </Video>
+              </videos>
+            </Lesson>
+            <Lesson>
+              <LessonNum>3</LessonNum>
+              <videos>
+                <Video>
+                  <Name>Test video</Name>
+                  <ResourceLocation />
+                </Video>
+                <Video>
+                  <Name>Test video</Name>
+                  <ResourceLocation />
+                </Video>
+              </videos>
+            </Lesson>
+          </lessons>
+        </Week>
+        <Week>
+          <WeekNum>4</WeekNum>
+          <lessons>
+            <Lesson>
+              <LessonNum>1</LessonNum>
+              <videos>
+                <Video>
+                  <Name>Test video</Name>
+                  <ResourceLocation />
+                </Video>
+                <Video>
+                  <Name>Test video</Name>
+                  <ResourceLocation />
+                </Video>
+              </videos>
+            </Lesson>
+            <Lesson>
+              <LessonNum>2</LessonNum>
+              <videos>
+                <Video>
+                  <Name>Test video</Name>
+                  <ResourceLocation />
+                </Video>
+                <Video>
+                  <Name>Test video</Name>
+                  <ResourceLocation />
+                </Video>
+              </videos>
+            </Lesson>
+            <Lesson>
+              <LessonNum>3</LessonNum>
+              <videos>
+                <Video>
+                  <Name>Test video</Name>
+                  <ResourceLocation />
+                </Video>
+                <Video>
+                  <Name>Test video</Name>
+                  <ResourceLocation />
+                </Video>
+              </videos>
+            </Lesson>
+          </lessons>
+        </Week>
+      </Weeks>
+      <TermNum>3</TermNum>
+    </Term>
+  </NurseryLevel1>
+  <NurseryLevel2 />
+  <PrimaryGrade1 />
+  <PrimaryGrade2 />
+  <PrimaryGrade3 />
+  <PrimaryGrade4 />
+  <PrimaryGrade5 />
+  <PrimaryGrade6 />
+  <SecondaryJuniorGrade1 />
+  <SecondaryJuniorGrade2 />
+  <SecondaryJuniorGrade3 />
+  <SecondarySeniorGrade4 />
+  <SecondarySeniorGrade5 />
+  <SecondarySeniorGrade6 />
+</MaterialConfig>
