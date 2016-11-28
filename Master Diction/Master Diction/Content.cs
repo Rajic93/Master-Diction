@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 using System.Xml;
 using System.Xml.Serialization;
 using Master_Diction.Classes;
@@ -35,6 +36,10 @@ namespace Master_Diction
 
         private void Content_Load(object sender, EventArgs e)
         {
+            panel2.Controls.Add(new Instructions()
+            {
+                Dock = DockStyle.Fill
+            });
             LoadConfiguration();
             RenderContent();
         }
@@ -91,20 +96,14 @@ namespace Master_Diction
                     break;
             }
 
-
-            //foreach (Term term in contentList)
-            //{
-            //    FlowLayoutPanel termFlowLayoutPanel = new FlowLayoutPanel()
-            //    {
-            //        FlowDirection = FlowDirection.TopDown
-            //    };
-            //    foreach (Week week in term.Weeks)
-            //    {
-            //        WeekControl weekControl = new WeekControl(week);
-            //        termFlowLayoutPanel.Controls.Add(weekControl);
-            //    }
-            //    flowLayoutPanel1.Controls.Add(termFlowLayoutPanel);
-            //}
+            for (int i = 0; i < 3; i++)
+            {
+                flowLayoutPanelNavigation.Controls.Add(new WeekControl(new Week() {WeekNum = i}, panel2)
+                {
+                    
+                    Width = flowLayoutPanelNavigation.Width - 6
+                });
+            }
         }
 
         public void SaveConfiguration(MaterialConfig materialConfig)
@@ -134,6 +133,24 @@ namespace Master_Diction
             catch (Exception)
             {
 
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (flowLayoutPanelNavigation.Visible = !flowLayoutPanelNavigation.Visible)
+            {
+                button1.Text = "Hide";
+                panelNavigation.Width += flowLayoutPanelNavigation.Width - button1.Width;
+                panel2.Width -= flowLayoutPanelNavigation.Width - button1.Width;
+                panel2.Location = new Point(panel2.Location.X + flowLayoutPanelNavigation.Width - button1.Width, panel2.Location.Y);
+            }
+            else
+            {
+                button1.Text = "Show";
+                panelNavigation.Width -= flowLayoutPanelNavigation.Width - button1.Width;
+                panel2.Width += flowLayoutPanelNavigation.Width - button1.Width;
+                panel2.Location = new Point(panel2.Location.X - flowLayoutPanelNavigation.Width + button1.Width, panel2.Location.Y);
             }
         }
     }

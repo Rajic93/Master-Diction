@@ -16,15 +16,20 @@ namespace Master_Diction.User_Controlls
     public partial class WeekControl : UserControl
     {
         private Week _week;
-        public WeekControl(Week week)
+        private Panel _panel;
+        private bool _startup = true;
+
+        public WeekControl(Week week, Panel panelRef)
         {
             _week = week;
+            _panel = panelRef;
             InitializeComponent();
         }
 
         private void WeekControl_Load(object sender, EventArgs e)
         {
-            RenderContent();
+            //RenderContent();
+            label1.Text += " " + _week.WeekNum;
         }
 
         private void RenderContent()
@@ -53,7 +58,31 @@ namespace Master_Diction.User_Controlls
 
         private void label1_Click(object sender, EventArgs e)
         {
+            if (_startup)
+            {
+                for (int i = 0; i < 3; i++)
+                {
+                    Label lesson = new Label()
+                    {
+                        Text = "Lesson " + i
+                    };
+                    lesson.Click += LessonOnClick;
+                    flowLayoutPanel1.Controls.Add(lesson);
+                }
+                _startup = false;
+            }
+            flowLayoutPanel1.Visible = !flowLayoutPanel1.Visible;
+        }
 
+        private void LessonOnClick(object sender, EventArgs eventArgs)
+        {
+            _panel.Controls.Clear();
+            _panel.Visible = true;
+            _panel.Controls.Add(new LessonControl()
+            {
+                Dock = DockStyle.Fill,
+                Anchor = (AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Top | AnchorStyles.Right)
+            });
         }
     }
 }

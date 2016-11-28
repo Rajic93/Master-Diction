@@ -23,7 +23,7 @@ namespace Master_Diction
         private void Welcome_Load(object sender, EventArgs e)
         {
            // _parent.Hide();
-            panelLevelSelection.Controls.Add(new LevelSelection(flowLayoutPanelGrades, this));
+            panelLevelSelection.Controls.Add(new LevelSelection(flowLayoutPanelGrades, this) { Dock = DockStyle.Fill});
         }
 
         private void Welcome_FormClosing(object sender, FormClosingEventArgs e)

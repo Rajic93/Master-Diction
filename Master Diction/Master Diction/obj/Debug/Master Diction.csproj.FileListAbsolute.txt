@@ -27,3 +27,5 @@ D:\Projects\Upwork\Master Diction\Master Diction\Master Diction\obj\Debug\Master
 D:\Projects\Upwork\Master Diction\Master Diction\Master Diction\obj\Debug\Master_Diction.User_Controlls.Credetials.resources
 D:\Projects\Upwork\Master Diction\Master Diction\Master Diction\obj\Debug\Master_Diction.Content.resources
 D:\Projects\Upwork\Master Diction\Master Diction\Master Diction\obj\Debug\Master_Diction.User_Controlls.WeekControl.resources
+D:\Projects\Upwork\Master Diction\Master Diction\Master Diction\obj\Debug\Master_Diction.User_Controlls.LessonControl.resources
+D:\Projects\Upwork\Master Diction\Master Diction\Master Diction\obj\Debug\Master_Diction.User_Controlls.Instructions.resources

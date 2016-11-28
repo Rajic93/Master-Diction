@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Master_Diction.User_Controlls
 {
-    public partial class VideoControl : UserControl
+    public partial class Instructions : UserControl
     {
-        public VideoControl()
+        public Instructions()
         {
             InitializeComponent();
         }
