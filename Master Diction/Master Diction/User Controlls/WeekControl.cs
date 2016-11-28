@@ -76,6 +76,10 @@ namespace Master_Diction.User_Controlls
 
         private void LessonOnClick(object sender, EventArgs eventArgs)
         {
+            if (_panel.Controls[0].GetType() == typeof(LessonControl))
+            {
+                ((LessonControl)_panel.Controls[0]).StopMedia();
+            }
             _panel.Controls.Clear();
             _panel.Visible = true;
             _panel.Controls.Add(new LessonControl()

@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<AppConfiguration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <FirstStart>true</FirstStart>
+  <Licence>MasterKey</Licence>
+  <Username>aleks</Username>
+  <Password>123</Password>
+  <Name>Aleksandar Rajic</Name>
+  <Key>MAST-ERDI-CTIO-NJOH-NATA-NONA</Key>
+  <KeyExpireDate>2016-12-25T00:00:00</KeyExpireDate>
+</AppConfiguration>

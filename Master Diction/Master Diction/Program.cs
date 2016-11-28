@@ -17,9 +17,9 @@ namespace Master_Diction
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Login());
+            //Application.Run(new Login());
             //Application.Run(new Welcome(new Login()));
-            //Application.Run(new Content(new Welcome(new Login()), Grades.NurseryLevel1));
+            Application.Run(new Content(new Welcome(new Login()), Grades.NurseryLevel1));
             //Application.Run(new Profile("",""));
         }
     }

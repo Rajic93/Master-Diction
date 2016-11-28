@@ -1,0 +1,6 @@
+D:\Projects\Upwork\Master Diction\Master Diction\Master Diction\bin\Release\Master Diction.exe.config
+D:\Projects\Upwork\Master Diction\Master Diction\Master Diction\obj\Release\Interop.AXVLC.dll
+D:\Projects\Upwork\Master Diction\Master Diction\Master Diction\obj\Release\Interop.WMPLib.dll
+D:\Projects\Upwork\Master Diction\Master Diction\Master Diction\obj\Release\AxInterop.AXVLC.dll
+D:\Projects\Upwork\Master Diction\Master Diction\Master Diction\obj\Release\AxInterop.WMPLib.dll
+D:\Projects\Upwork\Master Diction\Master Diction\Master Diction\obj\Release\Master Diction.csproj.ResolveComReference.cache

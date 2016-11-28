@@ -46,55 +46,55 @@ namespace Master_Diction
 
         private void RenderContent()
         {
-            List<Term> contentList;
-            switch (_grade)
-            {
-                case Grades.NurseryLevel1:
-                    contentList = _materialConfig.NurseryLevel1;
-                    break;
-                case Grades.NurseryLevel2:
-                    contentList = _materialConfig.NurseryLevel2;
-                    break;
-                case Grades.PrimaryGrade1:
-                    contentList = _materialConfig.PrimaryGrade1;
-                    break;
-                case Grades.PrimaryGrade2:
-                    contentList = _materialConfig.PrimaryGrade2;
-                    break;
-                case Grades.PrimaryGrade3:
-                    contentList = _materialConfig.PrimaryGrade3;
-                    break;
-                case Grades.PrimaryGrade4:
-                    contentList = _materialConfig.PrimaryGrade4;
-                    break;
-                case Grades.PrimaryGrade5:
-                    contentList = _materialConfig.PrimaryGrade5;
-                    break;
-                case Grades.PrimaryGrade6:
-                    contentList = _materialConfig.PrimaryGrade6;
-                    break;
-                case Grades.SecondaryJunior1:
-                    contentList = _materialConfig.SecondaryJuniorGrade1;
-                    break;
-                case Grades.SecondaryJunior2:
-                    contentList = _materialConfig.SecondaryJuniorGrade2;
-                    break;
-                case Grades.SecondaryJunior3:
-                    contentList = _materialConfig.SecondaryJuniorGrade3;
-                    break;
-                case Grades.SecondarySenior4:
-                    contentList = _materialConfig.SecondarySeniorGrade4;
-                    break;
-                case Grades.SecondarySenior5:
-                    contentList = _materialConfig.SecondarySeniorGrade5;
-                    break;
-                case Grades.SecondarySenior6:
-                    contentList = _materialConfig.SecondarySeniorGrade6;
-                    break;
-                default:
-                    contentList = new List<Term>();
-                    break;
-            }
+            //List<Term> contentList;
+            //switch (_grade)
+            //{
+            //    case Grades.NurseryLevel1:
+            //        contentList = _materialConfig.NurseryLevel1;
+            //        break;
+            //    case Grades.NurseryLevel2:
+            //        contentList = _materialConfig.NurseryLevel2;
+            //        break;
+            //    case Grades.PrimaryGrade1:
+            //        contentList = _materialConfig.PrimaryGrade1;
+            //        break;
+            //    case Grades.PrimaryGrade2:
+            //        contentList = _materialConfig.PrimaryGrade2;
+            //        break;
+            //    case Grades.PrimaryGrade3:
+            //        contentList = _materialConfig.PrimaryGrade3;
+            //        break;
+            //    case Grades.PrimaryGrade4:
+            //        contentList = _materialConfig.PrimaryGrade4;
+            //        break;
+            //    case Grades.PrimaryGrade5:
+            //        contentList = _materialConfig.PrimaryGrade5;
+            //        break;
+            //    case Grades.PrimaryGrade6:
+            //        contentList = _materialConfig.PrimaryGrade6;
+            //        break;
+            //    case Grades.SecondaryJunior1:
+            //        contentList = _materialConfig.SecondaryJuniorGrade1;
+            //        break;
+            //    case Grades.SecondaryJunior2:
+            //        contentList = _materialConfig.SecondaryJuniorGrade2;
+            //        break;
+            //    case Grades.SecondaryJunior3:
+            //        contentList = _materialConfig.SecondaryJuniorGrade3;
+            //        break;
+            //    case Grades.SecondarySenior4:
+            //        contentList = _materialConfig.SecondarySeniorGrade4;
+            //        break;
+            //    case Grades.SecondarySenior5:
+            //        contentList = _materialConfig.SecondarySeniorGrade5;
+            //        break;
+            //    case Grades.SecondarySenior6:
+            //        contentList = _materialConfig.SecondarySeniorGrade6;
+            //        break;
+            //    default:
+            //        contentList = new List<Term>();
+            //        break;
+            //}
 
             for (int i = 0; i < 3; i++)
             {

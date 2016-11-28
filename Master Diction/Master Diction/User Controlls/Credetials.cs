@@ -30,6 +30,7 @@ namespace Master_Diction.User_Controlls
                 configuration.Password.Equals(textBoxPassword.Text))
             {
                 //new Thread(() => new Welcome(_login)).Start();
+                textBoxPassword.Text = "";
                 new Welcome(_login).Show();
                 _login.Hide();
             }

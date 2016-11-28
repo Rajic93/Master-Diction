@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -46,28 +47,49 @@ namespace Master_Diction
         {
             try
             {
+                string path;
+#if DEBUG
+                path = Directory.GetCurrentDirectory() + "\\AppConfiguration.xml";
+#else
+                path = Directory.GetCurrentDirectory() + "\\Resources\\AppConfiguration.xml";
+#endif
+                if (!File.Exists(path))
+                {
+                    Assembly assembly = Assembly.GetExecutingAssembly();
+                    const string NAME = "Master_Diction.Resources.AppConfiguration.xml";
+                    using (Stream stream = assembly.GetManifestResourceStream(NAME))
+                    {
+                        XmlDocument xmlDocument = new XmlDataDocument();
+                        xmlDocument.Load(stream);
+                        
+                        xmlDocument.Save(path);
+                    }
+                }
                 XmlSerializer deserializer = new XmlSerializer(typeof(AppConfiguration));
-                TextReader reader = new StreamReader("AppConfiguration.xml");
+                TextReader reader = new StreamReader(path);
                 object obj = deserializer.Deserialize(reader);
                 configuration = (AppConfiguration)obj;
                 reader.Close();
             }
-            catch (Exception)
+            catch (Exception e)
             {
-
+                Console.WriteLine(e.Message);
             }
         }
 
         private void Login_Load(object sender, EventArgs e)
         {
             LoadConfiguration();
-            if (configuration.FirstStart)
+            if (configuration != null)
             {
-                panel1.Controls.Add(new UserInfo(this));
-            }
-            else
-            {
-                panel1.Controls.Add(new Credetials(configuration, this));
+                if (configuration.FirstStart)
+                {
+                    panel1.Controls.Add(new UserInfo(this));
+                }
+                else
+                {
+                    panel1.Controls.Add(new Credetials(configuration, this));
+                }
             }
         }
 
