@@ -25,49 +25,29 @@ namespace Master_Diction.Classes
         SecondarySenior6
     }
 
-    public class Term
-    {
-        public List<Week> Weeks { get; set; }
-        public int TermNum { get; set; }
-
-        public Term()
-        {
-            Weeks = new List<Week>();
-        }
-    }
-
-    public class Week
-    {
-        public int WeekNum { get; set; }
-        public List<Lesson> lessons { get; set; }
-
-        public Week()
-        {
-            lessons = new List<Lesson>();
-        }
-    }
-
-    public class Lesson
-    {
-        public int LessonNum { get; set; }
-        public List<Video> videos { get; set; }
-
-        public Lesson()
-        {
-            videos = new List<Video>();
-        }
-
-    }
-
-    public class Video
-    {
-        public string Name { get; set; }
-        public ResourceLocation ResourceLocation { get; set; }
-
-    }
-
     public class MaterialConfig
     {
+        #region Fields
+        private Term[] nurseryLevel1 = new Term[3];
+        private Term[] nurseryLevel2 = new Term[3];
+        private Term[] primaryGrade1 = new Term[3];
+        private Term[] primaryGrade2 = new Term[3];
+        private Term[] primaryGrade3 = new Term[3];
+        private Term[] primaryGrade4 = new Term[3];
+        private Term[] primaryGrade5 = new Term[3];
+        private Term[] primaryGrade6 = new Term[3];
+        private Term[] secondaryJuniorGrade1 = new Term[3];
+        private Term[] secondaryJuniorGrade2 = new Term[3];
+        private Term[] secondaryJuniorGrade3 = new Term[3];
+        private Term[] secondarySeniorGrade1 = new Term[3];
+        private Term[] secondarySeniorGrade2 = new Term[3];
+        private Term[] secondarySeniorGrade3 = new Term[3];
+
+
+        #endregion
+
+        #region Props
+
         public List<Term> NurseryLevel1 { get; set; }
         public List<Term> NurseryLevel2 { get; set; }
         public List<Term> PrimaryGrade1 { get; set; }
@@ -83,8 +63,12 @@ namespace Master_Diction.Classes
         public List<Term> SecondarySeniorGrade5 { get; set; }
         public List<Term> SecondarySeniorGrade6 { get; set; }
 
+        #endregion
+
         public MaterialConfig()
         {
+            #region Props initialization
+
             NurseryLevel1 = new List<Term>();
             NurseryLevel2 = new List<Term>();
             PrimaryGrade1 = new List<Term>();
@@ -99,7 +83,71 @@ namespace Master_Diction.Classes
             SecondarySeniorGrade4 = new List<Term>();
             SecondarySeniorGrade5 = new List<Term>();
             SecondarySeniorGrade6 = new List<Term>();
+
+            #endregion
         }
+    }
+
+    public class Term
+    {
+        #region Fields
+
+        private Week[] weeks = new Week[5];
+
+        #endregion
+
+        #region Props
+
+        public List<Week> Weeks { get; set; }
+        public int TermNum { get; set; }
+
+        #endregion
+
+        public Term()
+        {
+            #region Props initialization
+
+            Weeks = new List<Week>();
+
+            #endregion
+        }
+    }
+
+    public class Week
+    {
+        #region Fields
+
+        private Lesson[] lessons = new Lesson[5];
+
+        #endregion
+
+        #region Props
+
+        public int WeekNum { get; set; }
+        public List<Lesson> Lessons { get; set; }
+
+        #endregion
+
+        public Week()
+        {
+            #region Props initialization
+
+            Lessons = new List<Lesson>();
+
+            #endregion
+        }
+    }
+
+    public class Lesson
+    {
+
+        public string Name { get; set; }
+        public ResourceLocation ResourceLocation { get; set; }
+
+        public Lesson()
+        {
+        }
+
     }
 
 }

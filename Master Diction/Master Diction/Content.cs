@@ -20,6 +20,8 @@ namespace Master_Diction
     {
         private Welcome _welcome;
         private MaterialConfig _materialConfig;
+        private int _minWidth;
+        private int _maxWidth;
         private Grades _grade;
 
         public Content(Welcome welcomeRef, Grades grade)
@@ -31,11 +33,15 @@ namespace Master_Diction
 
         private void Content_FormClosing(object sender, FormClosingEventArgs e)
         {
+            _welcome.ShowMessage();
             _welcome.Show();
         }
 
         private void Content_Load(object sender, EventArgs e)
         {
+            _minWidth = button1.Width + 6;
+            _maxWidth = panelNavigation.Width;
+
             panel2.Controls.Add(new Instructions()
             {
                 Dock = DockStyle.Fill
@@ -138,17 +144,20 @@ namespace Master_Diction
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (flowLayoutPanelNavigation.Visible = !flowLayoutPanelNavigation.Visible)
+            flowLayoutPanelNavigation.Visible = !flowLayoutPanelNavigation.Visible;
+            if (flowLayoutPanelNavigation.Visible && panelNavigation.Width >= _minWidth)
             {
-                button1.Text = "Hide";
-                panelNavigation.Width += flowLayoutPanelNavigation.Width - button1.Width;
+                panelNavigation.Width = _maxWidth;
+                panelNavigation.BorderStyle = BorderStyle.FixedSingle;
+                panelNavigation.BackColor = Color.FromArgb(30, 41, 49);
                 panel2.Width -= flowLayoutPanelNavigation.Width - button1.Width;
                 panel2.Location = new Point(panel2.Location.X + flowLayoutPanelNavigation.Width - button1.Width, panel2.Location.Y);
             }
-            else
+            else if (!flowLayoutPanelNavigation.Visible && panelNavigation.Width <= _maxWidth)
             {
-                button1.Text = "Show";
-                panelNavigation.Width -= flowLayoutPanelNavigation.Width - button1.Width;
+                panelNavigation.Width = _minWidth;
+                panelNavigation.BorderStyle = BorderStyle.None;
+                panelNavigation.BackColor = Color.FromArgb(51, 60, 81);
                 panel2.Width += flowLayoutPanelNavigation.Width - button1.Width;
                 panel2.Location = new Point(panel2.Location.X - flowLayoutPanelNavigation.Width + button1.Width, panel2.Location.Y);
             }

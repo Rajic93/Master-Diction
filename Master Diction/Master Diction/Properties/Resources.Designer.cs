@@ -63,6 +63,16 @@ namespace Master_Diction.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap nursery {
+            get {
+                object obj = ResourceManager.GetObject("nursery", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap video {
             get {
                 object obj = ResourceManager.GetObject("video", resourceCulture);

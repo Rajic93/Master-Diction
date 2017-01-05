@@ -24,16 +24,16 @@ namespace Master_Diction.Classes
                     week.WeekNum = j + 1;
                     for (int k = 0; k < 3; k++)
                     {
-                        Lesson lesson = new Lesson();
-                        lesson.LessonNum = k + 1;
-                        for (int l = 0; l < 2; l++)
-                        {
-                            Video video = new Video();
-                            video.Name = "Test video";
-                            //video.ResourceLocation = "";
-                            lesson.videos.Add(video);
-                        }
-                        week.lessons.Add(lesson);
+                        //Lesson lesson = new Lesson();
+                        //lesson.LessonNum = k + 1;
+                        //for (int l = 0; l < 2; l++)
+                        //{
+                        //    Video video = new Video();
+                        //    video.Name = "Test video";
+                        //    //video.ResourceLocation = "";
+                        //    lesson.videos.Add(video);
+                        //}
+                        //week.lessons.Add(lesson);
                     }
                     term.Weeks.Add(week);
                 }

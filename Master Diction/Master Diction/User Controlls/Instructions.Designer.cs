@@ -45,6 +45,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(33)))), ((int)(((byte)(33)))));
             this.label1.Location = new System.Drawing.Point(192, 300);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(429, 17);

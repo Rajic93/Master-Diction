@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Content));
             this.panelNavigation = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
             this.flowLayoutPanelNavigation = new System.Windows.Forms.FlowLayoutPanel();
@@ -39,6 +40,7 @@
             // 
             this.panelNavigation.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
+            this.panelNavigation.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(21)))), ((int)(((byte)(101)))), ((int)(((byte)(192)))));
             this.panelNavigation.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelNavigation.Controls.Add(this.button1);
             this.panelNavigation.Controls.Add(this.flowLayoutPanelNavigation);
@@ -51,12 +53,14 @@
             // button1
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(270, 3);
-            this.button1.Margin = new System.Windows.Forms.Padding(3, 3, 2, 3);
+            this.button1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button1.BackgroundImage")));
+            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Location = new System.Drawing.Point(301, 3);
+            this.button1.Margin = new System.Windows.Forms.Padding(0);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(41, 38);
             this.button1.TabIndex = 0;
-            this.button1.Text = "Hide";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -67,9 +71,10 @@
             this.flowLayoutPanelNavigation.AutoScroll = true;
             this.flowLayoutPanelNavigation.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.flowLayoutPanelNavigation.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanelNavigation.Location = new System.Drawing.Point(2, 32);
+            this.flowLayoutPanelNavigation.Location = new System.Drawing.Point(2, 47);
+            this.flowLayoutPanelNavigation.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanelNavigation.Name = "flowLayoutPanelNavigation";
-            this.flowLayoutPanelNavigation.Size = new System.Drawing.Size(343, 661);
+            this.flowLayoutPanelNavigation.Size = new System.Drawing.Size(340, 646);
             this.flowLayoutPanelNavigation.TabIndex = 0;
             // 
             // panel2
@@ -77,6 +82,7 @@
             this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel2.BackColor = System.Drawing.Color.Transparent;
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel2.Location = new System.Drawing.Point(355, 23);
             this.panel2.Name = "panel2";
@@ -87,6 +93,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(242)))), ((int)(((byte)(253)))));
             this.ClientSize = new System.Drawing.Size(1226, 721);
             this.Controls.Add(this.panelNavigation);
             this.Controls.Add(this.panel2);

@@ -49,7 +49,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>UM/SnC4UJlX8Xw6QPGutkO1yo1Dx0V5Cn/H+Cx2au60=</dsig:DigestValue>
+        <dsig:DigestValue>W1QLfWgfJK3XkOVtVrfJMHOVLtBPI8ck6I1WIfqnprU=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -61,7 +61,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>Xb7Xir2CT1drcZGZD+SSNcTKSMDXxEq28Zc/v7LuKLg=</dsig:DigestValue>
+        <dsig:DigestValue>0vbksXrF7Po7kY8yloeSwIxSIHXZXmF/9R6QnabR4R8=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -73,7 +73,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>hf4Fh59rjXQ3uhxX7BC9+6ZO6ivOn0ycPCWxVcHPFPc=</dsig:DigestValue>
+        <dsig:DigestValue>1zVmarUcatpzANDKebzE0f6P1GOIN1cADMhIrQDtLjU=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -85,19 +85,19 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>p5MbwxCfUnylOB8uypCxts3C7XllhumlkFYpfP76i5U=</dsig:DigestValue>
+        <dsig:DigestValue>5I37Tz0y2F1N8/yWgpiPT1EXJloMS6+GP12nd29jGr4=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Master Diction.exe" size="6213600">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Master Diction.exe" size="7754208">
       <assemblyIdentity name="Master Diction" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>yFol4EUtqsM+hCA6xJZtgD/BjdW+JVqJDjJolQYrztE=</dsig:DigestValue>
+        <dsig:DigestValue>+KhzxoEQsojc0LdavYiWoSze9r+wQicMHnvVsD3Hizo=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

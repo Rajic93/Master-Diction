@@ -25,11 +25,12 @@ namespace Master_Diction.User_Controlls
         {
             string path;
 #if DEBUG
-            path = "Diction Exercise.mp4";
+            path = Directory.GetCurrentDirectory() + "\\Diction Exercise.mp4";
 #else
-            path = "Resources\\Diction Exercise.mp4";
+            path = Directory.GetCurrentDirectory() + "\\Resources\\Diction Exercise.mp4";
 #endif
             axWindowsMediaPlayer1.URL = path;
+            //axWindowsMediaPlayer1.URL = Directory.GetCurrentDirectory() + "\\Diction Exercise.mp4";
             axWindowsMediaPlayer1.Ctlcontrols.stop();
         }
 

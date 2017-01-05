@@ -38,7 +38,13 @@ namespace Master_Diction
                 serializer.Serialize(stream, configuration);
                 stream.Position = 0;
                 xmlDocument.Load(stream);
-                xmlDocument.Save("AppConfiguration.xml");
+                string path;
+#if DEBUG
+                path = Directory.GetCurrentDirectory() + "\\AppConfiguration.xml";
+#else
+                path = Directory.GetCurrentDirectory() + "\\Resources\\AppConfiguration.xml";
+#endif
+                xmlDocument.Save(path);
                 stream.Close();
             }
         }

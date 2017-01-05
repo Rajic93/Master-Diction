@@ -276,7 +276,12 @@
     <EmbeddedResource Include="Resources\AppConfiguration.xml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\Diction Exercise.mp4" />
+    <Content Include="Resources\Diction Exercise.mp4">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="Resources\secondary.jpg" />
+    <None Include="Resources\primary.jpg" />
+    <None Include="Resources\nursery.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

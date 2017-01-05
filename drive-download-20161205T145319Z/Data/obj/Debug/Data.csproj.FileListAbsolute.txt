@@ -1,0 +1,4 @@
+C:\Users\Giannis\Google Drive\Proframming\Projects\Games\ChatApp\Data\bin\Debug\Data.dll
+C:\Users\Giannis\Google Drive\Proframming\Projects\Games\ChatApp\Data\bin\Debug\Data.pdb
+C:\Users\Giannis\Google Drive\Proframming\Projects\Games\ChatApp\Data\obj\Debug\Data.dll
+C:\Users\Giannis\Google Drive\Proframming\Projects\Games\ChatApp\Data\obj\Debug\Data.pdb

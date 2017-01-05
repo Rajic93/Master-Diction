@@ -1,3 +1,4 @@
+D:\Projects\Upwork\Master Diction\Master Diction\Master Diction\bin\Debug\Resources\Diction Exercise.mp4
 D:\Projects\Upwork\Master Diction\Master Diction\Master Diction\bin\Debug\Master Diction.exe.config
 D:\Projects\Upwork\Master Diction\Master Diction\Master Diction\bin\Debug\Master Diction.exe.manifest
 D:\Projects\Upwork\Master Diction\Master Diction\Master Diction\bin\Debug\Master Diction.application
@@ -31,3 +32,4 @@ D:\Projects\Upwork\Master Diction\Master Diction\Master Diction\obj\Debug\Master
 D:\Projects\Upwork\Master Diction\Master Diction\Master Diction\obj\Debug\Master Diction.application
 D:\Projects\Upwork\Master Diction\Master Diction\Master Diction\obj\Debug\Master Diction.exe
 D:\Projects\Upwork\Master Diction\Master Diction\Master Diction\obj\Debug\Master Diction.pdb
+D:\Projects\Upwork\Master Diction\Master Diction\Master Diction\obj\Debug\Master Diction.csprojResolveAssemblyReference.cache

@@ -1,0 +1,11 @@
+C:\Users\Giannis\Google Drive\Proframming\Projects\Games\ChatApp\Server\bin\Debug\Server.exe.config
+C:\Users\Giannis\Google Drive\Proframming\Projects\Games\ChatApp\Server\bin\Debug\Server.exe
+C:\Users\Giannis\Google Drive\Proframming\Projects\Games\ChatApp\Server\bin\Debug\Server.pdb
+C:\Users\Giannis\Google Drive\Proframming\Projects\Games\ChatApp\Server\obj\Debug\Server.csprojResolveAssemblyReference.cache
+C:\Users\Giannis\Google Drive\Proframming\Projects\Games\ChatApp\Server\obj\Debug\Server.exe
+C:\Users\Giannis\Google Drive\Proframming\Projects\Games\ChatApp\Server\obj\Debug\Server.pdb
+C:\Users\Giannis\Google Drive\Proframming\Projects\Games\ChatApp\Server\bin\Debug\ServerData.dll
+C:\Users\Giannis\Google Drive\Proframming\Projects\Games\ChatApp\Server\bin\Debug\ServerData.pdb
+D:\Projects\Upwork\Master Diction\drive-download-20161205T145319Z\Server\bin\Debug\Server.exe.config
+D:\Projects\Upwork\Master Diction\drive-download-20161205T145319Z\Server\obj\Debug\Server.exe
+D:\Projects\Upwork\Master Diction\drive-download-20161205T145319Z\Server\obj\Debug\Server.pdb
