@@ -33,7 +33,7 @@ namespace Diction_Master___Server
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
-            ContentManager manager = new ContentManager(this);
+            Content manager = new Content();
             manager.Show();
             this.Hide();
         }
@@ -53,7 +53,7 @@ namespace Diction_Master___Server
             
             new Thread(() =>
             {
-                contentManager = Diction_Master___Library.ContentManager.CreateInstance(clientManager);
+                contentManager = Diction_Master___Library.ContentManager.CreateInstance();
                 contentManager.Start();
             }).Start();
         }

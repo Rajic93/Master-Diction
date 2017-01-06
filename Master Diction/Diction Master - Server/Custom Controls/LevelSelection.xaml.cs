@@ -21,7 +21,9 @@ namespace Diction_Master___Server.Custom_Controls
     /// </summary>
     public partial class LevelSelection : UserControl
     {
-        public Diction_Master___Library.EducationalLevelType SelectedEducationalLevel;
+        public Diction_Master___Library.GradeType SelectedGrade;
+        public Diction_Master___Library.EducationalLevelType SelectEducationalLevel;
+
         private Button previousSelected;
 
         public LevelSelection()
@@ -31,6 +33,7 @@ namespace Diction_Master___Server.Custom_Controls
 
         private void Nursery_OnClick(object sender, RoutedEventArgs e)
         {
+            SelectEducationalLevel = EducationalLevelType.Nursery;
             NurseryI.Visibility = Visibility.Visible;
             NurseryII.Visibility = Visibility.Visible;
             PrimaryI.Visibility = Visibility.Collapsed;
@@ -52,6 +55,7 @@ namespace Diction_Master___Server.Custom_Controls
 
         private void Primary_OnClick(object sender, RoutedEventArgs e)
         {
+            SelectEducationalLevel = EducationalLevelType.Primary;
             NurseryI.Visibility = Visibility.Collapsed;
             NurseryII.Visibility = Visibility.Collapsed;
             PrimaryI.Visibility = Visibility.Visible;
@@ -73,6 +77,7 @@ namespace Diction_Master___Server.Custom_Controls
 
         private void Secondary_OnClick(object sender, RoutedEventArgs e)
         {
+            SelectEducationalLevel = EducationalLevelType.Secondary;
             NurseryI.Visibility = Visibility.Collapsed;
             NurseryII.Visibility = Visibility.Collapsed;
             PrimaryI.Visibility = Visibility.Collapsed;
@@ -108,46 +113,46 @@ namespace Diction_Master___Server.Custom_Controls
             switch (((Button)sender).Name)
             {
                 case "NurseryI":
-                    SelectedEducationalLevel = EducationalLevelType.NurseryI;
+                    SelectedGrade = GradeType.NurseryI;
                     break;
                 case "NurseryII":
-                    SelectedEducationalLevel = EducationalLevelType.NurseryII;
+                    SelectedGrade = GradeType.NurseryII;
                     break;
                 case "PrimaryI":
-                    SelectedEducationalLevel = EducationalLevelType.PrimaryI;
+                    SelectedGrade = GradeType.PrimaryI;
                     break;
                 case "PrimaryII":
-                    SelectedEducationalLevel = EducationalLevelType.PrimaryII;
+                    SelectedGrade = GradeType.PrimaryII;
                     break;
                 case "PrimaryIII":
-                    SelectedEducationalLevel = EducationalLevelType.PrimaryIII;
+                    SelectedGrade = GradeType.PrimaryIII;
                     break;
                 case "PrimaryIV":
-                    SelectedEducationalLevel = EducationalLevelType.PrimaryIV;
+                    SelectedGrade = GradeType.PrimaryIV;
                     break;
                 case "PrimaryV":
-                    SelectedEducationalLevel = EducationalLevelType.PrimaryV;
+                    SelectedGrade = GradeType.PrimaryV;
                     break;
                 case "PrimaryVI":
-                    SelectedEducationalLevel = EducationalLevelType.PrimaryVI;
+                    SelectedGrade = GradeType.PrimaryVI;
                     break;
                 case "SecondaryJuniorI":
-                    SelectedEducationalLevel = EducationalLevelType.SecondaryJuniorI;
+                    SelectedGrade = GradeType.SecondaryJuniorI;
                     break;
                 case "SecondaryJuniorII":
-                    SelectedEducationalLevel = EducationalLevelType.SecondaryJuniorII;
+                    SelectedGrade = GradeType.SecondaryJuniorII;
                     break;
                 case "SecondaryJuniorIII":
-                    SelectedEducationalLevel = EducationalLevelType.SecondaryJuniorIII;
+                    SelectedGrade = GradeType.SecondaryJuniorIII;
                     break;
                 case "SecondarySeniorI":
-                    SelectedEducationalLevel = EducationalLevelType.SecondarySeniorI;
+                    SelectedGrade = GradeType.SecondarySeniorI;
                     break;
                 case "SecondarySeniorII":
-                    SelectedEducationalLevel = EducationalLevelType.SecondarySeniorII;
+                    SelectedGrade = GradeType.SecondarySeniorII;
                     break;
                 case "SecondarySeniorIII":
-                    SelectedEducationalLevel = EducationalLevelType.SecondarySeniorIII;
+                    SelectedGrade = GradeType.SecondarySeniorIII;
                     break;
             }
         }

@@ -24,3 +24,8 @@ D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Server\obj\Deb
 D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Server\obj\Debug\Custom Controls\WeeksCreation.baml
 D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Server\obj\Debug\Custom Controls\LessonsCreation.g.cs
 D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Server\obj\Debug\Custom Controls\LessonsCreation.baml
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Server\obj\Debug\Content.g.cs
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Server\obj\Debug\Content.baml
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Server\bin\Debug\Xceed.Wpf.Toolkit.dll
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Server\obj\Debug\Custom Controls\NumericUpDown.g.cs
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Server\obj\Debug\Custom Controls\NumericUpDown.baml

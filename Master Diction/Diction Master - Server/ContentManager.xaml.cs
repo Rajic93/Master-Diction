@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
 using System.Resources;
@@ -27,12 +28,19 @@ namespace Diction_Master___Server
     {
         private int active_section = 0;
         private Diction_Master___Library.ContentManager manager;
+        private Component buildingCourse;
         private MainWindow main;
         private Image selectedLanguage;
+        private GradeType selectedGrade;
+        private EducationalLevelType selectedEducationalLevel;
+        private ObservableCollection<Week> termI;
+        private ObservableCollection<Week> termII;
+        private ObservableCollection<Week> termIII;
 
         public ContentManager(MainWindow main)
         {
             this.main = main;
+            manager = Diction_Master___Library.ContentManager.CreateInstance();
             InitializeComponent();
         }
 
@@ -58,7 +66,6 @@ namespace Diction_Master___Server
                 RenderSize = content.RenderSize,
                 Visibility = Visibility.Collapsed
             });
-            manager = Diction_Master___Library.ContentManager.CreateInstance(ClientManager.CreateInstance());
         }
 
         private void TextBlock_MouseUp(object sender, MouseButtonEventArgs e)
@@ -103,10 +110,29 @@ namespace Diction_Master___Server
                 case 0:
                     selectedLanguage = ((LanguageSelection)content.Children[0]).selectedLanguage;
                     Previous.Visibility = Visibility.Visible;
+                    string course = selectedLanguage.Source.ToString().Split('/').Last().Split(' ').Last();
+                    buildingCourse = manager.GetCourse(course.Split('.').First());
                     break;
                 case 1:
+                    selectedGrade = ((LevelSelection)content.Children[1]).SelectedGrade;
+                    selectedEducationalLevel = ((LevelSelection)content.Children[1]).SelectEducationalLevel;
+                    buildingCourse = manager.GetChildComponent(buildingCourse, ComponentType.EducationalLevel, selectedEducationalLevel, selectedGrade);
                     break;
                 case 2:
+                    if (((WeeksCreation)content.Children[2]).SavedI && ((WeeksCreation)content.Children[2]).SavedII
+                        && ((WeeksCreation)content.Children[2]).SavedIII)
+                    {
+                        termI = ((WeeksCreation) content.Children[2]).TermI;
+                        termII = ((WeeksCreation)content.Children[2]).TermII;
+                        termIII = ((WeeksCreation)content.Children[2]).TermIII;
+                        manager.CreateWeekComponents(buildingCourse, ComponentType.Week, termI, termII, termIII);
+                        ((LessonsCreation) content.Children[3]).LoadWeeks(buildingCourse);
+                    }
+                    else
+                    {
+                        MessageBox.Show("You did not save progress or content is empty");
+                        //goto end;
+                    }
                     break;
                 case 3:
                     Next.Visibility = Visibility.Collapsed;
@@ -118,6 +144,7 @@ namespace Diction_Master___Server
                 content.Children[active_section].Visibility = Visibility.Collapsed;
                 content.Children[++active_section].Visibility = Visibility.Visible;
             }
+        
         }
 
         private void SaveCourse_OnClick(object sender, RoutedEventArgs e)

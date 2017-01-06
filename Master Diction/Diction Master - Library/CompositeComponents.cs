@@ -58,11 +58,12 @@ namespace Diction_Master___Library
 
     public class Grade : CompositeComponent
     {
-        public int Num { get; set; }
+        public GradeType GradeNum { get; set; }
     }
 
     public class Week : CompositeComponent
     {
+        public string Title { get; set; }
         public int Num { get; set; }
         public int Term { get; set; }
     }

@@ -3,7 +3,7 @@
 
 namespace Diction_Master___Library
 {
-    public enum EducationalLevelType
+    public enum GradeType
     {
         NurseryI,
         NurseryII,
@@ -18,7 +18,14 @@ namespace Diction_Master___Library
         SecondaryJuniorIII,
         SecondarySeniorI,
         SecondarySeniorII,
-        SecondarySeniorIII,
+        SecondarySeniorIII
+    }
+
+    public enum EducationalLevelType
+    {
+        Nursery,
+        Primary,
+        Secondary,
         Teachers
     }
 

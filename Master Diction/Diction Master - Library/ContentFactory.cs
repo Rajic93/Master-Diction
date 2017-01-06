@@ -9,6 +9,19 @@ namespace Diction_Master___Library
 {
     public static class ContentFactory
     {
+        public static Component CreateLeafComponent(ComponentType type, int id)
+        {
+            switch (type)
+            {
+                case ComponentType.Audio:
+                    return new Audio();
+                case ComponentType.Video:
+                    return new Video();
+                default:
+                    return null;
+            }   
+        }
+
         public static Component CreateLeafComponent(ComponentType type, string title, string uri, string desc)
         {
             switch (type)
@@ -32,6 +45,25 @@ namespace Diction_Master___Library
             }
         }
 
+        public static Component CreateCompositeComponent(ComponentType type)
+        {
+            switch (type)
+            {
+                case ComponentType.Course:
+                    return new Course();
+                case ComponentType.EducationalLevel:
+                    return new EducationalLevel();
+                case ComponentType.Grade:
+                    return new Grade();
+                case ComponentType.Week:
+                    return new Week();
+                case ComponentType.Lesson:
+                    return new Lesson();
+                default:
+                    return null;
+            }
+        }
+
         public static Component CreateCompositeComponent(ComponentType type, int num, int term)
         {
             return type == ComponentType.Week ? new Week { Num = num, Term = term } : null;
@@ -41,20 +73,29 @@ namespace Diction_Master___Library
         {
             return type == ComponentType.Lesson ? new Lesson { Num = num, Title = title } : null;
         }
-
-        public static Component CreateCompositeComponent(ComponentType type, int num)
-        {
-            return type == ComponentType.Grade ? new Grade { Num = num } : null;
-        }
-
         public static Component CreateCompositeComponent(ComponentType type, EducationalLevelType level)
         {
-            return type == ComponentType.EducationalLevel ? new EducationalLevel { Level = level} : null;
+            return type == ComponentType.EducationalLevel ? new EducationalLevel() { Level = level } : null;
+        }
+
+        public static Component CreateCompositeComponent(ComponentType type, GradeType grade)
+        {
+            return type == ComponentType.Grade ? new Grade { GradeNum = grade } : null;
+        }
+
+        public static Component CreateCompositeComponent(ComponentType type, bool edu = true)
+        {
+            return type == ComponentType.EducationalLevel ? new EducationalLevel() : null;
         }
 
         public static Component CreateCompositeComponent(ComponentType type, string name)
         {
             return type == ComponentType.Course ? new Course { Name = name} : null;
+        }
+
+        public static Component CreateCompositeComponent(ComponentType type, int num, int term, string title)
+        {
+            return type == ComponentType.Week ? new Week() { Num = num, Term = term, Title = title}: null;
         }
     }
 }

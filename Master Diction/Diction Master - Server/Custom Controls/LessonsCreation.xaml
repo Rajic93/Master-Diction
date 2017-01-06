@@ -6,16 +6,24 @@
              xmlns:local="clr-namespace:Diction_Master___Server.Custom_Controls"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300" Width="790" Height="590" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}">
-    <Grid>
-        <ListBox x:Name="listBox" HorizontalAlignment="Left" Height="549" Margin="10,31,0,0" VerticalAlignment="Top" Width="350"/>
+    <Grid Loaded="Grid_Loaded">
+        <ListBox x:Name="listBox" HorizontalAlignment="Left" Height="451" Margin="10,31,0,0" VerticalAlignment="Top" Width="350" SelectionChanged="listBox_SelectionChanged"/>
         <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Weeks" VerticalAlignment="Top"/>
         <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="431,10,0,0" TextWrapping="Wrap" Text="Lessons" VerticalAlignment="Top"/>
         <ListBox x:Name="listBox1" HorizontalAlignment="Left" Height="303" Margin="431,31,0,0" VerticalAlignment="Top" Width="350"/>
-        <Button x:Name="Load" Content="Load" HorizontalAlignment="Center" Margin="369,276,371.4,289.4" VerticalAlignment="Center" Width="50" Height="25" BorderThickness="1" Click="Button_OnClick"/>
+        <Button x:Name="Load" Content="Load" HorizontalAlignment="Center" Margin="365,276,364.4,289.4" VerticalAlignment="Center" Width="61" Height="25" BorderThickness="1" Click="Button_OnClick"/>
         <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="431,364,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="350"/>
         <Button x:Name="Add" Content="Add" HorizontalAlignment="Left" Margin="470,416,0,0" VerticalAlignment="Top" Width="100" Height="25"/>
         <Button x:Name="Edit" Content="Edit" HorizontalAlignment="Left" Margin="575,416,0,0" VerticalAlignment="Top" Width="100" Height="25"/>
         <Button x:Name="Delete" Content="Delete" HorizontalAlignment="Left" Margin="680,416,0,0" VerticalAlignment="Top" Width="100" Height="25"/>
-        <Button x:Name="Confirm" Content="Save" HorizontalAlignment="Left" Margin="680,560,0,0" VerticalAlignment="Top" Width="100" Height="25"/>
+        <Button x:Name="Confirm" Content="Save" HorizontalAlignment="Left" Margin="680,555,0,0" VerticalAlignment="Top" Width="100" Height="25" Click="Confirm_Click"/>
+        <TextBlock x:Name="textBlock2" HorizontalAlignment="Left" Margin="10,487,0,0" TextWrapping="Wrap" Text="ID" VerticalAlignment="Top"/>
+        <TextBox x:Name="textBox1" HorizontalAlignment="Left" Height="23" Margin="10,508,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80" IsEnabled="False"/>
+        <TextBox x:Name="textBox2" HorizontalAlignment="Left" Height="23" Margin="147,508,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80" IsEnabled="False"/>
+        <TextBlock x:Name="textBlock3" HorizontalAlignment="Left" Margin="147,487,0,0" TextWrapping="Wrap" Text="Number" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlock4" HorizontalAlignment="Left" Margin="280,487,0,0" TextWrapping="Wrap" Text="Term" VerticalAlignment="Top"/>
+        <TextBox x:Name="textBox3" HorizontalAlignment="Left" Height="23" Margin="280,508,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80" IsEnabled="False"/>
+        <TextBlock x:Name="textBlock5" HorizontalAlignment="Left" Margin="10,536,0,0" TextWrapping="Wrap" Text="Title" VerticalAlignment="Top"/>
+        <TextBox x:Name="textBox4" HorizontalAlignment="Left" Height="23" Margin="10,557,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="350" IsEnabled="False"/>
     </Grid>
 </UserControl>
