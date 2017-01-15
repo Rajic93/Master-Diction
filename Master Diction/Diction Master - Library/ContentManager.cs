@@ -7,13 +7,15 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace Diction_Master___Library
 {
     public class ContentManager : ISubject, IMigrate
     {
-        private static List<Component> courses;
-
+        private static List<Component> courses { get; set; }
+        private Component buildingCourse;
         private Dictionary<int, Component> componentsCache;
         private static int previousComponentID;
         private static int currentComponentID;
@@ -27,6 +29,12 @@ namespace Diction_Master___Library
             courses = new List<Component>();
             componentsCache = new Dictionary<int, Component>();
             clientManager = ClientManager.CreateInstance();
+            LoadManifest();
+        }
+
+        private void LoadManifest()
+        {
+            
         }
 
         public static ContentManager CreateInstance()
@@ -68,9 +76,11 @@ namespace Diction_Master___Library
                 case ComponentType.Lesson:
                     return new Lesson();
                 case ComponentType.Audio:
-                    return new Audio();
+                    return new LeafComponent() {ComponentType = ComponentType.Audio};
                 case ComponentType.Video:
-                    return new Video();
+                    return new LeafComponent() {ComponentType = ComponentType.Video};
+                case ComponentType.Document:
+                    return new LeafComponent() {ComponentType = ComponentType.Document};
                 default:
                     return null;
             }
@@ -170,13 +180,13 @@ namespace Diction_Master___Library
 
         public Component GetCourse(string country)
         {
-            return courses.Exists(x => ((Course)x).Name == country) 
+            return buildingCourse = courses.Exists(x => ((Course)x).Name == country) 
                 ? courses.Find(x => ((Course)x).Name == country) 
                 : ContentFactory.CreateCompositeComponent(ComponentType.Course);
         }
 
-        public void CreateWeekComponents(Component buildingCourse, ComponentType componentType, ObservableCollection<Week> termI,
-            ObservableCollection<Week> termII, ObservableCollection<Week> termIII)
+        public void CreateWeekComponents(Component buildingCourse, ComponentType componentType, ObservableCollection<Component> termI,
+            ObservableCollection<Component> termII, ObservableCollection<Component> termIII)
         {
             foreach (Week week in termI)
             {
@@ -213,6 +223,31 @@ namespace Diction_Master___Library
                 }
             }
             return weeks;
+        }
+
+        public ObservableCollection<Lesson> GetAllLessons(Component component)
+        {
+            ObservableCollection<Lesson> lessons = new ObservableCollection<Lesson>();
+            foreach (Week week in ((Grade)component).Components)
+            {
+                foreach (Lesson lesson in week.Components)
+                {
+                    lessons.Add(lesson);
+                }
+            }
+            return lessons;
+        }
+
+        public void SaveCourse()
+        {
+            courses.Add(buildingCourse);
+            SaveManifest();
+        }
+
+        private void SaveManifest()
+        {
+            XmlSerializer serializer = new XmlSerializer(courses.GetType());
+            serializer.Serialize(new XmlTextWriter("contentManifest.xml", Encoding.Unicode), courses);
         }
     }
 }

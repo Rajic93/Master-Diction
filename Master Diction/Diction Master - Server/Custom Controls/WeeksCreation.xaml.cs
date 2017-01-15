@@ -23,19 +23,47 @@ namespace Diction_Master___Server.Custom_Controls
     /// </summary>
     public partial class WeeksCreation : UserControl
     {
-        public ObservableCollection<Week> TermI;
-        public ObservableCollection<Week> TermII;
-        public ObservableCollection<Week> TermIII;
-        public bool SavedI;
-        public bool SavedII;
-        public bool SavedIII;
+        private ObservableCollection<Component> TermI;
+        private ObservableCollection<Component> TermII;
+        private ObservableCollection<Component> TermIII;
+        private bool SavedI;
+        private bool SavedII;
+        private bool SavedIII;
+        private bool emptyI = true;
+        private bool emptyII = true;
+        private bool emptyIII = true;
 
         public WeeksCreation()
         {
-            TermI = new ObservableCollection<Week>();
-            TermII = new ObservableCollection<Week>();
-            TermIII = new ObservableCollection<Week>();
+            TermI = new ObservableCollection<Component>();
+            TermII = new ObservableCollection<Component>();
+            TermIII = new ObservableCollection<Component>();
             InitializeComponent();
+        }
+
+        public bool IsEmpty()
+        {
+            return emptyI && emptyII && emptyIII;
+        }
+
+        public bool IsSaved()
+        {
+            return SavedI && SavedII && SavedIII;
+        }
+
+        public ObservableCollection<Component> GetTerm(int term)
+        {
+            switch (term)
+            {
+                case 1:
+                    return TermI;
+                case 2:
+                    return TermII;
+                case 3:
+                    return TermIII;
+                default:
+                    return null;
+            }
         }
 
         private void listBoxTermI_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -73,6 +101,7 @@ namespace Diction_Master___Server.Custom_Controls
                 TermI.Add((Week)ContentFactory.CreateCompositeComponent(ComponentType.Week, Convert.ToInt16(comboBox.SelectedValue), 1, textBoxI.Text));
                 SavedI = false;
                 ConfirmI.IsEnabled = true;
+                emptyI = false;
             }
         }
 
@@ -83,6 +112,7 @@ namespace Diction_Master___Server.Custom_Controls
                 TermII.Add((Week)ContentFactory.CreateCompositeComponent(ComponentType.Week, Convert.ToInt16(comboBox1.SelectedValue), 2, textBoxII.Text));
                 SavedII = false;
                 ConfirmII.IsEnabled = true;
+                emptyII = false;
             }
         }
 
@@ -93,6 +123,7 @@ namespace Diction_Master___Server.Custom_Controls
                 TermIII.Add((Week)ContentFactory.CreateCompositeComponent(ComponentType.Week, Convert.ToInt16(comboBox2.SelectedValue), 3, textBoxIII.Text));
                 SavedIII = false;
                 ConfirmIII.IsEnabled = true;
+                emptyIII = false;
             }
         }
 
@@ -140,6 +171,10 @@ namespace Diction_Master___Server.Custom_Controls
                 textBoxI.Text = "";
                 SavedI = false;
                 ConfirmI.IsEnabled = true;
+                if (TermII.Count == 0 && TermI.Count == 0 && TermIII.Count == 0)
+                {
+                    emptyI = true;
+                }
             }
         }
 
@@ -151,6 +186,10 @@ namespace Diction_Master___Server.Custom_Controls
                 textBoxII.Text = "";
                 SavedII = false;
                 ConfirmII.IsEnabled = true;
+                if (TermII.Count == 0 && TermI.Count == 0 && TermIII.Count == 0)
+                {
+                    emptyII = true;
+                }
             }
         }
 
@@ -162,6 +201,10 @@ namespace Diction_Master___Server.Custom_Controls
                 textBoxIII.Text = "";
                 SavedIII = false;
                 ConfirmIII.IsEnabled = true;
+                if (TermII.Count == 0 && TermI.Count == 0 && TermIII.Count == 0)
+                {
+                    emptyIII = true;
+                }
             }
         }
 

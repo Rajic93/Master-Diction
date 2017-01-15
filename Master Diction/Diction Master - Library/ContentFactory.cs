@@ -14,9 +14,11 @@ namespace Diction_Master___Library
             switch (type)
             {
                 case ComponentType.Audio:
-                    return new Audio();
+                    return new LeafComponent() {ComponentType = ComponentType.Audio};
                 case ComponentType.Video:
-                    return new Video();
+                    return new LeafComponent() {ComponentType = ComponentType.Video};
+                case ComponentType.Document:
+                    return new LeafComponent() {ComponentType = ComponentType.Document};
                 default:
                     return null;
             }   
@@ -27,18 +29,28 @@ namespace Diction_Master___Library
             switch (type)
             {
                 case ComponentType.Audio:
-                    return new Audio
+                    return new LeafComponent()
                     {
                         Description = desc,
                         Title = title,
-                        URI = uri
+                        URI = uri,
+                        ComponentType = ComponentType.Audio
                     };
                 case ComponentType.Video:
-                    return new Video
+                    return new LeafComponent()
                     {
                         Description = desc,
                         Title = title,
-                        URI = uri
+                        URI = uri,
+                        ComponentType = ComponentType.Video
+                    };
+                case ComponentType.Document:
+                    return new LeafComponent()
+                    {
+                        Description = desc,
+                        Title = title,
+                        URI = uri,
+                        ComponentType = ComponentType.Document
                     };
                 default:
                     return null;

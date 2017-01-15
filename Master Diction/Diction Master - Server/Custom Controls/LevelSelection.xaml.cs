@@ -21,8 +21,10 @@ namespace Diction_Master___Server.Custom_Controls
     /// </summary>
     public partial class LevelSelection : UserControl
     {
-        public Diction_Master___Library.GradeType SelectedGrade;
-        public Diction_Master___Library.EducationalLevelType SelectEducationalLevel;
+        private Diction_Master___Library.GradeType SelectedGrade;
+        private Diction_Master___Library.EducationalLevelType SelectedEducationalLevel;
+        private bool gradeSelected;
+        private bool levelSelected;
 
         private Button previousSelected;
 
@@ -31,9 +33,19 @@ namespace Diction_Master___Server.Custom_Controls
             InitializeComponent();
         }
 
+        public bool LevelSelected()
+        {
+            return levelSelected;
+        }
+
+        public bool GradeSelected()
+        {
+            return gradeSelected;
+        }
+
         private void Nursery_OnClick(object sender, RoutedEventArgs e)
         {
-            SelectEducationalLevel = EducationalLevelType.Nursery;
+            SelectedEducationalLevel = EducationalLevelType.Nursery;
             NurseryI.Visibility = Visibility.Visible;
             NurseryII.Visibility = Visibility.Visible;
             PrimaryI.Visibility = Visibility.Collapsed;
@@ -51,11 +63,12 @@ namespace Diction_Master___Server.Custom_Controls
             Nursery.Opacity = 1;
             Primary.Opacity = 0.6;
             Secondary.Opacity = 0.6;
+            levelSelected = true;
         }
 
         private void Primary_OnClick(object sender, RoutedEventArgs e)
         {
-            SelectEducationalLevel = EducationalLevelType.Primary;
+            SelectedEducationalLevel = EducationalLevelType.Primary;
             NurseryI.Visibility = Visibility.Collapsed;
             NurseryII.Visibility = Visibility.Collapsed;
             PrimaryI.Visibility = Visibility.Visible;
@@ -73,11 +86,12 @@ namespace Diction_Master___Server.Custom_Controls
             Nursery.Opacity = 0.6;
             Primary.Opacity = 1;
             Secondary.Opacity = 0.6;
+            levelSelected = true;
         }
 
         private void Secondary_OnClick(object sender, RoutedEventArgs e)
         {
-            SelectEducationalLevel = EducationalLevelType.Secondary;
+            SelectedEducationalLevel = EducationalLevelType.Secondary;
             NurseryI.Visibility = Visibility.Collapsed;
             NurseryII.Visibility = Visibility.Collapsed;
             PrimaryI.Visibility = Visibility.Collapsed;
@@ -95,6 +109,7 @@ namespace Diction_Master___Server.Custom_Controls
             Nursery.Opacity = 0.6;
             Primary.Opacity = 0.6;
             Secondary.Opacity = 1;
+            levelSelected = true;
         }
 
         private void Grade_OnClick(object sender, RoutedEventArgs e)
@@ -155,6 +170,17 @@ namespace Diction_Master___Server.Custom_Controls
                     SelectedGrade = GradeType.SecondarySeniorIII;
                     break;
             }
+            gradeSelected = true;
+        }
+
+        public GradeType GetSelectedGrade()
+        {
+            return SelectedGrade;
+        }
+
+        public EducationalLevelType GetSelectedEducationalLevel()
+        {
+            return SelectedEducationalLevel;
         }
     }
 }

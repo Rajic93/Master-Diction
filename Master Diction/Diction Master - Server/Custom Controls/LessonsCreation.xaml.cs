@@ -24,30 +24,47 @@ namespace Diction_Master___Server.Custom_Controls
     public partial class LessonsCreation : UserControl
     {
         private Diction_Master___Library.ContentManager manager;
-        private bool savedLessons;
-        private bool firstStart = true;
+        private bool savedLessons = true;
+        private bool empty = true;
         private Component loadedWeek;
         private ObservableCollection<Week> weeks;
-        private ObservableCollection<Lesson> lessons;
+        private ObservableCollection<Component> lessons;
+        private int numOfLessons = 0;
 
         public LessonsCreation()
         {
             manager = Diction_Master___Library.ContentManager.CreateInstance();
-            lessons = new ObservableCollection<Lesson>();
+            lessons = new ObservableCollection<Component>();
             InitializeComponent();
+        }
+
+        public bool IsEmpty()
+        {
+            return numOfLessons == 0;
+        }
+
+        public bool IsSaved()
+        {
+            return savedLessons;
         }
 
         private void Button_OnClick(object sender, RoutedEventArgs e)
         {
             if (listBox.SelectedItem != null)
             {
-                if (savedLessons || firstStart)
+                if (savedLessons || empty)
                 {
                     lessons.Clear();
-                    foreach (Lesson lesson in ((Week)listBox.SelectedItem).Components)
+                    foreach (Lesson lesson in ((Week) listBox.SelectedItem).Components)
                     {
                         lessons.Add(lesson);
                     }
+                    loadedWeek = (Week) listBox.SelectedItem;
+                    empty = true;
+                }
+                else
+                {
+                    MessageBox.Show("Progress is not saved!");
                 }
             }
         }
@@ -63,6 +80,11 @@ namespace Diction_Master___Server.Custom_Controls
             weeks = manager.GetAllWeeks(component);
             listBox.ItemsSource = weeks;
             listBox.DisplayMemberPath = "Title";
+            for (int i = 0; i < 100; i++)
+            {
+                comboBox.Items.Add((i + 1).ToString());
+            }
+            comboBox.Text = 1.ToString();
         }
 
         private void listBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -75,7 +97,59 @@ namespace Diction_Master___Server.Custom_Controls
 
         private void Confirm_Click(object sender, RoutedEventArgs e)
         {
+            ((Week)loadedWeek).Components.Clear();
+            foreach (Lesson lesson in lessons)
+            {
+                ((Week)loadedWeek).Components.Add(lesson);
+            }
             savedLessons = true;
+            Confirm.IsEnabled = false;
+        }
+
+        private void Add_OnClick(object sender, RoutedEventArgs e)
+        {
+            lessons.Add(new Lesson() { Num = Convert.ToInt16(comboBox.Text), Title = textBox.Text});
+            Confirm.IsEnabled = true;
+            savedLessons = false;
+            empty = false;
+            numOfLessons++;
+        }
+
+        private void listBox1_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (listBox1.SelectedItem != null)
+            {
+                textBox.Text = ((Lesson) listBox1.SelectedItem).Title;
+                comboBox.Text = ((Lesson)listBox1.SelectedItem).Num.ToString();
+            }
+        }
+
+        private void Delete_Click(object sender, RoutedEventArgs e)
+        {
+            if (listBox1.SelectedItem != null)
+            {
+                lessons.Remove((Lesson) listBox1.SelectedItem);
+                listBox1.Items.Refresh();
+                Confirm.IsEnabled = true;
+                savedLessons = false;
+                numOfLessons--;
+                if (listBox1.Items.Count == 0)
+                    empty = true;
+                else
+                    empty = false;
+            }
+        }
+
+        private void Edit_Click(object sender, RoutedEventArgs e)
+        {
+            if (listBox1.SelectedItem != null)
+            {
+                ((Lesson)listBox1.SelectedItem).Title = textBox.Text;
+                ((Lesson)listBox1.SelectedItem).Num = Convert.ToInt16(comboBox.Text);
+                listBox1.Items.Refresh();
+                Confirm.IsEnabled = true;
+                savedLessons = false;
+            }
         }
     }
 }

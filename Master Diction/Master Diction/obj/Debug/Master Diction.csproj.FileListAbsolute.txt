@@ -8,6 +8,7 @@ D:\Projects\Upwork\Master Diction\Master Diction\Master Diction\bin\Debug\Intero
 D:\Projects\Upwork\Master Diction\Master Diction\Master Diction\bin\Debug\Interop.WMPLib.dll
 D:\Projects\Upwork\Master Diction\Master Diction\Master Diction\bin\Debug\AxInterop.AXVLC.dll
 D:\Projects\Upwork\Master Diction\Master Diction\Master Diction\bin\Debug\AxInterop.WMPLib.dll
+D:\Projects\Upwork\Master Diction\Master Diction\Master Diction\obj\Debug\Master Diction.csprojResolveAssemblyReference.cache
 D:\Projects\Upwork\Master Diction\Master Diction\Master Diction\obj\Debug\Interop.AXVLC.dll
 D:\Projects\Upwork\Master Diction\Master Diction\Master Diction\obj\Debug\Interop.WMPLib.dll
 D:\Projects\Upwork\Master Diction\Master Diction\Master Diction\obj\Debug\AxInterop.AXVLC.dll
@@ -32,4 +33,3 @@ D:\Projects\Upwork\Master Diction\Master Diction\Master Diction\obj\Debug\Master
 D:\Projects\Upwork\Master Diction\Master Diction\Master Diction\obj\Debug\Master Diction.application
 D:\Projects\Upwork\Master Diction\Master Diction\Master Diction\obj\Debug\Master Diction.exe
 D:\Projects\Upwork\Master Diction\Master Diction\Master Diction\obj\Debug\Master Diction.pdb
-D:\Projects\Upwork\Master Diction\Master Diction\Master Diction\obj\Debug\Master Diction.csprojResolveAssemblyReference.cache

@@ -20,7 +20,7 @@ namespace Diction_Master___Server
     /// </summary>
     public partial class LanguageSelection : UserControl
     {
-        public Image selectedLanguage;
+        private Image selectedLanguage;
 
         public LanguageSelection()
         {
@@ -35,6 +35,16 @@ namespace Diction_Master___Server
             }
             selectedLanguage = (Image)sender;
             selectedLanguage.Opacity = 1;
+        }
+
+        public Image GetSelectedLanguage()
+        {
+            return selectedLanguage;
+        }
+
+        public bool IsSelected()
+        {
+            return selectedLanguage == null ? false : true;
         }
     }
 }

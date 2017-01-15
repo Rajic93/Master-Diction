@@ -3,9 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace Diction_Master___Library
 {
+    [XmlInclude(typeof(Course))]
+    [XmlInclude(typeof(EducationalLevel))]
+    [XmlInclude(typeof(Grade))]
+    [XmlInclude(typeof(Week))]
+    [XmlInclude(typeof(Lesson))]
     public abstract class CompositeComponent : Component
     {
         public List<Component> Components { get; set; }
@@ -49,6 +55,7 @@ namespace Diction_Master___Library
     public class Course : CompositeComponent
     {
         public string Name { get; set; }
+        public string Icon { get; set; }
     }
 
     public class EducationalLevel : CompositeComponent

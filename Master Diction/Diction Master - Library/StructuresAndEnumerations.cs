@@ -49,7 +49,8 @@ namespace Diction_Master___Library
         Week,
         Lesson,
         Audio,
-        Video
+        Video,
+        Document
     }
 
     public struct ContentVersionInfo
