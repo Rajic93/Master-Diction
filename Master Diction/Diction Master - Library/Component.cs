@@ -12,5 +12,6 @@ namespace Diction_Master___Library
     public abstract class Component
     {
         public int ID { get; set; }
+        public int ParentID { get; set; }
     }
 }

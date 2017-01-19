@@ -98,7 +98,7 @@ namespace Diction_Master___Server.Custom_Controls
         {
             if (textBoxI.Text != "")
             {
-                TermI.Add((Week)ContentFactory.CreateCompositeComponent(ComponentType.Week, Convert.ToInt16(comboBox.SelectedValue), 1, textBoxI.Text));
+                //TermI.Add((Week)ContentFactory.CreateCompositeComponent(ComponentType.Week, Convert.ToInt16(comboBox.SelectedValue), 1, textBoxI.Text));
                 SavedI = false;
                 ConfirmI.IsEnabled = true;
                 emptyI = false;
@@ -109,7 +109,7 @@ namespace Diction_Master___Server.Custom_Controls
         {
             if (textBoxII.Text != "")
             {
-                TermII.Add((Week)ContentFactory.CreateCompositeComponent(ComponentType.Week, Convert.ToInt16(comboBox1.SelectedValue), 2, textBoxII.Text));
+                //TermII.Add((Week)ContentFactory.CreateCompositeComponent(ComponentType.Week, Convert.ToInt16(comboBox1.SelectedValue), 2, textBoxII.Text));
                 SavedII = false;
                 ConfirmII.IsEnabled = true;
                 emptyII = false;
@@ -120,7 +120,7 @@ namespace Diction_Master___Server.Custom_Controls
         {
             if (textBoxIII.Text != "")
             {
-                TermIII.Add((Week)ContentFactory.CreateCompositeComponent(ComponentType.Week, Convert.ToInt16(comboBox2.SelectedValue), 3, textBoxIII.Text));
+                //TermIII.Add((Week)ContentFactory.CreateCompositeComponent(ComponentType.Week, Convert.ToInt16(comboBox2.SelectedValue), 3, textBoxIII.Text));
                 SavedIII = false;
                 ConfirmIII.IsEnabled = true;
                 emptyIII = false;

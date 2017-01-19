@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Runtime.Remoting.Messaging;
 using System.Text;
@@ -14,49 +15,87 @@ namespace Diction_Master___Library
             switch (type)
             {
                 case ComponentType.Audio:
-                    return new LeafComponent() {ComponentType = ComponentType.Audio};
+                    return new ContentFile() {ComponentType = ComponentType.Audio};
                 case ComponentType.Video:
-                    return new LeafComponent() {ComponentType = ComponentType.Video};
+                    return new ContentFile() {ComponentType = ComponentType.Video};
                 case ComponentType.Document:
-                    return new LeafComponent() {ComponentType = ComponentType.Document};
+                    return new ContentFile() {ComponentType = ComponentType.Document};
                 default:
                     return null;
             }   
         }
 
-        public static Component CreateLeafComponent(ComponentType type, string title, string uri, string desc)
+        public static Component CreateLeafComponent(int id, int parentID,
+            string text, string answer, QuestionType type)
         {
-            switch (type)
+            return new Question()
             {
-                case ComponentType.Audio:
-                    return new LeafComponent()
-                    {
-                        Description = desc,
-                        Title = title,
-                        URI = uri,
-                        ComponentType = ComponentType.Audio
-                    };
-                case ComponentType.Video:
-                    return new LeafComponent()
-                    {
-                        Description = desc,
-                        Title = title,
-                        URI = uri,
-                        ComponentType = ComponentType.Video
-                    };
-                case ComponentType.Document:
-                    return new LeafComponent()
-                    {
-                        Description = desc,
-                        Title = title,
-                        URI = uri,
-                        ComponentType = ComponentType.Document
-                    };
-                default:
-                    return null;
-            }
+                ID = id,
+                ParentID = parentID,
+                Text = text,
+                Answer = answer
+            };
         }
-
+        /// <summary>
+        /// Creates new leaf component with passed type.
+        /// </summary>
+        /// <param name="id">Id of component.</param>
+        /// <param name="parentID">Id of parent component.</param>
+        /// <param name="type">Type of leaf component. Can be Audio, Video or Document.</param>
+        /// <param name="title">Title of file.</param>
+        /// <param name="uri">Path to file.</param>
+        /// <param name="size">Size of file.</param>
+        /// <param name="desc">Description of file.</param>
+        /// <param name="icon">Icon path.</param>
+        /// <returns>New Audio, Video or Document component.</returns>
+        public static Component CreateLeafComponent(int id, int parentID, ComponentType type,
+            string title, string uri, float size, string desc, string icon)
+        {
+            if (type == ComponentType.Audio)
+            {
+                return new ContentFile()
+                {
+                    ID = id,
+                    ParentID = parentID,
+                    Description = desc,
+                    Title = title,
+                    URI = uri,
+                    Size = size,
+                    icon = icon,
+                    ComponentType = ComponentType.Audio
+                };
+            }
+            if (type == ComponentType.Video)
+            {
+                return new ContentFile()
+                {
+                    ID = id,
+                    ParentID = parentID,
+                    Description = desc,
+                    Title = title,
+                    URI = uri,
+                    Size = size,
+                    icon = icon,
+                    ComponentType = ComponentType.Video
+                };
+            }
+            return new ContentFile()
+            {
+                ID = id,
+                ParentID = parentID,
+                Description = desc,
+                Title = title,
+                URI = uri,
+                Size = size,
+                icon = icon,
+                ComponentType = ComponentType.Document
+            };
+        }
+        /// <summary>
+        /// Creates new empty component based on passed type.
+        /// </summary>
+        /// <param name="type">Component type.</param>
+        /// <returns>New empry component.</returns>
         public static Component CreateCompositeComponent(ComponentType type)
         {
             switch (type)
@@ -71,43 +110,113 @@ namespace Diction_Master___Library
                     return new Week();
                 case ComponentType.Lesson:
                     return new Lesson();
+                case ComponentType.Quiz:
+                    return new Quiz();
                 default:
                     return null;
             }
         }
-
-        public static Component CreateCompositeComponent(ComponentType type, int num, int term)
+        /// <summary>
+        /// Creates new Course object and sets all properties.
+        /// </summary>
+        /// <param name="id">ID of component.</param>
+        /// <param name="name">Course name.</param>
+        /// <param name="icon">Course icon.</param>
+        /// <returns>New Course object.</returns>
+        public static Component CreateCompositeComponent(int id, int parent, string name, string icon)
         {
-            return type == ComponentType.Week ? new Week { Num = num, Term = term } : null;
+            return new Course()
+            {
+                ID = id,
+                ParentID = parent,
+                Icon = icon,
+                Name = name
+            };
         }
-
-        public static Component CreateCompositeComponent(ComponentType type, int num, string title)
+        /// <summary>
+        /// Creates new EducationalLevel object and sets all properties.
+        /// </summary>
+        /// <param name="id">ID of component.</param>
+        /// <param name="level">EducationalLevel type.</param>
+        /// <param name="icon">EducationalLevel icon.</param>
+        /// <returns>New EducationalLevel object.</returns>
+        public static Component CreateCompositeComponent(int id, int parent, EducationalLevelType level, string icon)
         {
-            return type == ComponentType.Lesson ? new Lesson { Num = num, Title = title } : null;
+            return new EducationalLevel()
+            {
+                ID = id,
+                ParentID = parent,
+                Level = level,
+                Icon = icon
+            };
         }
-        public static Component CreateCompositeComponent(ComponentType type, EducationalLevelType level)
+        /// <summary>
+        /// Creates new Grade object and sets all properties.
+        /// </summary>
+        /// <param name="id">ID of component.</param>
+        /// <param name="icon"></param>
+        /// <param name="num">No. of Grade.</param>
+        /// <returns>New Grade object.</returns>
+        public static Component CreateCompositeComponent(int id, int parent, string icon, GradeType num)
         {
-            return type == ComponentType.EducationalLevel ? new EducationalLevel() { Level = level } : null;
+            return new Grade()
+            {
+                ID = id,
+                ParentID = parent,
+                Icon = icon,
+                GradeNum = num
+            };
         }
-
-        public static Component CreateCompositeComponent(ComponentType type, GradeType grade)
+        /// <summary>
+        /// Creates new Week object and sets all properties.
+        /// </summary>
+        /// <param name="id">ID of component.</param>
+        /// <param name="title">Week title.</param>
+        /// <param name="num">No. of Week.</param>
+        /// <param name="term">No. of Term.</param>
+        /// <returns>New Week object.</returns>
+        public static Component CreateCompositeComponent(int id, int parent, string title, int num, int term)
         {
-            return type == ComponentType.Grade ? new Grade { GradeNum = grade } : null;
+            return new Week()
+            {
+                ID = id,
+                ParentID = parent,
+                Title = title,
+                Num = num,
+                Term = term
+            };
         }
-
-        public static Component CreateCompositeComponent(ComponentType type, bool edu = true)
+        /// <summary>
+        /// Creates new Lesson object and sets all properties.
+        /// </summary>
+        /// <param name="id">ID of component.</param>
+        /// <param name="title">Lesson title.</param>
+        /// <param name="num">No. of Lesson.</param>
+        /// <returns>New Lesson object.</returns>
+        public static Component CreateCompositeComponent(int id, int parent, string title, int num)
         {
-            return type == ComponentType.EducationalLevel ? new EducationalLevel() : null;
+            return new Lesson()
+            {
+                ID = id,
+                ParentID = parent,
+                Title = title,
+                Num = num
+            };
         }
-
-        public static Component CreateCompositeComponent(ComponentType type, string name)
+        /// <summary>
+        /// Creates new Quiz object and sets all properties.
+        /// </summary>
+        /// <param name="id">ID of component.</param>
+        /// <param name="title">Quiz title.</param>
+        /// <returns>New Quiz object.</returns>
+        public static Component CreateCompositeComponent(int id, int parent, string title)
         {
-            return type == ComponentType.Course ? new Course { Name = name} : null;
-        }
-
-        public static Component CreateCompositeComponent(ComponentType type, int num, int term, string title)
-        {
-            return type == ComponentType.Week ? new Week() { Num = num, Term = term, Title = title}: null;
+            return new Quiz()
+            {
+                ID = id,
+                ParentID = parent,
+                Title = title
+            };
         }
     }
 }

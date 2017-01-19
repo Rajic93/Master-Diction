@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Diction_Master___Server"
              mc:Ignorable="d" Height="590" Width="790">
     <Grid Margin="0,0,0,0">
-        <WrapPanel x:Name="WrapPanelLanguages" Margin="0" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" Height="589.6">
+        <WrapPanel x:Name="WrapPanelLanguages" Margin="10,10,10.4,32.4" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
             <Image x:Name="image2" Height="100" Width="100" Margin="20" ToolTip="Italian" Source="../Resources/Flag of Italy.png" Opacity="0.5" Visibility="Visible" MouseUp="image_MouseUp"/>
             <Image x:Name="image3" Height="100" Width="100" Margin="20" ToolTip="Russian" Source="../Resources/Flag of Russia.png" Opacity="0.5" Visibility="Visible" MouseUp="image_MouseUp"/>
             <Image x:Name="image4" Height="100" Width="100" Margin="20" ToolTip="Serbian" Source="../Resources/Flag of Serbia.png" Opacity="0.5" Visibility="Visible" MouseUp="image_MouseUp"/>
@@ -18,6 +18,7 @@
             <Image x:Name="image8" ToolTip="Spanish" Height="100" Width="100" Margin="20" Source="../Resources/Flag of Spain.png" Opacity="0.5" Visibility="Visible" MouseUp="image_MouseUp"/>
             <Image x:Name="image1" ToolTip="Portuguese" Height="100" Width="100" Margin="20" Source="../Resources/Flag of Portugal.png" Opacity="0.5" Visibility="Visible" MouseUp="image_MouseUp"/>
         </WrapPanel>
+        <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="705,563,0,0" VerticalAlignment="Top" Width="75"/>
 
     </Grid>
 </UserControl>

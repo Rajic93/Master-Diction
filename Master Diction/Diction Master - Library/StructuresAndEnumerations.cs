@@ -50,7 +50,15 @@ namespace Diction_Master___Library
         Lesson,
         Audio,
         Video,
-        Document
+        Document,
+        Quiz,
+        Question
+    }
+
+    public enum QuestionType
+    {
+        Text,
+        Puzzle
     }
 
     public struct ContentVersionInfo
@@ -59,5 +67,24 @@ namespace Diction_Master___Library
         public ContentStatus Status;
     }
 
-
+    public static class Icons
+    {
+        public const string Nursery = "./Resources/nursery.png";
+        public const string Primary = "./Resources/primary.png";
+        public const string Secondary = "./Resources/secondary.png";
+        public const string NurseryI = "";
+        public const string NurseryII = "";
+        public const string PrimaryI = "";
+        public const string PrimaryII = "";
+        public const string PrimaryIII = "";
+        public const string PrimaryIV = "";
+        public const string PrimaryV = "";
+        public const string PrimaryVI = "";
+        public const string SecondaryJuniorI = "";
+        public const string SecondaryJuniorII = "";
+        public const string SecondaryJuniorIII = "";
+        public const string SecondarySeniorI = "";
+        public const string SecondarySeniorII = "";
+        public const string SecondarySeniorIII = "";
+    }
 }

@@ -20,7 +20,8 @@ namespace Diction_Master___Server
     /// </summary>
     public partial class LanguageSelection : UserControl
     {
-        private Image selectedLanguage;
+        private Image _selectedLanguage;
+        private string _nation;
 
         public LanguageSelection()
         {
@@ -29,22 +30,25 @@ namespace Diction_Master___Server
 
         private void image_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            if (selectedLanguage != null)
+            if (_selectedLanguage != null)
             {
-                selectedLanguage.Opacity = 0.5;
+                _selectedLanguage.Opacity = 0.5;
             }
-            selectedLanguage = (Image)sender;
-            selectedLanguage.Opacity = 1;
+            _selectedLanguage = (Image)sender;
+            _selectedLanguage.Opacity = 1;
+            _nation = _selectedLanguage.Source.ToString().Split('/').Last().Split(' ').Last().Split('.').First();
         }
 
         public Image GetSelectedLanguage()
         {
-            return selectedLanguage;
+            return _selectedLanguage;
         }
 
         public bool IsSelected()
         {
-            return selectedLanguage == null ? false : true;
+            return _selectedLanguage == null ? false : true;
         }
+
+        public string GetSelectedNation() => _nation;
     }
 }

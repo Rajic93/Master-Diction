@@ -4,8 +4,11 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Diction_Master___Server"
+        xmlns:generic="clr-namespace:System.Collections.Generic;assembly=mscorlib"
         mc:Ignorable="d"
         Title="Content" Height="680"  Width="1024" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen">
+        
+    
     <Grid Margin="0,81,-0.4,0.4">
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
@@ -32,5 +35,12 @@
         <Button x:Name="button4" Content="Delete" HorizontalAlignment="Left" Margin="424,540,0,0" VerticalAlignment="Top" Width="75"/>
         <Button x:Name="button5" Content="Edit" HorizontalAlignment="Left" Margin="344,540,0,0" VerticalAlignment="Top" Width="75"/>
         <Button x:Name="button6" Content="Add" HorizontalAlignment="Left" Margin="264,540,0,0" VerticalAlignment="Top" Width="75" Click="Button6_OnClick"/>
+        <ListView x:Name="listView" HorizontalAlignment="Left" Height="407" Margin="25,17,0,0" VerticalAlignment="Top" Width="637" Grid.ColumnSpan="2">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Image Source="{Binding}"></Image>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </Grid>
 </Window>

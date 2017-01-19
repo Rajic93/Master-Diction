@@ -30,5 +30,4 @@ D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Server\obj\Deb
 D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Server\obj\Debug\Diction Master - Server.exe
 D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Server\obj\Debug\Diction Master - Server.pdb
 D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Server\obj\Debug\Test.g.cs
-D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Server\obj\Debug\GeneratedInternalTypeHelper.g.cs
 D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Server\obj\Debug\Test.baml

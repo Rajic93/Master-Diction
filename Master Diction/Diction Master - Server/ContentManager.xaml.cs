@@ -141,8 +141,8 @@ namespace Diction_Master___Server
                             selectedGrade = ((LevelSelection) content.Children[1]).GetSelectedGrade();
                             selectedEducationalLevel =
                                 ((LevelSelection) content.Children[1]).GetSelectedEducationalLevel();
-                            buildingCourse = manager.GetChildComponent(buildingCourse, ComponentType.EducationalLevel,
-                                selectedEducationalLevel, selectedGrade);
+                            //buildingCourse = manager.GetChildComponent(buildingCourse, ComponentType.EducationalLevel,
+                            //    selectedEducationalLevel, selectedGrade);
                         }
                         else
                         {

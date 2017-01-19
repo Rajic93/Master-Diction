@@ -7,7 +7,8 @@
         mc:Ignorable="d"
         Title="Test" Height="626" Width="802.8">
     <Grid>
-        <Custom_Controls:ContentUpload x:Name="ContentUpload" Margin="0"/>
 
+        <Button Click="ButtonBase_OnClick" Margin="10,10,636.8,486"></Button>
     </Grid>
+
 </Window>

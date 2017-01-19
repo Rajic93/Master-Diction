@@ -20,6 +20,7 @@ using Microsoft.Win32;
 
 namespace Diction_Master___Server.Custom_Controls
 {
+
     /// <summary>
     /// Interaction logic for ContentUpload.xaml
     /// </summary>
@@ -94,7 +95,8 @@ namespace Diction_Master___Server.Custom_Controls
                 textBoxDescription.Text = "";
                 Directory.SetCurrentDirectory("tmp\\");
                 File.WriteAllBytes(name, bytes);
-                LeafComponent document = (LeafComponent)ContentFactory.CreateLeafComponent(CheckType(selectedFile), name, name, "");
+                //next line is bad
+                LeafComponent document = (LeafComponent)ContentFactory.CreateLeafComponent(1, 1, CheckType(selectedFile), name, name, 20, "", "");
                 ((Lesson) comboBox.SelectedItem).Components.Add(document);
                 lessonContent.Add(document);
                 listBox.Items.Refresh();
@@ -176,7 +178,7 @@ namespace Diction_Master___Server.Custom_Controls
                 TextBoxURI.Text = ((LeafComponent)listBox.SelectedItem).URI;
                 textBoxDescription.Text = ((LeafComponent)listBox.SelectedItem).Description;
                 Size.Text = ((LeafComponent)listBox.SelectedItem).Size.ToString();
-                switch (((LeafComponent)listBox.SelectedItem).ComponentType)
+                switch (((ContentFile)listBox.SelectedItem).ComponentType)
                 {
                     case ComponentType.Audio:
                         radioButtonAudio.IsChecked = true;
