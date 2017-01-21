@@ -6,41 +6,46 @@
         xmlns:local="clr-namespace:Diction_Master___Server"
         xmlns:generic="clr-namespace:System.Collections.Generic;assembly=mscorlib"
         mc:Ignorable="d"
-        Title="Content" Height="680"  Width="1024" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen">
-        
-    
+        Title="Content" Height="680"  Width="1024" MinHeight="680"  MinWidth="1024" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen">
+
+
     <Grid Margin="0,81,-0.4,0.4">
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <WrapPanel x:Name="Courses" Grid.Row="0" Grid.Column="0" Margin="10,33,9.8,34" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}"/>
+        <WrapPanel x:Name="Courses" Grid.Row="0" Grid.Column="0" Margin="10,36,9.8,10" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}"/>
         <Grid Grid.Row="0" Grid.Column="1">
             <Grid.RowDefinitions>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
+                <RowDefinition Height="89*"/>
+                <RowDefinition Height="127*"></RowDefinition>
+                <RowDefinition Height="68*"/>
             </Grid.RowDefinitions>
-            <WrapPanel HorizontalAlignment="Left" Height="220" Margin="10,31,0,0" VerticalAlignment="Top" Width="489" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}"/>
-            <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Available educational levels" VerticalAlignment="Top"/>
-            <Button x:Name="button" Content="Edit" HorizontalAlignment="Left" Margin="344,256,0,0" VerticalAlignment="Top" Width="75"/>
-            <Button x:Name="button1" Content="Delete" HorizontalAlignment="Left" Margin="424,256,0,0" VerticalAlignment="Top" Width="75"/>
-            <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="10,10.2,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Available grades" VerticalAlignment="Top" Width="120" Background="{x:Null}" BorderBrush="{x:Null}"/>
-            <Button x:Name="button2" Content="Delete" HorizontalAlignment="Left" Margin="424,255.2,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75"/>
-            <Button x:Name="button3" Content="Edit" HorizontalAlignment="Left" Margin="344,255.2,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75"/>
-            <WrapPanel HorizontalAlignment="Left" Height="212" Margin="10,38.2,0,0" Grid.Row="1" VerticalAlignment="Top" Width="489" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}"/>
+            <WrapPanel x:Name="WrapPanelEducationaLevel" Margin="10,35,9.8,10.4" Grid.Row="0" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}"/>
+            <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Available educational levels" VerticalAlignment="Top" Height="20" Width="158"/>
+            <Button x:Name="EditEducationalLevel" Content="Edit" HorizontalAlignment="Right" Margin="0,11,89.8,0" VerticalAlignment="Top" Width="75" Height="19" IsEnabled="False" Click="EditEducationalLevel_Click"/>
+            <Button x:Name="DeleteEducationalLevel" Content="Delete" HorizontalAlignment="Right" Margin="0,11,9.8,0" VerticalAlignment="Top" Width="75" Height="19" IsEnabled="False" Click="DeleteEducationalLevel_Click"/>
+            <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="10,5.6,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Available grades" VerticalAlignment="Top" Width="120" Background="{x:Null}" BorderBrush="{x:Null}"/>
+            <Button x:Name="DeleteGrade" Content="Delete" HorizontalAlignment="Right" Margin="0,5.6,9.8,0" VerticalAlignment="Top" Width="75" Height="19" Grid.Row="1" IsEnabled="False" Click="DeleteGrade_Click"/>
+            <Button x:Name="EditGrade" Content="Edit" HorizontalAlignment="Right" Margin="0,5.6,89.8,0" VerticalAlignment="Top" Width="75" Height="19" Grid.Row="1" IsEnabled="False" Click="EditGrade_Click"/>
+            <WrapPanel x:Name="WrapPanelGrades" Margin="10,29.6,9.8,9.8" Grid.Row="1" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}"/>
+            <Button x:Name="AddEducationalLevel" Content="Add" HorizontalAlignment="Right" Margin="0,11,169.8,0" VerticalAlignment="Top" Width="75" Height="19" Click="ButtonAddEducationalLevel_Click" IsEnabled="False"/>
+            <Button x:Name="AddGrade" Content="Add" HorizontalAlignment="Right" Margin="0,5.6,169.8,0" Grid.Row="1" VerticalAlignment="Top" Width="75" Height="19" Click="ButtonAddGrade_Click" IsEnabled="False"/>
+            <Button x:Name="EditWeeks" Content="Edit Weeks" HorizontalAlignment="Left" Margin="10,0,0,9.8" Grid.Row="2" VerticalAlignment="Bottom" Width="75" IsEnabled="False" Click="EditWeeks_Click"/>
+            <Button x:Name="EditFiles" Content="Edit Files" HorizontalAlignment="Right" Margin="0,0,9.8,9.8" Grid.Row="2" VerticalAlignment="Bottom" Width="75" IsEnabled="False" Click="EditFiles_Click"/>
+            <Button x:Name="EditLessons" Content="Edit Lessons" HorizontalAlignment="Center" Margin="210,0,210,9.8" Grid.Row="2" VerticalAlignment="Bottom" Width="85" IsEnabled="False" Click="EditLessons_Click"/>
+            <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="10,10.2,0,0" Grid.Row="2" TextWrapping="Wrap" Text="No of Weeks:" VerticalAlignment="Top"/>
+            <TextBlock x:Name="textBlock2" HorizontalAlignment="Right" Margin="0,10.2,9.8,0" Grid.Row="2" TextWrapping="Wrap" Text="No of files:" VerticalAlignment="Top"/>
+            <TextBlock x:Name="textBlock3" HorizontalAlignment="Center" Margin="210,10.2,210,0" Grid.Row="2" TextWrapping="Wrap" Text="No of Lessons:" VerticalAlignment="Top" Height="19" Width="85"/>
+            <TextBlock x:Name="NoOfWeeks" HorizontalAlignment="Left" Margin="10,31.2,0,0" Grid.Row="2" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+            <TextBlock x:Name="NoOfFiles" HorizontalAlignment="Right" Margin="0,31.2,9.8,0" Grid.Row="2" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+            <TextBlock x:Name="NoOfLessons" HorizontalAlignment="Left" Margin="212,31.2,0,0" Grid.Row="2" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
 
         </Grid>
-        <TextBox x:Name="textBox1" HorizontalAlignment="Left" Height="23" Margin="9,10,0,0" TextWrapping="Wrap" Text="Available courses" VerticalAlignment="Top" Width="120" Background="{x:Null}" BorderBrush="{x:Null}"/>
-        <WrapPanel HorizontalAlignment="Left" Height="65" Margin="9,-70,0,0" VerticalAlignment="Top" Width="995" Grid.ColumnSpan="2" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}"/>
-        <Button x:Name="button4" Content="Delete" HorizontalAlignment="Left" Margin="424,540,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button x:Name="button5" Content="Edit" HorizontalAlignment="Left" Margin="344,540,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button x:Name="button6" Content="Add" HorizontalAlignment="Left" Margin="264,540,0,0" VerticalAlignment="Top" Width="75" Click="Button6_OnClick"/>
-        <ListView x:Name="listView" HorizontalAlignment="Left" Height="407" Margin="25,17,0,0" VerticalAlignment="Top" Width="637" Grid.ColumnSpan="2">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <Image Source="{Binding}"></Image>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+        <TextBox x:Name="textBox1" HorizontalAlignment="Left" Height="23" Margin="10,8,0,0" TextWrapping="Wrap" Text="Available courses" VerticalAlignment="Top" Width="120" Background="{x:Null}" BorderBrush="{x:Null}"/>
+        <WrapPanel Height="65" Margin="10,-70,9.6,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}"/>
+        <Button x:Name="DeleteCourse" Content="Delete" HorizontalAlignment="Right" Margin="0,12,9.8,0" VerticalAlignment="Top" Width="75" IsEnabled="False" Click="DeleteCourse_Click"/>
+        <Button x:Name="EditCourse" Content="Edit" HorizontalAlignment="Right" Margin="0,12,89.8,0" VerticalAlignment="Top" Width="75" IsEnabled="False" Click="EditCourse_Click"/>
+        <Button x:Name="AddCourse" Content="Add" HorizontalAlignment="Right" Margin="0,12,169.8,0" VerticalAlignment="Top" Width="75" Click="ButtonAddCourse_OnClick"/>
     </Grid>
 </Window>

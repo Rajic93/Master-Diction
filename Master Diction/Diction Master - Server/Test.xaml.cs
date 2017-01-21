@@ -27,9 +27,13 @@ namespace Diction_Master___Server
         {
             manager = Diction_Master___Library.ContentManager.CreateInstance();
             InitializeComponent();
+
+            //ButtonBase_OnClick();
+            //WrapPanel1.DataContext = manager.GetCourses();
+
         }
 
-        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        private void ButtonBase_OnClick()
         {
             manager.AddCourse("Serbian", "");
             manager.EditCourse(1, null, "./Resources/Flag of Serbia.png");

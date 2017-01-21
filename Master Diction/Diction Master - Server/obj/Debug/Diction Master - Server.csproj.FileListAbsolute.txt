@@ -5,6 +5,7 @@ D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Server\bin\Deb
 D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Server\bin\Debug\Xceed.Wpf.Toolkit.dll
 D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Server\bin\Debug\Diction Master - Library.pdb
 D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Server\obj\Debug\Diction Master - Server.csprojResolveAssemblyReference.cache
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Server\obj\Debug\Custom Controls\ContentUpload.baml
 D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Server\obj\Debug\Content.g.cs
 D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Server\obj\Debug\ContentManager.g.cs
 D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Server\obj\Debug\Custom Controls\ContentUpload.g.cs
@@ -13,21 +14,22 @@ D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Server\obj\Deb
 D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Server\obj\Debug\Custom Controls\LevelSelection.g.cs
 D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Server\obj\Debug\Custom Controls\WeeksCreation.g.cs
 D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Server\obj\Debug\MainWindow.g.cs
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Server\obj\Debug\Test.g.cs
 D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Server\obj\Debug\App.g.cs
 D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Server\obj\Debug\Diction Master - Server_MarkupCompile.cache
 D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Server\obj\Debug\Diction Master - Server_MarkupCompile.lref
 D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Server\obj\Debug\Content.baml
 D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Server\obj\Debug\ContentManager.baml
-D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Server\obj\Debug\Custom Controls\ContentUpload.baml
 D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Server\obj\Debug\Custom Controls\LanguageSelection.baml
 D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Server\obj\Debug\Custom Controls\LessonsCreation.baml
 D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Server\obj\Debug\Custom Controls\LevelSelection.baml
 D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Server\obj\Debug\Custom Controls\WeeksCreation.baml
 D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Server\obj\Debug\MainWindow.baml
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Server\obj\Debug\Test.baml
 D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Server\obj\Debug\Diction Master - Server.g.resources
 D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Server\obj\Debug\Diction_Master___Server.Properties.Resources.resources
 D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Server\obj\Debug\Diction Master - Server.csproj.GenerateResource.Cache
 D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Server\obj\Debug\Diction Master - Server.exe
 D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Server\obj\Debug\Diction Master - Server.pdb
-D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Server\obj\Debug\Test.g.cs
-D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Server\obj\Debug\Test.baml
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Server\obj\Debug\Custom Controls\GradeSelection.g.cs
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Server\obj\Debug\Custom Controls\GradeSelection.baml

@@ -62,7 +62,7 @@ namespace Diction_Master___Server
                 RenderSize = content.RenderSize,
                 Visibility = Visibility.Collapsed
             });
-            content.Children.Add(new WeeksCreation()
+            content.Children.Add(new WeeksCreation(1)
             {
                 RenderSize = content.RenderSize,
                 Visibility = Visibility.Collapsed
@@ -122,7 +122,7 @@ namespace Diction_Master___Server
                 case 0:
                     if (((LanguageSelection)content.Children[0]).IsSelected())
                     {
-                        selectedLanguage = ((LanguageSelection)content.Children[0]).GetSelectedLanguage();
+                        //selectedLanguage = ((LanguageSelection)content.Children[0]).GetSelectedLanguage();
                         Previous.Visibility = Visibility.Visible;
                         string course = selectedLanguage.Source.ToString().Split('/').Last().Split(' ').Last();
                         buildingCourse = manager.GetCourse(course.Split('.').First());
@@ -222,7 +222,7 @@ namespace Diction_Master___Server
             switch (active_section)
             {
                 case 1:
-                    selectedLanguage = ((LanguageSelection)content.Children[0]).GetSelectedLanguage();
+                    //selectedLanguage = ((LanguageSelection)content.Children[0]).GetSelectedLanguage();
                     Previous.Visibility = Visibility.Collapsed;
                     break;
                 case 2:

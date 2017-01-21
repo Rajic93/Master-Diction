@@ -60,6 +60,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Custom Controls\GradeSelection.xaml.cs">
+      <DependentUpon>GradeSelection.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Test.xaml.cs">
       <DependentUpon>Test.xaml</DependentUpon>
     </Compile>
@@ -72,6 +75,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Custom Controls\ContentUpload.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Custom Controls\GradeSelection.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -879,12 +886,6 @@
     <Resource Include="Resources\button_bg_blue_inactive.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Diction Master - Library\Diction Master - Library.csproj">
-      <Project>{dffc9696-8df3-4362-8ded-48500e0c3366}</Project>
-      <Name>Diction Master - Library</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\nursery.jpg" />
   </ItemGroup>
   <ItemGroup>
@@ -892,6 +893,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\secondary.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Diction Master - Library\Diction Master - Library.csproj">
+      <Project>{dffc9696-8df3-4362-8ded-48500e0c3366}</Project>
+      <Name>Diction Master - Library</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

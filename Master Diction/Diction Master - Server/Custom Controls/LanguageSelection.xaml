@@ -18,7 +18,7 @@
             <Image x:Name="image8" ToolTip="Spanish" Height="100" Width="100" Margin="20" Source="../Resources/Flag of Spain.png" Opacity="0.5" Visibility="Visible" MouseUp="image_MouseUp"/>
             <Image x:Name="image1" ToolTip="Portuguese" Height="100" Width="100" Margin="20" Source="../Resources/Flag of Portugal.png" Opacity="0.5" Visibility="Visible" MouseUp="image_MouseUp"/>
         </WrapPanel>
-        <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="705,563,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="button" Content="Save" HorizontalAlignment="Left" Margin="705,563,0,0" VerticalAlignment="Top" Width="75"/>
 
     </Grid>
 </UserControl>

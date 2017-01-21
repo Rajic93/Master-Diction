@@ -1,6 +1,8 @@
 ﻿
 
 
+using System.Collections.Generic;
+
 namespace Diction_Master___Library
 {
     public enum GradeType

@@ -23,6 +23,7 @@ namespace Diction_Master___Server.Custom_Controls
     /// </summary>
     public partial class WeeksCreation : UserControl
     {
+        private Diction_Master___Library.ContentManager _manager;
         private ObservableCollection<Component> TermI;
         private ObservableCollection<Component> TermII;
         private ObservableCollection<Component> TermIII;
@@ -33,11 +34,15 @@ namespace Diction_Master___Server.Custom_Controls
         private bool emptyII = true;
         private bool emptyIII = true;
 
-        public WeeksCreation()
+        private int _selecetedGrade;
+
+        public WeeksCreation(int parentID)
         {
+            _manager = Diction_Master___Library.ContentManager.CreateInstance();
             TermI = new ObservableCollection<Component>();
             TermII = new ObservableCollection<Component>();
             TermIII = new ObservableCollection<Component>();
+            _selecetedGrade = parentID;
             InitializeComponent();
         }
 
@@ -98,7 +103,8 @@ namespace Diction_Master___Server.Custom_Controls
         {
             if (textBoxI.Text != "")
             {
-                //TermI.Add((Week)ContentFactory.CreateCompositeComponent(ComponentType.Week, Convert.ToInt16(comboBox.SelectedValue), 1, textBoxI.Text));
+                int id = _manager.AddWeek(_selecetedGrade, textBoxI.Text, Convert.ToInt16(comboBox.SelectedValue), 1);
+                TermI.Add(_manager.GetComponent(id) as Week);
                 SavedI = false;
                 ConfirmI.IsEnabled = true;
                 emptyI = false;
@@ -109,7 +115,8 @@ namespace Diction_Master___Server.Custom_Controls
         {
             if (textBoxII.Text != "")
             {
-                //TermII.Add((Week)ContentFactory.CreateCompositeComponent(ComponentType.Week, Convert.ToInt16(comboBox1.SelectedValue), 2, textBoxII.Text));
+                int id = _manager.AddWeek(_selecetedGrade, textBoxII.Text, Convert.ToInt16(comboBox1.SelectedValue), 1);
+                TermII.Add(_manager.GetComponent(id) as Week);
                 SavedII = false;
                 ConfirmII.IsEnabled = true;
                 emptyII = false;
@@ -120,7 +127,8 @@ namespace Diction_Master___Server.Custom_Controls
         {
             if (textBoxIII.Text != "")
             {
-                //TermIII.Add((Week)ContentFactory.CreateCompositeComponent(ComponentType.Week, Convert.ToInt16(comboBox2.SelectedValue), 3, textBoxIII.Text));
+                int id = _manager.AddWeek(_selecetedGrade, textBoxIII.Text, Convert.ToInt16(comboBox2.SelectedValue), 1);
+                TermIII.Add(_manager.GetComponent(id) as Week);
                 SavedIII = false;
                 ConfirmIII.IsEnabled = true;
                 emptyIII = false;

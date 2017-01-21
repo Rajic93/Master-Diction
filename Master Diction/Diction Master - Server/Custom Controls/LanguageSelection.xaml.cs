@@ -21,6 +21,7 @@ namespace Diction_Master___Server
     public partial class LanguageSelection : UserControl
     {
         private Image _selectedLanguage;
+        private string _imageURI;
         private string _nation;
 
         public LanguageSelection()
@@ -36,17 +37,18 @@ namespace Diction_Master___Server
             }
             _selectedLanguage = (Image)sender;
             _selectedLanguage.Opacity = 1;
-            _nation = _selectedLanguage.Source.ToString().Split('/').Last().Split(' ').Last().Split('.').First();
+            _imageURI = _selectedLanguage.Source.ToString();
+            _nation = _selectedLanguage.Source.ToString().Split('/').Last().Split('.').First().Substring(("Flag of ").Length);
         }
 
-        public Image GetSelectedLanguage()
+        public string GetSelectedLanguageIcon()
         {
-            return _selectedLanguage;
+            return _imageURI;
         }
 
         public bool IsSelected()
         {
-            return _selectedLanguage == null ? false : true;
+            return _selectedLanguage != null;
         }
 
         public string GetSelectedNation() => _nation;

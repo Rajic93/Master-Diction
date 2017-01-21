@@ -165,26 +165,6 @@ namespace Diction_Master___Library
             }
         }
 
-        //public Component GetPreviousComponent()
-        //{
-        //    return componentsCache[previousComponentID];
-        //}
-
-        //public Component GetCurrentComponent()
-        //{
-        //    return componentsCache[currentComponentID];
-        //}
-
-        public Dictionary<string, int> GetCourses()
-        {
-            Dictionary<string, int> coursesDictionary = new Dictionary<string, int>();
-            foreach (var course in courses)
-            {
-                coursesDictionary.Add(((Course)course).Name, course.ID);
-            }
-            return coursesDictionary;
-        }
-
         //public Component GetChildComponent(Component parent, ComponentType childType, EducationalLevelType educationalLevel,
         //    GradeType gradeNum)
         //{
@@ -244,6 +224,12 @@ namespace Diction_Master___Library
             return weeks;
         }
 
+        public int GetNoOfWeeks(int id)
+        {
+            Grade grade = GetComponent(id)as Grade;
+            return grade.Components.Count;
+        }
+
         public ObservableCollection<Lesson> GetAllLessons(Component component)
         {
             ObservableCollection<Lesson> lessons = new ObservableCollection<Lesson>();
@@ -255,6 +241,27 @@ namespace Diction_Master___Library
                 }
             }
             return lessons;
+        }
+
+        public int GetNoOfLessons(int id)
+        {
+            return GetAllLessons(GetComponent(id)).Count;
+        }
+
+        public int GetNoOfFiles(int id)
+        {
+            int counter = 0;
+            foreach (Lesson lesson in GetAllLessons(GetComponent(id)))
+            {
+                foreach (var child in lesson.Components)
+                {
+                    if (child.GetType().Name == "Quiz")
+                        counter += (child as Quiz).Components.Count;
+                    else
+                        counter++;
+                }
+            }
+            return counter;
         }
 
         private void AddComponent(int ID, Component component)
@@ -275,22 +282,76 @@ namespace Diction_Master___Library
             return null;
         }
 
+        public Component GetPreviousComponent()
+        {
+            return componentsCache[previousComponentID];
+        }
+
+        public Component GetCurrentComponent()
+        {
+            return componentsCache[currentComponentID];
+        }
+
+        public void SetCurrentComponent(int id)
+        {
+            if (componentsCache.ContainsKey(id))
+            {
+                previousComponentID = currentComponentID;
+                currentComponentID = id;
+            }
+        }
+
+        public ObservableCollection<Course> GetCourses()
+        {
+            //Dictionary<string, int> coursesDictionary = new Dictionary<string, int>();
+            //foreach (var course in courses)
+            //{
+            //    coursesDictionary.Add(((Course)course).Name, course.ID);
+            //}
+            //return coursesDictionary;
+            ObservableCollection<Course> coursesCollection = new ObservableCollection<Course>();
+            foreach (Course course in courses)
+            {
+                coursesCollection.Add(course);
+            }
+            return coursesCollection;
+        }
+
+        public List<int> GetChildrenIDs(int id)
+        {
+            if (componentsCache.ContainsKey(id))
+            {
+                List<int> children = new List<int>();
+                CompositeComponent component = componentsCache[id] as CompositeComponent;
+                foreach (Component childComponent in component.Components)
+                {
+                    children.Add(childComponent.ID);
+                }
+                return children;
+            }
+            return null;
+        }
+
         #region Composite components
 
         #region Course
 
-        public void AddCourse(string name, string iconURI)
+        public int AddCourse(string name, string iconURI)
         {
             if (courses != null)
             {
                 if (!courses.Exists(x => ((Course)x).Name== name || ((Course)x).Icon == iconURI))
                 {
-                    Course course = ContentFactory.CreateCompositeComponent(GetID(), 0, name, iconURI) as Course;
-                    componentsCache[course.ID] = course;
+                    int id = GetID();
+                    Course course = ContentFactory.CreateCompositeComponent(id, 0, name, iconURI) as Course;
+                    componentsCache[id] = course;
                     courses.Add(course);
+                    return id;
                 }
+                return 0;
                 //log message if course exist
             }
+            return -1;
             //log message if courses is null
         }
 
@@ -328,7 +389,7 @@ namespace Diction_Master___Library
 
         #region EducationalLevel
 
-        public void AddEducationalLevel(int parentID, string iconURI, EducationalLevelType type)
+        public int AddEducationalLevel(int parentID, string iconURI, EducationalLevelType type)
         {
             if (componentsCache.ContainsKey(parentID))//check for course
             {
@@ -339,25 +400,29 @@ namespace Diction_Master___Library
                     level = ContentFactory.CreateCompositeComponent(ID, parentID, type, iconURI) as EducationalLevel;
                     (componentsCache[parentID] as Course).Add(level);
                     componentsCache[ID] = level;
+                    return ID;
                 }
-                //edu level exists
+                return 0;
             }
-            //there is no such course
+            return -1;
         }
 
         public void EditEducationalLevel(int id, string iconURI, EducationalLevelType levelType)
         {
-            if (componentsCache.ContainsKey(id))
+            if (componentsCache != null && componentsCache.ContainsKey(id))
             {
                 EducationalLevel level = componentsCache[id] as EducationalLevel;
-                level.Icon = iconURI ?? level.Icon;
-                level.Level = levelType;
+                if (level != null)
+                {
+                    level.Icon = iconURI ?? level.Icon;
+                    level.Level = levelType;
+                }
             }
         }
 
         public void DeleteEducationalLevel(int id, int parentID)
         {
-            if (componentsCache.ContainsKey(parentID) && componentsCache.ContainsKey(parentID))
+            if (componentsCache.ContainsKey(parentID) && componentsCache.ContainsKey(id))
             {
                 (componentsCache[parentID] as Course).Components.RemoveAll(x => x.ID == id);
                 componentsCache.Remove(id);
@@ -367,20 +432,26 @@ namespace Diction_Master___Library
 
         #region Grade
 
-        public void AddGrade(int parentID, string icon, GradeType type)
+        public int AddGrade(int parentID, string icon, GradeType type)
         {
             if (componentsCache.ContainsKey(parentID))//check for course
             {
-                Grade grade = (componentsCache[parentID] as EducationalLevel).FindGrade(type);
-                if (grade == null)//there is no existing edu level
+                if (componentsCache[parentID] is EducationalLevel)
                 {
-                    int ID = GetID();
-                    grade = ContentFactory.CreateCompositeComponent(ID, parentID, icon, type) as Grade;
-                    (componentsCache[parentID] as EducationalLevel).Add(grade);
-                    componentsCache[ID] = grade;
+                    Grade grade = (componentsCache[parentID] as EducationalLevel).FindGrade(type);
+                    if (grade == null)//there is no existing edu level
+                    {
+                        int ID = GetID();
+                        grade = ContentFactory.CreateCompositeComponent(ID, parentID, icon, type) as Grade;
+                        (componentsCache[parentID] as EducationalLevel).Add(grade);
+                        componentsCache[ID] = grade;
+                        return ID;
+                    }
                 }
+                return 0;
                 //edu level exists
             }
+            return -1;
             //there is no such edu level
         }
 
@@ -407,7 +478,7 @@ namespace Diction_Master___Library
 
         #region Week
 
-        public void AddWeek(int parentID, string title, int num, int term)
+        public int AddWeek(int parentID, string title, int num, int term)
         {
             if (componentsCache.ContainsKey(parentID))
             {
@@ -418,9 +489,12 @@ namespace Diction_Master___Library
                     week = ContentFactory.CreateCompositeComponent(ID, parentID, title, num, term) as Week;
                     componentsCache[ID] = week;
                     (componentsCache[parentID] as Grade).Components.Add(week);
+                    return ID;
                 }
+                return 0;
                 //there is such week
             }
+            return -1;
             //there is no such parent grade
         }
 
