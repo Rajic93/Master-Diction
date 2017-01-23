@@ -1,0 +1,8 @@
+C:\Users\Giannis\Google Drive\Proframming\Projects\Games\ChatApp\client\bin\Debug\client.exe.config
+C:\Users\Giannis\Google Drive\Proframming\Projects\Games\ChatApp\client\bin\Debug\client.exe
+C:\Users\Giannis\Google Drive\Proframming\Projects\Games\ChatApp\client\bin\Debug\client.pdb
+C:\Users\Giannis\Google Drive\Proframming\Projects\Games\ChatApp\client\bin\Debug\ServerData.dll
+C:\Users\Giannis\Google Drive\Proframming\Projects\Games\ChatApp\client\bin\Debug\ServerData.pdb
+C:\Users\Giannis\Google Drive\Proframming\Projects\Games\ChatApp\client\obj\Debug\Client.csprojResolveAssemblyReference.cache
+C:\Users\Giannis\Google Drive\Proframming\Projects\Games\ChatApp\client\obj\Debug\client.exe
+C:\Users\Giannis\Google Drive\Proframming\Projects\Games\ChatApp\client\obj\Debug\client.pdb

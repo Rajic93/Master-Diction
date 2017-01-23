@@ -1,0 +1,24 @@
+﻿<UserControl x:Class="Diction_Master___Server.Custom_Controls.LevelSelection"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Diction_Master___Server.Custom_Controls"
+             mc:Ignorable="d" 
+             Height="230" Width="648">
+    <Grid Margin="0,0,0,0.4">
+        <WrapPanel HorizontalAlignment="Left" Height="202" VerticalAlignment="Top" Width="645" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}">
+            <Button x:Name="Nursery" Margin="30,25,45,15"  Height="150" Width="150" Click="Nursery_OnClick" Opacity="0.6">
+                <Image x:Name="ImageNursery" Source="../Resources/nursery.jpg"></Image>
+            </Button>
+            <Button x:Name="Primary" Margin="15,25,45,15"  Height="150" Width="150" Click="Primary_OnClick" Opacity="0.6">
+                <Image x:Name="ImagePrimary" Source="../Resources/primary.jpg"></Image>
+            </Button>
+            <Button x:Name="Secondary" Margin="15,25,45,15"  Height="150" Width="150" Click="Secondary_OnClick" Opacity="0.6">
+                <Image x:Name="ImageSecondary" Source="../Resources/secondary.jpg"></Image>
+            </Button>
+        </WrapPanel>
+        <Button x:Name="button" Content="Save" HorizontalAlignment="Left" Margin="569,207,0,0" VerticalAlignment="Top" Width="75" IsEnabled="False"/>
+
+    </Grid>
+</UserControl>

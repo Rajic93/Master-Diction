@@ -14,11 +14,13 @@ namespace Master_Diction.User_Controlls
     {
         private FlowLayoutPanel _flowLayout;
         private Welcome _welcome;
+        private PictureBox _pictureBox;
 
-        public LevelSelection(FlowLayoutPanel container, Welcome welcomeRef)
+        public LevelSelection(FlowLayoutPanel container, Welcome welcomeRef, PictureBox pictureBoxRef)
         {
             _welcome = welcomeRef;
             _flowLayout = container;
+            _pictureBox = pictureBoxRef;
             InitializeComponent();
         }
 
@@ -26,18 +28,21 @@ namespace Master_Diction.User_Controlls
         {
             _flowLayout.Controls.Clear();
             _flowLayout.Controls.Add(new Secondary(_welcome));
+            _pictureBox.Visible = false;
         }
 
         private void pictureBox3_Click(object sender, EventArgs e)
         {
             _flowLayout.Controls.Clear();
             _flowLayout.Controls.Add(new Primary(_welcome));
+            _pictureBox.Visible = false;
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
             _flowLayout.Controls.Clear();
             _flowLayout.Controls.Add(new Nursery(_welcome));
+            _pictureBox.Visible = false;
         }
     }
 }

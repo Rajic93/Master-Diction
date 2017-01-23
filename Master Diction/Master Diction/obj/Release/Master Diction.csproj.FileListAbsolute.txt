@@ -1,0 +1,35 @@
+D:\Projects\Upwork\Master Diction\Master Diction\Master Diction\bin\Release\Master Diction.exe.config
+D:\Projects\Upwork\Master Diction\Master Diction\Master Diction\obj\Release\Interop.AXVLC.dll
+D:\Projects\Upwork\Master Diction\Master Diction\Master Diction\obj\Release\Interop.WMPLib.dll
+D:\Projects\Upwork\Master Diction\Master Diction\Master Diction\obj\Release\AxInterop.AXVLC.dll
+D:\Projects\Upwork\Master Diction\Master Diction\Master Diction\obj\Release\AxInterop.WMPLib.dll
+D:\Projects\Upwork\Master Diction\Master Diction\Master Diction\obj\Release\Master Diction.csproj.ResolveComReference.cache
+D:\Projects\Upwork\Master Diction\Master Diction\Master Diction\bin\Release\Resources\Diction Exercise.mp4
+D:\Projects\Upwork\Master Diction\Master Diction\Master Diction\bin\Release\Master Diction.exe.manifest
+D:\Projects\Upwork\Master Diction\Master Diction\Master Diction\bin\Release\Master Diction.application
+D:\Projects\Upwork\Master Diction\Master Diction\Master Diction\bin\Release\Master Diction.exe
+D:\Projects\Upwork\Master Diction\Master Diction\Master Diction\bin\Release\Master Diction.pdb
+D:\Projects\Upwork\Master Diction\Master Diction\Master Diction\bin\Release\Interop.AXVLC.dll
+D:\Projects\Upwork\Master Diction\Master Diction\Master Diction\bin\Release\Interop.WMPLib.dll
+D:\Projects\Upwork\Master Diction\Master Diction\Master Diction\bin\Release\AxInterop.AXVLC.dll
+D:\Projects\Upwork\Master Diction\Master Diction\Master Diction\bin\Release\AxInterop.WMPLib.dll
+D:\Projects\Upwork\Master Diction\Master Diction\Master Diction\obj\Release\Master_Diction.Content.resources
+D:\Projects\Upwork\Master Diction\Master Diction\Master Diction\obj\Release\Master_Diction.Login.resources
+D:\Projects\Upwork\Master Diction\Master Diction\Master Diction\obj\Release\Master_Diction.Properties.Resources.resources
+D:\Projects\Upwork\Master Diction\Master Diction\Master Diction\obj\Release\Master_Diction.TestVideo.resources
+D:\Projects\Upwork\Master Diction\Master Diction\Master Diction\obj\Release\Master_Diction.User_Controlls.Credetials.resources
+D:\Projects\Upwork\Master Diction\Master Diction\Master Diction\obj\Release\Master_Diction.User_Controlls.Instructions.resources
+D:\Projects\Upwork\Master Diction\Master Diction\Master Diction\obj\Release\Master_Diction.User_Controlls.LessonControl.resources
+D:\Projects\Upwork\Master Diction\Master Diction\Master Diction\obj\Release\Master_Diction.User_Controlls.LevelSelection.resources
+D:\Projects\Upwork\Master Diction\Master Diction\Master Diction\obj\Release\Master_Diction.User_Controlls.Nursery.resources
+D:\Projects\Upwork\Master Diction\Master Diction\Master Diction\obj\Release\Master_Diction.User_Controlls.Primary.resources
+D:\Projects\Upwork\Master Diction\Master Diction\Master Diction\obj\Release\Master_Diction.User_Controlls.Secondary.resources
+D:\Projects\Upwork\Master Diction\Master Diction\Master Diction\obj\Release\Master_Diction.User_Controlls.UserInfo.resources
+D:\Projects\Upwork\Master Diction\Master Diction\Master Diction\obj\Release\Master_Diction.User_Controlls.WeekControl.resources
+D:\Projects\Upwork\Master Diction\Master Diction\Master Diction\obj\Release\Master_Diction.Welcome.resources
+D:\Projects\Upwork\Master Diction\Master Diction\Master Diction\obj\Release\Master Diction.csproj.GenerateResource.Cache
+D:\Projects\Upwork\Master Diction\Master Diction\Master Diction\obj\Release\Master Diction.exe.manifest
+D:\Projects\Upwork\Master Diction\Master Diction\Master Diction\obj\Release\Master Diction.application
+D:\Projects\Upwork\Master Diction\Master Diction\Master Diction\obj\Release\Master Diction.exe
+D:\Projects\Upwork\Master Diction\Master Diction\Master Diction\obj\Release\Master Diction.pdb
+D:\Projects\Upwork\Master Diction\Master Diction\Master Diction\obj\Release\Master Diction.csprojResolveAssemblyReference.cache

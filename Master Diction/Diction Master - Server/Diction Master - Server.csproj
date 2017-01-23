@@ -1,0 +1,969 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{181CE5AC-2DD2-4018-93BC-17EA02703968}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Diction_Master___Server</RootNamespace>
+    <AssemblyName>Diction Master - Server</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="Xceed.Wpf.Toolkit">
+      <HintPath>C:\Users\aleks\Desktop\Extended WPF Toolkit Binaries\Xceed.Wpf.Toolkit.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Custom Controls\GradeSelection.xaml.cs">
+      <DependentUpon>GradeSelection.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Custom Controls\QuizCreation.xaml.cs">
+      <DependentUpon>QuizCreation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Test.xaml.cs">
+      <DependentUpon>Test.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Content.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Custom Controls\ContentUpload.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Custom Controls\GradeSelection.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Custom Controls\LanguageSelection.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Custom Controls\LessonsCreation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Custom Controls\LevelSelection.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Custom Controls\QuizCreation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Custom Controls\WeeksCreation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Content.xaml.cs">
+      <DependentUpon>Content.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Custom Controls\ContentUpload.xaml.cs">
+      <DependentUpon>ContentUpload.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Custom Controls\LanguageSelection.xaml.cs">
+      <DependentUpon>LanguageSelection.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Custom Controls\LessonsCreation.xaml.cs">
+      <DependentUpon>LessonsCreation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Custom Controls\LevelSelection.xaml.cs">
+      <DependentUpon>LevelSelection.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Custom Controls\WeeksCreation.xaml.cs">
+      <DependentUpon>WeeksCreation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="Test.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Afghanistan.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Albania.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Algeria.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of American Samoa.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Andorra.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Angola.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Anguilla.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Antigua and Barbuda.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Argentina.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Armenia.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Aruba.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Australia.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Austria.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Azerbaijan.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Bahrain.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Bangladesh.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Barbados.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Belarus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Belgium.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Belize.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Benin.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Bermuda.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Bhutan.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Bolivia.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Bosnia and Herzegovina.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Bostswana.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Bouvet Island.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Brazil.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of British Indian Ocean Territory.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of British Virgin Islands.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Brunei.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Bulgaria.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Burkina Faso.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Burma %28Myanmar%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Burundi.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Cambodia.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Cameroon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Canada.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Cape Verde.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Cayman Islands.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Central African Republic.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Chad.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Chile.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of China.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Christmas Islands.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Cocos %28Keeling%29 Islands.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Colombia.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Comoros.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Cook Islands.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Costa Rica.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Cote d%27Ivoire.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Croatia.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Cuba.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Cyprus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Czech Republic.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Democratic Republic of the Congo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Denmark.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Djibouti.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Dominica.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Dominican Republic.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Ecuador.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Egypt.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of El Salvador.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of England.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Equatorial Guinea.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Eritrea.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Estonia.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Ethiopia.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of European Union.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Falkland Islands %28Islas Malvinas%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Faroe Islands.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Fiji.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flag of Finland.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flag of France.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of French Poynesia.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Gabon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Georgia.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flag of Germany.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Ghana.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Gibraltar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Greece.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Greenland.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Grenada.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Guam.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Guatemala.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Guernsey.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Guinea Blissau.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Guinea.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Guyana.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Haiti.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Holy See %28Vatican City%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Honduras.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Hong Kong.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Hungary.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Iceland.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of India.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Indonesia.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Iran.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Iraq.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Ireland.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Isle of Man.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Israel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flag of Italy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Jamaica.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Japan.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Jordan.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Kazahstan.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Kenya.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Kiribati.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Kosovo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Kurdistan Nation.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Kuwait.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Kyrgyzstan.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Laos.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Latvia.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Lebanon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Lesotho.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Liberia.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Libya.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Liechtenstein.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Lithuania.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Luxembourg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Macau.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Macedonia.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Madagascar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Malawi.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Malaysia.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Maldives.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Mali.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Malta.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Marschal Islands.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Mauritania.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Mauritius.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Mayotte.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Mexico.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Micronesia.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Moldavia.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Monaco.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Mongolia.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Montenegro.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Montserrat.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Morocco.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Mozambique.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Namibia.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Nauru.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Nepal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Netherlands Anthilles.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Netherlands.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of New Zealand.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Nicaragua.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Niger.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flag of Nigeria.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Niue.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Norfolk Island.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of North Korea.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Northern Mariana Islands.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Norway.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flag of Oman.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Pakistan.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Palau.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Palestine.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Panama.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Papua New Guinea.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Paraguay.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Peru.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Philippines.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Pitcairn Islands.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Poland.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flag of Portugal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Puerto Rico.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Quatar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Republic of the Congo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Romania.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flag of Russia.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Rwanda.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Saint Helena.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Saint Kitts and Nevis.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Saint Lucia.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Saint Pierre and Miquelon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Saint Vincent.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Samoa.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of San Marino.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Sao Tome and Principe.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Saudi Arabia.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Scotland.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Senegal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flag of Serbia.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Seychelles.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Sierra Leone.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Singapore.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Slovakia.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Slovenia.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Solomon Islands.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Somalia.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of South Africa.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of South Georgia and the South Sandwitch Islands.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of South Korea.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flag of Spain.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Sri Lanka.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Sudan.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Suriname.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Swaziland.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Sweden.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Switzerland.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Syria.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Taiwan.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Tajikistan.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Tamil Nation.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Tanzania.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Thailand.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of the Bahamas.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of the Gambia.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Tibet.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Timor Leste.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Togo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Tonga.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Trinidad and Tobago.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Tunisia.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Turkey.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Turkmenistan.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Turks and Caicos Islands.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Tuvalu.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Uganda.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Ukraine.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of United Arab Emirates.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flag of United Kingdom.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flag of United States.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Uruguay.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Uzbekistan.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Vanuatu.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Venezuela.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Vietnam.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Virgin Islands.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Wales.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Wallis and Futuna.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Yemen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Zambia.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag of Zimbabwe.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\button_bg_blue.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\button_bg_blue_inactive.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\nursery.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\primary.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\secondary.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Diction Master - Library\Diction Master - Library.csproj">
+      <Project>{dffc9696-8df3-4362-8ded-48500e0c3366}</Project>
+      <Name>Diction Master - Library</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Master Diction\Master Diction.csproj">
+      <Project>{0876A641-5CC8-44A5-9F76-1675774BF9FF}</Project>
+      <Name>Master Diction</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\audio.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\document.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\nusery1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\nusery2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\5th Grade.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\6th Grade.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\1st Grade.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\2nd Grade.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\3rd Grade.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\4th Grade.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\1st Grade sec.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\2nd Grade sec.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\3rd Grade sec.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\4th Grade sec.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\5th Grade sec.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\6th Grade sec.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\video.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\quiz.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

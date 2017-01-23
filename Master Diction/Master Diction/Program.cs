@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Master_Diction.Classes;
 
 namespace Master_Diction
 {
@@ -17,6 +18,8 @@ namespace Master_Diction
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Login());
+            //Application.Run(new Welcome(new Login()));
+            //Application.Run(new Content(new Welcome(new Login()), Grades.NurseryLevel1));
             //Application.Run(new Profile("",""));
         }
     }

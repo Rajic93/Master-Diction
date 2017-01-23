@@ -1,0 +1,9 @@
+D:\Projects\Upwork\Master Diction\Master Diction\Server\bin\Release\Server.exe.config
+D:\Projects\Upwork\Master Diction\Master Diction\Server\bin\Release\Server.exe
+D:\Projects\Upwork\Master Diction\Master Diction\Server\bin\Release\Server.pdb
+D:\Projects\Upwork\Master Diction\Master Diction\Server\obj\Release\Server.csprojResolveAssemblyReference.cache
+D:\Projects\Upwork\Master Diction\Master Diction\Server\obj\Release\Server.Form1.resources
+D:\Projects\Upwork\Master Diction\Master Diction\Server\obj\Release\Server.Properties.Resources.resources
+D:\Projects\Upwork\Master Diction\Master Diction\Server\obj\Release\Server.csproj.GenerateResource.Cache
+D:\Projects\Upwork\Master Diction\Master Diction\Server\obj\Release\Server.exe
+D:\Projects\Upwork\Master Diction\Master Diction\Server\obj\Release\Server.pdb
