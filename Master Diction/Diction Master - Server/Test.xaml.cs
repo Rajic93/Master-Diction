@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Diction_Master___Library;
+using Diction_Master___Server.Custom_Controls;
 
 namespace Diction_Master___Server
 {
@@ -27,8 +28,7 @@ namespace Diction_Master___Server
         {
             manager = Diction_Master___Library.ContentManager.CreateInstance();
             InitializeComponent();
-
-            //ButtonBase_OnClick();
+            ButtonBase_OnClick();
             //WrapPanel1.DataContext = manager.GetCourses();
 
         }
@@ -55,12 +55,18 @@ namespace Diction_Master___Server
             manager.EditLesson(5, "Lesson 1", 1);
             //manager.DeleteLesson(5, 4);
 
+            ContentUpload upload = new ContentUpload(3, manager);
+            Content = upload;
+            Width = upload.Width + 50;
+            Height = upload.Height + 50;
+            upload.Margin = new Thickness(15);
+
             manager.AddQuiz(5, "");
             manager.EditQuiz(6, "Quiz 1");
             //manager.DeleteQuiz(6, 5);
 
-            manager.AddQuestion(6, "How old are you?", "23", QuestionType.Text);
-            manager.EditQuestion(7, "How old are you", "I am 24 years old.", QuestionType.Puzzle);
+            //manager.AddQuestion(6, "How old are you?", "23", QuestionType.Text);
+            //manager.EditQuestion(7, "How old are you", "I am 24 years old.", QuestionType.Puzzle);
             //manager.DeleteQuestion(7, 6);
 
             manager.AddContentFile(5, ComponentType.Audio, "", "", "", 2, "");

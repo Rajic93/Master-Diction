@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Automation.Peers;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
@@ -24,41 +25,45 @@ namespace Diction_Master___Server
     /// </summary>
     public partial class Content : Window
     {
-        private Diction_Master___Library.ContentManager _contentManager;
+        /// <summary>
+        /// 
+        /// </summary>
+        private readonly Diction_Master___Library.ContentManager _contentManager;
         //Course
-        private LanguagesHashTable _languages;
-        private Dictionary<string, int> _courseImagesCache;
+        /// <summary>
+        /// 
+        /// </summary>
+        private readonly LanguagesHashTable _languages;
+        /// <summary>
+        /// 
+        /// </summary>
+        private readonly Dictionary<string, int> _courseImagesCache;
+        /// <summary>
+        /// 
+        /// </summary>
         private Image _selectedLanguage;
         //Educational Level
-        private Dictionary<string, int> _educationalLevelDictionary;
+        /// <summary>
+        /// 
+        /// </summary>
+        private readonly Dictionary<string, int> _educationalLevelDictionary;
+        /// <summary>
+        /// 
+        /// </summary>
         private Image _selectedEducationalLevel;
         //Grades
-        private Dictionary<string, int> _gradesDictionary;
+        /// <summary>
+        /// 
+        /// </summary>
+        private readonly Dictionary<string, int> _gradesDictionary;
+        /// <summary>
+        /// 
+        /// </summary>
         private Image _selectedGrade;
-        //Weeks
-
-        //Lessons
-
-        //
-        //private Dictionary<string, Component> _componentsCache;
-        //private Dictionary<Image, Component> courses;
-        //private ObservableCollection<Image> _courses;
-        //private int _chosenCourse;
-        //private ObservableCollection<Image> _levels;
-        //private int _chosenLevel;
-        //private ObservableCollection<Image> _grades;
-        //private int _chosenGrade;
 
         public Content()
         {
-            //_courses = new ObservableCollection<Image>();
-            //_levels = new ObservableCollection<Image>();
-            //_grades = new ObservableCollection<Image>();
-            //courses = new Dictionary<Image, Component>();
             _contentManager = Diction_Master___Library.ContentManager.CreateInstance();
-            //------------------------------------------------------------------------
-            //TMP();
-            //------------------------------------------------------------------------
             _languages = new LanguagesHashTable();
             _courseImagesCache = new Dictionary<string, int>();
             _educationalLevelDictionary = new Dictionary<string, int>();
@@ -92,21 +97,16 @@ namespace Diction_Master___Server
             //_contentManager.EditQuiz(6, "Quiz 1");
             //_contentManager.DeleteQuiz(6, 5);
 
-            _contentManager.AddQuestion(6, "How old are you?", "I am 24 years old.", QuestionType.Puzzle);
+            //_contentManager.AddQuestion(6, "How old are you?", "I am 24 years old.", QuestionType.Puzzle);
             //_contentManager.EditQuestion(7, "How old are you", "I am 24 years old.", QuestionType.Puzzle);
             //_contentManager.DeleteQuestion(7, 6);
 
             _contentManager.AddContentFile(5, ComponentType.Audio, "", "", "", 2, "HEHEHE");
             //_contentManager.EditContentFile(8, ComponentType.Audio, "", "", "", 2, "HEHEHE");
         }
-
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-
-        }
+        
 
         #region Course
-
         /// <summary>
         /// Add new Course
         /// </summary>
@@ -148,18 +148,21 @@ namespace Diction_Master___Server
                                 MaxHeight = 100,
                                 MaxWidth = 100,
                                 Margin = new Thickness(10),
-                                Opacity = 0.5
+                                Opacity = 0.5,
+                                Name = "Image_" + id
                             };
                             image.MouseUp += delegate (object senderImage, MouseButtonEventArgs eventArgs)
                             {
                                 ImageCourse_Click(senderImage as Image);
                             };
-                            if (!_courseImagesCache.ContainsKey(image.Source.ToString()))
+                            if (!_courseImagesCache.ContainsKey(image.Name))
                             {
-                                _courseImagesCache[image.Source.ToString()] = id;
+                                _courseImagesCache[image.Name] = id;
                                 Courses.Children.Add(image);
                                 ImageCourse_Click(image);
                                 AddEducationalLevel.IsEnabled = true;
+                                EditCourse.IsEnabled = true;
+                                DeleteCourse.IsEnabled = true;
                             }
                             else
                                 image = null;
@@ -178,6 +181,8 @@ namespace Diction_Master___Server
         /// <param name="e"></param>
         private void EditCourse_Click(object sender, RoutedEventArgs e)
         {
+            bool exitCancel = false;
+            bool normalExit = true;
             Window window = new Window()
             {
                 Title = "Create course",
@@ -197,20 +202,53 @@ namespace Diction_Master___Server
                 language.button.Click += delegate (object obj, RoutedEventArgs Args)
                 {
                     LanguageSelection control = (LanguageSelection)window.Content;
-                    int id = _courseImagesCache[_selectedLanguage.Source.ToString()];
+                    int id = _courseImagesCache[_selectedLanguage.Name];
                     string nation = control.GetSelectedNation();
                     string selectedLanguage = _languages.GetLanguageName(nation);
                     if (selectedLanguage != null)
                     {
-                        _courseImagesCache.Remove(_selectedLanguage.Source.ToString());
-                        _courseImagesCache[control.GetSelectedLanguageIcon()] = id;
-                        _contentManager.EditCourse(id, selectedLanguage, control.GetSelectedLanguageIcon());
-                        _selectedLanguage.Source = new BitmapImage(new Uri(control.GetSelectedLanguageIcon()));
-                        window.Close();
+                        if (!ExistingCourse(control.GetSelectedLanguageIcon()))
+                        {
+                            _courseImagesCache.Remove(_selectedLanguage.Name);
+                            _courseImagesCache[control.GetSelectedLanguageIcon()] = id;
+                            _contentManager.EditCourse(id, selectedLanguage, control.GetSelectedLanguageIcon());
+                            _selectedLanguage.Source = new BitmapImage(new Uri(control.GetSelectedLanguageIcon()));
+                            exitCancel = false;
+                            normalExit = false;
+                            window.Close();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Course already exists!");
+                            exitCancel = true;
+                            normalExit = true;
+                        }
                     }
                 };
             };
+            window.Closing += delegate(object o, CancelEventArgs args)
+            {
+                if (!normalExit)
+                {
+                    if (exitCancel)
+                    {
+                        args.Cancel = true;
+                    }
+                }
+            };
             window.ShowDialog();
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="icon"></param>
+        /// <returns></returns>
+        private bool ExistingCourse(string icon)
+        {
+            foreach (Image image in Courses.Children)
+                if (image.Source.ToString() == icon)
+                    return true;
+            return false;
         }
         /// <summary>
         /// Delete existing course
@@ -219,7 +257,7 @@ namespace Diction_Master___Server
         /// <param name="e"></param>
         private void DeleteCourse_Click(object sender, RoutedEventArgs e)
         {
-            int id = _courseImagesCache[_selectedLanguage.Source.ToString()];
+            int id = _courseImagesCache[_selectedLanguage.Name];
             _contentManager.DeleteCourse(id);
             _courseImagesCache.Remove(_selectedLanguage.Source.ToString());
             Courses.Children.Remove(_selectedLanguage);
@@ -241,7 +279,10 @@ namespace Diction_Master___Server
             EditLessons.IsEnabled = false;
             EditFiles.IsEnabled = false;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="image"></param>
         private void ImageCourse_Click(Image image)
         {
             if (_selectedLanguage != null)
@@ -250,17 +291,21 @@ namespace Diction_Master___Server
             }
             image.Opacity = 1;
             _selectedLanguage = image;
-            int id = _courseImagesCache[image.Source.ToString()];
+            int id = _courseImagesCache[image.Name];
             EditCourse.IsEnabled = true;
             DeleteCourse.IsEnabled = true;
             AddEducationalLevel.IsEnabled = true;
+            WrapPanelEducationaLevel.Children.Clear();
             LoadEducationalLevels(id);
         }
 
         #endregion
 
         #region EducationalLevel
-        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
         private void LoadEducationalLevels(int id)
         {
             WrapPanelEducationaLevel.Children.Clear();
@@ -284,7 +329,7 @@ namespace Diction_Master___Server
                     {
                         ImageEducationaLevel_Click(sender as Image);
                     };
-                    _educationalLevelDictionary[image.Source.ToString()] = childID;
+                    _educationalLevelDictionary[image.Name] = childID;
                     WrapPanelEducationaLevel.Children.Add(image);
                     _selectedEducationalLevel = image;
                 }
@@ -294,7 +339,10 @@ namespace Diction_Master___Server
             NoOfFiles.Text = "0";
             NoOfWeeks.Text = "0";
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
         private void ImageEducationaLevel_Click(Image sender)
         {
             if (_selectedEducationalLevel != null)
@@ -303,11 +351,15 @@ namespace Diction_Master___Server
             }
             sender.Opacity = 1;
             _selectedEducationalLevel = sender;
-            int id = _educationalLevelDictionary[sender.Source.ToString()];
-            EditEducationalLevel.IsEnabled = true;
-            DeleteEducationalLevel.IsEnabled = true;
-            AddGrade.IsEnabled = true;
-            LoadGrades(id);
+            if (_educationalLevelDictionary.ContainsKey(sender.Source.ToString()))
+            {
+                int id = _educationalLevelDictionary[sender.Name];
+                EditEducationalLevel.IsEnabled = true;
+                DeleteEducationalLevel.IsEnabled = true;
+                AddGrade.IsEnabled = true;
+                WrapPanelGrades.Children.Clear();
+                LoadGrades(id);
+            }
         }
         /// <summary>
         /// Add new Educational Level
@@ -341,7 +393,7 @@ namespace Diction_Master___Server
                     {
                         if (_selectedLanguage != null)
                         {
-                            int id = _contentManager.AddEducationalLevel(_courseImagesCache[_selectedLanguage.Source.ToString()], icon, type);
+                            int id = _contentManager.AddEducationalLevel(_courseImagesCache[_selectedLanguage.Name], icon, type);
                             if (id > 0) //new edu level created
                             {
                                 Image image = new Image()
@@ -351,18 +403,21 @@ namespace Diction_Master___Server
                                     MaxHeight = 100,
                                     MaxWidth = 100,
                                     Margin = new Thickness(15),
-                                    Opacity = 0.5
+                                    Opacity = 0.5,
+                                    Name = "Icon_" + id
                                 };
                                 image.MouseUp += delegate (object senderImage, MouseButtonEventArgs eventArgs)
                                 {
                                     ImageEducationaLevel_Click(senderImage as Image);
                                 };
-                                if (!_educationalLevelDictionary.ContainsKey(icon))
+                                if (!_educationalLevelDictionary.ContainsKey(image.Name))
                                 {
-                                    _educationalLevelDictionary[icon] = id;
+                                    _educationalLevelDictionary[image.Name] = id;
                                     WrapPanelEducationaLevel.Children.Add(image);
                                     ImageEducationaLevel_Click(image);
                                     AddGrade.IsEnabled = true;
+                                    EditEducationalLevel.IsEnabled = true;
+                                    DeleteEducationalLevel.IsEnabled = true;
                                 }
                                 else
                                     image = null;
@@ -375,9 +430,15 @@ namespace Diction_Master___Server
             };
             window.ShowDialog();
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void EditEducationalLevel_Click(object sender, RoutedEventArgs e)
         {
+            bool exitCancel = false;
+            bool normalExit = true;
             Window window = new Window()
             {
                 Title = "Create educatinal level",
@@ -397,32 +458,66 @@ namespace Diction_Master___Server
                 level.button.Click += delegate (object obj, RoutedEventArgs Args)
                 {
                     LevelSelection control = window.Content as LevelSelection;
-                    int id = _educationalLevelDictionary[_selectedEducationalLevel.Source.ToString()];
+                    int id = _educationalLevelDictionary[_selectedEducationalLevel.Name];
                     string icon = control.GetSelectedIcon();
                     EducationalLevelType type = control.GetSelectedEducationalLevel();
                     if (icon != "")
                     {
                         if (_selectedLanguage != null)
                         {
-                            //_contentManager.AddEducationalLevel(_courseImagesCache[_selectedLanguage.Source.ToString()], icon, type);
-                            _contentManager.EditEducationalLevel(id, icon, type);
-                            _educationalLevelDictionary.Remove(_selectedEducationalLevel.Source.ToString());
-                            _educationalLevelDictionary[icon] = id;
-                            _selectedEducationalLevel.Source = new BitmapImage(new Uri(icon));
+                            if (!ExistingEducationalLevel(_selectedEducationalLevel.Name))
+                            {
+                                _contentManager.EditEducationalLevel(id, icon, type);
+                                _selectedEducationalLevel.Source = new BitmapImage(new Uri(icon));
+                                exitCancel = false;
+                                normalExit = false;
+                                window.Close();
+                            }
+                            else
+                            {
+                                MessageBox.Show("Educational level already exists!");
+                                exitCancel = true;
+                                normalExit = true;
+                            }
                         }
                     }
-                    window.Close();
                 };
 
             };
+            window.Closing += delegate(object o, CancelEventArgs args)
+            {
+                if (!normalExit)
+                {
+                    if (exitCancel)
+                    {
+                        args.Cancel = true;
+                    }
+                }
+            };
             window.ShowDialog();
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="icon"></param>
+        /// <returns></returns>
+        private bool ExistingEducationalLevel(string icon)
+        {
+            foreach (Image image in WrapPanelEducationaLevel.Children)
+                if (image.Name == icon)
+                    return true;
+            return false;
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DeleteEducationalLevel_Click(object sender, RoutedEventArgs e)
         {
-            _contentManager.DeleteEducationalLevel(_educationalLevelDictionary[_selectedEducationalLevel.Source.ToString()],
-                _courseImagesCache[_selectedLanguage.Source.ToString()]);
-            _educationalLevelDictionary.Remove(_selectedEducationalLevel.Source.ToString());
+            _contentManager.DeleteEducationalLevel(_educationalLevelDictionary[_selectedEducationalLevel.Name],
+                _courseImagesCache[_selectedLanguage.Name]);
+            _educationalLevelDictionary.Remove(_selectedEducationalLevel.Name);
             WrapPanelEducationaLevel.Children.Remove(_selectedEducationalLevel);
             _selectedEducationalLevel = null;
             WrapPanelGrades.Children.Clear();
@@ -442,7 +537,10 @@ namespace Diction_Master___Server
         #endregion
 
         #region Grades
-        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
         private void LoadGrades(int id)
         {
             WrapPanelGrades.Children.Clear();
@@ -466,7 +564,7 @@ namespace Diction_Master___Server
                     {
                         ImageGrade_Click(sender as Image);
                     };
-                    _gradesDictionary[image.Source.ToString()] = childID;
+                    _gradesDictionary[image.Name] = childID;
                     WrapPanelGrades.Children.Add(image);
                     _selectedGrade = image;
                 }
@@ -475,7 +573,10 @@ namespace Diction_Master___Server
             NoOfFiles.Text = "0";
             NoOfWeeks.Text = "0";
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="image"></param>
         private void ImageGrade_Click(Image image)
         {
             if (_selectedGrade != null)
@@ -484,7 +585,7 @@ namespace Diction_Master___Server
             }
             image.Opacity = 1;
             _selectedGrade = image;
-            int id = _gradesDictionary[image.Source.ToString()];
+            int id = _gradesDictionary[image.Name];
             int num = _contentManager.GetNoOfWeeks(id);
             NoOfWeeks.Text = num.ToString();
             num = _contentManager.GetNoOfLessons(id);
@@ -508,7 +609,7 @@ namespace Diction_Master___Server
         {
             Window window = new Window()
             {
-                Title = "Create educatinal level",
+                Title = "Create grade",
                 ResizeMode = ResizeMode.NoResize,
                 WindowStartupLocation = WindowStartupLocation.CenterScreen
             };
@@ -517,7 +618,7 @@ namespace Diction_Master___Server
                 if (_selectedEducationalLevel != null)
                 {
                     EducationalLevelType type =
-                    (_contentManager.GetComponent(_educationalLevelDictionary[_selectedEducationalLevel.Source.ToString()])
+                    (_contentManager.GetComponent(_educationalLevelDictionary[_selectedEducationalLevel.Name])
                         as EducationalLevel).Level;
                     GradeSelection grade = new GradeSelection(type)
                     {
@@ -536,7 +637,7 @@ namespace Diction_Master___Server
                         {
                             if (_selectedEducationalLevel != null)
                             {
-                                int id = _contentManager.AddGrade(_educationalLevelDictionary[_selectedEducationalLevel.Source.ToString()], icon, gradeType);
+                                int id = _contentManager.AddGrade(_educationalLevelDictionary[_selectedEducationalLevel.Name], icon, gradeType);
                                 if (id > 0) //new edu level created
                                 {
                                     Image image = new Image()
@@ -546,15 +647,16 @@ namespace Diction_Master___Server
                                         MaxHeight = 100,
                                         MaxWidth = 100,
                                         Margin = new Thickness(15),
-                                        Opacity = 0.5
+                                        Opacity = 0.5,
+                                        Name = "Image_" + id
                                     };
                                     image.MouseUp += delegate (object senderImage, MouseButtonEventArgs eventArgs)
                                     {
                                         ImageGrade_Click(senderImage as Image);
                                     };
-                                    if (!_gradesDictionary.ContainsKey(icon))
+                                    if (!_gradesDictionary.ContainsKey(image.Name))
                                     {
-                                        _gradesDictionary[icon] = id;
+                                        _gradesDictionary[image.Name] = id;
                                         WrapPanelGrades.Children.Add(image);
                                         ImageGrade_Click(image);
                                     }
@@ -571,12 +673,18 @@ namespace Diction_Master___Server
             };
             window.ShowDialog();
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void EditGrade_Click(object sender, RoutedEventArgs e)
         {
+            bool exitCancel = false;
+            bool normalExit = true;
             Window window = new Window()
             {
-                Title = "Create educatinal level",
+                Title = "Create grade",
                 ResizeMode = ResizeMode.NoResize,
                 WindowStartupLocation = WindowStartupLocation.CenterScreen
             };
@@ -585,7 +693,7 @@ namespace Diction_Master___Server
                 if (_selectedEducationalLevel != null)
                 {
                     EducationalLevelType type =
-                    (_contentManager.GetComponent(_educationalLevelDictionary[_selectedEducationalLevel.Source.ToString()])
+                    (_contentManager.GetComponent(_educationalLevelDictionary[_selectedEducationalLevel.Name])
                         as EducationalLevel).Level;
                     GradeSelection grade = new GradeSelection(type)
                     {
@@ -598,26 +706,57 @@ namespace Diction_Master___Server
                     grade.button.Click += delegate (object obj, RoutedEventArgs Args)
                     {
                         GradeSelection control = window.Content as GradeSelection;
-                        int id = _gradesDictionary[_selectedGrade.Source.ToString()];
+                        int id = _gradesDictionary[_selectedGrade.Name];
                         string icon = control.GetSelectedIcon();
                         GradeType gradeType = control.GetSelectedGrade();
                         if (icon != "")
                         {
                             if (_selectedEducationalLevel != null)
                             {
-                                _contentManager.EditGrade(id, icon, gradeType);
-                                _gradesDictionary.Remove(_selectedGrade.Source.ToString());
-                                _gradesDictionary[icon] = id;
-                                _selectedGrade.Source = new BitmapImage(new Uri(icon));
+                                if (!ExistingGrade(_selectedGrade.Name))
+                                {
+                                    _contentManager.EditGrade(id, icon, gradeType);
+                                    _selectedGrade.Source = new BitmapImage(new Uri(icon));
+                                    exitCancel = false;
+                                    normalExit = false;
+                                    window.Close();
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Grade already exists!");
+                                    exitCancel = true;
+                                    normalExit = true;
+                                }
                             }
                         }
-                        window.Close();
                     };
                 }
                 else
                     window.Close();
             };
+            window.Closing += delegate(object o, CancelEventArgs args)
+            {
+                if (!normalExit)
+                {
+                    if (exitCancel)
+                    {
+                        args.Cancel = true;
+                    }
+                }
+            };
             window.ShowDialog();
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="icon"></param>
+        /// <returns></returns>
+        private bool ExistingGrade(string icon)
+        {
+            foreach (Image image in WrapPanelGrades.Children)
+                if (image.Name == icon)
+                    return true;
+            return false;
         }
         /// <summary>
         /// Delete existing grade
@@ -626,9 +765,9 @@ namespace Diction_Master___Server
         /// <param name="e"></param>
         private void DeleteGrade_Click(object sender, RoutedEventArgs e)
         {
-            int id = _gradesDictionary[_selectedGrade.Source.ToString()];
-            _contentManager.DeleteGrade(id, _educationalLevelDictionary[_selectedEducationalLevel.Source.ToString()]);
-            _gradesDictionary.Remove(_selectedGrade.Source.ToString());
+            int id = _gradesDictionary[_selectedGrade.Name];
+            _contentManager.DeleteGrade(id, _educationalLevelDictionary[_selectedEducationalLevel.Name]);
+            _gradesDictionary.Remove(_selectedGrade.Name);
             WrapPanelGrades.Children.Remove(_selectedGrade);
             _selectedGrade = null;
             EditGrade.IsEnabled = false;
@@ -642,12 +781,16 @@ namespace Diction_Master___Server
         }
 
         #endregion
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void EditWeeks_Click(object sender, RoutedEventArgs e)
         {
             Window window = new Window()
             {
-                Title = "Create educatinal level",
+                Title = "Edit weeks",
                 ResizeMode = ResizeMode.NoResize,
                 WindowStartupLocation = WindowStartupLocation.CenterScreen
             };
@@ -655,10 +798,7 @@ namespace Diction_Master___Server
             {
                 if (_selectedEducationalLevel != null)
                 {
-                    EducationalLevelType type =
-                    (_contentManager.GetComponent(_educationalLevelDictionary[_selectedEducationalLevel.Source.ToString()])
-                        as EducationalLevel).Level;
-                    WeeksCreation weeksCreation = new WeeksCreation(_gradesDictionary[_selectedGrade.Source.ToString()])
+                    WeeksCreation weeksCreation = new WeeksCreation(_gradesDictionary[_selectedGrade.Name], _contentManager)
                     {
                         VerticalAlignment = VerticalAlignment.Stretch,
                         HorizontalAlignment = HorizontalAlignment.Stretch,
@@ -669,39 +809,13 @@ namespace Diction_Master___Server
                     weeksCreation.Button.Click += delegate (object obj, RoutedEventArgs Args)
                     {
                         WeeksCreation control = window.Content as WeeksCreation;
-                        //string icon = control.GetSelectedIcon();
-                        //GradeType gradeType = control.GetSelectedGrade();
-                        //if (icon != "")
-                        //{
-                        //    if (_selectedEducationalLevel != null)
-                        //    {
-                        //        int id = _contentManager.AddGrade(_educationalLevelDictionary[_selectedEducationalLevel.Source.ToString()], icon, gradeType);
-                        //        if (id > 0) //new edu level created
-                        //        {
-                        //            Image image = new Image()
-                        //            {
-                        //                Source = new BitmapImage(new Uri(icon)),
-                        //                RenderSize = new Size(100, 100),
-                        //                MaxHeight = 100,
-                        //                MaxWidth = 100,
-                        //                Margin = new Thickness(15),
-                        //                Opacity = 0.5
-                        //            };
-                        //            image.MouseUp += delegate (object senderImage, MouseButtonEventArgs eventArgs)
-                        //            {
-                        //                ImageGrade_Click(senderImage as Image);
-                        //            };
-                        //            if (!_gradesDictionary.ContainsKey(icon))
-                        //            {
-                        //                _gradesDictionary[icon] = id;
-                        //                WrapPanelGrades.Children.Add(image);
-                        //                ImageGrade_Click(image);
-                        //            }
-                        //            else
-                        //                image = null;
-                        //        }// -1 - error; 0 - already exists
-                        //    }
-                        //}
+                        if (!control.IsEmpty() && control.IsSaved())
+                        {
+                            int num = _contentManager.GetNoOfWeeks(_gradesDictionary[_selectedGrade.Name]);
+                            NoOfWeeks.Text = num.ToString();
+                            if (num > 0)
+                                EditLessons.IsEnabled = true;
+                        }
                         window.Close();
                     };
                 }
@@ -711,7 +825,9 @@ namespace Diction_Master___Server
             window.Closing += delegate(object o, CancelEventArgs args)
             {
                 //not good
-                if (!(window.Content as WeeksCreation).IsSaved())
+                bool empty = (window.Content as WeeksCreation).IsEmpty();
+                bool ctrl = (window.Content as WeeksCreation).IsSaved();
+                if (!empty && !ctrl)
                 {
                     args.Cancel = true;
                     MessageBox.Show("Progress is not saved!!!");
@@ -719,15 +835,106 @@ namespace Diction_Master___Server
             };
             window.ShowDialog();
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void EditLessons_Click(object sender, RoutedEventArgs e)
         {
-
+            Window window = new Window()
+            {
+                Title = "Edit lessons",
+                ResizeMode = ResizeMode.NoResize,
+                WindowStartupLocation = WindowStartupLocation.CenterScreen
+            };
+            window.Loaded += delegate (object o, RoutedEventArgs args)
+            {
+                if (_selectedEducationalLevel != null)
+                {
+                    LessonsCreation lessonsCreation = new LessonsCreation(_gradesDictionary[_selectedGrade.Name], _contentManager)
+                    {
+                        VerticalAlignment = VerticalAlignment.Stretch,
+                        HorizontalAlignment = HorizontalAlignment.Stretch,
+                    };
+                    window.Width = lessonsCreation.Width + 35;
+                    window.Height = lessonsCreation.Height + 40;
+                    window.Content = lessonsCreation;
+                    lessonsCreation.Button.Click += delegate (object obj, RoutedEventArgs Args)
+                    {
+                        LessonsCreation control = window.Content as LessonsCreation;
+                        if (!control.IsEmpty() && control.IsSaved())
+                        {
+                            int num = _contentManager.GetNoOfLessons(_gradesDictionary[_selectedGrade.Name]);
+                            NoOfLessons.Text = num.ToString();
+                            if (num > 0)
+                                EditFiles.IsEnabled = true;
+                        }
+                        window.Close();
+                    };
+                }
+                else
+                    window.Close();
+            };
+            window.Closing += delegate (object o, CancelEventArgs args)
+            {
+                //not good
+                bool empty = (window.Content as LessonsCreation).IsEmpty();
+                bool ctrl = (window.Content as LessonsCreation).IsSaved();
+                if (!empty && !ctrl)
+                {
+                    args.Cancel = true;
+                    MessageBox.Show("Progress is not saved!!!");
+                }
+            };
+            window.ShowDialog();
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void EditFiles_Click(object sender, RoutedEventArgs e)
         {
-
+            Window window = new Window()
+            {
+                Title = "Edit content",
+                ResizeMode = ResizeMode.NoResize,
+                WindowStartupLocation = WindowStartupLocation.CenterScreen
+            };
+            window.Loaded += delegate (object o, RoutedEventArgs args)
+            {
+                if (_selectedEducationalLevel != null)
+                {
+                    ContentUpload contentUpload= new ContentUpload(_gradesDictionary[_selectedGrade.Name], _contentManager)
+                    {
+                        VerticalAlignment = VerticalAlignment.Stretch,
+                        HorizontalAlignment = HorizontalAlignment.Stretch,
+                    };
+                    window.Width = contentUpload.Width + 35;
+                    window.Height = contentUpload.Height + 40;
+                    window.Content = contentUpload;
+                    contentUpload.Button.Click += delegate (object obj, RoutedEventArgs Args)
+                    {
+                        if (contentUpload.IsSaved())
+                        {
+                            NoOfFiles.Text = contentUpload.GetNoOfFiles();
+                            window.Close();
+                        }
+                    };
+                }
+                else
+                    window.Close();
+            };
+            window.Closing += delegate (object o, CancelEventArgs args)
+            {
+                if (!(window.Content as ContentUpload).IsSaved())
+                {
+                    args.Cancel = true;
+                    MessageBox.Show("Progress is not saved!");
+                }
+            };
+            window.ShowDialog();
         }
     }
 }

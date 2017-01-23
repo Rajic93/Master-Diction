@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Runtime.Remoting.Messaging;
@@ -33,7 +34,22 @@ namespace Diction_Master___Library
                 ID = id,
                 ParentID = parentID,
                 Text = text,
+                Type = type,
                 Answer = answer
+            };
+        }
+
+        public static Component CreateLeafComponent(int id, int parentID,
+            string text, string answer, QuestionType type, ObservableCollection<string> wrongAnswers)
+        {
+            return new Question()
+            {
+                ID = id,
+                ParentID = parentID,
+                Text = text,
+                Type = type,
+                Answer = answer,
+                WrongAnswers = wrongAnswers
             };
         }
         /// <summary>
@@ -49,7 +65,7 @@ namespace Diction_Master___Library
         /// <param name="icon">Icon path.</param>
         /// <returns>New Audio, Video or Document component.</returns>
         public static Component CreateLeafComponent(int id, int parentID, ComponentType type,
-            string title, string uri, float size, string desc, string icon)
+            string title, string uri, long size, string desc, string icon)
         {
             if (type == ComponentType.Audio)
             {

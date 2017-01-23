@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Diction_Master___Server"
         xmlns:generic="clr-namespace:System.Collections.Generic;assembly=mscorlib"
         mc:Ignorable="d"
-        Title="Content" Height="680"  Width="1024" MinHeight="680"  MinWidth="1024" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen">
+        Title="Content" Height="680"  Width="1024" MinHeight="680"  MinWidth="1024" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" WindowStartupLocation="CenterScreen">
 
 
     <Grid Margin="0,81,-0.4,0.4">

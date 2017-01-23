@@ -89,7 +89,7 @@ namespace Diction_Master___Library
 
         public Week FindWeek(string title, int num, int term)
         {
-            Week week = Components.Find(x => (x as Week).Title == title || ((x as Week).Num == num && (x as Week).Term == term)) as Week;
+            Week week = Components.Find(x => (x as Week).Title == title && ((x as Week).Num == num && (x as Week).Term == term)) as Week;
             return week;
         }
     }

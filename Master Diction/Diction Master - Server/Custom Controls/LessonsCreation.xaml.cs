@@ -23,7 +23,7 @@ namespace Diction_Master___Server.Custom_Controls
     /// </summary>
     public partial class LessonsCreation : UserControl
     {
-        private Diction_Master___Library.ContentManager manager;
+        private Diction_Master___Library.ContentManager _contentManager;
         private bool savedLessons = true;
         private bool empty = true;
         private Component loadedWeek;
@@ -31,11 +31,15 @@ namespace Diction_Master___Server.Custom_Controls
         private ObservableCollection<Component> lessons;
         private int numOfLessons = 0;
 
-        public LessonsCreation()
+        private int _selectedGrade;
+
+        public LessonsCreation(int parentID, Diction_Master___Library.ContentManager manager)
         {
-            manager = Diction_Master___Library.ContentManager.CreateInstance();
+            _contentManager = manager;
+            _selectedGrade = parentID;
             lessons = new ObservableCollection<Component>();
             InitializeComponent();
+            LoadWeeks();
         }
 
         public bool IsEmpty()
@@ -60,6 +64,8 @@ namespace Diction_Master___Server.Custom_Controls
                         lessons.Add(lesson);
                     }
                     loadedWeek = (Week) listBox.SelectedItem;
+                    listBox1.Items.Refresh();
+                    Add.IsEnabled = true;
                     empty = true;
                 }
                 else
@@ -75,11 +81,13 @@ namespace Diction_Master___Server.Custom_Controls
             listBox1.DisplayMemberPath = "Title";
         }
 
-        public void LoadWeeks(Component component)
+        public void LoadWeeks()
         {
-            weeks = manager.GetAllWeeks(component);
+            weeks = _contentManager.GetAllWeeks(_contentManager.GetComponent(_selectedGrade));
+            numOfLessons = _contentManager.GetNoOfLessons(_selectedGrade);
             listBox.ItemsSource = weeks;
             listBox.DisplayMemberPath = "Title";
+            listBox.Items.Refresh();
             for (int i = 0; i < 100; i++)
             {
                 comboBox.Items.Add((i + 1).ToString());
@@ -93,50 +101,30 @@ namespace Diction_Master___Server.Custom_Controls
             textBox2.Text = ((Week) listBox.SelectedItem).Num.ToString();
             textBox3.Text = ((Week) listBox.SelectedItem).Term.ToString();
             textBox4.Text = ((Week) listBox.SelectedItem).Title;
-        }
-
-        private void Confirm_Click(object sender, RoutedEventArgs e)
-        {
-            ((Week)loadedWeek).Components.Clear();
-            foreach (Lesson lesson in lessons)
-            {
-                ((Week)loadedWeek).Components.Add(lesson);
-            }
-            savedLessons = true;
-            Confirm.IsEnabled = false;
-        }
-
-        private void Add_OnClick(object sender, RoutedEventArgs e)
-        {
-            lessons.Add(new Lesson() { Num = Convert.ToInt16(comboBox.Text), Title = textBox.Text});
-            Confirm.IsEnabled = true;
-            savedLessons = false;
-            empty = false;
-            numOfLessons++;
+            Load.IsEnabled = true;
         }
 
         private void listBox1_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (listBox1.SelectedItem != null)
             {
-                textBox.Text = ((Lesson) listBox1.SelectedItem).Title;
+                textBox.Text = ((Lesson)listBox1.SelectedItem).Title;
                 comboBox.Text = ((Lesson)listBox1.SelectedItem).Num.ToString();
+                Edit.IsEnabled = true;
+                Delete.IsEnabled = true;
             }
         }
 
-        private void Delete_Click(object sender, RoutedEventArgs e)
+        private void Add_OnClick(object sender, RoutedEventArgs e)
         {
-            if (listBox1.SelectedItem != null)
+            int id = _contentManager.AddLesson(loadedWeek.ID, textBox.Text, Convert.ToInt16(comboBox.Text));
+            if (id > 0)
             {
-                lessons.Remove((Lesson) listBox1.SelectedItem);
-                listBox1.Items.Refresh();
+                lessons.Add(_contentManager.GetComponent(id));
                 Confirm.IsEnabled = true;
                 savedLessons = false;
-                numOfLessons--;
-                if (listBox1.Items.Count == 0)
-                    empty = true;
-                else
-                    empty = false;
+                empty = false;
+                numOfLessons++;
             }
         }
 
@@ -150,6 +138,37 @@ namespace Diction_Master___Server.Custom_Controls
                 Confirm.IsEnabled = true;
                 savedLessons = false;
             }
+        }
+
+        private void Delete_Click(object sender, RoutedEventArgs e)
+        {
+            if (listBox1.SelectedItem != null)
+            {
+                int id = (listBox1.SelectedItem as Lesson).ID;
+                lessons.Remove((Lesson) listBox1.SelectedItem);
+                _contentManager.DeleteLesson(id, loadedWeek.ID);
+                listBox1.Items.Refresh();
+                Confirm.IsEnabled = true;
+                savedLessons = false;
+                numOfLessons--;
+                if (listBox1.Items.Count == 0)
+                    empty = true;
+                else
+                    empty = false;
+                Edit.IsEnabled = false;
+                Delete.IsEnabled = false;
+            }
+        }
+
+        private void Confirm_Click(object sender, RoutedEventArgs e)
+        {
+            ((Week)loadedWeek).Components.Clear();
+            foreach (Lesson lesson in lessons)
+            {
+                ((Week)loadedWeek).Components.Add(lesson);
+            }
+            savedLessons = true;
+            Confirm.IsEnabled = false;
         }
     }
 }

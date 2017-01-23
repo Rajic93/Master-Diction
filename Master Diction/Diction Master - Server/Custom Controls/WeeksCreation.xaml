@@ -15,20 +15,20 @@
 
         <TextBox x:Name="textBoxI" HorizontalAlignment="Left" Height="23" Margin="385,33,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="290"/>
         <Button x:Name="AddI" Width="100" Height="25" Content="Add" Margin="471,64,219.4,542.2" Click="AddI_Click"></Button>
-        <Button x:Name="EditI" Width="100" Height="25" Content="Edit" Margin="576,64,114.4,542.2" Click="EditI_Click"></Button>
-        <Button x:Name="DeleteI" Width="100" Height="25" Content="Delete" Margin="681,64,9.4,542.2" Click="DeleteI_Click"></Button>
+        <Button x:Name="EditI" Width="100" Height="25" Content="Edit" Margin="576,64,114.4,542.2" Click="EditI_Click" IsEnabled="False"></Button>
+        <Button x:Name="DeleteI" Width="100" Height="25" Content="Delete" Margin="681,64,9.4,542.2" Click="DeleteI_Click" IsEnabled="False"></Button>
         <Button x:Name="ConfirmI" Width="100" Height="25" Content="Confirm" Margin="681,168,11,438.2" Click="ConfirmI_Click" IsEnabled="False"></Button>
 
         <TextBox x:Name="textBoxII" HorizontalAlignment="Left" Height="23" Margin="385,224,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="291"/>
         <Button x:Name="AddII" Width="100" Height="25" Content="Add" Margin="471,255,219.4,351.2" Click="AddII_Click"></Button>
-        <Button x:Name="EditII" Width="100" Height="25" Content="Edit" Margin="576,255,114.4,351.2" Click="EditII_Click"></Button>
-        <Button x:Name="DeleteII" Width="100" Height="25" Content="Delete" Margin="681,255,9.4,351.2" Click="DeleteII_Click"></Button>
+        <Button x:Name="EditII" Width="100" Height="25" Content="Edit" Margin="576,255,114.4,351.2" Click="EditII_Click" IsEnabled="False"></Button>
+        <Button x:Name="DeleteII" Width="100" Height="25" Content="Delete" Margin="681,255,9.4,351.2" Click="DeleteII_Click" IsEnabled="False"></Button>
         <Button x:Name="ConfirmII" Width="100" Height="25" Content="Confirm" Margin="680,359,10.4,247.2" Click="ConfirmII_Click" IsEnabled="False"></Button>
 
         <TextBox x:Name="textBoxIII" HorizontalAlignment="Left" Height="23" Margin="385,414,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="290"/>
         <Button x:Name="AddIII" Width="100" Height="25" Content="Add" Margin="470,445,220.4,161.2" Click="AddIII_Click"></Button>
-        <Button x:Name="EditIII" Width="100" Height="25" Content="Edit" Margin="575,445,115.4,161.2" Click="EditIII_Click"></Button>
-        <Button x:Name="DeleteIII" Width="100" Height="25" Content="Delete" Margin="681,445,9.4,161.2" Click="DeleteIII_Click"></Button>
+        <Button x:Name="EditIII" Width="100" Height="25" Content="Edit" Margin="575,445,115.4,161.2" Click="EditIII_Click" IsEnabled="False"></Button>
+        <Button x:Name="DeleteIII" Width="100" Height="25" Content="Delete" Margin="681,445,9.4,161.2" Click="DeleteIII_Click" IsEnabled="False"></Button>
         <Button x:Name="ConfirmIII" Width="100" Height="25" Content="Confirm" Margin="680,549,10.4,57.2" Click="ConfirmIII_Click" IsEnabled="False"/>
         <ComboBox x:Name="comboBox" HorizontalAlignment="Left" Margin="731,33,0,0" VerticalAlignment="Top" Width="50"/>
         <ComboBox x:Name="comboBox1" HorizontalAlignment="Left" Margin="731,225,0,0" VerticalAlignment="Top" Width="50"/>
@@ -39,6 +39,6 @@
         <TextBlock x:Name="textBlock4" HorizontalAlignment="Left" Margin="705,13,0,0" TextWrapping="Wrap" Text="Week number" VerticalAlignment="Top"/>
         <TextBlock x:Name="textBlock5" HorizontalAlignment="Left" Margin="706,203,0,0" TextWrapping="Wrap" Text="Week number" VerticalAlignment="Top"/>
         <TextBlock x:Name="textBlock6" HorizontalAlignment="Left" Margin="706,393,0,0" TextWrapping="Wrap" Text="Week number" VerticalAlignment="Top"/>
-        <Button x:Name="Button" Content="Save" HorizontalAlignment="Left" Margin="684,602,0,0" VerticalAlignment="Top" Width="98" Height="19"/>
+        <Button x:Name="Button" Content="Finish" HorizontalAlignment="Left" Margin="684,602,0,0" VerticalAlignment="Top" Width="98" Height="19"/>
     </Grid>
 </UserControl>

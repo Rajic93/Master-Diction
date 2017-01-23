@@ -23,27 +23,41 @@ namespace Diction_Master___Server.Custom_Controls
     /// </summary>
     public partial class WeeksCreation : UserControl
     {
-        private Diction_Master___Library.ContentManager _manager;
+        private Diction_Master___Library.ContentManager _contentManager;
         private ObservableCollection<Component> TermI;
         private ObservableCollection<Component> TermII;
         private ObservableCollection<Component> TermIII;
-        private bool SavedI;
-        private bool SavedII;
-        private bool SavedIII;
+        private bool SavedI = true;
+        private bool SavedII = true;
+        private bool SavedIII = true;
         private bool emptyI = true;
         private bool emptyII = true;
         private bool emptyIII = true;
 
         private int _selecetedGrade;
 
-        public WeeksCreation(int parentID)
+        public WeeksCreation(int parentID, Diction_Master___Library.ContentManager manager)
         {
-            _manager = Diction_Master___Library.ContentManager.CreateInstance();
+            _contentManager = manager;
             TermI = new ObservableCollection<Component>();
             TermII = new ObservableCollection<Component>();
             TermIII = new ObservableCollection<Component>();
             _selecetedGrade = parentID;
+            LoadWeeks();
             InitializeComponent();
+        }
+
+        private void LoadWeeks()
+        {
+            foreach (Week week in _contentManager.GetAllWeeks(_contentManager.GetComponent(_selecetedGrade)))
+            {
+                if (week.Term == 1)
+                    TermI.Add(week);
+                else if (week.Term == 2)
+                    TermII.Add(week);
+                else if (week.Term == 3)
+                    TermIII.Add(week);
+            }
         }
 
         public bool IsEmpty()
@@ -77,6 +91,8 @@ namespace Diction_Master___Server.Custom_Controls
             {
                 textBoxI.Text = ((Week)listBoxTermI.SelectedItem).Title;
                 comboBox.Text = ((Week) listBoxTermI.SelectedItem).Num.ToString();
+                EditI.IsEnabled = true;
+                DeleteI.IsEnabled = true;
             }
 
         }
@@ -87,6 +103,8 @@ namespace Diction_Master___Server.Custom_Controls
             {
                 textBoxII.Text = ((Week)listBoxTermII.SelectedItem).Title;
                 comboBox1.Text = ((Week)listBoxTermII.SelectedItem).Num.ToString();
+                EditII.IsEnabled = true;
+                DeleteII.IsEnabled = true;
             }
         }
 
@@ -96,6 +114,8 @@ namespace Diction_Master___Server.Custom_Controls
             {
                 textBoxIII.Text = ((Week)listBoxTermIII.SelectedItem).Title;
                 comboBox2.Text = ((Week)listBoxTermIII.SelectedItem).Num.ToString();
+                EditIII.IsEnabled = true;
+                DeleteIII.IsEnabled = true;
             }
         }
 
@@ -103,11 +123,15 @@ namespace Diction_Master___Server.Custom_Controls
         {
             if (textBoxI.Text != "")
             {
-                int id = _manager.AddWeek(_selecetedGrade, textBoxI.Text, Convert.ToInt16(comboBox.SelectedValue), 1);
-                TermI.Add(_manager.GetComponent(id) as Week);
-                SavedI = false;
-                ConfirmI.IsEnabled = true;
-                emptyI = false;
+                int id = _contentManager.AddWeek(_selecetedGrade, textBoxI.Text, Convert.ToInt16(comboBox.SelectedValue), 1);
+                if (id > 0)
+                {
+                    TermI.Add(_contentManager.GetComponent(id) as Week);
+                    listBoxTermI.Items.Refresh();
+                    SavedI = false;
+                    ConfirmI.IsEnabled = true;
+                    emptyI = false;
+                }
             }
         }
 
@@ -115,11 +139,15 @@ namespace Diction_Master___Server.Custom_Controls
         {
             if (textBoxII.Text != "")
             {
-                int id = _manager.AddWeek(_selecetedGrade, textBoxII.Text, Convert.ToInt16(comboBox1.SelectedValue), 1);
-                TermII.Add(_manager.GetComponent(id) as Week);
-                SavedII = false;
-                ConfirmII.IsEnabled = true;
-                emptyII = false;
+                int id = _contentManager.AddWeek(_selecetedGrade, textBoxII.Text, Convert.ToInt16(comboBox1.SelectedValue), 2);
+                if (id > 0)
+                {
+                    TermII.Add(_contentManager.GetComponent(id) as Week);
+                    listBoxTermII.Items.Refresh();
+                    SavedII = false;
+                    ConfirmII.IsEnabled = true;
+                    emptyII = false;
+                }
             }
         }
 
@@ -127,11 +155,15 @@ namespace Diction_Master___Server.Custom_Controls
         {
             if (textBoxIII.Text != "")
             {
-                int id = _manager.AddWeek(_selecetedGrade, textBoxIII.Text, Convert.ToInt16(comboBox2.SelectedValue), 1);
-                TermIII.Add(_manager.GetComponent(id) as Week);
-                SavedIII = false;
-                ConfirmIII.IsEnabled = true;
-                emptyIII = false;
+                int id = _contentManager.AddWeek(_selecetedGrade, textBoxIII.Text, Convert.ToInt16(comboBox2.SelectedValue), 3);
+                if (id > 0)
+                {
+                    TermIII.Add(_contentManager.GetComponent(id) as Week);
+                    listBoxTermIII.Items.Refresh();
+                    SavedIII = false;
+                    ConfirmIII.IsEnabled = true;
+                    emptyIII = false;
+                }
             }
         }
 
@@ -175,9 +207,12 @@ namespace Diction_Master___Server.Custom_Controls
         {
             if (listBoxTermI.SelectedItem != null)
             {
-                listBoxTermI.Items.RemoveAt(listBoxTermI.SelectedIndex);
+                _contentManager.DeleteWeek((listBoxTermI.SelectedItem as Week).ID, _selecetedGrade);
+                TermI.Remove(listBoxTermI.SelectedItem as Week);
                 textBoxI.Text = "";
                 SavedI = false;
+                EditI.IsEnabled = false;
+                DeleteI.IsEnabled = false;
                 ConfirmI.IsEnabled = true;
                 if (TermII.Count == 0 && TermI.Count == 0 && TermIII.Count == 0)
                 {
@@ -190,9 +225,12 @@ namespace Diction_Master___Server.Custom_Controls
         {
             if (listBoxTermII.SelectedItem != null)
             {
-                listBoxTermII.Items.RemoveAt(listBoxTermII.SelectedIndex);
+                _contentManager.DeleteWeek((listBoxTermII.SelectedItem as Week).ID, _selecetedGrade);
+                TermII.Remove(listBoxTermII.SelectedItem as Week);
                 textBoxII.Text = "";
                 SavedII = false;
+                EditII.IsEnabled = false;
+                DeleteII.IsEnabled = false;
                 ConfirmII.IsEnabled = true;
                 if (TermII.Count == 0 && TermI.Count == 0 && TermIII.Count == 0)
                 {
@@ -205,9 +243,12 @@ namespace Diction_Master___Server.Custom_Controls
         {
             if (listBoxTermIII.SelectedItem != null)
             {
-                listBoxTermIII.Items.RemoveAt(listBoxTermIII.SelectedIndex);
+                _contentManager.DeleteWeek((listBoxTermIII.SelectedItem as Week).ID, _selecetedGrade);
+                TermIII.Remove(listBoxTermIII.SelectedItem as Week);
                 textBoxIII.Text = "";
                 SavedIII = false;
+                EditIII.IsEnabled = false;
+                DeleteIII.IsEnabled = false;
                 ConfirmIII.IsEnabled = true;
                 if (TermII.Count == 0 && TermI.Count == 0 && TermIII.Count == 0)
                 {

@@ -114,59 +114,59 @@ namespace Diction_Master___Server.Custom_Controls
             switch (((Button)sender).Name)
             {
                 case "NurseryI":
-                    Icon = "pack://application:,,,/Resources/nursery.jpg";
+                    Icon = "pack://application:,,,/Resources/nusery1.png";
                     SelectedGrade = GradeType.NurseryI;
                     break;
                 case "NurseryII":
-                    Icon = "pack://application:,,,/Resources/nursery.jpg";
+                    Icon = "pack://application:,,,/Resources/nusery2.png";
                     SelectedGrade = GradeType.NurseryII;
                     break;
                 case "PrimaryI":
-                    Icon = "pack://application:,,,/Resources/primary.jpg";
+                    Icon = "pack://application:,,,/Resources/1st Grade.png";
                     SelectedGrade = GradeType.PrimaryI;
                     break;
                 case "PrimaryII":
-                    Icon = "pack://application:,,,/Resources/primary.jpg";
+                    Icon = "pack://application:,,,/Resources/2nd Grade.png";
                     SelectedGrade = GradeType.PrimaryII;
                     break;
                 case "PrimaryIII":
-                    Icon = "pack://application:,,,/Resources/primary.jpg";
+                    Icon = "pack://application:,,,/Resources/3rd Grade.png";
                     SelectedGrade = GradeType.PrimaryIII;
                     break;
                 case "PrimaryIV":
-                    Icon = "pack://application:,,,/Resources/primary.jpg";
+                    Icon = "pack://application:,,,/Resources/4th Grade.png";
                     SelectedGrade = GradeType.PrimaryIV;
                     break;
                 case "PrimaryV":
-                    Icon = "pack://application:,,,/Resources/primary.jpg";
+                    Icon = "pack://application:,,,/Resources/1st Grade.png5th";
                     SelectedGrade = GradeType.PrimaryV;
                     break;
                 case "PrimaryVI":
-                    Icon = "pack://application:,,,/Resources/primary.jpg";
+                    Icon = "pack://application:,,,/Resources/6th Grade.png";
                     SelectedGrade = GradeType.PrimaryVI;
                     break;
                 case "SecondaryJuniorI":
-                    Icon = "pack://application:,,,/Resources/secondary.jpg";
+                    Icon = "pack://application:,,,/Resources/1st Grade sec.png";
                     SelectedGrade = GradeType.SecondaryJuniorI;
                     break;
                 case "SecondaryJuniorII":
-                    Icon = "pack://application:,,,/Resources/secondary.jpg";
+                    Icon = "pack://application:,,,/Resources/2nd Grade sec.png";
                     SelectedGrade = GradeType.SecondaryJuniorII;
                     break;
                 case "SecondaryJuniorIII":
-                    Icon = "pack://application:,,,/Resources/secondary.jpg";
+                    Icon = "pack://application:,,,/Resources/3rd Grade sec.png";
                     SelectedGrade = GradeType.SecondaryJuniorIII;
                     break;
                 case "SecondarySeniorI":
-                    Icon = "pack://application:,,,/Resources/secondary.jpg";
+                    Icon = "pack://application:,,,/Resources/4th Grade sec.png";
                     SelectedGrade = GradeType.SecondarySeniorI;
                     break;
                 case "SecondarySeniorII":
-                    Icon = "pack://application:,,,/Resources/secondary.jpg";
+                    Icon = "pack://application:,,,/Resources/5th Grade sec.png";
                     SelectedGrade = GradeType.SecondarySeniorII;
                     break;
                 case "SecondarySeniorIII":
-                    Icon = "pack://application:,,,/Resources/secondary.jpg";
+                    Icon = "pack://application:,,,/Resources/6th Grade sec.png";
                     SelectedGrade = GradeType.SecondarySeniorIII;
                     break;
             }

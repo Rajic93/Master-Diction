@@ -2,3 +2,4 @@ D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Library\bin\De
 D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Library\bin\Debug\Diction Master - Library.pdb
 D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Library\obj\Debug\Diction Master - Library.dll
 D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Library\obj\Debug\Diction Master - Library.pdb
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Library\obj\Debug\Diction Master - Library.csprojResolveAssemblyReference.cache

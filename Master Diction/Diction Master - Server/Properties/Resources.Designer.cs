@@ -22,7 +22,7 @@ namespace Diction_Master___Server.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
+    public class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace Diction_Master___Server.Properties {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Diction_Master___Server.Properties.Resources", typeof(Resources).Assembly);
@@ -51,7 +51,7 @@ namespace Diction_Master___Server.Properties {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,7 +63,137 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap button_bg_blue {
+        public static System.Drawing.Bitmap _1st_Grade {
+            get {
+                object obj = ResourceManager.GetObject("_1st_Grade", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap _1st_Grade_sec {
+            get {
+                object obj = ResourceManager.GetObject("_1st_Grade_sec", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap _2nd_Grade {
+            get {
+                object obj = ResourceManager.GetObject("_2nd_Grade", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap _2nd_Grade_sec {
+            get {
+                object obj = ResourceManager.GetObject("_2nd_Grade_sec", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap _3rd_Grade {
+            get {
+                object obj = ResourceManager.GetObject("_3rd_Grade", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap _3rd_Grade_sec {
+            get {
+                object obj = ResourceManager.GetObject("_3rd_Grade_sec", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap _4th_Grade {
+            get {
+                object obj = ResourceManager.GetObject("_4th_Grade", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap _4th_Grade_sec {
+            get {
+                object obj = ResourceManager.GetObject("_4th_Grade_sec", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap _5th_Grade {
+            get {
+                object obj = ResourceManager.GetObject("_5th_Grade", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap _5th_Grade_sec {
+            get {
+                object obj = ResourceManager.GetObject("_5th_Grade_sec", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap _6th_Grade {
+            get {
+                object obj = ResourceManager.GetObject("_6th_Grade", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap _6th_Grade_sec {
+            get {
+                object obj = ResourceManager.GetObject("_6th_Grade_sec", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap audio {
+            get {
+                object obj = ResourceManager.GetObject("audio", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap button_bg_blue {
             get {
                 object obj = ResourceManager.GetObject("button_bg_blue", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -73,7 +203,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap button_bg_blue_inactive {
+        public static System.Drawing.Bitmap button_bg_blue_inactive {
             get {
                 object obj = ResourceManager.GetObject("button_bg_blue_inactive", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -83,7 +213,17 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Afghanistan {
+        public static System.Drawing.Bitmap document {
+            get {
+                object obj = ResourceManager.GetObject("document", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap Flag_of_Afghanistan {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Afghanistan", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -93,7 +233,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Albania {
+        public static System.Drawing.Bitmap Flag_of_Albania {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Albania", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -103,7 +243,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Algeria {
+        public static System.Drawing.Bitmap Flag_of_Algeria {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Algeria", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -113,7 +253,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_American_Samoa {
+        public static System.Drawing.Bitmap Flag_of_American_Samoa {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_American_Samoa", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -123,7 +263,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Andorra {
+        public static System.Drawing.Bitmap Flag_of_Andorra {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Andorra", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -133,7 +273,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Angola {
+        public static System.Drawing.Bitmap Flag_of_Angola {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Angola", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -143,7 +283,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Anguilla {
+        public static System.Drawing.Bitmap Flag_of_Anguilla {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Anguilla", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -153,7 +293,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Antigua_and_Barbuda {
+        public static System.Drawing.Bitmap Flag_of_Antigua_and_Barbuda {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Antigua_and_Barbuda", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -163,7 +303,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Argentina {
+        public static System.Drawing.Bitmap Flag_of_Argentina {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Argentina", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -173,7 +313,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Armenia {
+        public static System.Drawing.Bitmap Flag_of_Armenia {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Armenia", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -183,7 +323,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Aruba {
+        public static System.Drawing.Bitmap Flag_of_Aruba {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Aruba", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -193,7 +333,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Australia {
+        public static System.Drawing.Bitmap Flag_of_Australia {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Australia", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -203,7 +343,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Austria {
+        public static System.Drawing.Bitmap Flag_of_Austria {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Austria", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -213,7 +353,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Azerbaijan {
+        public static System.Drawing.Bitmap Flag_of_Azerbaijan {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Azerbaijan", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -223,7 +363,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Bahrain {
+        public static System.Drawing.Bitmap Flag_of_Bahrain {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Bahrain", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -233,7 +373,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Bangladesh {
+        public static System.Drawing.Bitmap Flag_of_Bangladesh {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Bangladesh", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -243,7 +383,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Barbados {
+        public static System.Drawing.Bitmap Flag_of_Barbados {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Barbados", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -253,7 +393,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Belarus {
+        public static System.Drawing.Bitmap Flag_of_Belarus {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Belarus", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -263,7 +403,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Belgium {
+        public static System.Drawing.Bitmap Flag_of_Belgium {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Belgium", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -273,7 +413,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Belize {
+        public static System.Drawing.Bitmap Flag_of_Belize {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Belize", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -283,7 +423,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Benin {
+        public static System.Drawing.Bitmap Flag_of_Benin {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Benin", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -293,7 +433,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Bermuda {
+        public static System.Drawing.Bitmap Flag_of_Bermuda {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Bermuda", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -303,7 +443,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Bhutan {
+        public static System.Drawing.Bitmap Flag_of_Bhutan {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Bhutan", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -313,7 +453,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Bolivia {
+        public static System.Drawing.Bitmap Flag_of_Bolivia {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Bolivia", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -323,7 +463,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Bosnia_and_Herzegovina {
+        public static System.Drawing.Bitmap Flag_of_Bosnia_and_Herzegovina {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Bosnia_and_Herzegovina", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -333,7 +473,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Bostswana {
+        public static System.Drawing.Bitmap Flag_of_Bostswana {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Bostswana", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -343,7 +483,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Bouvet_Island {
+        public static System.Drawing.Bitmap Flag_of_Bouvet_Island {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Bouvet_Island", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -353,7 +493,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Brazil {
+        public static System.Drawing.Bitmap Flag_of_Brazil {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Brazil", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -363,7 +503,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_British_Indian_Ocean_Territory {
+        public static System.Drawing.Bitmap Flag_of_British_Indian_Ocean_Territory {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_British_Indian_Ocean_Territory", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -373,7 +513,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_British_Virgin_Islands {
+        public static System.Drawing.Bitmap Flag_of_British_Virgin_Islands {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_British_Virgin_Islands", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -383,7 +523,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Brunei {
+        public static System.Drawing.Bitmap Flag_of_Brunei {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Brunei", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -393,7 +533,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Bulgaria {
+        public static System.Drawing.Bitmap Flag_of_Bulgaria {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Bulgaria", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -403,7 +543,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Burkina_Faso {
+        public static System.Drawing.Bitmap Flag_of_Burkina_Faso {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Burkina_Faso", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -413,7 +553,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Burma__Myanmar_ {
+        public static System.Drawing.Bitmap Flag_of_Burma__Myanmar_ {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Burma__Myanmar_", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -423,7 +563,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Burundi {
+        public static System.Drawing.Bitmap Flag_of_Burundi {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Burundi", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -433,7 +573,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Cambodia {
+        public static System.Drawing.Bitmap Flag_of_Cambodia {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Cambodia", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -443,7 +583,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Cameroon {
+        public static System.Drawing.Bitmap Flag_of_Cameroon {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Cameroon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -453,7 +593,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Canada {
+        public static System.Drawing.Bitmap Flag_of_Canada {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Canada", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -463,7 +603,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Cape_Verde {
+        public static System.Drawing.Bitmap Flag_of_Cape_Verde {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Cape_Verde", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -473,7 +613,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Cayman_Islands {
+        public static System.Drawing.Bitmap Flag_of_Cayman_Islands {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Cayman_Islands", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -483,7 +623,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Central_African_Republic {
+        public static System.Drawing.Bitmap Flag_of_Central_African_Republic {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Central_African_Republic", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -493,7 +633,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Chad {
+        public static System.Drawing.Bitmap Flag_of_Chad {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Chad", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -503,7 +643,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Chile {
+        public static System.Drawing.Bitmap Flag_of_Chile {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Chile", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -513,7 +653,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_China {
+        public static System.Drawing.Bitmap Flag_of_China {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_China", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -523,7 +663,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Christmas_Islands {
+        public static System.Drawing.Bitmap Flag_of_Christmas_Islands {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Christmas_Islands", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -533,7 +673,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Cocos__Keeling__Islands {
+        public static System.Drawing.Bitmap Flag_of_Cocos__Keeling__Islands {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Cocos__Keeling__Islands", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -543,7 +683,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Colombia {
+        public static System.Drawing.Bitmap Flag_of_Colombia {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Colombia", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -553,7 +693,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Comoros {
+        public static System.Drawing.Bitmap Flag_of_Comoros {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Comoros", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -563,7 +703,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Cook_Islands {
+        public static System.Drawing.Bitmap Flag_of_Cook_Islands {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Cook_Islands", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -573,7 +713,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Costa_Rica {
+        public static System.Drawing.Bitmap Flag_of_Costa_Rica {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Costa_Rica", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -583,7 +723,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Cote_d_Ivoire {
+        public static System.Drawing.Bitmap Flag_of_Cote_d_Ivoire {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Cote_d_Ivoire", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -593,7 +733,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Croatia {
+        public static System.Drawing.Bitmap Flag_of_Croatia {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Croatia", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -603,7 +743,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Cuba {
+        public static System.Drawing.Bitmap Flag_of_Cuba {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Cuba", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -613,7 +753,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Cyprus {
+        public static System.Drawing.Bitmap Flag_of_Cyprus {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Cyprus", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -623,7 +763,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Czech_Republic {
+        public static System.Drawing.Bitmap Flag_of_Czech_Republic {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Czech_Republic", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -633,7 +773,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Democratic_Republic_of_the_Congo {
+        public static System.Drawing.Bitmap Flag_of_Democratic_Republic_of_the_Congo {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Democratic_Republic_of_the_Congo", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -643,7 +783,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Denmark {
+        public static System.Drawing.Bitmap Flag_of_Denmark {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Denmark", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -653,7 +793,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Djibouti {
+        public static System.Drawing.Bitmap Flag_of_Djibouti {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Djibouti", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -663,7 +803,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Dominica {
+        public static System.Drawing.Bitmap Flag_of_Dominica {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Dominica", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -673,7 +813,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Dominican_Republic {
+        public static System.Drawing.Bitmap Flag_of_Dominican_Republic {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Dominican_Republic", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -683,7 +823,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Ecuador {
+        public static System.Drawing.Bitmap Flag_of_Ecuador {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Ecuador", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -693,7 +833,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Egypt {
+        public static System.Drawing.Bitmap Flag_of_Egypt {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Egypt", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -703,7 +843,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_El_Salvador {
+        public static System.Drawing.Bitmap Flag_of_El_Salvador {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_El_Salvador", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -713,7 +853,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_England {
+        public static System.Drawing.Bitmap Flag_of_England {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_England", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -723,7 +863,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Equatorial_Guinea {
+        public static System.Drawing.Bitmap Flag_of_Equatorial_Guinea {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Equatorial_Guinea", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -733,7 +873,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Eritrea {
+        public static System.Drawing.Bitmap Flag_of_Eritrea {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Eritrea", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -743,7 +883,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Estonia {
+        public static System.Drawing.Bitmap Flag_of_Estonia {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Estonia", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -753,7 +893,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Ethiopia {
+        public static System.Drawing.Bitmap Flag_of_Ethiopia {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Ethiopia", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -763,7 +903,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_European_Union {
+        public static System.Drawing.Bitmap Flag_of_European_Union {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_European_Union", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -773,7 +913,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Falkland_Islands__Islas_Malvinas_ {
+        public static System.Drawing.Bitmap Flag_of_Falkland_Islands__Islas_Malvinas_ {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Falkland_Islands__Islas_Malvinas_", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -783,7 +923,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Faroe_Islands {
+        public static System.Drawing.Bitmap Flag_of_Faroe_Islands {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Faroe_Islands", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -793,7 +933,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Fiji {
+        public static System.Drawing.Bitmap Flag_of_Fiji {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Fiji", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -803,7 +943,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Finland {
+        public static System.Drawing.Bitmap Flag_of_Finland {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Finland", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -813,7 +953,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_France {
+        public static System.Drawing.Bitmap Flag_of_France {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_France", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -823,7 +963,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_French_Poynesia {
+        public static System.Drawing.Bitmap Flag_of_French_Poynesia {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_French_Poynesia", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -833,7 +973,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Gabon {
+        public static System.Drawing.Bitmap Flag_of_Gabon {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Gabon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -843,7 +983,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Georgia {
+        public static System.Drawing.Bitmap Flag_of_Georgia {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Georgia", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -853,7 +993,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Germany {
+        public static System.Drawing.Bitmap Flag_of_Germany {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Germany", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -863,7 +1003,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Ghana {
+        public static System.Drawing.Bitmap Flag_of_Ghana {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Ghana", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -873,7 +1013,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Gibraltar {
+        public static System.Drawing.Bitmap Flag_of_Gibraltar {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Gibraltar", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -883,7 +1023,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Greece {
+        public static System.Drawing.Bitmap Flag_of_Greece {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Greece", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -893,7 +1033,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Greenland {
+        public static System.Drawing.Bitmap Flag_of_Greenland {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Greenland", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -903,7 +1043,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Grenada {
+        public static System.Drawing.Bitmap Flag_of_Grenada {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Grenada", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -913,7 +1053,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Guam {
+        public static System.Drawing.Bitmap Flag_of_Guam {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Guam", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -923,7 +1063,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Guatemala {
+        public static System.Drawing.Bitmap Flag_of_Guatemala {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Guatemala", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -933,7 +1073,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Guernsey {
+        public static System.Drawing.Bitmap Flag_of_Guernsey {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Guernsey", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -943,7 +1083,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Guinea {
+        public static System.Drawing.Bitmap Flag_of_Guinea {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Guinea", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -953,7 +1093,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Guinea_Blissau {
+        public static System.Drawing.Bitmap Flag_of_Guinea_Blissau {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Guinea_Blissau", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -963,7 +1103,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Guyana {
+        public static System.Drawing.Bitmap Flag_of_Guyana {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Guyana", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -973,7 +1113,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Haiti {
+        public static System.Drawing.Bitmap Flag_of_Haiti {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Haiti", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -983,7 +1123,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Holy_See__Vatican_City_ {
+        public static System.Drawing.Bitmap Flag_of_Holy_See__Vatican_City_ {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Holy_See__Vatican_City_", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -993,7 +1133,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Honduras {
+        public static System.Drawing.Bitmap Flag_of_Honduras {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Honduras", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1003,7 +1143,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Hong_Kong {
+        public static System.Drawing.Bitmap Flag_of_Hong_Kong {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Hong_Kong", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1013,7 +1153,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Hungary {
+        public static System.Drawing.Bitmap Flag_of_Hungary {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Hungary", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1023,7 +1163,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Iceland {
+        public static System.Drawing.Bitmap Flag_of_Iceland {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Iceland", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1033,7 +1173,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_India {
+        public static System.Drawing.Bitmap Flag_of_India {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_India", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1043,7 +1183,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Indonesia {
+        public static System.Drawing.Bitmap Flag_of_Indonesia {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Indonesia", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1053,7 +1193,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Iran {
+        public static System.Drawing.Bitmap Flag_of_Iran {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Iran", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1063,7 +1203,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Iraq {
+        public static System.Drawing.Bitmap Flag_of_Iraq {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Iraq", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1073,7 +1213,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Ireland {
+        public static System.Drawing.Bitmap Flag_of_Ireland {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Ireland", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1083,7 +1223,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Isle_of_Man {
+        public static System.Drawing.Bitmap Flag_of_Isle_of_Man {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Isle_of_Man", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1093,7 +1233,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Israel {
+        public static System.Drawing.Bitmap Flag_of_Israel {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Israel", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1103,7 +1243,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Italy {
+        public static System.Drawing.Bitmap Flag_of_Italy {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Italy", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1113,7 +1253,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Jamaica {
+        public static System.Drawing.Bitmap Flag_of_Jamaica {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Jamaica", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1123,7 +1263,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Japan {
+        public static System.Drawing.Bitmap Flag_of_Japan {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Japan", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1133,7 +1273,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Jordan {
+        public static System.Drawing.Bitmap Flag_of_Jordan {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Jordan", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1143,7 +1283,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Kazahstan {
+        public static System.Drawing.Bitmap Flag_of_Kazahstan {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Kazahstan", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1153,7 +1293,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Kenya {
+        public static System.Drawing.Bitmap Flag_of_Kenya {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Kenya", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1163,7 +1303,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Kiribati {
+        public static System.Drawing.Bitmap Flag_of_Kiribati {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Kiribati", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1173,7 +1313,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Kosovo {
+        public static System.Drawing.Bitmap Flag_of_Kosovo {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Kosovo", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1183,7 +1323,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Kurdistan_Nation {
+        public static System.Drawing.Bitmap Flag_of_Kurdistan_Nation {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Kurdistan_Nation", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1193,7 +1333,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Kuwait {
+        public static System.Drawing.Bitmap Flag_of_Kuwait {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Kuwait", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1203,7 +1343,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Kyrgyzstan {
+        public static System.Drawing.Bitmap Flag_of_Kyrgyzstan {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Kyrgyzstan", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1213,7 +1353,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Laos {
+        public static System.Drawing.Bitmap Flag_of_Laos {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Laos", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1223,7 +1363,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Latvia {
+        public static System.Drawing.Bitmap Flag_of_Latvia {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Latvia", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1233,7 +1373,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Lebanon {
+        public static System.Drawing.Bitmap Flag_of_Lebanon {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Lebanon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1243,7 +1383,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Lesotho {
+        public static System.Drawing.Bitmap Flag_of_Lesotho {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Lesotho", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1253,7 +1393,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Liberia {
+        public static System.Drawing.Bitmap Flag_of_Liberia {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Liberia", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1263,7 +1403,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Libya {
+        public static System.Drawing.Bitmap Flag_of_Libya {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Libya", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1273,7 +1413,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Liechtenstein {
+        public static System.Drawing.Bitmap Flag_of_Liechtenstein {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Liechtenstein", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1283,7 +1423,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Lithuania {
+        public static System.Drawing.Bitmap Flag_of_Lithuania {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Lithuania", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1293,7 +1433,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Luxembourg {
+        public static System.Drawing.Bitmap Flag_of_Luxembourg {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Luxembourg", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1303,7 +1443,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Macau {
+        public static System.Drawing.Bitmap Flag_of_Macau {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Macau", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1313,7 +1453,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Macedonia {
+        public static System.Drawing.Bitmap Flag_of_Macedonia {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Macedonia", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1323,7 +1463,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Madagascar {
+        public static System.Drawing.Bitmap Flag_of_Madagascar {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Madagascar", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1333,7 +1473,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Malawi {
+        public static System.Drawing.Bitmap Flag_of_Malawi {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Malawi", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1343,7 +1483,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Malaysia {
+        public static System.Drawing.Bitmap Flag_of_Malaysia {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Malaysia", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1353,7 +1493,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Maldives {
+        public static System.Drawing.Bitmap Flag_of_Maldives {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Maldives", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1363,7 +1503,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Mali {
+        public static System.Drawing.Bitmap Flag_of_Mali {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Mali", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1373,7 +1513,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Malta {
+        public static System.Drawing.Bitmap Flag_of_Malta {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Malta", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1383,7 +1523,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Marschal_Islands {
+        public static System.Drawing.Bitmap Flag_of_Marschal_Islands {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Marschal_Islands", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1393,7 +1533,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Mauritania {
+        public static System.Drawing.Bitmap Flag_of_Mauritania {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Mauritania", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1403,7 +1543,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Mauritius {
+        public static System.Drawing.Bitmap Flag_of_Mauritius {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Mauritius", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1413,7 +1553,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Mayotte {
+        public static System.Drawing.Bitmap Flag_of_Mayotte {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Mayotte", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1423,7 +1563,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Mexico {
+        public static System.Drawing.Bitmap Flag_of_Mexico {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Mexico", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1433,7 +1573,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Micronesia {
+        public static System.Drawing.Bitmap Flag_of_Micronesia {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Micronesia", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1443,7 +1583,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Moldavia {
+        public static System.Drawing.Bitmap Flag_of_Moldavia {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Moldavia", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1453,7 +1593,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Monaco {
+        public static System.Drawing.Bitmap Flag_of_Monaco {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Monaco", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1463,7 +1603,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Mongolia {
+        public static System.Drawing.Bitmap Flag_of_Mongolia {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Mongolia", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1473,7 +1613,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Montenegro {
+        public static System.Drawing.Bitmap Flag_of_Montenegro {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Montenegro", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1483,7 +1623,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Montserrat {
+        public static System.Drawing.Bitmap Flag_of_Montserrat {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Montserrat", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1493,7 +1633,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Morocco {
+        public static System.Drawing.Bitmap Flag_of_Morocco {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Morocco", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1503,7 +1643,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Mozambique {
+        public static System.Drawing.Bitmap Flag_of_Mozambique {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Mozambique", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1513,7 +1653,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Namibia {
+        public static System.Drawing.Bitmap Flag_of_Namibia {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Namibia", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1523,7 +1663,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Nauru {
+        public static System.Drawing.Bitmap Flag_of_Nauru {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Nauru", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1533,7 +1673,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Nepal {
+        public static System.Drawing.Bitmap Flag_of_Nepal {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Nepal", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1543,7 +1683,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Netherlands {
+        public static System.Drawing.Bitmap Flag_of_Netherlands {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Netherlands", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1553,7 +1693,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Netherlands_Anthilles {
+        public static System.Drawing.Bitmap Flag_of_Netherlands_Anthilles {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Netherlands_Anthilles", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1563,7 +1703,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_New_Zealand {
+        public static System.Drawing.Bitmap Flag_of_New_Zealand {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_New_Zealand", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1573,7 +1713,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Nicaragua {
+        public static System.Drawing.Bitmap Flag_of_Nicaragua {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Nicaragua", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1583,7 +1723,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Niger {
+        public static System.Drawing.Bitmap Flag_of_Niger {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Niger", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1593,7 +1733,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Nigeria {
+        public static System.Drawing.Bitmap Flag_of_Nigeria {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Nigeria", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1603,7 +1743,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Niue {
+        public static System.Drawing.Bitmap Flag_of_Niue {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Niue", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1613,7 +1753,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Norfolk_Island {
+        public static System.Drawing.Bitmap Flag_of_Norfolk_Island {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Norfolk_Island", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1623,7 +1763,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_North_Korea {
+        public static System.Drawing.Bitmap Flag_of_North_Korea {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_North_Korea", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1633,7 +1773,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Northern_Mariana_Islands {
+        public static System.Drawing.Bitmap Flag_of_Northern_Mariana_Islands {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Northern_Mariana_Islands", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1643,7 +1783,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Norway {
+        public static System.Drawing.Bitmap Flag_of_Norway {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Norway", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1653,7 +1793,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Oman {
+        public static System.Drawing.Bitmap Flag_of_Oman {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Oman", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1663,7 +1803,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Pakistan {
+        public static System.Drawing.Bitmap Flag_of_Pakistan {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Pakistan", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1673,7 +1813,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Palau {
+        public static System.Drawing.Bitmap Flag_of_Palau {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Palau", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1683,7 +1823,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Palestine {
+        public static System.Drawing.Bitmap Flag_of_Palestine {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Palestine", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1693,7 +1833,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Panama {
+        public static System.Drawing.Bitmap Flag_of_Panama {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Panama", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1703,7 +1843,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Papua_New_Guinea {
+        public static System.Drawing.Bitmap Flag_of_Papua_New_Guinea {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Papua_New_Guinea", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1713,7 +1853,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Paraguay {
+        public static System.Drawing.Bitmap Flag_of_Paraguay {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Paraguay", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1723,7 +1863,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Peru {
+        public static System.Drawing.Bitmap Flag_of_Peru {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Peru", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1733,7 +1873,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Philippines {
+        public static System.Drawing.Bitmap Flag_of_Philippines {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Philippines", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1743,7 +1883,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Pitcairn_Islands {
+        public static System.Drawing.Bitmap Flag_of_Pitcairn_Islands {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Pitcairn_Islands", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1753,7 +1893,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Poland {
+        public static System.Drawing.Bitmap Flag_of_Poland {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Poland", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1763,7 +1903,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Portugal {
+        public static System.Drawing.Bitmap Flag_of_Portugal {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Portugal", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1773,7 +1913,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Puerto_Rico {
+        public static System.Drawing.Bitmap Flag_of_Puerto_Rico {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Puerto_Rico", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1783,7 +1923,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Quatar {
+        public static System.Drawing.Bitmap Flag_of_Quatar {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Quatar", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1793,7 +1933,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Republic_of_the_Congo {
+        public static System.Drawing.Bitmap Flag_of_Republic_of_the_Congo {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Republic_of_the_Congo", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1803,7 +1943,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Romania {
+        public static System.Drawing.Bitmap Flag_of_Romania {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Romania", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1813,7 +1953,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Russia {
+        public static System.Drawing.Bitmap Flag_of_Russia {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Russia", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1823,7 +1963,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Rwanda {
+        public static System.Drawing.Bitmap Flag_of_Rwanda {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Rwanda", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1833,7 +1973,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Saint_Helena {
+        public static System.Drawing.Bitmap Flag_of_Saint_Helena {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Saint_Helena", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1843,7 +1983,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Saint_Kitts_and_Nevis {
+        public static System.Drawing.Bitmap Flag_of_Saint_Kitts_and_Nevis {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Saint_Kitts_and_Nevis", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1853,7 +1993,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Saint_Lucia {
+        public static System.Drawing.Bitmap Flag_of_Saint_Lucia {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Saint_Lucia", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1863,7 +2003,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Saint_Pierre_and_Miquelon {
+        public static System.Drawing.Bitmap Flag_of_Saint_Pierre_and_Miquelon {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Saint_Pierre_and_Miquelon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1873,7 +2013,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Saint_Vincent {
+        public static System.Drawing.Bitmap Flag_of_Saint_Vincent {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Saint_Vincent", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1883,7 +2023,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Samoa {
+        public static System.Drawing.Bitmap Flag_of_Samoa {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Samoa", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1893,7 +2033,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_San_Marino {
+        public static System.Drawing.Bitmap Flag_of_San_Marino {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_San_Marino", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1903,7 +2043,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Sao_Tome_and_Principe {
+        public static System.Drawing.Bitmap Flag_of_Sao_Tome_and_Principe {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Sao_Tome_and_Principe", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1913,7 +2053,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Saudi_Arabia {
+        public static System.Drawing.Bitmap Flag_of_Saudi_Arabia {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Saudi_Arabia", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1923,7 +2063,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Scotland {
+        public static System.Drawing.Bitmap Flag_of_Scotland {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Scotland", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1933,7 +2073,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Senegal {
+        public static System.Drawing.Bitmap Flag_of_Senegal {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Senegal", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1943,7 +2083,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Serbia {
+        public static System.Drawing.Bitmap Flag_of_Serbia {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Serbia", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1953,7 +2093,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Seychelles {
+        public static System.Drawing.Bitmap Flag_of_Seychelles {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Seychelles", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1963,7 +2103,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Sierra_Leone {
+        public static System.Drawing.Bitmap Flag_of_Sierra_Leone {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Sierra_Leone", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1973,7 +2113,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Singapore {
+        public static System.Drawing.Bitmap Flag_of_Singapore {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Singapore", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1983,7 +2123,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Slovakia {
+        public static System.Drawing.Bitmap Flag_of_Slovakia {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Slovakia", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1993,7 +2133,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Slovenia {
+        public static System.Drawing.Bitmap Flag_of_Slovenia {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Slovenia", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -2003,7 +2143,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Solomon_Islands {
+        public static System.Drawing.Bitmap Flag_of_Solomon_Islands {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Solomon_Islands", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -2013,7 +2153,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Somalia {
+        public static System.Drawing.Bitmap Flag_of_Somalia {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Somalia", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -2023,7 +2163,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_South_Africa {
+        public static System.Drawing.Bitmap Flag_of_South_Africa {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_South_Africa", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -2033,7 +2173,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_South_Georgia_and_the_South_Sandwitch_Islands {
+        public static System.Drawing.Bitmap Flag_of_South_Georgia_and_the_South_Sandwitch_Islands {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_South_Georgia_and_the_South_Sandwitch_Islands", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -2043,7 +2183,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_South_Korea {
+        public static System.Drawing.Bitmap Flag_of_South_Korea {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_South_Korea", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -2053,7 +2193,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Spain {
+        public static System.Drawing.Bitmap Flag_of_Spain {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Spain", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -2063,7 +2203,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Sri_Lanka {
+        public static System.Drawing.Bitmap Flag_of_Sri_Lanka {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Sri_Lanka", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -2073,7 +2213,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Sudan {
+        public static System.Drawing.Bitmap Flag_of_Sudan {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Sudan", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -2083,7 +2223,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Suriname {
+        public static System.Drawing.Bitmap Flag_of_Suriname {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Suriname", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -2093,7 +2233,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Swaziland {
+        public static System.Drawing.Bitmap Flag_of_Swaziland {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Swaziland", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -2103,7 +2243,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Sweden {
+        public static System.Drawing.Bitmap Flag_of_Sweden {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Sweden", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -2113,7 +2253,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Switzerland {
+        public static System.Drawing.Bitmap Flag_of_Switzerland {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Switzerland", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -2123,7 +2263,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Syria {
+        public static System.Drawing.Bitmap Flag_of_Syria {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Syria", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -2133,7 +2273,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Taiwan {
+        public static System.Drawing.Bitmap Flag_of_Taiwan {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Taiwan", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -2143,7 +2283,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Tajikistan {
+        public static System.Drawing.Bitmap Flag_of_Tajikistan {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Tajikistan", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -2153,7 +2293,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Tamil_Nation {
+        public static System.Drawing.Bitmap Flag_of_Tamil_Nation {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Tamil_Nation", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -2163,7 +2303,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Tanzania {
+        public static System.Drawing.Bitmap Flag_of_Tanzania {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Tanzania", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -2173,7 +2313,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Thailand {
+        public static System.Drawing.Bitmap Flag_of_Thailand {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Thailand", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -2183,7 +2323,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_the_Bahamas {
+        public static System.Drawing.Bitmap Flag_of_the_Bahamas {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_the_Bahamas", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -2193,7 +2333,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_the_Gambia {
+        public static System.Drawing.Bitmap Flag_of_the_Gambia {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_the_Gambia", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -2203,7 +2343,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Tibet {
+        public static System.Drawing.Bitmap Flag_of_Tibet {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Tibet", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -2213,7 +2353,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Timor_Leste {
+        public static System.Drawing.Bitmap Flag_of_Timor_Leste {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Timor_Leste", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -2223,7 +2363,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Togo {
+        public static System.Drawing.Bitmap Flag_of_Togo {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Togo", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -2233,7 +2373,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Tonga {
+        public static System.Drawing.Bitmap Flag_of_Tonga {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Tonga", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -2243,7 +2383,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Trinidad_and_Tobago {
+        public static System.Drawing.Bitmap Flag_of_Trinidad_and_Tobago {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Trinidad_and_Tobago", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -2253,7 +2393,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Tunisia {
+        public static System.Drawing.Bitmap Flag_of_Tunisia {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Tunisia", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -2263,7 +2403,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Turkey {
+        public static System.Drawing.Bitmap Flag_of_Turkey {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Turkey", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -2273,7 +2413,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Turkmenistan {
+        public static System.Drawing.Bitmap Flag_of_Turkmenistan {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Turkmenistan", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -2283,7 +2423,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Turks_and_Caicos_Islands {
+        public static System.Drawing.Bitmap Flag_of_Turks_and_Caicos_Islands {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Turks_and_Caicos_Islands", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -2293,7 +2433,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Tuvalu {
+        public static System.Drawing.Bitmap Flag_of_Tuvalu {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Tuvalu", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -2303,7 +2443,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Uganda {
+        public static System.Drawing.Bitmap Flag_of_Uganda {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Uganda", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -2313,7 +2453,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Ukraine {
+        public static System.Drawing.Bitmap Flag_of_Ukraine {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Ukraine", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -2323,7 +2463,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_United_Arab_Emirates {
+        public static System.Drawing.Bitmap Flag_of_United_Arab_Emirates {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_United_Arab_Emirates", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -2333,7 +2473,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_United_Kingdom {
+        public static System.Drawing.Bitmap Flag_of_United_Kingdom {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_United_Kingdom", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -2343,7 +2483,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_United_States {
+        public static System.Drawing.Bitmap Flag_of_United_States {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_United_States", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -2353,7 +2493,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Uruguay {
+        public static System.Drawing.Bitmap Flag_of_Uruguay {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Uruguay", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -2363,7 +2503,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Uzbekistan {
+        public static System.Drawing.Bitmap Flag_of_Uzbekistan {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Uzbekistan", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -2373,7 +2513,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Vanuatu {
+        public static System.Drawing.Bitmap Flag_of_Vanuatu {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Vanuatu", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -2383,7 +2523,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Venezuela {
+        public static System.Drawing.Bitmap Flag_of_Venezuela {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Venezuela", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -2393,7 +2533,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Vietnam {
+        public static System.Drawing.Bitmap Flag_of_Vietnam {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Vietnam", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -2403,7 +2543,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Virgin_Islands {
+        public static System.Drawing.Bitmap Flag_of_Virgin_Islands {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Virgin_Islands", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -2413,7 +2553,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Wales {
+        public static System.Drawing.Bitmap Flag_of_Wales {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Wales", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -2423,7 +2563,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Wallis_and_Futuna {
+        public static System.Drawing.Bitmap Flag_of_Wallis_and_Futuna {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Wallis_and_Futuna", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -2433,7 +2573,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Yemen {
+        public static System.Drawing.Bitmap Flag_of_Yemen {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Yemen", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -2443,7 +2583,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Zambia {
+        public static System.Drawing.Bitmap Flag_of_Zambia {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Zambia", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -2453,7 +2593,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Flag_of_Zimbabwe {
+        public static System.Drawing.Bitmap Flag_of_Zimbabwe {
             get {
                 object obj = ResourceManager.GetObject("Flag_of_Zimbabwe", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -2463,7 +2603,7 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap nursery {
+        public static System.Drawing.Bitmap nursery {
             get {
                 object obj = ResourceManager.GetObject("nursery", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -2473,7 +2613,27 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap primary {
+        public static System.Drawing.Bitmap nusery1 {
+            get {
+                object obj = ResourceManager.GetObject("nusery1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap nusery2 {
+            get {
+                object obj = ResourceManager.GetObject("nusery2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap primary {
             get {
                 object obj = ResourceManager.GetObject("primary", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -2483,9 +2643,29 @@ namespace Diction_Master___Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap secondary {
+        public static System.Drawing.Bitmap quiz {
+            get {
+                object obj = ResourceManager.GetObject("quiz", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap secondary {
             get {
                 object obj = ResourceManager.GetObject("secondary", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap video {
+            get {
+                object obj = ResourceManager.GetObject("video", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

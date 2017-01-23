@@ -54,13 +54,15 @@ namespace Diction_Master___Library
         Video,
         Document,
         Quiz,
-        Question
+        Question,
+        Uknown
     }
 
     public enum QuestionType
     {
         Text,
-        Puzzle
+        Puzzle,
+        Choice
     }
 
     public struct ContentVersionInfo
