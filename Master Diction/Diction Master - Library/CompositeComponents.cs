@@ -12,6 +12,8 @@ namespace Diction_Master___Library
     [XmlInclude(typeof(Grade))]
     [XmlInclude(typeof(Week))]
     [XmlInclude(typeof(Lesson))]
+    [XmlInclude(typeof(Topic))]
+    [XmlInclude(typeof(Quiz))]
     public abstract class CompositeComponent : Component
     {
         public List<Component> Components { get; set; }
@@ -25,32 +27,7 @@ namespace Diction_Master___Library
         {
             Components.Add(component);
         }
-
-        public void Delete(Component component)
-        {
-            if (Components.Exists(x => x.ID == component.ID))
-            {
-                Components.Remove(component);
-            }
-            else
-            {
-                throw new Exception("Component does not exist!");
-            }
-        }
-
-        public void Update(Component oldComponent, Component newComponent)
-        {
-            if (Components.Exists(x => x.ID == oldComponent.ID))
-            {
-                //check if it needs to be deleted first
-                Components.Insert(Components.IndexOf(oldComponent), newComponent);
-            }
-            else
-            {
-                throw new Exception("Component does not exist!");
-            }
-        }
-        }
+    }
 
     public class Course : CompositeComponent
     {
@@ -91,6 +68,17 @@ namespace Diction_Master___Library
         {
             Week week = Components.Find(x => (x as Week).Title == title && ((x as Week).Num == num && (x as Week).Term == term)) as Week;
             return week;
+        }
+    }
+    public class Topic : CompositeComponent
+    {
+        public string Title { get; set; }
+        public int Num { get; set; }
+
+        public Lesson FindLesson(string title, int num)
+        {
+            return Components.Find(x => (x as Lesson).Title == title
+            || (x as Lesson).Num == num) as Lesson;
         }
     }
 

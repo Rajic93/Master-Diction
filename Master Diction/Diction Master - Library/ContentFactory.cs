@@ -150,6 +150,23 @@ namespace Diction_Master___Library
             };
         }
         /// <summary>
+        /// Creates new Topic object and sets all properties.
+        /// </summary>
+        /// <param name="id">ID of component.</param>
+        /// <param name="name">Course name.</param>
+        /// <param name="icon">Course icon.</param>
+        /// <returns>New Topic object.</returns>
+        public static Topic CreateCompositeComponent(int id, int parent, string title, int num, bool topic = true)
+        {
+            return new Topic()
+            {
+                ID = id,
+                ParentID = parent,
+                Title = title,
+                Num = num
+            };
+        }
+        /// <summary>
         /// Creates new EducationalLevel object and sets all properties.
         /// </summary>
         /// <param name="id">ID of component.</param>

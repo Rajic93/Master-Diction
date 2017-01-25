@@ -61,14 +61,15 @@ namespace Diction_Master___Server
         /// </summary>
         private Image _selectedGrade;
 
-        public Content()
+        public Content(Diction_Master___Library.ContentManager manager)
         {
-            _contentManager = Diction_Master___Library.ContentManager.CreateInstance();
+            _contentManager = manager;
             _languages = new LanguagesHashTable();
             _courseImagesCache = new Dictionary<string, int>();
             _educationalLevelDictionary = new Dictionary<string, int>();
             _gradesDictionary = new Dictionary<string, int>();
             InitializeComponent();
+            LoadCourses();
         }
 
         private void TMP()
@@ -107,6 +108,37 @@ namespace Diction_Master___Server
         
 
         #region Course
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void LoadCourses()
+        {
+            foreach (Course course in _contentManager.GetAllCourses())
+            {
+                Image image = new Image()
+                {
+                    Source = new BitmapImage(new Uri(course.Icon)),
+                    RenderSize = new Size(100, 100),
+                    MaxHeight = 100,
+                    MaxWidth = 100,
+                    Margin = new Thickness(10),
+                    Opacity = 0.5,
+                    Name = "Image_" + course.ID
+                };
+                image.MouseUp += delegate (object senderImage, MouseButtonEventArgs eventArgs)
+                {
+                    ImageCourse_Click(senderImage as Image);
+                };
+                if (!_courseImagesCache.ContainsKey(image.Name))
+                {
+                    _courseImagesCache[image.Name] = course.ID;
+                    Courses.Children.Add(image);
+                    
+                    
+                }
+            }
+        }
         /// <summary>
         /// Add new Course
         /// </summary>
@@ -323,7 +355,8 @@ namespace Diction_Master___Server
                         MaxWidth = 100,
                         Margin = new Thickness(15),
                         Opacity = 0.5,
-                        Visibility = Visibility.Visible
+                        Visibility = Visibility.Visible,
+                        Name = "Icon_" + level.ID
                     };
                     image.MouseUp += delegate(object sender, MouseButtonEventArgs args)
                     {
@@ -351,7 +384,7 @@ namespace Diction_Master___Server
             }
             sender.Opacity = 1;
             _selectedEducationalLevel = sender;
-            if (_educationalLevelDictionary.ContainsKey(sender.Source.ToString()))
+            if (_educationalLevelDictionary.ContainsKey(sender.Name))
             {
                 int id = _educationalLevelDictionary[sender.Name];
                 EditEducationalLevel.IsEnabled = true;
@@ -781,6 +814,7 @@ namespace Diction_Master___Server
         }
 
         #endregion
+
         /// <summary>
         /// 
         /// </summary>
@@ -852,7 +886,7 @@ namespace Diction_Master___Server
             {
                 if (_selectedEducationalLevel != null)
                 {
-                    LessonsCreation lessonsCreation = new LessonsCreation(_gradesDictionary[_selectedGrade.Name], _contentManager)
+                    LessonsCreation lessonsCreation = new LessonsCreation(_gradesDictionary[_selectedGrade.Name], _contentManager, false)
                     {
                         VerticalAlignment = VerticalAlignment.Stretch,
                         HorizontalAlignment = HorizontalAlignment.Stretch,
@@ -906,7 +940,7 @@ namespace Diction_Master___Server
             {
                 if (_selectedEducationalLevel != null)
                 {
-                    ContentUpload contentUpload= new ContentUpload(_gradesDictionary[_selectedGrade.Name], _contentManager)
+                    ContentUpload contentUpload= new ContentUpload(_gradesDictionary[_selectedGrade.Name], _contentManager, false)
                     {
                         VerticalAlignment = VerticalAlignment.Stretch,
                         HorizontalAlignment = HorizontalAlignment.Stretch,

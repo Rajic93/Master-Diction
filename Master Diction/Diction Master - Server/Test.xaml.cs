@@ -55,7 +55,7 @@ namespace Diction_Master___Server
             manager.EditLesson(5, "Lesson 1", 1);
             //manager.DeleteLesson(5, 4);
 
-            ContentUpload upload = new ContentUpload(3, manager);
+            TopicsCreation upload = new TopicsCreation(manager);
             Content = upload;
             Width = upload.Width + 50;
             Height = upload.Height + 50;

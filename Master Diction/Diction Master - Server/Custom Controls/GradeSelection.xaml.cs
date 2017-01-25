@@ -138,7 +138,7 @@ namespace Diction_Master___Server.Custom_Controls
                     SelectedGrade = GradeType.PrimaryIV;
                     break;
                 case "PrimaryV":
-                    Icon = "pack://application:,,,/Resources/1st Grade.png5th";
+                    Icon = "pack://application:,,,/Resources/5th Grade.png";
                     SelectedGrade = GradeType.PrimaryV;
                     break;
                 case "PrimaryVI":

@@ -1,9 +1,12 @@
 ﻿
 
 using System.Collections.ObjectModel;
+using System.Xml.Serialization;
 
 namespace Diction_Master___Library
 {
+    [XmlInclude(typeof(Question))]
+    [XmlInclude(typeof(ContentFile))]
     public class LeafComponent : Component
     {
         public string Title { get; set; }

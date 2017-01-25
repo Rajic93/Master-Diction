@@ -12,7 +12,7 @@
         <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="431,10,0,0" TextWrapping="Wrap" Text="Lessons" VerticalAlignment="Top"/>
         <ListBox x:Name="listBox1" HorizontalAlignment="Left" Height="303" Margin="431,31,0,0" VerticalAlignment="Top" Width="350" SelectionChanged="listBox1_SelectionChanged"/>
         <Button x:Name="Load" Content="Load" HorizontalAlignment="Center" Margin="365,276,364.4,289.4" VerticalAlignment="Center" Width="61" Height="25" BorderThickness="1" Click="Button_OnClick" IsEnabled="False"/>
-        <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="431,364,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="294"/>
+        <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="431,364,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="294"/>
         <Button x:Name="Add" Content="Add" HorizontalAlignment="Left" Margin="470,416,0,0" VerticalAlignment="Top" Width="100" Height="25" Click="Add_OnClick" IsEnabled="False"/>
         <Button x:Name="Edit" Content="Edit" HorizontalAlignment="Left" Margin="575,416,0,0" VerticalAlignment="Top" Width="100" Height="25" Click="Edit_Click" IsEnabled="False"/>
         <Button x:Name="Delete" Content="Delete" HorizontalAlignment="Left" Margin="680,416,0,0" VerticalAlignment="Top" Width="100" Height="25" Click="Delete_Click" IsEnabled="False"/>

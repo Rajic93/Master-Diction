@@ -21,15 +21,17 @@ namespace Diction_Master___Library
             return clientManager ?? new ClientManager();
         }
 
-        public void Start()
+        public Thread Start()
         {
-            new Thread(() =>
+            Thread thread = new Thread(() =>
             {
                 while (true)
                 {
 
                 }
-            }).Start();
+            });
+            thread.Start();
+            return thread;
         }
     }
 }

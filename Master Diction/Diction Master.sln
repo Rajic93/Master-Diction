@@ -7,13 +7,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Master Diction", "Master Di
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Server", "Server\Server.csproj", "{D1AEFA8C-8191-4D31-A536-D7C1DBDC11F9}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup", "Setup\Setup.vdproj", "{FA206FCF-8D95-4122-B4A4-9931312D4CAA}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Diction Master - Client", "Diction Master\Diction Master - Client.csproj", "{1940D0EF-3F3E-4F3C-9D92-265F5DB3523A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Diction Master - Server", "Diction Master - Server\Diction Master - Server.csproj", "{181CE5AC-2DD2-4018-93BC-17EA02703968}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Diction Master - Library", "Diction Master - Library\Diction Master - Library.csproj", "{DFFC9696-8DF3-4362-8DED-48500E0C3366}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "ServerInstaller", "ServerInstaller\ServerInstaller.vdproj", "{F368A94F-361E-4FD9-9EE3-9173AB4379F1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,8 +29,6 @@ Global
 		{D1AEFA8C-8191-4D31-A536-D7C1DBDC11F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D1AEFA8C-8191-4D31-A536-D7C1DBDC11F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D1AEFA8C-8191-4D31-A536-D7C1DBDC11F9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FA206FCF-8D95-4122-B4A4-9931312D4CAA}.Debug|Any CPU.ActiveCfg = Debug
-		{FA206FCF-8D95-4122-B4A4-9931312D4CAA}.Release|Any CPU.ActiveCfg = Release
 		{1940D0EF-3F3E-4F3C-9D92-265F5DB3523A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1940D0EF-3F3E-4F3C-9D92-265F5DB3523A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1940D0EF-3F3E-4F3C-9D92-265F5DB3523A}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -43,6 +41,8 @@ Global
 		{DFFC9696-8DF3-4362-8DED-48500E0C3366}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DFFC9696-8DF3-4362-8DED-48500E0C3366}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DFFC9696-8DF3-4362-8DED-48500E0C3366}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F368A94F-361E-4FD9-9EE3-9173AB4379F1}.Debug|Any CPU.ActiveCfg = Debug
+		{F368A94F-361E-4FD9-9EE3-9173AB4379F1}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

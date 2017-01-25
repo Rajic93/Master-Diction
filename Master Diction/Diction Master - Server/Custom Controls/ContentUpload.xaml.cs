@@ -39,12 +39,14 @@ namespace Diction_Master___Server.Custom_Controls
 
         private int _selectedGrade;
         private Image _selectedFile;
-        private bool _saved;
+        private bool _saved = true;
+        private bool _topics;
 
-        public ContentUpload(int parent, Diction_Master___Library.ContentManager manager)
+        public ContentUpload(int parent, Diction_Master___Library.ContentManager manager, bool topics)
         {
             _contentManager = manager;
             _selectedGrade = parent;
+            _topics = topics;
             lessonContent = new ObservableCollection<Component>();
             _imagesCache = new Dictionary<string, int>();
             //---------------------
@@ -57,7 +59,10 @@ namespace Diction_Master___Server.Custom_Controls
 
         private void LoadLessons()
         {
-            lessons = _contentManager.GetAllLessons(_contentManager.GetComponent(_selectedGrade));
+            if (_topics)
+                lessons = _contentManager.GetAllTopicsLessons();
+            else
+                lessons = _contentManager.GetAllLessons(_contentManager.GetComponent(_selectedGrade));
             comboBox.ItemsSource = lessons;
             comboBox.DisplayMemberPath = "Title";
         }
