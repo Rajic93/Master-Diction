@@ -49,16 +49,26 @@ namespace Diction_Master___Library
         /// <summary>
         /// 
         /// </summary>
-        private Dictionary<int, Component> ComponentsCache;
+        private Dictionary<long, Component> ComponentsCache;
 
         /// <summary>
         /// 
         /// </summary>
-        private int _globalIdCounter;
+        private long _globalIdCounter;
         /// <summary>
         /// 
         /// </summary>
         private readonly string _encryptionKey = "pfKLNfYgJG6CWi46fyFzXpyr";
+        /// <summary>
+        /// 
+        /// </summary>
+        private List<ContentVersionInfo> ChangesDiction { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        private List<ContentVersionInfo> ChangesTeachers { get; set; }
+
+        private ApplicationType _type;
 
         /// <summary>
         /// 
@@ -67,8 +77,10 @@ namespace Diction_Master___Library
         {
             Courses = new List<Component>();
             Topics = new List<Component>();
-            ComponentsCache = new Dictionary<int, Component>();
+            ComponentsCache = new Dictionary<long, Component>();
             clientManager = ClientManager.CreateInstance();
+            ChangesDiction = new List<ContentVersionInfo>();
+            ChangesTeachers = new List<ContentVersionInfo>();
             _globalIdCounter = 1;
             LoadManifest();
             SetUpCache(Courses);
@@ -153,23 +165,38 @@ namespace Diction_Master___Library
             return thread;
         }
 
+        public void SetAppType(ApplicationType type)
+        {
+            _type = type;
+        }
+
         #region ISubject
 
         public void Attach(IObserver observer)
         {
-            throw new NotImplementedException();
+            clientManager = observer as ClientManager;
         }
 
         public void Detach(IObserver observer)
         {
-            throw new NotImplementedException();
+            
         }
 
-        public void Notify()
+        public void Notify(ApplicationType type)
         {
-            throw new NotImplementedException();
+            switch (type)
+            {
+                    case ApplicationType.Audio:
+                    break;
+                    case ApplicationType.Diction:
+                    clientManager.Update(ChangesDiction);
+                    break;
+                    case ApplicationType.Teachers:
+                    clientManager.Update(ChangesTeachers);
+                    break;
+            }
         }
-
+        
         #endregion
 
         #region IMigration
@@ -188,7 +215,7 @@ namespace Diction_Master___Library
 
         #region Get functions
 
-        private int GetID()
+        private long GetID()
         {
             return _globalIdCounter++;
         }
@@ -221,7 +248,7 @@ namespace Diction_Master___Library
             return weeks;
         }
 
-        public int GetNoOfWeeks(int id)
+        public int GetNoOfWeeks(long id)
         {
             Grade grade = GetComponent(id) as Grade;
             return grade.Components.Count;
@@ -269,12 +296,12 @@ namespace Diction_Master___Library
             return lessons;
         }
 
-        public int GetNoOfLessons(int id)
+        public int GetNoOfLessons(long id)
         {
             return GetAllLessons(GetComponent(id)).Count;
         }
 
-        public int GetNoOfFiles(int id)
+        public int GetNoOfFiles(long id)
         {
             int counter = 0;
             foreach (Lesson lesson in GetAllLessons(GetComponent(id)))
@@ -290,7 +317,7 @@ namespace Diction_Master___Library
             return counter;
         }
 
-        public ObservableCollection<Question> GetAllQuestions(int parent)
+        public ObservableCollection<Question> GetAllQuestions(long parent)
         {
             ObservableCollection<Question> questions = new ObservableCollection<Question>();
             Quiz quiz = GetComponent(parent) as Quiz;
@@ -304,7 +331,7 @@ namespace Diction_Master___Library
             return questions;
         }
 
-        public Component GetComponent(int id)
+        public Component GetComponent(long id)
         {
             if (ComponentsCache.ContainsKey(id))
             {
@@ -313,11 +340,11 @@ namespace Diction_Master___Library
             return null;
         }
 
-        public List<int> GetChildrenIDs(int id)
+        public List<long> GetChildrenIDs(long id)
         {
             if (ComponentsCache.ContainsKey(id))
             {
-                List<int> children = new List<int>();
+                List<long> children = new List<long>();
                 CompositeComponent component = ComponentsCache[id] as CompositeComponent;
                 foreach (Component childComponent in component.Components)
                 {
@@ -334,13 +361,13 @@ namespace Diction_Master___Library
 
         #region Course
 
-        public int AddCourse(string name, string iconURI)
+        public long AddCourse(string name, string iconURI)
         {
             if (Courses != null)
             {
                 if (!Courses.Exists(x => ((Course) x).Name == name || ((Course) x).Icon == iconURI))
                 {
-                    int id = GetID();
+                    long id = GetID();
                     Course course = ContentFactory.CreateCompositeComponent(id, 0, name, iconURI) as Course;
                     ComponentsCache[id] = course;
                     Courses.Add(course);
@@ -353,7 +380,7 @@ namespace Diction_Master___Library
             //log message if courses is null
         }
 
-        public void EditCourse(int id, string name, string iconURI)
+        public void EditCourse(long id, string name, string iconURI)
         {
             if (Courses != null)
             {
@@ -368,7 +395,7 @@ namespace Diction_Master___Library
             //courses list is null
         }
 
-        public void DeleteCourse(int id)
+        public void DeleteCourse(long id)
         {
             if (Courses != null)
             {
@@ -388,13 +415,13 @@ namespace Diction_Master___Library
 
         #region Topic
 
-        public int AddTopic(string title, int num)
+        public long AddTopic(string title, int num)
         {
             if (Topics != null)
             {
                 if (!Topics.Exists(x => ((Topic)x).Title == title || ((Topic)x).Num == num))
                 {
-                    int id = GetID();
+                    long id = GetID();
                     Topic topic = ContentFactory.CreateCompositeComponent(id, 0, title, num, true);
                     ComponentsCache[id] = topic;
                     Topics.Add(topic);
@@ -407,7 +434,7 @@ namespace Diction_Master___Library
             //log message if courses is null
         }
 
-        public void EditTopic(int id, string title, int num)
+        public void EditTopic(long id, string title, int num)
         {
             if (Topics != null)
             {
@@ -422,7 +449,7 @@ namespace Diction_Master___Library
             //courses list is null
         }
 
-        public void DeleteTopic(int id)
+        public void DeleteTopic(long id)
         {
             if (Topics != null)
             {
@@ -442,14 +469,14 @@ namespace Diction_Master___Library
 
         #region EducationalLevel
 
-        public int AddEducationalLevel(int parentID, string iconURI, EducationalLevelType type)
+        public long AddEducationalLevel(long parentID, string iconURI, EducationalLevelType type)
         {
             if (ComponentsCache.ContainsKey(parentID)) //check for course
             {
                 EducationalLevel level = (ComponentsCache[parentID] as Course).FindEducationLevel(type);
                 if (level == null) //there is no existing edu level
                 {
-                    int ID = GetID();
+                    long ID = GetID();
                     level = ContentFactory.CreateCompositeComponent(ID, parentID, type, iconURI) as EducationalLevel;
                     (ComponentsCache[parentID] as Course).Add(level);
                     ComponentsCache[ID] = level;
@@ -460,7 +487,7 @@ namespace Diction_Master___Library
             return -1;
         }
 
-        public void EditEducationalLevel(int id, string iconURI, EducationalLevelType levelType)
+        public void EditEducationalLevel(long id, string iconURI, EducationalLevelType levelType)
         {
             if (ComponentsCache != null && ComponentsCache.ContainsKey(id))
             {
@@ -473,7 +500,7 @@ namespace Diction_Master___Library
             }
         }
 
-        public void DeleteEducationalLevel(int id, int parentID)
+        public void DeleteEducationalLevel(long id, long parentID)
         {
             if (ComponentsCache.ContainsKey(parentID) && ComponentsCache.ContainsKey(id))
             {
@@ -487,7 +514,7 @@ namespace Diction_Master___Library
 
         #region Grade
 
-        public int AddGrade(int parentID, string icon, GradeType type)
+        public long AddGrade(long parentID, string icon, GradeType type)
         {
             if (ComponentsCache.ContainsKey(parentID)) //check for course
             {
@@ -496,7 +523,7 @@ namespace Diction_Master___Library
                     Grade grade = (ComponentsCache[parentID] as EducationalLevel).FindGrade(type);
                     if (grade == null) //there is no existing grade
                     {
-                        int ID = GetID();
+                        long ID = GetID();
                         grade = ContentFactory.CreateCompositeComponent(ID, parentID, icon, type) as Grade;
                         (ComponentsCache[parentID] as EducationalLevel).Add(grade);
                         ComponentsCache[ID] = grade;
@@ -510,7 +537,7 @@ namespace Diction_Master___Library
             //there is no such edu level
         }
 
-        public void EditGrade(int id, string icon, GradeType type)
+        public void EditGrade(long id, string icon, GradeType type)
         {
             if (ComponentsCache.ContainsKey(id))
             {
@@ -520,7 +547,7 @@ namespace Diction_Master___Library
             }
         }
 
-        public void DeleteGrade(int id, int parentID)
+        public void DeleteGrade(long id, long parentID)
         {
             if (ComponentsCache.ContainsKey(id) && ComponentsCache.ContainsKey(parentID))
             {
@@ -534,14 +561,14 @@ namespace Diction_Master___Library
 
         #region Week
 
-        public int AddWeek(int parentID, string title, int num, int term)
+        public long AddWeek(long parentID, string title, int num, int term)
         {
             if (ComponentsCache.ContainsKey(parentID))
             {
                 Week week = (ComponentsCache[parentID] as Grade).FindWeek(title, num, term);
                 if (week == null)
                 {
-                    int ID = GetID();
+                    long ID = GetID();
                     week = ContentFactory.CreateCompositeComponent(ID, parentID, title, num, term) as Week;
                     ComponentsCache[ID] = week;
                     (ComponentsCache[parentID] as Grade).Components.Add(week);
@@ -554,7 +581,7 @@ namespace Diction_Master___Library
             //there is no such parent grade
         }
 
-        public void EditWeek(int id, string title, int num, int term)
+        public void EditWeek(long id, string title, int num, int term)
         {
             if (ComponentsCache.ContainsKey(id))
             {
@@ -566,7 +593,7 @@ namespace Diction_Master___Library
             //there is such week
         }
 
-        public void DeleteWeek(int id, int parentID)
+        public void DeleteWeek(long id, long parentID)
         {
             if (ComponentsCache.ContainsKey(id) && ComponentsCache.ContainsKey(parentID))
             {
@@ -581,7 +608,7 @@ namespace Diction_Master___Library
 
         #region Lesson
 
-        public int AddLesson(int parentID, string title, int num)
+        public long AddLesson(long parentID, string title, int num)
         {
             if (ComponentsCache.ContainsKey(parentID))
             {
@@ -592,7 +619,7 @@ namespace Diction_Master___Library
                     lesson = (ComponentsCache[parentID] as Topic).FindLesson(title, num);
                 if (lesson == null)
                 {
-                    int ID = GetID();
+                    long ID = GetID();
                     lesson = ContentFactory.CreateCompositeComponent(ID, parentID, title, num) as Lesson;
                     ComponentsCache[ID] = lesson;
                     (ComponentsCache[parentID] as CompositeComponent).Components.Add(lesson);
@@ -603,7 +630,7 @@ namespace Diction_Master___Library
             return -1;
         }
 
-        public void EditLesson(int id, string title, int num)
+        public void EditLesson(long id, string title, int num)
         {
             if (ComponentsCache.ContainsKey(id))
             {
@@ -613,7 +640,7 @@ namespace Diction_Master___Library
             }
         }
 
-        public void DeleteLesson(int id, int parentID)
+        public void DeleteLesson(long id, long parentID)
         {
             if (ComponentsCache.ContainsKey(id) && ComponentsCache.ContainsKey(parentID))
             {
@@ -627,14 +654,14 @@ namespace Diction_Master___Library
 
         #region Quiz
 
-        public int AddQuiz(int parentID, string title)
+        public long AddQuiz(long parentID, string title)
         {
             if (ComponentsCache.ContainsKey(parentID))
             {
                 Quiz quiz = (ComponentsCache[parentID] as Lesson).FindQuiz(title);
                 if (quiz == null)
                 {
-                    int id = GetID();
+                    long id = GetID();
                     quiz = ContentFactory.CreateCompositeComponent(id, parentID, title) as Quiz;
                     (ComponentsCache[parentID] as Lesson).Components.Add(quiz);
                     ComponentsCache[id] = quiz;
@@ -645,7 +672,7 @@ namespace Diction_Master___Library
             return -1;
         }
 
-        public void EditQuiz(int id, string title)
+        public void EditQuiz(long id, string title)
         {
             if (ComponentsCache.ContainsKey(id))
             {
@@ -654,7 +681,7 @@ namespace Diction_Master___Library
             }
         }
 
-        public void DeleteQuiz(int id, int parentID)
+        public void DeleteQuiz(long id, long parentID)
         {
             if (ComponentsCache.ContainsKey(id) && ComponentsCache.ContainsKey(parentID))
             {
@@ -672,7 +699,7 @@ namespace Diction_Master___Library
 
         #region ContentFile
 
-        public int AddContentFile(int parentID, ComponentType type, string icon,
+        public long AddContentFile(long parentID, ComponentType type, string icon,
             string title, string uri, long size, string description)
         {
             if (ComponentsCache.ContainsKey(parentID))
@@ -682,7 +709,7 @@ namespace Diction_Master___Library
                 {
                     if (!SaveFile(uri))
                         return -2;
-                    int id = GetID();
+                    long id = GetID();
                     string path = "cont\\" + uri.Split('\\').Last();
                     file =
                         ContentFactory.CreateLeafComponent(id, parentID, type, title, path, size, description, icon) as
@@ -696,7 +723,7 @@ namespace Diction_Master___Library
             return -1;
         }
 
-        public void EditContentFile(int id, ComponentType type, string icon,
+        public void EditContentFile(long id, ComponentType type, string icon,
             string title, string uri, long size, string description)
         {
             if (ComponentsCache.ContainsKey(id))
@@ -711,7 +738,7 @@ namespace Diction_Master___Library
             }
         }
 
-        public void DeleteContentFile(int id, int parentID)
+        public void DeleteContentFile(long id, long parentID)
         {
             if (ComponentsCache.ContainsKey(id) && ComponentsCache.ContainsKey(parentID))
             {
@@ -727,7 +754,7 @@ namespace Diction_Master___Library
 
         #region Question
 
-        public int AddQuestion(int parentID, string text, string answer, QuestionType type,
+        public long AddQuestion(long parentID, string text, string answer, QuestionType type,
             ObservableCollection<string> wrongAnswers)
         {
             if (ComponentsCache.ContainsKey(parentID))
@@ -735,7 +762,7 @@ namespace Diction_Master___Library
                 Question file = (ComponentsCache[parentID] as Quiz).FindQuestion(text, answer);
                 if (file == null)
                 {
-                    int id = GetID();
+                    long id = GetID();
                     if (type != QuestionType.Choice)
                         file = ContentFactory.CreateLeafComponent(id, parentID, text, answer, type) as Question;
                     else
@@ -752,7 +779,7 @@ namespace Diction_Master___Library
             return -1;
         }
 
-        public void EditQuestion(int id, string text, string answer, QuestionType type,
+        public void EditQuestion(long id, string text, string answer, QuestionType type,
             ObservableCollection<string> wrongAnswers)
         {
             if (ComponentsCache.ContainsKey(id))
@@ -765,7 +792,7 @@ namespace Diction_Master___Library
             }
         }
 
-        public void DeleteQuestion(int id, int parentID)
+        public void DeleteQuestion(long id, long parentID)
         {
             if (ComponentsCache.ContainsKey(id) && ComponentsCache.ContainsKey(parentID))
             {

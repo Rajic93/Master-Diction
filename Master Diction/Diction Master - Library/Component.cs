@@ -11,7 +11,7 @@ namespace Diction_Master___Library
     [XmlInclude(typeof(CompositeComponent))]
     public abstract class Component
     {
-        public int ID { get; set; }
-        public int ParentID { get; set; }
+        public long ID { get; set; }
+        public long ParentID { get; set; }
     }
 }

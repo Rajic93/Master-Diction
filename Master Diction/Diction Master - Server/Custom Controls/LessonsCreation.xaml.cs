@@ -32,9 +32,9 @@ namespace Diction_Master___Server.Custom_Controls
         private ObservableCollection<Component> lessons;
         private int numOfLessons = 0;
 
-        private int _selectedGrade;
+        private long _selectedGrade;
 
-        public LessonsCreation(int parentID, Diction_Master___Library.ContentManager manager, bool topics)
+        public LessonsCreation(long parentID, Diction_Master___Library.ContentManager manager, bool topics)
         {
             _contentManager = manager;
             _selectedGrade = parentID;
@@ -142,7 +142,7 @@ namespace Diction_Master___Server.Custom_Controls
 
         private void Add_OnClick(object sender, RoutedEventArgs e)
         {
-            int id = _contentManager.AddLesson(loadedComponent.ID, textBox.Text, Convert.ToInt16(comboBox.Text));
+            long id = _contentManager.AddLesson(loadedComponent.ID, textBox.Text, Convert.ToInt16(comboBox.Text));
             if (id > 0)
             {
                 lessons.Add(_contentManager.GetComponent(id));
@@ -169,7 +169,7 @@ namespace Diction_Master___Server.Custom_Controls
         {
             if (listBox1.SelectedItem != null)
             {
-                int id = (listBox1.SelectedItem as Lesson).ID;
+                long id = (listBox1.SelectedItem as Lesson).ID;
                 lessons.Remove((Lesson) listBox1.SelectedItem);
                 _contentManager.DeleteLesson(id, loadedComponent.ID);
                 listBox1.Items.Refresh();

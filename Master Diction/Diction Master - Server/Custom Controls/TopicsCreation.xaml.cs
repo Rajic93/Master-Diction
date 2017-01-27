@@ -59,7 +59,7 @@ namespace Diction_Master___Server.Custom_Controls
         {
             if (textBox.Text != "")
             {
-                int id = _contentManager.AddTopic(textBox.Text, Convert.ToInt16(comboBox.SelectedValue));
+                long id = _contentManager.AddTopic(textBox.Text, Convert.ToInt16(comboBox.SelectedValue));
                 if (id > 0)
                 {
                     _topics.Add(_contentManager.GetComponent(id) as Topic);

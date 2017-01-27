@@ -34,9 +34,9 @@ namespace Diction_Master___Server.Custom_Controls
         private bool emptyII = true;
         private bool emptyIII = true;
 
-        private int _selecetedGrade;
+        private long _selecetedGrade;
 
-        public WeeksCreation(int parentID, Diction_Master___Library.ContentManager manager)
+        public WeeksCreation(long parentID, Diction_Master___Library.ContentManager manager)
         {
             _contentManager = manager;
             TermI = new ObservableCollection<Component>();
@@ -123,7 +123,7 @@ namespace Diction_Master___Server.Custom_Controls
         {
             if (textBoxI.Text != "")
             {
-                int id = _contentManager.AddWeek(_selecetedGrade, textBoxI.Text, Convert.ToInt16(comboBox.SelectedValue), 1);
+                long id = _contentManager.AddWeek(_selecetedGrade, textBoxI.Text, Convert.ToInt16(comboBox.SelectedValue), 1);
                 if (id > 0)
                 {
                     TermI.Add(_contentManager.GetComponent(id) as Week);
@@ -139,7 +139,7 @@ namespace Diction_Master___Server.Custom_Controls
         {
             if (textBoxII.Text != "")
             {
-                int id = _contentManager.AddWeek(_selecetedGrade, textBoxII.Text, Convert.ToInt16(comboBox1.SelectedValue), 2);
+                long id = _contentManager.AddWeek(_selecetedGrade, textBoxII.Text, Convert.ToInt16(comboBox1.SelectedValue), 2);
                 if (id > 0)
                 {
                     TermII.Add(_contentManager.GetComponent(id) as Week);
@@ -155,7 +155,7 @@ namespace Diction_Master___Server.Custom_Controls
         {
             if (textBoxIII.Text != "")
             {
-                int id = _contentManager.AddWeek(_selecetedGrade, textBoxIII.Text, Convert.ToInt16(comboBox2.SelectedValue), 3);
+                long id = _contentManager.AddWeek(_selecetedGrade, textBoxIII.Text, Convert.ToInt16(comboBox2.SelectedValue), 3);
                 if (id > 0)
                 {
                     TermIII.Add(_contentManager.GetComponent(id) as Week);

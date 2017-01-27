@@ -1,6 +1,7 @@
 ﻿
 
 
+using System;
 using System.Collections.Generic;
 
 namespace Diction_Master___Library
@@ -33,8 +34,9 @@ namespace Diction_Master___Library
 
     public enum ContentStatus
     {
-        OutDated,
-        UpToDate
+        Add,
+        Edit,
+        Delete
     }
 
     public enum NetworkAvailability
@@ -65,10 +67,45 @@ namespace Diction_Master___Library
         Choice
     }
 
+    public enum ApplicationType
+    {
+        Diction,
+        Teachers,
+        Audio
+    }
+
+    public enum SubscriptionType
+    {
+        Term,
+        Year
+    }
+
+    public enum Action
+    {
+        Login,
+        Register
+    }
+
+    public enum KeyValidation
+    {
+        ValidOneTerm,
+        ValidFullYear,
+        Invalid
+    }
+
     public struct ContentVersionInfo
     {
         public int ComponentID;
         public ContentStatus Status;
+    }
+
+    public struct Subscription
+    {
+        public long ID { get; set; }
+        public long ClientID { get; set; }
+        public SubscriptionType SubscriptionType { get; set; }
+        public TimeSpan Period { get; set; }
+
     }
 
     public static class Icons

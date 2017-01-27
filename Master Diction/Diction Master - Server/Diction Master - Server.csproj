@@ -65,6 +65,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ClientsManagement.xaml.cs">
+      <DependentUpon>ClientsManagement.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ContentManager.xaml.cs">
       <DependentUpon>ContentManager.xaml</DependentUpon>
     </Compile>
@@ -77,9 +80,14 @@
     <Compile Include="Custom Controls\TopicsCreation.xaml.cs">
       <DependentUpon>TopicsCreation.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Keys.cs" />
     <Compile Include="Test.xaml.cs">
       <DependentUpon>Test.xaml</DependentUpon>
     </Compile>
+    <Page Include="ClientsManagement.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Content.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

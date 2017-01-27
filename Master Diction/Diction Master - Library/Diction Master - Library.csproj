@@ -41,6 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Authentication.cs" />
+    <Compile Include="Client.cs" />
     <Compile Include="ClientManager.cs" />
     <Compile Include="Component.cs" />
     <Compile Include="CompositeComponents.cs" />
@@ -53,6 +55,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StructuresAndEnumerations.cs" />
     <Compile Include="ISubject.cs" />
+    <Compile Include="SubscriptionManager.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Master Diction\Master Diction.csproj">
+      <Project>{0876A641-5CC8-44A5-9F76-1675774BF9FF}</Project>
+      <Name>Master Diction</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

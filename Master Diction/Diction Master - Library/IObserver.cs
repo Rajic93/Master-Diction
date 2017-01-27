@@ -8,6 +8,6 @@ namespace Diction_Master___Library
 {
     public interface IObserver
     {
-        void Update(List<Component> components);
+        void Update(List<ContentVersionInfo> changes);
     }
 }

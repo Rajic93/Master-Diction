@@ -23,18 +23,18 @@ namespace Diction_Master___Server.Custom_Controls
     public partial class QuizCreation : UserControl
     {
         private Diction_Master___Library.ContentManager _contentManager;
-        private int _selectedQuiz;
-        private int _selectedLesson;
+        private long _selectedQuiz;
+        private long _selectedLesson;
         private bool _edit;
         private ObservableCollection<Question> questions;
         private ObservableCollection<string> _wrongAnswers;
         private Question _selectedQuestion;
         private bool _newQuiz;
-        private int _newQuizID;
+        private long _newQuizID;
 
         private bool _saved;
 
-        public QuizCreation(int parent, Diction_Master___Library.ContentManager manager, bool edit, int quiz)
+        public QuizCreation(long parent, Diction_Master___Library.ContentManager manager, bool edit, long quiz)
         {
             _contentManager = manager;
             _selectedLesson = parent;
@@ -55,7 +55,7 @@ namespace Diction_Master___Server.Custom_Controls
                 questions = _contentManager.GetAllQuestions(_selectedQuiz);
             else
             {
-                int id = _contentManager.AddQuiz(_selectedLesson, "");
+                long id = _contentManager.AddQuiz(_selectedLesson, "");
                 if (id > 0)
                 {
                     _selectedQuiz = id;
@@ -122,7 +122,7 @@ namespace Diction_Master___Server.Custom_Controls
         private void AddQuestion_Click(object sender, RoutedEventArgs e)
         {
             QuestionType type;
-            int id = 0;
+            long id = 0;
             if (radioButtonText.IsChecked.Value)
             {
                 type = QuestionType.Text;
@@ -253,7 +253,7 @@ namespace Diction_Master___Server.Custom_Controls
             return _newQuiz;
         }
 
-        public int NewQuizID()
+        public long NewQuizID()
         {
             return _newQuizID;
         }

@@ -1,5 +1,10 @@
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Library\obj\Debug\Diction Master - Library.dll
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Library\bin\Debug\Resources\Diction Exercise.mp4
 D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Library\bin\Debug\Diction Master - Library.dll
 D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Library\bin\Debug\Diction Master - Library.pdb
-D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Library\obj\Debug\Diction Master - Library.dll
-D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Library\obj\Debug\Diction Master - Library.pdb
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Library\bin\Debug\Master Diction.exe
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Library\bin\Debug\AxInterop.WMPLib.dll
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Library\bin\Debug\Interop.WMPLib.dll
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Library\bin\Debug\Master Diction.pdb
 D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Library\obj\Debug\Diction Master - Library.csprojResolveAssemblyReference.cache
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Library\obj\Debug\Diction Master - Library.pdb
