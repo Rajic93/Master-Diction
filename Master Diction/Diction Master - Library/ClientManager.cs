@@ -60,19 +60,19 @@ namespace Diction_Master___Library
             try
             {
                 Authentication<Client> auth = new Authentication<Client>(SocketType.Stream, AddressFamily.InterNetwork, ProtocolType.Tcp);
-                auth.Listen("192.168.1.142", 30000, CheckForUser, CreateNewUser);
+                auth.Listen("192.168.1.142", 30000, CheckForUser, CreateNewUser, Subscribe);
             }
             catch (ArgumentNullException ae)
             {
-                Console.WriteLine("ArgumentNullException : {0}", ae.ToString());
+                Console.WriteLine("ArgumentNullException : {0}", ae);
             }
             catch (SocketException se)
             {
-                Console.WriteLine("SocketException : {0}", se.ToString());
+                Console.WriteLine("SocketException : {0}", se);
             }
             catch (Exception e)
             {
-                Console.WriteLine("Unexpected exception : {0}", e.ToString());
+                Console.WriteLine("Unexpected exception : {0}", e);
             }
         }
 
@@ -91,6 +91,11 @@ namespace Diction_Master___Library
                 Password = password,
                 Salt = salt
             });
+        }
+
+        private object Subscribe(object obj)
+        {
+            return obj;
         }
     }
 }

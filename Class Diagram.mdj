@@ -29655,9 +29655,9 @@
 									"showShadow": true,
 									"containerChangeable": false,
 									"containerExtending": false,
-									"left": 591,
+									"left": 538,
 									"top": 559,
-									"width": 192.21337890625,
+									"width": 299.88232421875,
 									"height": 13,
 									"autoResize": false,
 									"alpha": 4.6090179992251725,
@@ -29667,7 +29667,7 @@
 									},
 									"edgePosition": 1,
 									"underline": false,
-									"text": "online [5min] / createSubscription",
+									"text": "online [subscriptionNotCreated] / createSubscription",
 									"horizontalAlignment": 2,
 									"verticalAlignment": 5,
 									"wordWrap": false
@@ -37030,7 +37030,7 @@
 							},
 							"visibility": "public",
 							"kind": "external",
-							"guard": "5min",
+							"guard": "subscriptionNotCreated",
 							"triggers": [
 								{
 									"_type": "UMLEvent",

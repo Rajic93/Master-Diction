@@ -14,7 +14,9 @@
             <TextBlock x:Name="textBlock2" HorizontalAlignment="Left" Margin="11,108,0,0" TextWrapping="Wrap" Text="Repeat password" VerticalAlignment="Top"/>
             <TextBox x:Name="textBox2" HorizontalAlignment="Left" Height="23" Margin="10,129,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="280"/>
             <Button x:Name="button" Content="Register" HorizontalAlignment="Left" Margin="215,175,0,0" VerticalAlignment="Top" Width="75"/>
-
+            <Label x:Name="skip" Margin="10,172,237.6,0.2">
+                <TextBlock TextDecorations="Underline">Skip</TextBlock>
+            </Label>
         </Grid>
     </Border>
 </UserControl>

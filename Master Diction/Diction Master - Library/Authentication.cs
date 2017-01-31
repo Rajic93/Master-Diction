@@ -26,6 +26,8 @@ namespace Diction_Master___Library
 
         public delegate bool CheckForUser(string username);
 
+        public delegate object Subscribe(byte[] subsInfo);
+
         public Authentication(SocketType socketType, AddressFamily family, ProtocolType protocolType)
         {
             _addressFamily = family;
@@ -50,7 +52,7 @@ namespace Diction_Master___Library
             }
         }
 
-        public int Listen(string ipAdd, int port, CheckForUser checkForUser, CreateUser createUser)
+        public int Listen(string ipAdd, int port, CheckForUser checkForUser, CreateUser createUser, Subscribe subscribe)
         {
             try
             {
@@ -64,7 +66,7 @@ namespace Diction_Master___Library
                     Socket socket = _socket.Accept();
                     new Thread(() =>
                     {
-                        ConnectionAccepted(socket, checkForUser, createUser);
+                        ConnectionAccepted(socket, checkForUser, createUser, subscribe);
                     }).Start();
                 }
                 return 0;
@@ -87,14 +89,32 @@ namespace Diction_Master___Library
             }
         }
 
-        private void ConnectionAccepted(Socket socket, CheckForUser checkForUser, CreateUser createUser)
+        private void ConnectionAccepted(Socket socket, CheckForUser checkForUser, CreateUser createUser, Subscribe subscribe)
         {
-            byte[] buffer = new byte[8];
-            socket.Receive(buffer);
-            if (Encoding.Unicode.GetString(buffer) == "LOGIN")
-                LoginServerSide(socket, checkForUser);
-            else
-                RegisterServerSide(socket, checkForUser, createUser);
+            string command = "";
+            do
+            {
+                byte[] buffer = new byte[9];
+                socket.Receive(buffer);
+                command = Encoding.Unicode.GetString(buffer);
+                if (command == "LOGIN")
+                    LoginServerSide(socket, checkForUser);
+                else if (command == "REGISTER")
+                    RegisterServerSide(socket, checkForUser, createUser);
+                else if (command == "SUBSCRIBE")
+                    SubscribeServerSide(socket, subscribe);
+            } while (command != "TERMINATE");
+            Close(socket);
+        }
+
+        private void Close(Socket socket)
+        {
+            socket.Close();
+        }
+
+        public void SubscribeServerSide(Socket socket, Subscribe subscribe)
+        {
+            
         }
 
         public bool LoginClientSide(string username, string password)
@@ -127,6 +147,39 @@ namespace Diction_Master___Library
                 }
             }
             return false;
+        }
+
+        private void LoginServerSide(Socket socket, CheckForUser checkForUser)
+        {
+            byte[] ok = Encoding.Unicode.GetBytes("OK");
+            byte[] err = Encoding.Unicode.GetBytes("ER");
+            //response to action
+            _socket.Send(ok);
+            //receive username
+            byte[] buffer = new byte[50];
+            socket.Receive(buffer);
+            string username = Encoding.Unicode.GetString(buffer);
+            //check for existing user
+            if (checkForUser(username))
+            {
+                //user exists send OK: salt_value
+                string salt = "1234567891234567";
+                string password = "Aleks@12";
+                socket.Send(Encoding.Unicode.GetBytes("OK: " + salt));
+                //receive hashed password
+                buffer = new byte[64];
+                socket.Receive(buffer);
+                byte[] hashedPassword = CreateHashedPassword(Encoding.Unicode.GetBytes(password),
+                    Encoding.Unicode.GetBytes(salt));
+                if (buffer.SequenceEqual(hashedPassword))
+                {
+                    //password is ok
+                    socket.Send(ok);
+                }
+                socket.Send(err);
+            }
+            //user does not exist
+            socket.Send(err);
         }
 
         private static byte[] CreateHashedPassword(byte[] passwordBytes, byte[] saltBytes)
@@ -163,6 +216,9 @@ namespace Diction_Master___Library
                 _socket.Receive(ok);
                 if (Encoding.Unicode.GetString(ok) == "OK")
                 {
+                    //send actual username
+
+
                     //generate and send salt
                     RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider();
                     byte[] salt = new byte[16];
@@ -180,47 +236,43 @@ namespace Diction_Master___Library
                             //created new user
                             return salt;
                         }
+                        //server error
                     }
+                    //server error
                 }
                 //username exists
             }
             return null;
         }
 
-        private void LoginServerSide(Socket socket, CheckForUser checkForUser)
+        public object SubscribeClientSide(string username, string password, byte[] salt, Subscribe subscribe)
         {
-            byte[] ok = Encoding.Unicode.GetBytes("OK");
-            byte[] err = Encoding.Unicode.GetBytes("ER");
-            //response to action
-            _socket.Send(ok);
-            //receive username
-            byte[] buffer = new byte[50];
-            socket.Receive(buffer);
-            string username = Encoding.Unicode.GetString(buffer);
-            //check for existing user
-            if (checkForUser(username))
+            if (_socket == null)
+                throw new Exception("Socket not initialized");
+            byte[] subs = Encoding.Unicode.GetBytes("SUBSCRIBE");
+            _socket.Send(subs);
+            byte[] ok = new byte[4];
+            _socket.Receive(ok);
+            string tmp = Encoding.Unicode.GetString(ok);
+            if (tmp == "OK")
             {
-                //user exists send OK: salt_value
-                string salt = "1234567891234567";
-                string password = "Aleks@12";
-                socket.Send(Encoding.Unicode.GetBytes("OK: " + salt));
-                //receive hashed password
-                buffer = new byte[64];
-                socket.Receive(buffer);
-                byte[] hashedPassword = CreateHashedPassword(Encoding.Unicode.GetBytes(password),
-                    Encoding.Unicode.GetBytes(salt));
-                if (buffer.SequenceEqual(hashedPassword))
+                //send username
+                byte[] usernameBytes = Encoding.Unicode.GetBytes(username);
+                _socket.Send(usernameBytes);
+                ok = new byte[4];
+                _socket.Receive(ok);
+                if (Encoding.Unicode.GetString(ok) == "OK")
                 {
-                    //password is ok
-                    socket.Send(ok);
+                    //byte[] hash = CreateHashedPassword(Encoding.Unicode.GetBytes(password))
+                    byte[] buffer = new byte[512];
+                    _socket.Receive(buffer);
+                    return subscribe(buffer);
                 }
-                socket.Send(err);
             }
-            //user does not exist
-            socket.Send(err);
+            return null;
         }
 
-        private void RegisterServerSide(Socket socket, CheckForUser checkForUser, CreateUser createUser)
+        private void RegisterServerSide(Socket socket, CheckForUser checkForUser, CreateUser createUser/*, Subscribe subscribe*/)
         {
             byte[] ok = Encoding.Unicode.GetBytes("OK");
             byte[] err = Encoding.Unicode.GetBytes("ER");

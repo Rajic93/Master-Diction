@@ -26,3 +26,9 @@ D:\Projects\Upwork\Master Diction\Master Diction\Diction Master\obj\Debug\UserCo
 D:\Projects\Upwork\Master Diction\Master Diction\Diction Master\obj\Debug\UserControls\GradeSelection.baml
 D:\Projects\Upwork\Master Diction\Master Diction\Diction Master\obj\Debug\UserControls\TermSelection.g.cs
 D:\Projects\Upwork\Master Diction\Master Diction\Diction Master\obj\Debug\UserControls\TermSelection.baml
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master\obj\Debug\UserControls\Content.g.cs
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master\obj\Debug\UserControls\Content.baml
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master\obj\Debug\UserControls\Login.g.cs
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master\obj\Debug\UserControls\Login.baml
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master\obj\Debug\UserControls\ContentContainer.g.cs
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master\obj\Debug\UserControls\ContentContainer.baml

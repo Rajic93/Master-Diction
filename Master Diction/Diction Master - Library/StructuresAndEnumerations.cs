@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Security.Permissions;
 
 namespace Diction_Master___Library
 {
@@ -103,9 +104,13 @@ namespace Diction_Master___Library
     {
         public long ID { get; set; }
         public long ClientID { get; set; }
+        public long CourseID { get; set; }
+        public long EduLevelID { get; set; }
+        public long GradeID { get; set; }
+        public long TermID { get; set; }
         public SubscriptionType SubscriptionType { get; set; }
-        public TimeSpan Period { get; set; }
-
+        public DateTime ExpirationDateTime { get; set; }
+        public string Key { get; set; }
     }
 
     public static class Icons
