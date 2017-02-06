@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace Diction_Master
+namespace Diction_Master___Library
 {
     /// <summary>
     /// Interaction logic for App.xaml

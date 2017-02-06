@@ -7,6 +7,7 @@ using System.Xml.Serialization;
 
 namespace Diction_Master___Library
 {
+    [Serializable]
     [XmlInclude(typeof(Course))]
     [XmlInclude(typeof(EducationalLevel))]
     [XmlInclude(typeof(Grade))]
@@ -29,6 +30,7 @@ namespace Diction_Master___Library
         }
     }
 
+    [Serializable]
     public class Course : CompositeComponent
     {
         public string Name { get; set; }
@@ -44,6 +46,7 @@ namespace Diction_Master___Library
         }
     }
 
+    [Serializable]
     public class EducationalLevel : CompositeComponent
     {
         public string Icon { get; set; }
@@ -59,6 +62,7 @@ namespace Diction_Master___Library
         }
     }
 
+    [Serializable]
     public class Grade : CompositeComponent
     {
         public string Icon { get; set; }
@@ -70,6 +74,8 @@ namespace Diction_Master___Library
             return week;
         }
     }
+
+    [Serializable]
     public class Topic : CompositeComponent
     {
         public string Title { get; set; }
@@ -82,6 +88,7 @@ namespace Diction_Master___Library
         }
     }
 
+    [Serializable]
     public class Week : CompositeComponent
     {
         public string Title { get; set; }
@@ -95,6 +102,7 @@ namespace Diction_Master___Library
         }
     }
 
+    [Serializable]
     public class Lesson : CompositeComponent
     {
         public string Title { get; set; }
@@ -115,6 +123,7 @@ namespace Diction_Master___Library
         }
     }
 
+    [Serializable]
     public class Quiz : CompositeComponent
     {
         public string Title { get; set; }

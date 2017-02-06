@@ -14,7 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Diction_Master___Library;
 
-namespace Diction_Master.UserControls
+namespace Diction_Master___Library.UserControls
 {
     /// <summary>
     /// Interaction logic for GradeSelection.xaml

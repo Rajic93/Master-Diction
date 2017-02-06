@@ -1,10 +1,12 @@
 ﻿
 
+using System;
 using System.Collections.ObjectModel;
 using System.Xml.Serialization;
 
 namespace Diction_Master___Library
 {
+    [Serializable]
     [XmlInclude(typeof(Question))]
     [XmlInclude(typeof(ContentFile))]
     public class LeafComponent : Component
@@ -15,6 +17,7 @@ namespace Diction_Master___Library
         public string Description { get; set; }
     }
 
+    [Serializable]
     public class Question : LeafComponent
     {
         public string Text { get; set; }
@@ -23,6 +26,7 @@ namespace Diction_Master___Library
         public ObservableCollection<string> WrongAnswers { get; set; }
     }
 
+    [Serializable]
     public class ContentFile : LeafComponent
     {
         public ComponentType ComponentType { get; set; }

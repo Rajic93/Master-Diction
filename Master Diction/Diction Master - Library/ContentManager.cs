@@ -29,7 +29,7 @@ namespace Diction_Master___Library
         /// <summary>
         /// 
         /// </summary>
-        private ClientManager clientManager;
+        private Dictionary<ApplicationType, ClientManager> _clientManagers;
 
         /// <summary>
         /// 
@@ -67,8 +67,13 @@ namespace Diction_Master___Library
         /// 
         /// </summary>
         private List<ContentVersionInfo> ChangesTeachers { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        private List<ContentVersionInfo> ChangesAudio { get; set; }
 
         private ApplicationType _type;
+        private bool _running = true;
 
         /// <summary>
         /// 
@@ -78,10 +83,11 @@ namespace Diction_Master___Library
             Courses = new List<Component>();
             Topics = new List<Component>();
             ComponentsCache = new Dictionary<long, Component>();
-            clientManager = ClientManager.CreateInstance();
+            _clientManagers = new Dictionary<ApplicationType, ClientManager>();
             ChangesDiction = new List<ContentVersionInfo>();
             ChangesTeachers = new List<ContentVersionInfo>();
-            _globalIdCounter = 1;
+            ChangesAudio = new List<ContentVersionInfo>();
+            _globalIdCounter = 0;
             LoadManifest();
             SetUpCache(Courses);
             SetUpCache(Topics);
@@ -97,11 +103,6 @@ namespace Diction_Master___Library
                     SetUpCache((component as CompositeComponent).Components);
                 }
             }
-        }
-
-        ~ContentManager()
-        {
-            SaveManifest();
         }
 
         /// <summary>
@@ -141,12 +142,24 @@ namespace Diction_Master___Library
         /// </summary>
         private void SaveManifest()
         {
-
             XmlSerializer serializer = new XmlSerializer(Courses.GetType());
-            serializer.Serialize(new XmlTextWriter("DictionAppContentManifest.xml", Encoding.Unicode), Courses);
-            serializer.Serialize(new XmlTextWriter("TeachersAppContentManifest.xml", Encoding.Unicode), Topics);
+            using (var writer = new StreamWriter("DictionAppContentManifest.xml"))
+            using (var xmlWriter = XmlWriter.Create(writer, new XmlWriterSettings { Indent = true }))
+            {
+                serializer.Serialize(xmlWriter, Courses);
+            }
+            serializer = new XmlSerializer(Topics.GetType());
+            using (var writer = new StreamWriter("TeachersAppContentManifest.xml"))
+            using (var xmlWriter = XmlWriter.Create(writer, new XmlWriterSettings { Indent = true }))
+            {
+                serializer.Serialize(xmlWriter, Topics);
+            }
             serializer = new XmlSerializer(GetType());
-            serializer.Serialize(new XmlTextWriter("ContentManifest.xml", Encoding.Unicode), this);
+            using (var writer = new StreamWriter("ContentManifest.xml"))
+            using (var xmlWriter = XmlWriter.Create(writer, new XmlWriterSettings { Indent = true }))
+            {
+                serializer.Serialize(xmlWriter, this);
+            }
         }
 
         /// <summary>
@@ -156,7 +169,7 @@ namespace Diction_Master___Library
         {
             Thread thread = new Thread(() =>
             {
-                while (true)
+                while (_running)
                 {
 
                 }
@@ -165,34 +178,101 @@ namespace Diction_Master___Library
             return thread;
         }
 
+        public void Stop()
+        {
+            _running = false;
+            SaveManifest();
+        }
+
         public void SetAppType(ApplicationType type)
         {
             _type = type;
+        }
+
+        private void LogChange(Component component, ContentStatus status)
+        {
+            ContentVersionInfo info = new ContentVersionInfo
+            {
+                ComponentID = component.ID,
+                ParentID = component.ParentID,
+                Status = status,
+                Component = component
+            };
+            switch (_type)
+            {
+                case ApplicationType.Diction:
+                    if (ChangesDiction.FindIndex(x => x.ComponentID == component.ID && x.ParentID == component.ParentID) == -1)
+                    {
+                        ChangesDiction.Add(info); 
+                    }
+                    else
+                    {
+                        info = ChangesDiction.Find(x => x.ComponentID == component.ID && x.ParentID == component.ParentID);
+                        info.ParentID = component.ParentID;
+                        info.Status = status;
+                        info.Component = component;
+                    }
+                    break;
+                case ApplicationType.Teachers:
+                    if (ChangesTeachers.FindIndex(x => x.ComponentID == component.ID && x.ParentID == component.ParentID) == -1)
+                    {
+                        ChangesTeachers.Add(info);
+                    }
+                    else
+                    {
+                        info = ChangesTeachers.Find(x => x.ComponentID == component.ID && x.ParentID == component.ParentID);
+                        info.ParentID = component.ParentID;
+                        info.Status = status;
+                        info.Component = component;
+                    }
+                    break;
+                case ApplicationType.Audio:
+                    if (ChangesAudio.FindIndex(x => x.ComponentID == component.ID && x.ParentID == component.ParentID) == -1)
+                    {
+                        ChangesAudio.Add(info);
+                    }
+                    else
+                    {
+                        info = ChangesAudio.Find(x => x.ComponentID == component.ID && x.ParentID == component.ParentID);
+                        info.ParentID = component.ParentID;
+                        info.Status = status;
+                        info.Component = component;
+                    }
+                    break;
+                default:
+                    break;
+            }
         }
 
         #region ISubject
 
         public void Attach(IObserver observer)
         {
-            clientManager = observer as ClientManager;
+            _clientManagers[(observer as ClientManager).ClientsType] = observer as ClientManager;
         }
 
         public void Detach(IObserver observer)
         {
-            
+            if (_clientManagers.ContainsKey((observer as ClientManager).ClientsType))
+            {
+                _clientManagers.Remove((observer as ClientManager).ClientsType);
+            }
         }
 
         public void Notify(ApplicationType type)
         {
             switch (type)
             {
-                    case ApplicationType.Audio:
+                case ApplicationType.Diction:
+                    _clientManagers[type].Update(ChangesDiction);
                     break;
-                    case ApplicationType.Diction:
-                    clientManager.Update(ChangesDiction);
+                case ApplicationType.Teachers:
+                    _clientManagers[type].Update(ChangesTeachers);
                     break;
-                    case ApplicationType.Teachers:
-                    clientManager.Update(ChangesTeachers);
+                case ApplicationType.Audio:
+                    _clientManagers[type].Update(ChangesAudio);
+                    break;
+                default:
                     break;
             }
         }
@@ -217,7 +297,7 @@ namespace Diction_Master___Library
 
         private long GetID()
         {
-            return _globalIdCounter++;
+            return ++_globalIdCounter;
         }
 
         public List<Course> GetAllCourses()
@@ -371,6 +451,7 @@ namespace Diction_Master___Library
                     Course course = ContentFactory.CreateCompositeComponent(id, 0, name, iconURI) as Course;
                     ComponentsCache[id] = course;
                     Courses.Add(course);
+                    LogChange(course, ContentStatus.Add);
                     return id;
                 }
                 return 0;
@@ -389,6 +470,7 @@ namespace Diction_Master___Library
                     Course course = ComponentsCache[id] as Course;
                     course.Name = name ?? course.Name;
                     course.Icon = iconURI ?? course.Icon;
+                    LogChange(course, ContentStatus.Edit);
                 }
                 //course does not exist
             }
@@ -401,8 +483,10 @@ namespace Diction_Master___Library
             {
                 if (Courses.Exists(x => x.ID == id))
                 {
-                    RecursiveDelete(Courses.Find(x => x.ID == id));
+                    Component component = Courses.Find(x => x.ID == id);
+                    RecursiveDelete(component);
                     int index = Courses.FindIndex(x => x.ID == id);
+                    LogChange(component, ContentStatus.Delete);
                     Courses.RemoveAt(index);
                     ComponentsCache.Remove(id);
                 }
@@ -425,6 +509,7 @@ namespace Diction_Master___Library
                     Topic topic = ContentFactory.CreateCompositeComponent(id, 0, title, num, true);
                     ComponentsCache[id] = topic;
                     Topics.Add(topic);
+                    LogChange(topic, ContentStatus.Add);
                     return id;
                 }
                 return 0;
@@ -443,6 +528,7 @@ namespace Diction_Master___Library
                     Topic topic = ComponentsCache[id] as Topic;
                     topic.Title = title;
                     topic.Num = num;
+                    LogChange(topic, ContentStatus.Edit );
                 }
                 //course does not exist
             }
@@ -455,8 +541,10 @@ namespace Diction_Master___Library
             {
                 if (Topics.Exists(x => x.ID == id))
                 {
-                    RecursiveDelete(Topics.Find(x => x.ID == id));
+                    Component component = Topics.Find(x => x.ID == id);
+                    RecursiveDelete(component);
                     int index = Topics.FindIndex(x => x.ID == id);
+                    LogChange(component, ContentStatus.Delete);
                     Topics.RemoveAt(index);
                     ComponentsCache.Remove(id);
                 }
@@ -480,6 +568,7 @@ namespace Diction_Master___Library
                     level = ContentFactory.CreateCompositeComponent(ID, parentID, type, iconURI) as EducationalLevel;
                     (ComponentsCache[parentID] as Course).Add(level);
                     ComponentsCache[ID] = level;
+                    LogChange(level, ContentStatus.Add);
                     return ID;
                 }
                 return 0;
@@ -496,6 +585,7 @@ namespace Diction_Master___Library
                 {
                     level.Icon = iconURI ?? level.Icon;
                     level.Level = levelType;
+                    LogChange(level, ContentStatus.Edit);
                 }
             }
         }
@@ -505,6 +595,7 @@ namespace Diction_Master___Library
             if (ComponentsCache.ContainsKey(parentID) && ComponentsCache.ContainsKey(id))
             {
                 RecursiveDelete((ComponentsCache[parentID] as Course).Components.Find(x => x.ID == id));
+                LogChange(GetComponent(id), ContentStatus.Delete);
                 (ComponentsCache[parentID] as Course).Components.RemoveAll(x => x.ID == id);
                 ComponentsCache.Remove(id);
             }
@@ -527,6 +618,7 @@ namespace Diction_Master___Library
                         grade = ContentFactory.CreateCompositeComponent(ID, parentID, icon, type) as Grade;
                         (ComponentsCache[parentID] as EducationalLevel).Add(grade);
                         ComponentsCache[ID] = grade;
+                        LogChange(grade, ContentStatus.Add);
                         return ID;
                     }
                 }
@@ -544,6 +636,7 @@ namespace Diction_Master___Library
                 Grade grade = ComponentsCache[id] as Grade;
                 grade.GradeNum = type;
                 grade.Icon = icon ?? grade.Icon;
+                LogChange(grade, ContentStatus.Edit);
             }
         }
 
@@ -552,6 +645,7 @@ namespace Diction_Master___Library
             if (ComponentsCache.ContainsKey(id) && ComponentsCache.ContainsKey(parentID))
             {
                 RecursiveDelete((ComponentsCache[parentID] as EducationalLevel).Components.Find(x => x.ID == id));
+                LogChange(GetComponent(id), ContentStatus.Delete);
                 (ComponentsCache[parentID] as EducationalLevel).Components.RemoveAll(x => x.ID == id);
                 ComponentsCache.Remove(id);
             }
@@ -572,6 +666,7 @@ namespace Diction_Master___Library
                     week = ContentFactory.CreateCompositeComponent(ID, parentID, title, num, term) as Week;
                     ComponentsCache[ID] = week;
                     (ComponentsCache[parentID] as Grade).Components.Add(week);
+                    LogChange(week, ContentStatus.Add);
                     return ID;
                 }
                 return 0;
@@ -589,6 +684,7 @@ namespace Diction_Master___Library
                 week.Num = num;
                 week.Term = term;
                 week.Title = title ?? week.Title;
+                LogChange(week, ContentStatus.Edit);
             }
             //there is such week
         }
@@ -598,6 +694,7 @@ namespace Diction_Master___Library
             if (ComponentsCache.ContainsKey(id) && ComponentsCache.ContainsKey(parentID))
             {
                 RecursiveDelete((ComponentsCache[parentID] as Grade).Components.Find(x => x.ID == id));
+                LogChange(GetComponent(id), ContentStatus.Delete);
                 (ComponentsCache[parentID] as Grade).Components.RemoveAll(x => x.ID == id);
                 ComponentsCache.Remove(id);
             }
@@ -623,6 +720,7 @@ namespace Diction_Master___Library
                     lesson = ContentFactory.CreateCompositeComponent(ID, parentID, title, num) as Lesson;
                     ComponentsCache[ID] = lesson;
                     (ComponentsCache[parentID] as CompositeComponent).Components.Add(lesson);
+                    LogChange(lesson, ContentStatus.Add);
                     return ID;
                 }
                 return 0;
@@ -637,6 +735,7 @@ namespace Diction_Master___Library
                 Lesson lesson = ComponentsCache[id] as Lesson;
                 lesson.Num = num;
                 lesson.Title = title ?? lesson.Title;
+                LogChange(lesson, ContentStatus.Edit);
             }
         }
 
@@ -645,6 +744,7 @@ namespace Diction_Master___Library
             if (ComponentsCache.ContainsKey(id) && ComponentsCache.ContainsKey(parentID))
             {
                 RecursiveDelete((ComponentsCache[parentID] as CompositeComponent).Components.Find(x => x.ID == id));
+                LogChange(GetComponent(id), ContentStatus.Delete);
                 (ComponentsCache[parentID] as CompositeComponent).Components.RemoveAll(x => x.ID == id);
                 ComponentsCache.Remove(id);
             }
@@ -665,6 +765,7 @@ namespace Diction_Master___Library
                     quiz = ContentFactory.CreateCompositeComponent(id, parentID, title) as Quiz;
                     (ComponentsCache[parentID] as Lesson).Components.Add(quiz);
                     ComponentsCache[id] = quiz;
+                    LogChange(quiz, ContentStatus.Add);
                     return id;
                 }
                 return 0;
@@ -678,6 +779,7 @@ namespace Diction_Master___Library
             {
                 Quiz quiz = ComponentsCache[id] as Quiz;
                 quiz.Title = title ?? quiz.Title;
+                LogChange(quiz, ContentStatus.Edit);
             }
         }
 
@@ -686,6 +788,7 @@ namespace Diction_Master___Library
             if (ComponentsCache.ContainsKey(id) && ComponentsCache.ContainsKey(parentID))
             {
                 RecursiveDelete((ComponentsCache[parentID] as Lesson).Components.Find(x => x.ID == id));
+                LogChange(GetComponent(id), ContentStatus.Delete);
                 (ComponentsCache[parentID] as Lesson).Components.RemoveAll(x => x.ID == id);
                 ComponentsCache.Remove(id);
             }
@@ -716,6 +819,7 @@ namespace Diction_Master___Library
                             ContentFile;
                     (ComponentsCache[parentID] as Lesson).Components.Add(file);
                     ComponentsCache[id] = file;
+                    LogChange(file, ContentStatus.Add);
                     return id;
                 }
                 return 0;
@@ -735,6 +839,7 @@ namespace Diction_Master___Library
                 file.URI = uri ?? file.URI;
                 file.Size = size;
                 file.Description = description ?? file.Description;
+                LogChange(file, ContentStatus.Edit);
             }
         }
 
@@ -744,6 +849,7 @@ namespace Diction_Master___Library
             {
                 if (DeleteFile((ComponentsCache[id] as ContentFile).URI))
                 {
+                    LogChange(GetComponent(id), ContentStatus.Delete);
                     (ComponentsCache[parentID] as Lesson).Components.RemoveAll(x => x.ID == id);
                     ComponentsCache.Remove(id);
                 }
@@ -759,19 +865,20 @@ namespace Diction_Master___Library
         {
             if (ComponentsCache.ContainsKey(parentID))
             {
-                Question file = (ComponentsCache[parentID] as Quiz).FindQuestion(text, answer);
-                if (file == null)
+                Question question = (ComponentsCache[parentID] as Quiz).FindQuestion(text, answer);
+                if (question == null)
                 {
                     long id = GetID();
                     if (type != QuestionType.Choice)
-                        file = ContentFactory.CreateLeafComponent(id, parentID, text, answer, type) as Question;
+                        question = ContentFactory.CreateLeafComponent(id, parentID, text, answer, type) as Question;
                     else
                         //mozda u factory treba da se promeni lista
-                        file =
+                        question =
                             ContentFactory.CreateLeafComponent(id, parentID, text, answer, type, wrongAnswers) as
                                 Question;
-                    (ComponentsCache[parentID] as Quiz).Components.Add(file);
-                    ComponentsCache[id] = file;
+                    (ComponentsCache[parentID] as Quiz).Components.Add(question);
+                    ComponentsCache[id] = question;
+                    LogChange(question, ContentStatus.Add);
                     return id;
                 }
                 return 0;
@@ -789,6 +896,7 @@ namespace Diction_Master___Library
                 question.Answer = answer ?? question.Answer;
                 question.Type = type;
                 question.WrongAnswers = wrongAnswers;
+                LogChange(question, ContentStatus.Edit);
             }
         }
 
@@ -796,6 +904,7 @@ namespace Diction_Master___Library
         {
             if (ComponentsCache.ContainsKey(id) && ComponentsCache.ContainsKey(parentID))
             {
+                LogChange(GetComponent(id), ContentStatus.Delete);
                 (ComponentsCache[parentID] as Quiz).Components.RemoveAll(x => x.ID == id);
                 ComponentsCache.Remove(id);
             }

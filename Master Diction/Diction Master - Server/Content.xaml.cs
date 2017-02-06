@@ -61,6 +61,8 @@ namespace Diction_Master___Server
         /// </summary>
         private Image _selectedGrade;
 
+        public Dictionary<ApplicationType, ClientManager> _clientManagers;
+
         public Content(Diction_Master___Library.ContentManager manager)
         {
             _contentManager = manager;

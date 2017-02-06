@@ -7,6 +7,7 @@ using System.Xml.Serialization;
 
 namespace Diction_Master___Library
 {
+    [Serializable]
     [XmlInclude(typeof(LeafComponent))]
     [XmlInclude(typeof(CompositeComponent))]
     public abstract class Component

@@ -49,10 +49,14 @@
     <Compile Include="CompositeComponents.cs" />
     <Compile Include="ContentFactory.cs" />
     <Compile Include="ContentManager.cs" />
+    <Compile Include="DictionMasterClient.cs" />
+    <Compile Include="DictionMasterServer.cs" />
     <Compile Include="IObserver.cs" />
     <Compile Include="IMigrate.cs" />
+    <Compile Include="Keys.cs" />
     <Compile Include="LanguagesHashTable.cs" />
     <Compile Include="LeafComponents.cs" />
+    <Compile Include="NetworkModuleFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StructuresAndEnumerations.cs" />
     <Compile Include="ISubject.cs" />

@@ -1,9 +1,9 @@
-﻿<UserControl x:Class="Diction_Master.UserControls.RegistrationKey"
+﻿<UserControl x:Class="Diction_Master___Library.UserControls.RegistrationKey"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Diction_Master.UserControls"
+             xmlns:local="clr-namespace:Diction_Master___Library.UserControls"
              mc:Ignorable="d" Width="355" Height="110" MaxHeight="110" MaxWidth="355" MinHeight="110" MinWidth="355">
     <Border BorderBrush="DarkGray" BorderThickness="0, 0, 2, 2" CornerRadius="0,3,0,5">
         <Grid Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" Margin="0,0,0.2,0">

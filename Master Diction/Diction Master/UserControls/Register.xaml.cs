@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Diction_Master.UserControls
+namespace Diction_Master___Library.UserControls
 {
     /// <summary>
     /// Interaction logic for Register.xaml

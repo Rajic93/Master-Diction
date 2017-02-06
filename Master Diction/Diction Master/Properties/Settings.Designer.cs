@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Diction_Master.Properties
+namespace Diction_Master___Library.Properties
 {
 
 

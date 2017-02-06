@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Diction_Master___Library
 {
+    [Serializable]
     public class Client
     {
         public long ID { get; set; }
@@ -26,10 +27,49 @@ namespace Diction_Master___Library
             set { value.CopyTo(_salt, 0); }
         }
 
-        public IPAddress IpAddress { get; set; }
+        private IPAddress _ipAddress;
+        public IPAddress IpAddress
+        {
+            get { return _ipAddress; }
+            set { _ipAddress = value; }
+        }
         public int Port { get; set; }
         public ContentStatus ContentStatus { get; set; }
         public NetworkAvailability NetworkAvailability { get; set; }
         public ContentVersionInfo ContentVersionInfo { get; set; }
+
+        private DateTime _lastUpdate;
+        public DateTime LastUpdate
+        {
+            get { return _lastUpdate; }
+            set { _lastUpdate = value; }
+        }
+
+        private DateTime _registrationDate;
+        public DateTime RegistrationDate
+        {
+            get { return _registrationDate; }
+            set { _registrationDate = value; }
+        }
+
+        private List<Subscription> _activeSubscriptions;
+        public List<Subscription> ActiveSubscriptions
+        {
+            get { return _activeSubscriptions; }
+            set { _activeSubscriptions = value; }
+        }
+
+        private List<Subscription> _expiredSubscription;
+        public List<Subscription> ExpiredSubscription
+        {
+            get { return _expiredSubscription; }
+            set { _expiredSubscription = value; }
+        }
+
+        public Client()
+        {
+            _expiredSubscription = new List<Subscription>();
+            _activeSubscriptions = new List<Subscription>();
+        }
     }
 }

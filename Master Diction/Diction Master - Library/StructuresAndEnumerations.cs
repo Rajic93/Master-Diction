@@ -94,12 +94,16 @@ namespace Diction_Master___Library
         Invalid
     }
 
+    [Serializable]
     public struct ContentVersionInfo
     {
-        public int ComponentID;
+        public long ComponentID;
+        public long ParentID;
         public ContentStatus Status;
+        public Component Component;
     }
 
+    [Serializable]
     public struct Subscription
     {
         public long ID { get; set; }

@@ -1,4 +1,16 @@
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Server\bin\Debug\Diction Master - Server.exe
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Server\bin\Debug\Diction Master - Library.dll
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Server\bin\Debug\System.Windows.Controls.DataVisualization.Toolkit.dll
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Server\bin\Debug\WPFToolkit.dll
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Server\bin\Debug\Diction Master - Library.pdb
 D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Server\bin\Debug\Diction Master - Server.exe.config
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Server\bin\Debug\Master Diction.exe
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Server\bin\Debug\Xceed.Wpf.Toolkit.dll
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Server\bin\Debug\AxInterop.WMPLib.dll
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Server\bin\Debug\Interop.WMPLib.dll
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Server\bin\Debug\Master Diction.pdb
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Server\bin\Debug\System.Windows.Controls.DataVisualization.Toolkit.pdb
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Server\bin\Debug\WPFToolkit.pdb
 D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Server\obj\Debug\Diction Master - Server.csprojResolveAssemblyReference.cache
 D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Server\obj\Debug\Custom Controls\ContentUpload.baml
 D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Server\obj\Debug\ClientsManagement.g.cs
@@ -17,20 +29,6 @@ D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Server\obj\Deb
 D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Server\obj\Debug\App.g.cs
 D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Server\obj\Debug\Diction Master - Server_MarkupCompile.cache
 D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Server\obj\Debug\Diction Master - Server_MarkupCompile.lref
-D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Server\bin\Debug\Resources\Diction Exercise.mp4
-D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Server\bin\Debug\Diction Master - Server.exe
-D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Server\bin\Debug\Diction Master - Server.pdb
-D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Server\bin\Debug\Diction Master - Library.dll
-D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Server\bin\Debug\Master Diction.exe
-D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Server\bin\Debug\System.Windows.Controls.DataVisualization.Toolkit.dll
-D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Server\bin\Debug\Xceed.Wpf.Toolkit.dll
-D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Server\bin\Debug\AxInterop.WMPLib.dll
-D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Server\bin\Debug\Interop.WMPLib.dll
-D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Server\bin\Debug\WPFToolkit.dll
-D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Server\bin\Debug\Diction Master - Library.pdb
-D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Server\bin\Debug\Master Diction.pdb
-D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Server\bin\Debug\System.Windows.Controls.DataVisualization.Toolkit.pdb
-D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Server\bin\Debug\WPFToolkit.pdb
 D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Server\obj\Debug\ClientsManagement.baml
 D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Server\obj\Debug\Content.baml
 D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Server\obj\Debug\ContentManager.baml
@@ -48,3 +46,5 @@ D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Server\obj\Deb
 D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Server\obj\Debug\Diction Master - Server.csproj.GenerateResource.Cache
 D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Server\obj\Debug\Diction Master - Server.exe
 D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Server\obj\Debug\Diction Master - Server.pdb
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Server\bin\Debug\Resources\Diction Exercise.mp4
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Server\bin\Debug\Diction Master - Server.pdb
