@@ -20,9 +20,6 @@ using Component = Diction_Master___Library.Component;
 
 namespace Diction_Master___Server
 {
-    /// <summary>
-    /// Interaction logic for Content.xaml
-    /// </summary>
     public partial class Content : Window
     {
         /// <summary>
@@ -652,9 +649,9 @@ namespace Diction_Master___Server
             {
                 if (_selectedEducationalLevel != null)
                 {
-                    EducationalLevelType type =
-                    (_contentManager.GetComponent(_educationalLevelDictionary[_selectedEducationalLevel.Name])
-                        as EducationalLevel).Level;
+                    long value = _educationalLevelDictionary[_selectedEducationalLevel.Name];
+                    Component component = _contentManager.GetComponent(value);
+                    EducationalLevelType type = (component as EducationalLevel).Level;
                     GradeSelection grade = new GradeSelection(type)
                     {
                         VerticalAlignment = VerticalAlignment.Stretch,

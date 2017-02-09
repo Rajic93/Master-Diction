@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="768" Width="1024" MinHeight="768" MinWidth="1024" WindowStartupLocation="CenterScreen" Closing="Window_Closing">
     <Grid>
+        <WrapPanel Height="32" Margin="0,706,-0.4,0" Width="1018" Background="CornflowerBlue"/>
         <Button x:Name="Back" BorderThickness="0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="40" Height="40" Background="{x:Null}" Margin="10,10,0,0" Click="Back_OnClick" IsEnabled="False">
             <StackPanel>
                 <Image Source="Resources/previous.png"/>
@@ -37,7 +38,13 @@
                 <Image Source="Resources/properties.png"/>
             </StackPanel>
         </Button>
-        <Grid x:Name="Panel" Height="673" Margin="0,60,4.6,5.4"/>
+        <Button x:Name="CheckForUpdates" BorderThickness="0" HorizontalAlignment="Right"  VerticalAlignment="Top" Width="40" Height="40" Background="{x:Null}" Margin="0,10,832.6,0" Click="CheckForUpdates_OnClick">
+            <StackPanel>
+                <Image Source="Resources/download.png"/>
+            </StackPanel>
+        </Button>
+        <Grid x:Name="Panel" Margin="0,60,4.6,32.4"/>
+        <TextBlock x:Name="Notification" HorizontalAlignment="Left" Margin="805,711,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="18" Width="200" MouseUp="Notification_MouseUp"/>
     </Grid>
 </Window>
 

@@ -45,6 +45,7 @@
     <Compile Include="Authentication.cs" />
     <Compile Include="Client.cs" />
     <Compile Include="ClientManager.cs" />
+    <Compile Include="ClientState.cs" />
     <Compile Include="Component.cs" />
     <Compile Include="CompositeComponents.cs" />
     <Compile Include="ContentFactory.cs" />

@@ -40,3 +40,5 @@ D:\Projects\Upwork\Master Diction\Master Diction\Diction Master\obj\Debug\Dictio
 D:\Projects\Upwork\Master Diction\Master Diction\Diction Master\obj\Debug\Diction Master - Client.csproj.GenerateResource.Cache
 D:\Projects\Upwork\Master Diction\Master Diction\Diction Master\obj\Debug\Diction Master.exe
 D:\Projects\Upwork\Master Diction\Master Diction\Diction Master\obj\Debug\Diction Master.pdb
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master\obj\Debug\UserControls\HomePage.g.cs
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master\obj\Debug\UserControls\HomePage.baml

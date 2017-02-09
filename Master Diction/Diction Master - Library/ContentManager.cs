@@ -54,7 +54,7 @@ namespace Diction_Master___Library
         /// <summary>
         /// 
         /// </summary>
-        private long _globalIdCounter;
+        private long _globalIdCounter { get; set; }
         /// <summary>
         /// 
         /// </summary>
@@ -196,7 +196,8 @@ namespace Diction_Master___Library
                 ComponentID = component.ID,
                 ParentID = component.ParentID,
                 Status = status,
-                Component = component
+                Component = component,
+                Date = DateTime.Now
             };
             switch (_type)
             {
@@ -264,13 +265,13 @@ namespace Diction_Master___Library
             switch (type)
             {
                 case ApplicationType.Diction:
-                    _clientManagers[type].Update(ChangesDiction);
+                    _clientManagers[type].Update(ChangesDiction, DateTime.Now);
                     break;
                 case ApplicationType.Teachers:
-                    _clientManagers[type].Update(ChangesTeachers);
+                    _clientManagers[type].Update(ChangesTeachers, DateTime.Now);
                     break;
                 case ApplicationType.Audio:
-                    _clientManagers[type].Update(ChangesAudio);
+                    _clientManagers[type].Update(ChangesAudio, DateTime.Now);
                     break;
                 default:
                     break;

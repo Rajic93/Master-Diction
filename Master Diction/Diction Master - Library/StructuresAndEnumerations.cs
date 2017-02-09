@@ -33,6 +33,7 @@ namespace Diction_Master___Library
         Teachers
     }
 
+    [Serializable]
     public enum ContentStatus
     {
         Add,
@@ -95,12 +96,31 @@ namespace Diction_Master___Library
     }
 
     [Serializable]
+    public enum NotificationType
+    {
+        SubscriptionExpired,
+        UpdateAvailable
+    }
+
+    [Serializable]
     public struct ContentVersionInfo
     {
         public long ComponentID;
         public long ParentID;
         public ContentStatus Status;
         public Component Component;
+        public DateTime Date;
+    }
+
+    [Serializable]
+    public struct PendingNotification
+    {
+        public NotificationType NotificationType;
+        public long SubscriptionID;
+        public DateTime UpdateVersion;
+        public long ClientID;
+        public string IPAddress;
+        public int Port;
     }
 
     [Serializable]

@@ -16,7 +16,6 @@ namespace Diction_Master___Library
 {
     public class ClientManager : IObserver
     {
-        private ClientManager clientManager;
         private static object _lock = new object();
 
         private int _globalIDCounter {get; set;}
@@ -24,8 +23,10 @@ namespace Diction_Master___Library
 
         private List<Client> _clients { get; set; }
         private object _clientsLock = new object();
-        private Queue<Client> _unableToContact { set; get; }
+        private Queue<Client> _unableToContact { get; set; }
         private object _unableToContactLock = new object();
+
+        private List<PendingNotification> _pendingNotifications { get; set; }
 
         private Authentication _auth;
         private string _IPAddress = "192.168.56.1";
@@ -33,8 +34,9 @@ namespace Diction_Master___Library
         private ApplicationType _clientsType;
         private bool _running = true;
 
-        private List<ContentVersionInfo> _changes;
-        private DateTime _currentVersion;
+        private List<ContentVersionInfo> _changes { get; set; }
+        private DateTime _currentVersion { get; set; }
+
         private object _changesLock = new object();
 
         private bool _updateInProgress = false;
@@ -42,6 +44,7 @@ namespace Diction_Master___Library
         private Thread _listeningThread;
         private Thread _retryThread;
         private Thread _updateThread;
+        private Thread _checkSubscriptionsThread;
 
         #region Properties
 
@@ -89,11 +92,14 @@ namespace Diction_Master___Library
             _clients = new List<Client>();
             _unableToContact = new Queue<Client>();
             _changes = new List<ContentVersionInfo>();
+            _pendingNotifications = new List<PendingNotification>();
             _listeningThread = new Thread(ListenForIncomingClientConnections);
+            _checkSubscriptionsThread = new Thread(CheckSubscriptions);
             _clientsType = type;
             LoadConfig();
         }
-        
+
+        #region Config
 
         private void SaveConfig()
         {
@@ -124,7 +130,7 @@ namespace Diction_Master___Library
             catch (SerializationException e)
             {
                 Console.WriteLine("Failed to serialize. Reason: " + e.Message);
-                
+
             }
             finally
             {
@@ -182,7 +188,7 @@ namespace Diction_Master___Library
                 catch (SerializationException e)
                 {
                     Console.WriteLine("Failed to deserialize. Reason: " + e.Message);
-                    
+
                 }
                 finally
                 {
@@ -195,7 +201,9 @@ namespace Diction_Master___Library
             //    _clients = serializer.Deserialize(new XmlTextReader("Clients.xml")) as List<Client>;
             //if (File.Exists("TeachersAppContentManifest.xml"))
             //    Topics = serializer.Deserialize(new XmlTextReader("TeachersAppContentManifest.xml")) as List<Component>;
-        }
+        } 
+
+        #endregion
 
         public void Start()
         {
@@ -206,6 +214,7 @@ namespace Diction_Master___Library
             });
             _retryThread.Start();
             _listeningThread.Start();
+            _checkSubscriptionsThread.Start();
         }
 
         public void Stop()
@@ -227,8 +236,9 @@ namespace Diction_Master___Library
             SaveConfig();
         }
 
-        public void Update(List<ContentVersionInfo> changes)
+        public void Update(List<ContentVersionInfo> changes, DateTime currentVersion)
         {
+            _currentVersion = currentVersion;
             _updateThread = new Thread(() =>
             {
                 _updateInProgress = true;
@@ -239,7 +249,7 @@ namespace Diction_Master___Library
                 }
                 foreach (Client client in _clients)
                 {
-                    UpdateUser(client);
+                    NotifyUser(client, _currentVersion);
                 }
                 _updateInProgress = false;
             });
@@ -300,7 +310,7 @@ namespace Diction_Master___Library
                                 try
                                 {
                                     //try to contact and if it is successfull remove it from queue
-                                    UpdateUser(client);
+                                    NotifyUser(client, _currentVersion);
                                 }
                                 catch (Exception)
                                 {
@@ -319,6 +329,11 @@ namespace Diction_Master___Library
                     sleep *= 2;
                 Thread.Sleep(sleep);
             }
+        }
+
+        public DateTime GetCurrentVersionDate()
+        {
+            return _currentVersion;
         }
 
         public int GetUpToDateClients()
@@ -357,6 +372,14 @@ namespace Diction_Master___Library
             return _running;
         }
 
+        private void CheckSubscriptions()
+        {
+            foreach (Client client in _clients)
+            {
+                CheckSubscription(client);
+            }
+        }
+
         private void ListenForIncomingClientConnections()
         {
             //manage exceptions
@@ -386,7 +409,7 @@ namespace Diction_Master___Library
             return _clients.Exists(x => x.Username == username);
         }
 
-        public long CreateNewUser(string username, byte[] password, byte[] salt)
+        public long CreateNewUser(string username, byte[] password, byte[] salt, IPAddress address, int port)
         {
             long id = GetId();
             lock (_clientsLock)
@@ -400,7 +423,9 @@ namespace Diction_Master___Library
                     RegistrationDate = DateTime.Now,
                     LastUpdate = DateTime.Now,
                     ActiveSubscriptions = new List<Subscription>(),
-                    ExpiredSubscription = new List<Subscription>()
+                    ExpiredSubscription = new List<Subscription>(),
+                    IpAddress = address,
+                    Port = port
                 });
             }
             return id;
@@ -431,23 +456,32 @@ namespace Diction_Master___Library
             }
         }
 
-        public void UpdateUser(Client client)
+        public void NotifyUser(Client client, DateTime currentVersion)
         {
             //connect to client, notify about updates and send if confirmed
             //if not confirmed put it 
-            if (client.LastUpdate < _currentVersion)
+            if (client.LastUpdate < currentVersion)
             {
                 try
                 {
                     //try to connect to client
-                    
-                    //
-                    
+                    Authentication auth = new Authentication(SocketType.Stream, AddressFamily.InterNetwork, ProtocolType.Tcp);
+                    auth.NotifyServerSide(new PendingNotification
+                    {
+                        ClientID = client.ID,
+                        IPAddress = client.IpAddress.ToString(),
+                        Port = client.Port,
+                        NotificationType = NotificationType.UpdateAvailable,
+                        UpdateVersion = currentVersion
+                    }, client.IpAddress.ToString(), 50000);
                 }
                 catch (Exception ex)
                 {
                     //failed to connect to client add to 
-                    throw new Exception(ex.Message);
+                    lock (_unableToContactLock)
+                    {
+                        _unableToContact.Enqueue(client);
+                    }
                 }
             }
         }
@@ -471,19 +505,22 @@ namespace Diction_Master___Library
                 if (validation != KeyValidation.Invalid)
                 {
                     SubscriptionType type = (validation == KeyValidation.ValidFullYear) ? SubscriptionType.Year : SubscriptionType.Term;
-                    _clients.Find(x => x.ID == clientID).ActiveSubscriptions.Add(new Subscription
+                    if (_clients.Exists(x => x.ID == clientID))
                     {
-                        ID = id,
-                        ClientID = clientID,
-                        CourseID = courseID,
-                        EduLevelID = eduLevelID,
-                        GradeID = gradeID,
-                        TermID = termID,
-                        SubscriptionType = type,
-                        ExpirationDateTime = now,
-                        Key = key
-                    });
-                    return new KeyValuePair<long, DateTime>(id, now); 
+                        _clients.Find(x => x.ID == clientID).ActiveSubscriptions.Add(new Subscription
+                        {
+                            ID = id,
+                            ClientID = clientID,
+                            CourseID = courseID,
+                            EduLevelID = eduLevelID,
+                            GradeID = gradeID,
+                            TermID = termID,
+                            SubscriptionType = type,
+                            ExpirationDateTime = now,
+                            Key = key
+                        });
+                        return new KeyValuePair<long, DateTime>(id, now);
+                    }
                 }
                 return new KeyValuePair<long, DateTime>();
             }
@@ -529,6 +566,37 @@ namespace Diction_Master___Library
             }
         }
 
+        public void CheckSubscription(Client client)
+        {
+            List<Subscription> subs = new List<Subscription>(client.ActiveSubscriptions);
+            foreach (Subscription sub in subs)
+            {
+                if (sub.ExpirationDateTime >= DateTime.Now)
+                {
+                    client.ActiveSubscriptions.Remove(sub);
+                    client.ExpiredSubscription.Add(sub);
+                    PendingNotification notification = new PendingNotification()
+                    {
+                        ClientID = client.ID,
+                        IPAddress = client.IpAddress.ToString(),
+                        Port = client.Port,
+                        NotificationType = NotificationType.SubscriptionExpired,
+                        SubscriptionID = sub.ID
+                    };
+                    //send notification
+                    try
+                    {
+                        Authentication auth = new Authentication(SocketType.Stream, AddressFamily.InterNetwork, ProtocolType.Tcp);
+                        auth.NotifyServerSide(notification, client.IpAddress.ToString(), 50000);
+                    }
+                    catch (Exception)
+                    {
+                        _pendingNotifications.Add(notification);
+                    }
+                }
+            }
+        }
+
         #endregion
 
         public byte[] GetSalt(string username)
@@ -543,6 +611,11 @@ namespace Diction_Master___Library
             return _clients.Exists(x => x.Username == username)
                 ? _clients.Find(x => x.Username == username).Password
                 : null;
+        }
+
+        public List<ContentVersionInfo> GetChanges()
+        {
+            return new List<ContentVersionInfo>(_changes);
         }
     }
 }

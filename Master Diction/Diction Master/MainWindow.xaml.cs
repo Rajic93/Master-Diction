@@ -25,6 +25,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Runtime.Serialization;
 using Diction_Master;
 using System.Threading;
+using Diction_Master.UserControls;
 
 namespace Diction_Master___Library
 {
@@ -55,6 +56,7 @@ namespace Diction_Master___Library
         private readonly Stack<UserControl> _nextControls;
 
         private Thread _backgroundWorker;
+        private Thread _listeningThread;
         
 
         public MainWindow()
@@ -127,6 +129,8 @@ namespace Diction_Master___Library
 
         private void BackgroundWork()
         {
+            _listeningThread = new Thread(() => ListenForNotifications());
+            _listeningThread.Start();
             while (true)
             {
                 if (_state._registered && _state.LocalRegistration)
@@ -137,7 +141,23 @@ namespace Diction_Master___Library
                 {
                     TrySubscribe(_state._pendingSubscriptions.First());
                 }
+                if (_state._pendingNotification)
+                {
+                    //show notifications
+                    int num = _state._notifications.Count;
+                    string notif = num + " Total Notification";
+                    if (num > 1)
+                        notif += "s";
+                    Notification.Text = notif;
+                }
             }
+        }
+
+        private void ListenForNotifications()
+        {
+            Authentication auth = new Authentication(SocketType.Stream, AddressFamily.InterNetwork, ProtocolType.Tcp);
+            auth.SetNotificationHandler(_state);
+            auth.Listen(_state._serverIPAdd, 50000, null);
         }
 
         private void TryRegister()
@@ -166,10 +186,15 @@ namespace Diction_Master___Library
                 auth.Connect(_state._serverIPAdd, _state._port);
                 KeyValuePair<long, DateTime> ret = auth.SubscribeClientSide(_state.clientProfile.Username, _state._pass, _state.clientProfile.Salt, subscription.Key,
                     _state.clientProfile.ID, subscription.CourseID, subscription.EduLevelID, subscription.GradeID, subscription.TermID);
-                subscription.ID = ret.Key;
-                subscription.ExpirationDateTime = ret.Value;
-                _state.clientProfile.ActiveSubscriptions.Add(subscription);
-                _state._pendingSubscriptions.Remove(subscription);
+                if (ret.Key != 0)
+                {
+                    subscription.ID = ret.Key;
+                    subscription.ExpirationDateTime = ret.Value;
+                    _state.clientProfile.ActiveSubscriptions.Add(subscription);
+                    _state._pendingSubscriptions.Remove(subscription); 
+                }
+                else
+                    Thread.Sleep(10000);
             }
             catch (Exception)
             {
@@ -185,7 +210,16 @@ namespace Diction_Master___Library
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             _backgroundWorker.Abort();
+            _listeningThread.Abort();
             SaveConfig();
+        }
+
+        private void Notification_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            if (Notification.Text != "")
+            {
+
+            }
         }
 
         private void Back_OnClick(object sender, RoutedEventArgs e)
@@ -307,6 +341,13 @@ namespace Diction_Master___Library
 
         }
 
+        private void CheckForUpdates_OnClick(object sender, RoutedEventArgs e)
+        {
+            Authentication auth = new Authentication(SocketType.Stream, AddressFamily.InterNetwork, ProtocolType.Tcp);
+            auth.Connect(_state._serverIPAdd, _state._port);
+            auth.
+        }
+
         #endregion
 
         #region Animation
@@ -350,7 +391,7 @@ namespace Diction_Master___Library
                 if (_keyType != KeyValidation.Invalid) //valid key FX8hMdt5JixcCokAwdik2B4A
                 {
                     //save key and create profile
-                    _key = key;
+                    _key = "FX8hMdt5JixcCokAwdik2B4A";// key;
                     if (_keyType == KeyValidation.ValidOneTerm)
                     {
                         _subType = SubscriptionType.Term;
@@ -484,7 +525,12 @@ namespace Diction_Master___Library
                         else
                         {
                             MessageBox.Show("Login failed: bad credetials");
-                            _state._loggedIn = false;
+                            if (login.textBox.Text == _state.clientProfile.Username &&
+                            _state.clientProfile.Password.SequenceEqual(Authentication.CreateHashedPassword(Encoding.Unicode.GetBytes(login.textBox1.Text), _state.clientProfile.Salt)))
+                            {
+                                _state._loggedIn = true;
+                                ShowContent();
+                            }
                         }
                     }
                     catch (Exception)
@@ -552,60 +598,30 @@ namespace Diction_Master___Library
                 //list all available content
                 _previousControls.Push(Panel.Children[0] as UserControl);
                 Back.IsEnabled = true;
-                Panel.Children.Clear();
-                _currentControl = new ContentContainer();
-                Panel.Children.Add(_currentControl);
+                HomePage home = new HomePage(_state._availableCourses)
+                {
+                    VerticalAlignment = VerticalAlignment.Stretch,
+                    HorizontalAlignment = HorizontalAlignment.Stretch
+                };
+                NextControlAnimation(_currentControl, home);
+                home.ShowContent.Click += delegate (object sender, RoutedEventArgs args)
+                {
+                    _previousControls.Push(Panel.Children[0] as UserControl);
+                    Back.IsEnabled = true;
+                    ContentContainer container = new ContentContainer()
+                    {
+                        VerticalAlignment = VerticalAlignment.Stretch,
+                        HorizontalAlignment = HorizontalAlignment.Stretch
+                    };
+                    NextControlAnimation(_currentControl, container);
+                    _currentControl = container;
+                };
+                _currentControl = home;
             }
             else
             {
                 ChooseContent();
             }
-        }
-
-        private void GetValue()
-        {
-            RegistrationKey regKey = new RegistrationKey();
-            regKey.HorizontalAlignment = HorizontalAlignment.Center;
-            regKey.VerticalAlignment = VerticalAlignment.Center;
-            regKey.Opacity = 1;
-
-            LanguageSelection selection = new LanguageSelection()
-            {
-                HorizontalAlignment = HorizontalAlignment.Center,
-                VerticalAlignment = VerticalAlignment.Center,
-                Opacity = 0
-            };
-            Register reg = new Register()
-            {
-                HorizontalAlignment = HorizontalAlignment.Center,
-                VerticalAlignment = VerticalAlignment.Center,
-                Opacity = 0
-            };
-            LevelSelection level = new LevelSelection()
-            {
-                HorizontalAlignment = HorizontalAlignment.Center,
-                VerticalAlignment = VerticalAlignment.Center,
-                Opacity = 0
-            };
-            GradeSelection grade = new GradeSelection(EducationalLevelType.Primary)
-            {
-                HorizontalAlignment = HorizontalAlignment.Center,
-                VerticalAlignment = VerticalAlignment.Center,
-                Opacity = 0
-            };
-            TermSelection term = new TermSelection()
-            {
-                HorizontalAlignment = HorizontalAlignment.Center,
-                VerticalAlignment = VerticalAlignment.Center,
-                Opacity = 0
-            };
-            selection.button.Click += delegate (object sender, RoutedEventArgs args) { NextControlAnimation(selection, level); };
-            level.button.Click += delegate (object sender, RoutedEventArgs args) { NextControlAnimation(level, grade); };
-            grade.button.Click += delegate (object sender, RoutedEventArgs args) { NextControlAnimation(grade, term); };
-            Content = regKey;
-
-            Width = selection.Width + 20;
-            Height = selection.Height + 40;
         }
 
         private void ChooseContent()
@@ -693,13 +709,21 @@ namespace Diction_Master___Library
                     //ids and key are hardcoded
                     long clID, crsID, eduID, grID, tmID;
                     clID = crsID = eduID = grID = tmID = 0;
-                    string key = "";
                     KeyValuePair<long, DateTime> ret = _auth.SubscribeClientSide(_state.clientProfile.Username, _state._pass, _state.clientProfile.Salt,
-                        key, clID, crsID, eduID, grID, tmID);
-                    subscription.ID = ret.Key;
-                    subscription.ExpirationDateTime = ret.Value;
-                    _state._contentEnabled = true;
-                    _state.clientProfile.ActiveSubscriptions.Add(subscription);
+                        _key, _state.clientProfile.ID, crsID, eduID, grID, tmID);
+
+                    if (ret.Key != 0)
+                    {
+                        subscription.ID = ret.Key;
+                        subscription.ExpirationDateTime = ret.Value; //not good date - it should be this plus something
+                        _state._contentEnabled = true;
+                        _state.clientProfile.ActiveSubscriptions.Add(subscription); 
+                    }
+                    else
+                    {
+                        _state._contentEnabled = true;
+                        _state._pendingSubscriptions.Add(subscription);
+                    }
                 }
                 catch (Exception)
                 {
@@ -719,6 +743,52 @@ namespace Diction_Master___Library
         #endregion
 
         #region Potential Delete
+
+        private void GetValue()
+        {
+            RegistrationKey regKey = new RegistrationKey();
+            regKey.HorizontalAlignment = HorizontalAlignment.Center;
+            regKey.VerticalAlignment = VerticalAlignment.Center;
+            regKey.Opacity = 1;
+
+            LanguageSelection selection = new LanguageSelection()
+            {
+                HorizontalAlignment = HorizontalAlignment.Center,
+                VerticalAlignment = VerticalAlignment.Center,
+                Opacity = 0
+            };
+            Register reg = new Register()
+            {
+                HorizontalAlignment = HorizontalAlignment.Center,
+                VerticalAlignment = VerticalAlignment.Center,
+                Opacity = 0
+            };
+            LevelSelection level = new LevelSelection()
+            {
+                HorizontalAlignment = HorizontalAlignment.Center,
+                VerticalAlignment = VerticalAlignment.Center,
+                Opacity = 0
+            };
+            GradeSelection grade = new GradeSelection(EducationalLevelType.Primary)
+            {
+                HorizontalAlignment = HorizontalAlignment.Center,
+                VerticalAlignment = VerticalAlignment.Center,
+                Opacity = 0
+            };
+            TermSelection term = new TermSelection()
+            {
+                HorizontalAlignment = HorizontalAlignment.Center,
+                VerticalAlignment = VerticalAlignment.Center,
+                Opacity = 0
+            };
+            selection.button.Click += delegate (object sender, RoutedEventArgs args) { NextControlAnimation(selection, level); };
+            level.button.Click += delegate (object sender, RoutedEventArgs args) { NextControlAnimation(level, grade); };
+            grade.button.Click += delegate (object sender, RoutedEventArgs args) { NextControlAnimation(grade, term); };
+            Content = regKey;
+
+            Width = selection.Width + 20;
+            Height = selection.Height + 40;
+        }
 
         private bool CreateSubsc(Socket socket, string username)
         {
@@ -800,5 +870,6 @@ namespace Diction_Master___Library
         }
 
         #endregion
+
     }
 }

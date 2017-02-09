@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Runtime.Remoting.Messaging;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Security;
 using System.Security.Cryptography;
 using System.Text;
@@ -14,6 +16,11 @@ namespace Diction_Master___Library
 {
     public class Authentication
     {
+        public delegate bool Subscribe(Socket socket, string username);
+
+        public delegate void HandleNotification(DateTime currentVersion);
+
+
         private Socket _socket;
         private AddressFamily _addressFamily;
         private SocketType _socketType;
@@ -23,13 +30,18 @@ namespace Diction_Master___Library
 
         private bool _running = true;
 
-        public delegate bool Subscribe(Socket socket, string username);
+        private ClientState _state;
 
         public Authentication(SocketType socketType, AddressFamily family, ProtocolType protocolType)
         {
             _addressFamily = family;
             _socketType = socketType;
             _protocolType = protocolType;
+        }
+
+        public void SetNotificationHandler(ClientState state)
+        {
+            _state = state;
         }
 
         public int Connect(string ipAdd, int port)
@@ -106,10 +118,12 @@ namespace Diction_Master___Library
                         RegisterServerSide(socket, clientManager);
                     else if (command.Contains("SUBSCRIBE"))
                         SubscribeServerSide(socket, clientManager);
-                    else if (command.Contains("SUBSCRIBE"))
-                        RenewSubsServerSide(socket, clientManager);
-                    else if (command.Contains("CHKUPDATE"))
-                        RenewSubsServerSide(socket, clientManager); 
+                    else if (command.Contains("NOTIFICATION"))
+                        NotifyClientSide(socket);
+                    else if (command.Contains("CHKUPDATES"))
+                        CheckUpdatesServerSide(socket, clientManager);
+                    else if (command.Contains("UPDATE"))
+                        UpdateServerSide(socket, clientManager); 
                 } while (!command.Contains("TERMINATE"));
                 Close(socket);
             }
@@ -207,10 +221,12 @@ namespace Diction_Master___Library
                     //password is ok
                     socket.Send(ok);
                 }
-                socket.Send(err);
+                else
+                    socket.Send(err);
             }
-            //user does not exist
-            socket.Send(err);
+            else
+                //user does not exist
+                socket.Send(err);
         }
 
         #endregion
@@ -297,7 +313,8 @@ namespace Diction_Master___Library
                 byte[] pass = new byte[64];
                 buffer.CopyTo(pass, 0);
                 //send ok: id
-                long id = clientManager.CreateNewUser(username, pass, salt);
+                IPEndPoint endPoint = socket.RemoteEndPoint as IPEndPoint;
+                long id = clientManager.CreateNewUser(username, pass, salt, endPoint.Address, endPoint.Port);
                 socket.Send(Encoding.Unicode.GetBytes("OK"));
                 socket.Send(BitConverter.GetBytes(id));
             }
@@ -327,14 +344,15 @@ namespace Diction_Master___Library
                 _socket.Send(usernameBytes);
                 ok = new byte[4];
                 _socket.Receive(ok);
+                tmp = Encoding.Unicode.GetString(ok);
                 if (Encoding.Unicode.GetString(ok) == "OK")
                 {
                     //send hashed password
                     byte[] hash = CreateHashedPassword(Encoding.Unicode.GetBytes(password), salt);
                     int len = hash.Length;
-                    _socket.Send(BitConverter.GetBytes(len));
                     _socket.Send(hash);
                     _socket.Receive(ok);
+                    tmp = Encoding.Unicode.GetString(ok);
                     if (Encoding.Unicode.GetString(ok) == "OK")
                     {
                         //send details and get new subscription
@@ -347,6 +365,7 @@ namespace Diction_Master___Library
                         BitConverter.GetBytes(termID).CopyTo(ids, 32);
                         _socket.Send(ids);
                         _socket.Receive(ok);
+                        tmp = Encoding.Unicode.GetString(ok);
                         if (Encoding.Unicode.GetString(ok) == "OK")
                         {
                             //send key
@@ -354,18 +373,20 @@ namespace Diction_Master___Library
                             _socket.Receive(ok);
                             if (Encoding.Unicode.GetString(ok) == "OK")
                             {
-                                byte[] buffer = new byte[20];
+                                byte[] buffer = new byte[80];
                                 _socket.Receive(buffer);
                                 long id;
                                 byte[] idBytes = new byte[8];
-                                buffer.CopyTo(idBytes, 0);
+                                Array.Copy(buffer, idBytes, 8);
+
+
                                 id = BitConverter.ToInt64(idBytes, 0);
                                 byte[] intBytes = new byte[4];
-                                buffer.CopyTo(intBytes, 8);
+                                Array.Copy(buffer, 8, intBytes, 0, 4);
                                 int day = BitConverter.ToInt32(intBytes, 0);
-                                buffer.CopyTo(intBytes, 12);
+                                Array.Copy(buffer, 12, intBytes, 0, 4);
                                 int month = BitConverter.ToInt32(intBytes, 0);
-                                buffer.CopyTo(intBytes, 16);
+                                Array.Copy(buffer, 16, intBytes, 0, 4);
                                 int year = BitConverter.ToInt32(intBytes, 0);
                                 return new KeyValuePair<long, DateTime>(id, new DateTime(year, month, day));
                             }
@@ -392,9 +413,10 @@ namespace Diction_Master___Library
                 //user exists send
                 socket.Send(ok);
                 //subscribe(socket, username);
-                buffer = new byte[512];
+                buffer = new byte[64];
                 socket.Receive(buffer);
-                if (buffer.SequenceEqual(clientManager.GetHashedPassword(username)))
+                byte[] hash = clientManager.GetHashedPassword(username);
+                if (buffer.SequenceEqual(hash))
                 {
                     //valid password send ok
                     socket.Send(ok);
@@ -416,20 +438,22 @@ namespace Diction_Master___Library
                     socket.Send(ok);
                     //receive key
                     buffer = new byte[48];
-                    socket.Receive(buffer);
-                    string key = Encoding.Unicode.GetString(buffer);
+                    socket.Receive(buffer); // here
+                    string key = Encoding.Unicode.GetString(buffer).Trim('\0');
                     KeyValuePair<long, DateTime> info = clientManager.CreateNewSubscription(clientID, courseID, eduLevelID, gradeID, termID, key);
                     if (info.Key != 0)
                     {
                         //subscription created
                         socket.Send(ok);
                         buffer = new byte[20];
-                        BitConverter.GetBytes(info.Key).CopyTo(buffer, 0);
+
+                        long id = info.Key;
+                        BitConverter.GetBytes(id).CopyTo(buffer, 0);
                         BitConverter.GetBytes(info.Value.Day).CopyTo(buffer, 8);
-                        BitConverter.GetBytes(info.Value.Month).CopyTo(buffer, 12); ;
+                        BitConverter.GetBytes(info.Value.Month).CopyTo(buffer, 12);
                         BitConverter.GetBytes(info.Value.Year).CopyTo(buffer, 16);
                         //send subscription key and date
-                        socket.Send(buffer); 
+                        socket.Send(buffer);
                     }
                     else
                         socket.Send(err);
@@ -486,6 +510,262 @@ namespace Diction_Master___Library
 
         #endregion
 
+        #region Notify
+
+        public void NotifyServerSide(PendingNotification notification, string ipAdd, int port)
+        {
+            _addressFamily = AddressFamily.InterNetwork;
+            _ipAddress = IPAddress.Parse(ipAdd);
+            _ipEndPoint = new IPEndPoint(_ipAddress, port);
+            _socket = new Socket(_addressFamily, _socketType, _protocolType);
+            _socket.Connect(_ipEndPoint);
+            if (_socket == null)
+                throw new Exception("Socket is null");
+            //send command
+            string command = "NOTIFICATION";
+            _socket.Send(BitConverter.GetBytes(command.Length * 2));
+            _socket.Send(Encoding.Unicode.GetBytes(command));
+            byte[] status = new byte[4];
+            _socket.Receive(status);
+            if (Encoding.Unicode.GetString(status) == "OK")
+            {
+                MemoryStream ms = new MemoryStream();
+                BinaryFormatter formatter = new BinaryFormatter();
+                formatter.Serialize(ms, notification);
+                byte[] buffer = ms.GetBuffer();
+                _socket.Send(BitConverter.GetBytes(buffer.Length));
+                _socket.Send(buffer);
+                _socket.Receive(status);
+                if (Encoding.Unicode.GetString(status) == "OK")
+                {
+                    command = "TERMINATE";
+                    _socket.Send(BitConverter.GetBytes(command.Length * 2));
+                    _socket.Send(Encoding.Unicode.GetBytes(command));
+                }
+            }
+        }
+
+        public void NotifyClientSide(Socket socket)
+        {
+            byte[] ok = Encoding.Unicode.GetBytes("OK");
+            byte[] er = Encoding.Unicode.GetBytes("ER");
+            socket.Send(ok);
+            byte[] buffer = new byte[4];
+            socket.Receive(buffer);
+            buffer = new byte[BitConverter.ToInt32(buffer, 0)];
+            socket.Receive(buffer);
+            BinaryFormatter formatter = new BinaryFormatter();
+            PendingNotification notification = (PendingNotification)formatter.Deserialize(new MemoryStream(buffer));
+            socket.Send(ok);
+            _state.SetNotification(notification);
+        }
+
+        #endregion
+
+        #region Check For Updates
+
+        public void CheckUpdatesServerSide(Socket socket, ClientManager manager)
+        {
+            byte[] ok = Encoding.Unicode.GetBytes("OK");
+            socket.Send(ok);
+            byte[] buffer = new byte[4];
+            socket.Receive(buffer);
+            buffer = new byte[BitConverter.ToInt32(buffer, 0)];
+            socket.Receive(buffer);
+            BinaryFormatter formatter = new BinaryFormatter();
+            DateTime lastUpdate = (DateTime)formatter.Deserialize(new MemoryStream(buffer));
+            SendChanges(socket, manager, lastUpdate);
+            socket.Send(ok);
+        }
+
+        public List<ContentVersionInfo> CheckUpdatesClientSide(DateTime lastUpdate)
+        {
+            try
+            {
+                if (_socket == null)
+                    throw new Exception("Socket is null");
+                //send command
+                string command = "CHKUPDATES";
+                _socket.Send(BitConverter.GetBytes(command.Length * 2));
+                _socket.Send(Encoding.Unicode.GetBytes(command));
+                byte[] status = new byte[4];
+                _socket.Receive(status);
+                if (Encoding.Unicode.GetString(status) == "OK")
+                {
+                    MemoryStream ms = new MemoryStream();
+                    BinaryFormatter formatter = new BinaryFormatter();
+                    formatter.Serialize(ms, lastUpdate);
+                    byte[] buffer = ms.GetBuffer();
+                    _socket.Send(BitConverter.GetBytes(buffer.Length));
+                    _socket.Send(buffer);
+                    _socket.Receive(status);
+                    if (Encoding.Unicode.GetString(status) == "OK")
+                    {
+                        List<ContentVersionInfo> changes = ReceiveChanges();
+                        return changes;
+                    }
+                }
+                return null;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        private void SendChanges(Socket socket, ClientManager manager, DateTime lastUpdate)
+        {
+            List<ContentVersionInfo> changes = manager.GetChanges();
+            List<ContentVersionInfo> validChanges = changes.Where(x => x.Date > lastUpdate) as List<ContentVersionInfo>;
+            socket.Send(BitConverter.GetBytes(validChanges.Count)); //number of changes
+            foreach (ContentVersionInfo change in validChanges)
+            {
+                byte[] changeBytes = null;
+                //if (change.Date > lastUpdate)
+                {
+                    MemoryStream ms = new MemoryStream();
+                    BinaryFormatter formatter = new BinaryFormatter();
+                    try
+                    {
+                        formatter.Serialize(ms, change);
+                        changeBytes = ms.GetBuffer();
+                    }
+                    catch { }
+                    if (changeBytes != null)
+                    {
+                        int numOfBlocks;
+                        if (changeBytes.Length > 8000)
+                        {
+                            float len = changeBytes.Length / 8000;
+                            numOfBlocks = (int)len;
+                       
+                            if (len - (int)len > 0)
+                                numOfBlocks++;
+                            for (int i = 0; i < numOfBlocks; ++i)
+                            {
+                                byte[] block = new byte[8000];
+                                Array.Copy(changeBytes, 8000 * i, block, 0, 8000);
+                                socket.Send(block);
+                                byte[] echo = new byte[8000];
+                                socket.Receive(echo);
+                                if (!echo.SequenceEqual(block))
+                                    --i;
+                            }
+                        }
+                        else
+                        {
+                        label:
+                            socket.Send(changeBytes);
+                            byte[] echo = new byte[changeBytes.Length];
+                            socket.Receive(echo);
+                            if (!echo.SequenceEqual(changeBytes))
+                                goto label;
+                        }
+                    }
+                }
+            }
+        }
+
+        public List<ContentVersionInfo> ReceiveChanges()
+        {
+            byte[] buffer = new byte[4];
+            _socket.Receive(buffer);
+            int num = BitConverter.ToInt32(buffer, 0);
+
+            return null;
+        }
+
+        #endregion
+
+        #region Update
+
+        public void UpdateServerSide(Socket socket, ClientManager manager)
+        {
+            byte[] ok = Encoding.Unicode.GetBytes("OK");
+            byte[] err = Encoding.Unicode.GetBytes("ER");
+            //response to action
+            _socket.Send(ok);
+            //receive username
+            byte[] buffer = new byte[50];
+            int received = _socket.Receive(buffer);
+            string username = Encoding.Unicode.GetString(buffer).Substring(0, received / 2);
+            //check for existing user
+            if (manager.CheckForUser(username))
+            {
+                //user exists send OK: salt_value
+                byte[] salt = manager.GetSalt(username);
+                _socket.Send(Encoding.Unicode.GetBytes("OK"));
+                _socket.Send(salt);
+                //receive hashed password
+                buffer = new byte[64];
+                _socket.Receive(buffer);
+                byte[] hashedPassword = manager.GetHashedPassword(username);
+                if (buffer.SequenceEqual(hashedPassword))
+                {
+                    //password is ok
+                    _socket.Send(ok);
+                    //receive last update datetime
+                    byte[] dateTime = new byte[24];
+                    socket.Receive(dateTime);
+                    int year, month, day, hour, minute, second;
+                    byte[] intBytes = new byte[4];
+                    Array.Copy(dateTime, 0, intBytes, 0, 4);
+                    year = BitConverter.ToInt32(intBytes, 0);
+                    Array.Copy(dateTime, 4, intBytes, 0, 4);
+                    month = BitConverter.ToInt32(intBytes, 0);
+                    Array.Copy(dateTime, 8, intBytes, 0, 4);
+                    day = BitConverter.ToInt32(intBytes, 0);
+                    Array.Copy(dateTime, 12, intBytes, 0, 4);
+                    hour = BitConverter.ToInt32(intBytes, 0);
+                    Array.Copy(dateTime, 16, intBytes, 0, 4);
+                    minute = BitConverter.ToInt32(intBytes, 0);
+                    Array.Copy(dateTime, 20, intBytes, 0, 4);
+                    second = BitConverter.ToInt32(intBytes, 0);
+                    socket.Send(ok);
+                    SendChanges(socket, manager, new DateTime(year, month, day, hour, minute, second));
+                }
+                else
+                    _socket.Send(err);
+            }
+            else
+                //user does not exist
+                _socket.Send(err);
+        }
+
+        public void UpdateClientSide(string username, string password, DateTime lastUpdate)
+        {
+            //if (_socket == null)
+            //    throw new Exception("Socket is null");
+            ////send action
+            //byte[] login = Encoding.Unicode.GetBytes("UPDATE");
+            //_socket.Send(BitConverter.GetBytes(login.Length));
+            //_socket.Send(login);
+            //byte[] ok = new byte[4];
+            //_socket.Receive(ok);
+            //if (Encoding.Unicode.GetString(ok) == "OK")
+            //{
+            //    //send username
+            //    byte[] usernameBytes = Encoding.Unicode.GetBytes(username);
+            //    _socket.Send(usernameBytes);
+            //    _socket.Receive(ok); //OK: salt_value
+            //    if (Encoding.Unicode.GetString(ok) == "OK")
+            //    {
+            //        //get salt
+            //        byte[] saltBytes = new byte[16];
+            //        _socket.Receive(saltBytes);
+            //        //send hashed password
+            //        byte[] passwordBytes = Encoding.Unicode.GetBytes(password);
+            //        byte[] hashedPassword = CreateHashedPassword(passwordBytes, saltBytes);
+            //        _socket.Send(hashedPassword);
+            //        _socket.Receive(ok);
+            //        if (Encoding.Unicode.GetString(ok) == "OK") ;
+            //            //receive changes
+            //    }
+            //}
+        }
+
+        #endregion
+
         #region Other Methods
 
         public static byte[] CreateHashedPassword(byte[] passwordBytes, byte[] saltBytes)
@@ -503,6 +783,7 @@ namespace Diction_Master___Library
             hashedPassword = algoritm.ComputeHash(hashedPassword);
             return hashedPassword;
         }
+
         public static byte[] GenerateSalt()
         {
             RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider();
@@ -510,6 +791,7 @@ namespace Diction_Master___Library
             rng.GetNonZeroBytes(salt);
             return salt;
         }
+
         #endregion
     }
 }
