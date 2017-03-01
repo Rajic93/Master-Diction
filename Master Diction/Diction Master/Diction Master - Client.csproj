@@ -65,11 +65,11 @@
     <Compile Include="UserControls\ContentContainer.xaml.cs">
       <DependentUpon>ContentContainer.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\ContentViewer.xaml.cs">
-      <DependentUpon>ContentViewer.xaml</DependentUpon>
+    <Compile Include="UserControls\DocumentViewer.xaml.cs">
+      <DependentUpon>DocumentViewer.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\DropDown.xaml.cs">
-      <DependentUpon>DropDown.xaml</DependentUpon>
+    <Compile Include="UserControls\MediaViewer.xaml.cs">
+      <DependentUpon>MediaViewer.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\GradeSelection.xaml.cs">
       <DependentUpon>GradeSelection.xaml</DependentUpon>
@@ -85,6 +85,12 @@
     </Compile>
     <Compile Include="UserControls\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\TextQuestion.xaml.cs">
+      <DependentUpon>TextQuestion.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\QuizViewer.xaml.cs">
+      <DependentUpon>QuizViewer.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\Register.xaml.cs">
       <DependentUpon>Register.xaml</DependentUpon>
@@ -122,11 +128,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControls\ContentViewer.xaml">
+    <Page Include="UserControls\DocumentViewer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControls\DropDown.xaml">
+    <Page Include="UserControls\MediaViewer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -147,6 +153,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\Login.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\TextQuestion.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\QuizViewer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -315,12 +329,6 @@
     <Resource Include="Resources\6th Grade sec.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\nusery1.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\nusery2.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\next.png" />
   </ItemGroup>
   <ItemGroup>
@@ -349,6 +357,48 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\download.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\background.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\plus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\nursery1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\nursery2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\right.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\left.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\quiz.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\video.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\audio.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\document.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\play.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\fullscreen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\stop.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\pause.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -4,29 +4,28 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Diction_Master.UserControls"
-             mc:Ignorable="d" Height="600" Width="800" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
+             mc:Ignorable="d" Height="600" Width="830" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
     <Border BorderBrush="DarkGray" BorderThickness="0, 0, 2, 2" CornerRadius="0,3,0,5" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
-        <Grid Margin="0,81,-0.4,0.4">
+        <Grid Margin="0,0,-0.6,0.4">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <WrapPanel x:Name="Courses" Grid.Row="0" Grid.Column="0" Margin="10,36,9.8,10" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}"/>
+            <WrapPanel x:Name="Courses" Grid.Row="0" Grid.Column="0" Margin="10,35,10,10" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}"/>
             <Grid Grid.Row="0" Grid.Column="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="213*"/>
                     <RowDefinition Height="257*"/>
                     <RowDefinition Height="49*"/>
                 </Grid.RowDefinitions>
-                <WrapPanel x:Name="WrapPanelEducationaLevel" Margin="10,35,10,10.8" Grid.Row="0" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}"/>
+                <WrapPanel x:Name="WrapPanelEducationaLevel" Margin="10,35,10.2,10.6" Grid.Row="0" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}"/>
                 <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Available educational levels" VerticalAlignment="Top" Height="20" Width="158"/>
                 <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="10,5.2,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Available grades" VerticalAlignment="Top" Width="120" Background="{x:Null}" BorderBrush="{x:Null}"/>
                 <WrapPanel x:Name="WrapPanelGrades" Margin="10,33.2,10,11.6" Grid.Row="1" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}"/>
-                <Button x:Name="ShowContent" Content="Show Content" HorizontalAlignment="Center" Margin="120,19.4,120,0" Grid.Row="2" VerticalAlignment="Top" Width="160"/>
+                <Button x:Name="ShowContent" Content="Show Content" HorizontalAlignment="Center" Margin="100,19.4,99.2,0" Grid.Row="2" VerticalAlignment="Top" Width="200"/>
 
             </Grid>
             <TextBox x:Name="textBox1" HorizontalAlignment="Left" Height="23" Margin="10,8,0,0" TextWrapping="Wrap" Text="Available courses" VerticalAlignment="Top" Width="120" Background="{x:Null}" BorderBrush="{x:Null}"/>
-            <WrapPanel Height="65" Margin="10,-70,9.6,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}"/>
         </Grid>
     </Border>
 </UserControl>

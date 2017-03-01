@@ -21,82 +21,127 @@ namespace Diction_Master___Library.UserControls
     /// </summary>
     public partial class GradeSelection : UserControl
     {
-        private Diction_Master___Library.GradeType SelectedGrade;
-        private Diction_Master___Library.EducationalLevelType SelectedEducationalLevel;
-        private string Icon;
+        private Diction_Master___Library.GradeType SelectedGradeType;
+
+        private Component _selectedGrade;
+        private List<Component> _availableGrades;
 
         private Button previousSelected;
 
         public GradeSelection(EducationalLevelType type)
         {
+            _availableGrades = new List<Component>();
             InitializeComponent();
-            if (type == EducationalLevelType.Nursery)
+        }
+
+        internal void SetAvailableGrades(List<Component> components)
+        {
+            foreach (Grade item in components)
             {
-                EnableNursery();
-            }
-            else if (type == EducationalLevelType.Primary)
-            {
-                EnablePrimary();
-            }
-            else if (type == EducationalLevelType.Secondary)
-            {
-                EnableSecondary();
+                _availableGrades.Add(item);
+                switch (item.GradeNum)
+                {
+                    case GradeType.NurseryI:
+                        NurseryI.Visibility = Visibility.Visible;
+                        break;
+                    case GradeType.NurseryII:
+                        NurseryII.Visibility = Visibility.Visible;
+                        break;
+                    case GradeType.PrimaryI:
+                        PrimaryI.Visibility = Visibility.Visible;
+                        break;
+                    case GradeType.PrimaryII:
+                        PrimaryII.Visibility = Visibility.Visible;
+                        break;
+                    case GradeType.PrimaryIII:
+                        PrimaryIII.Visibility = Visibility.Visible;
+                        break;
+                    case GradeType.PrimaryIV:
+                        PrimaryIV.Visibility = Visibility.Visible;
+                        break;
+                    case GradeType.PrimaryV:
+                        PrimaryV.Visibility = Visibility.Visible;
+                        break;
+                    case GradeType.PrimaryVI:
+                        PrimaryVI.Visibility = Visibility.Visible;
+                        break;
+                    case GradeType.SecondaryJuniorI:
+                        SecondaryJuniorI.Visibility = Visibility.Visible;
+                        break;
+                    case GradeType.SecondaryJuniorII:
+                        SecondaryJuniorII.Visibility = Visibility.Visible;
+                        break;
+                    case GradeType.SecondaryJuniorIII:
+                        SecondaryJuniorIII.Visibility = Visibility.Visible;
+                        break;
+                    case GradeType.SecondarySeniorI:
+                        SecondarySeniorI.Visibility = Visibility.Visible;
+                        break;
+                    case GradeType.SecondarySeniorII:
+                        SecondarySeniorII.Visibility = Visibility.Visible;
+                        break;
+                    case GradeType.SecondarySeniorIII:
+                        SecondarySeniorIII.Visibility = Visibility.Visible;
+                        break;
+                    default:
+                        break;
+                }
             }
         }
 
-        private void EnableSecondary()
-        {
-            NurseryI.Visibility = Visibility.Collapsed;
-            NurseryII.Visibility = Visibility.Collapsed;
-            PrimaryI.Visibility = Visibility.Collapsed;
-            PrimaryII.Visibility = Visibility.Collapsed;
-            PrimaryIII.Visibility = Visibility.Collapsed;
-            PrimaryIV.Visibility = Visibility.Collapsed;
-            PrimaryV.Visibility = Visibility.Collapsed;
-            PrimaryVI.Visibility = Visibility.Collapsed;
-            SecondaryJuniorI.Visibility = Visibility.Visible;
-            SecondaryJuniorII.Visibility = Visibility.Visible;
-            SecondaryJuniorIII.Visibility = Visibility.Visible;
-            SecondarySeniorI.Visibility = Visibility.Visible;
-            SecondarySeniorII.Visibility = Visibility.Visible;
-            SecondarySeniorIII.Visibility = Visibility.Visible;
-        }
+        //private void EnableSecondary()
+        //{
+        //    NurseryI.Visibility = Visibility.Collapsed;
+        //    NurseryII.Visibility = Visibility.Collapsed;
+        //    PrimaryI.Visibility = Visibility.Collapsed;
+        //    PrimaryII.Visibility = Visibility.Collapsed;
+        //    PrimaryIII.Visibility = Visibility.Collapsed;
+        //    PrimaryIV.Visibility = Visibility.Collapsed;
+        //    PrimaryV.Visibility = Visibility.Collapsed;
+        //    PrimaryVI.Visibility = Visibility.Collapsed;
+        //    SecondaryJuniorI.Visibility = Visibility.Visible;
+        //    SecondaryJuniorII.Visibility = Visibility.Visible;
+        //    SecondaryJuniorIII.Visibility = Visibility.Visible;
+        //    SecondarySeniorI.Visibility = Visibility.Visible;
+        //    SecondarySeniorII.Visibility = Visibility.Visible;
+        //    SecondarySeniorIII.Visibility = Visibility.Visible;
+        //}
 
-        private void EnablePrimary()
-        {
-            NurseryI.Visibility = Visibility.Collapsed;
-            NurseryII.Visibility = Visibility.Collapsed;
-            PrimaryI.Visibility = Visibility.Visible;
-            PrimaryII.Visibility = Visibility.Visible;
-            PrimaryIII.Visibility = Visibility.Visible;
-            PrimaryIV.Visibility = Visibility.Visible;
-            PrimaryV.Visibility = Visibility.Visible;
-            PrimaryVI.Visibility = Visibility.Visible;
-            SecondaryJuniorI.Visibility = Visibility.Collapsed;
-            SecondaryJuniorII.Visibility = Visibility.Collapsed;
-            SecondaryJuniorIII.Visibility = Visibility.Collapsed;
-            SecondarySeniorI.Visibility = Visibility.Collapsed;
-            SecondarySeniorII.Visibility = Visibility.Collapsed;
-            SecondarySeniorIII.Visibility = Visibility.Collapsed;
-        }
+        //private void EnablePrimary()
+        //{
+        //    NurseryI.Visibility = Visibility.Collapsed;
+        //    NurseryII.Visibility = Visibility.Collapsed;
+        //    PrimaryI.Visibility = Visibility.Visible;
+        //    PrimaryII.Visibility = Visibility.Visible;
+        //    PrimaryIII.Visibility = Visibility.Visible;
+        //    PrimaryIV.Visibility = Visibility.Visible;
+        //    PrimaryV.Visibility = Visibility.Visible;
+        //    PrimaryVI.Visibility = Visibility.Visible;
+        //    SecondaryJuniorI.Visibility = Visibility.Collapsed;
+        //    SecondaryJuniorII.Visibility = Visibility.Collapsed;
+        //    SecondaryJuniorIII.Visibility = Visibility.Collapsed;
+        //    SecondarySeniorI.Visibility = Visibility.Collapsed;
+        //    SecondarySeniorII.Visibility = Visibility.Collapsed;
+        //    SecondarySeniorIII.Visibility = Visibility.Collapsed;
+        //}
 
-        private void EnableNursery()
-        {
-            NurseryI.Visibility = Visibility.Visible;
-            NurseryII.Visibility = Visibility.Visible;
-            PrimaryI.Visibility = Visibility.Collapsed;
-            PrimaryII.Visibility = Visibility.Collapsed;
-            PrimaryIII.Visibility = Visibility.Collapsed;
-            PrimaryIV.Visibility = Visibility.Collapsed;
-            PrimaryV.Visibility = Visibility.Collapsed;
-            PrimaryVI.Visibility = Visibility.Collapsed;
-            SecondaryJuniorI.Visibility = Visibility.Collapsed;
-            SecondaryJuniorII.Visibility = Visibility.Collapsed;
-            SecondaryJuniorIII.Visibility = Visibility.Collapsed;
-            SecondarySeniorI.Visibility = Visibility.Collapsed;
-            SecondarySeniorII.Visibility = Visibility.Collapsed;
-            SecondarySeniorIII.Visibility = Visibility.Collapsed;
-        }
+        //private void EnableNursery()
+        //{
+        //    NurseryI.Visibility = Visibility.Visible;
+        //    NurseryII.Visibility = Visibility.Visible;
+        //    PrimaryI.Visibility = Visibility.Collapsed;
+        //    PrimaryII.Visibility = Visibility.Collapsed;
+        //    PrimaryIII.Visibility = Visibility.Collapsed;
+        //    PrimaryIV.Visibility = Visibility.Collapsed;
+        //    PrimaryV.Visibility = Visibility.Collapsed;
+        //    PrimaryVI.Visibility = Visibility.Collapsed;
+        //    SecondaryJuniorI.Visibility = Visibility.Collapsed;
+        //    SecondaryJuniorII.Visibility = Visibility.Collapsed;
+        //    SecondaryJuniorIII.Visibility = Visibility.Collapsed;
+        //    SecondarySeniorI.Visibility = Visibility.Collapsed;
+        //    SecondarySeniorII.Visibility = Visibility.Collapsed;
+        //    SecondarySeniorIII.Visibility = Visibility.Collapsed;
+        //}
 
         private void Grade_OnClick(object sender, RoutedEventArgs e)
         {
@@ -114,73 +159,69 @@ namespace Diction_Master___Library.UserControls
             switch (((Button)sender).Name)
             {
                 case "NurseryI":
-                    Icon = "pack://application:,,,/Resources/nusery1.png";
-                    SelectedGrade = GradeType.NurseryI;
+                    //Icon = "pack://application:,,,/Resources/nusery1.png";
+                    SelectedGradeType = GradeType.NurseryI;
                     break;
                 case "NurseryII":
-                    Icon = "pack://application:,,,/Resources/nusery2.png";
-                    SelectedGrade = GradeType.NurseryII;
+                    //Icon = "pack://application:,,,/Resources/nusery2.png";
+                    SelectedGradeType = GradeType.NurseryII;
                     break;
                 case "PrimaryI":
-                    Icon = "pack://application:,,,/Resources/1st Grade.png";
-                    SelectedGrade = GradeType.PrimaryI;
+                    //Icon = "pack://application:,,,/Resources/1st Grade.png";
+                    SelectedGradeType = GradeType.PrimaryI;
                     break;
                 case "PrimaryII":
-                    Icon = "pack://application:,,,/Resources/2nd Grade.png";
-                    SelectedGrade = GradeType.PrimaryII;
+                    //Icon = "pack://application:,,,/Resources/2nd Grade.png";
+                    SelectedGradeType = GradeType.PrimaryII;
                     break;
                 case "PrimaryIII":
-                    Icon = "pack://application:,,,/Resources/3rd Grade.png";
-                    SelectedGrade = GradeType.PrimaryIII;
+                    //Icon = "pack://application:,,,/Resources/3rd Grade.png";
+                    SelectedGradeType = GradeType.PrimaryIII;
                     break;
                 case "PrimaryIV":
-                    Icon = "pack://application:,,,/Resources/4th Grade.png";
-                    SelectedGrade = GradeType.PrimaryIV;
+                    //Icon = "pack://application:,,,/Resources/4th Grade.png";
+                    SelectedGradeType = GradeType.PrimaryIV;
                     break;
                 case "PrimaryV":
-                    Icon = "pack://application:,,,/Resources/5th Grade.png";
-                    SelectedGrade = GradeType.PrimaryV;
+                   // Icon = "pack://application:,,,/Resources/5th Grade.png";
+                    SelectedGradeType = GradeType.PrimaryV;
                     break;
                 case "PrimaryVI":
-                    Icon = "pack://application:,,,/Resources/6th Grade.png";
-                    SelectedGrade = GradeType.PrimaryVI;
+                    //Icon = "pack://application:,,,/Resources/6th Grade.png";
+                    SelectedGradeType = GradeType.PrimaryVI;
                     break;
                 case "SecondaryJuniorI":
-                    Icon = "pack://application:,,,/Resources/1st Grade sec.png";
-                    SelectedGrade = GradeType.SecondaryJuniorI;
+                    //Icon = "pack://application:,,,/Resources/1st Grade sec.png";
+                    SelectedGradeType = GradeType.SecondaryJuniorI;
                     break;
                 case "SecondaryJuniorII":
-                    Icon = "pack://application:,,,/Resources/2nd Grade sec.png";
-                    SelectedGrade = GradeType.SecondaryJuniorII;
+                    //Icon = "pack://application:,,,/Resources/2nd Grade sec.png";
+                    SelectedGradeType = GradeType.SecondaryJuniorII;
                     break;
                 case "SecondaryJuniorIII":
-                    Icon = "pack://application:,,,/Resources/3rd Grade sec.png";
-                    SelectedGrade = GradeType.SecondaryJuniorIII;
+                    //Icon = "pack://application:,,,/Resources/3rd Grade sec.png";
+                    SelectedGradeType = GradeType.SecondaryJuniorIII;
                     break;
                 case "SecondarySeniorI":
-                    Icon = "pack://application:,,,/Resources/4th Grade sec.png";
-                    SelectedGrade = GradeType.SecondarySeniorI;
+                    //Icon = "pack://application:,,,/Resources/4th Grade sec.png";
+                    SelectedGradeType = GradeType.SecondarySeniorI;
                     break;
                 case "SecondarySeniorII":
-                    Icon = "pack://application:,,,/Resources/5th Grade sec.png";
-                    SelectedGrade = GradeType.SecondarySeniorII;
+                    //Icon = "pack://application:,,,/Resources/5th Grade sec.png";
+                    SelectedGradeType = GradeType.SecondarySeniorII;
                     break;
                 case "SecondarySeniorIII":
-                    Icon = "pack://application:,,,/Resources/6th Grade sec.png";
-                    SelectedGrade = GradeType.SecondarySeniorIII;
+                    //Icon = "pack://application:,,,/Resources/6th Grade sec.png";
+                    SelectedGradeType = GradeType.SecondarySeniorIII;
                     break;
             }
+            _selectedGrade = _availableGrades.Find(x => (x as Grade).GradeNum == SelectedGradeType);
             button.IsEnabled = true;
         }
 
-        public GradeType GetSelectedGrade()
+        public Component GetSelectedGrade()
         {
-            return SelectedGrade;
-        }
-
-        public string GetSelectedIcon()
-        {
-            return Icon;
+            return _selectedGrade;
         }
     }
 }

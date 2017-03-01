@@ -30,7 +30,7 @@ namespace Diction_Master___Server
         /// <summary>
         /// 
         /// </summary>
-        private readonly LanguagesHashTable _languages;
+        private readonly LanguagesDictionary _languages;
         /// <summary>
         /// 
         /// </summary>
@@ -63,7 +63,7 @@ namespace Diction_Master___Server
         public Content(Diction_Master___Library.ContentManager manager)
         {
             _contentManager = manager;
-            _languages = new LanguagesHashTable();
+            _languages = new LanguagesDictionary();
             _courseImagesCache = new Dictionary<string, long>();
             _educationalLevelDictionary = new Dictionary<string, long>();
             _gradesDictionary = new Dictionary<string, long>();

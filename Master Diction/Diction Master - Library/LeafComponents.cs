@@ -1,4 +1,4 @@
-﻿
+﻿ 
 
 using System;
 using System.Collections.ObjectModel;
@@ -7,7 +7,7 @@ using System.Xml.Serialization;
 namespace Diction_Master___Library
 {
     [Serializable]
-    [XmlInclude(typeof(Question))]
+    [XmlInclude(typeof(Question))] 
     [XmlInclude(typeof(ContentFile))]
     public class LeafComponent : Component
     {

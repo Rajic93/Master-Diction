@@ -8,14 +8,14 @@
              Height="230" Width="648">
     <Border BorderBrush="DarkGray" BorderThickness="0, 0, 2, 2" CornerRadius="0,3,0,5">
         <Grid Margin="0,0,0,0.4" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
-            <WrapPanel HorizontalAlignment="Left" Height="202" VerticalAlignment="Top" Width="645" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}">
-                <Button x:Name="Nursery" Margin="30,25,45,15"  Height="150" Width="150" Click="Nursery_OnClick" Opacity="0.6">
+            <WrapPanel x:Name="Content" HorizontalAlignment="Left" Height="202" VerticalAlignment="Top" Width="645" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}">
+                <Button x:Name="Nursery" Margin="30,25,45,15"  Height="150" Width="150" Click="Nursery_OnClick" Opacity="0.6" Visibility="Collapsed">
                     <Image x:Name="ImageNursery" Source="../Resources/nursery.jpg"></Image>
                 </Button>
-                <Button x:Name="Primary" Margin="15,25,45,15"  Height="150" Width="150" Click="Primary_OnClick" Opacity="0.6">
+                <Button x:Name="Primary" Margin="15,25,45,15"  Height="150" Width="150" Click="Primary_OnClick" Opacity="0.6" Visibility="Collapsed">
                     <Image x:Name="ImagePrimary" Source="../Resources/primary.jpg"></Image>
                 </Button>
-                <Button x:Name="Secondary" Margin="15,25,45,15"  Height="150" Width="150" Click="Secondary_OnClick" Opacity="0.6">
+                <Button x:Name="Secondary" Margin="15,25,45,15"  Height="150" Width="150" Click="Secondary_OnClick" Opacity="0.6" Visibility="Collapsed">
                     <Image x:Name="ImageSecondary" Source="../Resources/secondary.jpg"></Image>
                 </Button>
             </WrapPanel>

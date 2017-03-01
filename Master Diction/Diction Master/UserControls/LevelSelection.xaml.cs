@@ -21,27 +21,40 @@ namespace Diction_Master___Library.UserControls
     /// </summary>
     public partial class LevelSelection : UserControl
     {
-        private Diction_Master___Library.GradeType SelectedGrade;
         private Diction_Master___Library.EducationalLevelType SelectedEducationalLevel;
         private string Icon;
-        private bool gradeSelected;
         private bool levelSelected;
 
-        private Button previousSelected;
+        private Component _selectedGrade;
+        private List<Component> _availableLevels;
+        
+
 
         public LevelSelection()
         {
+            _availableLevels = new List<Component>();
             InitializeComponent();
         }
 
-        public bool LevelSelected()
+        internal void SetAvailableLevels(List<Component> components)
         {
-            return levelSelected;
-        }
-
-        public bool GradeSelected()
-        {
-            return gradeSelected;
+            _availableLevels.Clear();
+            foreach (EducationalLevel item in components)
+            {
+                _availableLevels.Add(item);
+                if (item.Level == EducationalLevelType.Nursery)
+                {
+                    Nursery.Visibility = Visibility.Visible;
+                }
+                if (item.Level == EducationalLevelType.Primary)
+                {
+                    Primary.Visibility = Visibility.Visible;
+                }
+                if (item.Level == EducationalLevelType.Secondary)
+                {
+                    Secondary.Visibility = Visibility.Visible;
+                }
+            }
         }
 
         private void Nursery_OnClick(object sender, RoutedEventArgs e)
@@ -53,6 +66,7 @@ namespace Diction_Master___Library.UserControls
             levelSelected = true;
             button.IsEnabled = true;
             Icon = ImageNursery.Source.ToString();
+            _selectedGrade = _availableLevels.Find(x => (x as EducationalLevel).Level == EducationalLevelType.Nursery);
         }
 
         private void Primary_OnClick(object sender, RoutedEventArgs e)
@@ -64,6 +78,7 @@ namespace Diction_Master___Library.UserControls
             levelSelected = true;
             button.IsEnabled = true;
             Icon = ImagePrimary.Source.ToString();
+            _selectedGrade = _availableLevels.Find(x => (x as EducationalLevel).Level == EducationalLevelType.Primary);
         }
 
         private void Secondary_OnClick(object sender, RoutedEventArgs e)
@@ -75,21 +90,17 @@ namespace Diction_Master___Library.UserControls
             levelSelected = true;
             button.IsEnabled = true;
             Icon = ImageSecondary.Source.ToString();
+            _selectedGrade = _availableLevels.Find(x => (x as EducationalLevel).Level == EducationalLevelType.Secondary);
         }
 
-        public GradeType GetSelectedGrade()
+        public Component GetSelectedComponent()
         {
-            return SelectedGrade;
+            return _selectedGrade;
         }
 
         public EducationalLevelType GetSelectedEducationalLevel()
         {
             return SelectedEducationalLevel;
-        }
-
-        public string GetSelectedIcon()
-        {
-            return Icon;
         }
     }
 }

@@ -24,7 +24,7 @@ namespace Diction_Master.UserControls
         /// <summary>
         /// 
         /// </summary>
-        private readonly LanguagesHashTable _languages;
+        private readonly LanguagesDictionary _languages;
         /// <summary>
         /// 
         /// </summary>
@@ -53,10 +53,19 @@ namespace Diction_Master.UserControls
         /// 
         /// </summary>
         private List<Component> _availableCourses;
+        private List<Component> _availableEducationalLevels;
+        private List<Component> _availableGrades;
+        private List<KeyValuePair<long, int>> _availableTerms;
 
-        public HomePage(List<Component> courses)
+        public HomePage(ClientState state)
         {
-            _availableCourses = courses;
+            _courseImagesCache = new Dictionary<string, long>();
+            _educationalLevelDictionary = new Dictionary<string, long>();
+            _gradesDictionary = new Dictionary<string, long>();
+            _availableCourses = state._enabledCourses;
+            _availableEducationalLevels = state._enabledEduLevels;
+            _availableGrades = state._enabledGrades;
+            _availableTerms = state._enabledTerms;
             InitializeComponent();
             LoadCourses();
         }
@@ -68,7 +77,7 @@ namespace Diction_Master.UserControls
             {
                 Image image = new Image()
                 {
-                    Source = new BitmapImage(new Uri(course.Icon)),
+                    Source = new BitmapImage(new Uri(course.Icon, UriKind.Relative)),
                     RenderSize = new Size(100, 100),
                     MaxHeight = 100,
                     MaxWidth = 100,
@@ -96,50 +105,42 @@ namespace Diction_Master.UserControls
             }
             image.Opacity = 1;
             _selectedLanguage = image;
-            long id = _courseImagesCache[image.Name];
-            WrapPanelEducationaLevel.Children.Clear();
-            LoadEducationalLevels(id);
+            LoadEducationalLevels();
         }
 
-        private void LoadEducationalLevels(long id)
+        private void LoadEducationalLevels()
         {
             WrapPanelEducationaLevel.Children.Clear();
-            List<EducationalLevel> children = GetChildrenEduLevels();
-            if (children != null)
+            if (_availableEducationalLevels != null)
             {
-                foreach (EducationalLevel child in children)
+                foreach (EducationalLevel child in _availableEducationalLevels)
                 {
-                    Image image = new Image()
+                    if (child.ParentID == _courseImagesCache[_selectedLanguage.Name])
                     {
-                        Source = new BitmapImage(new Uri(child.Icon)),
-                        RenderSize = new Size(100, 100),
-                        MaxHeight = 100,
-                        MaxWidth = 100,
-                        Margin = new Thickness(15),
-                        Opacity = 0.5,
-                        Visibility = Visibility.Visible,
-                        Name = "Icon_" + child.ID
-                    };
-                    image.MouseUp += delegate (object sender, MouseButtonEventArgs args)
-                    {
-                        ImageEducationaLevel_Click(sender as Image);
-                    };
-                    _educationalLevelDictionary[image.Name] = child.ID;
-                    WrapPanelEducationaLevel.Children.Add(image);
-                    _selectedEducationalLevel = image;
+                        Image image = new Image()
+                        {
+                            Source = new BitmapImage(new Uri(child.Icon, UriKind.Relative)),
+                            RenderSize = new Size(100, 100),
+                            MaxHeight = 100,
+                            MaxWidth = 100,
+                            Margin = new Thickness(15, 45, 15, 15),
+                            Opacity = 0.5,
+                            Name = "Icon_" + child.ID
+                        };
+                        image.MouseUp += delegate (object sender, MouseButtonEventArgs args)
+                        {
+                            ImageEducationaLevel_Click(sender as Image);
+                        };
+                        if (!_educationalLevelDictionary.ContainsKey(image.Name))
+                        {
+                            _educationalLevelDictionary[image.Name] = child.ID;
+                        } 
+                        WrapPanelEducationaLevel.Children.Add(image);
+                    }
+                    //_selectedEducationalLevel = image;
                 }
             }
             WrapPanelGrades.Children.Clear();
-        }
-
-        private List<EducationalLevel> GetChildrenEduLevels()
-        {
-            List<EducationalLevel> children = new List<EducationalLevel>();
-            foreach (EducationalLevel level in (_availableCourses.Find(x => x.ID == _courseImagesCache[_selectedLanguage.Name]) as CompositeComponent).Components)
-            {
-                children.Add(level);
-            }
-            return children;
         }
 
         private void ImageEducationaLevel_Click(Image sender)
@@ -152,51 +153,41 @@ namespace Diction_Master.UserControls
             _selectedEducationalLevel = sender;
             if (_educationalLevelDictionary.ContainsKey(sender.Name))
             {
-                long id = _educationalLevelDictionary[sender.Name];
-                WrapPanelGrades.Children.Clear();
-                LoadGrades(id);
+                LoadGrades();
             }
         }
 
-        private void LoadGrades(long id)
+        private void LoadGrades()
         {
             WrapPanelGrades.Children.Clear();
-            List<Grade> children = GetChildrenGrades();
-            if (children != null)
+            if (_availableGrades != null)
             {
-                foreach (Grade child in children)
+                foreach (Grade child in _availableGrades)
                 {
-                    Image image = new Image()
+                    if (child.ParentID == _educationalLevelDictionary[_selectedEducationalLevel.Name])
                     {
-                        Source = new BitmapImage(new Uri(child.Icon)),
-                        RenderSize = new Size(100, 100),
-                        MaxHeight = 100,
-                        MaxWidth = 100,
-                        Margin = new Thickness(15),
-                        Opacity = 0.5,
-                        Visibility = Visibility.Visible
-                    };
-                    image.MouseUp += delegate (object sender, MouseButtonEventArgs args)
-                    {
-                        ImageGrade_Click(sender as Image);
-                    };
-                    _gradesDictionary[image.Name] = child.ID;
-                    WrapPanelGrades.Children.Add(image);
-                    _selectedGrade = image;
+                        Image image = new Image()
+                        {
+                            Source = new BitmapImage(new Uri(child.Icon, UriKind.Relative)),
+                            RenderSize = new Size(100, 100),
+                            MaxHeight = 100,
+                            MaxWidth = 100,
+                            Margin = new Thickness(15),
+                            Opacity = 0.5,
+                            Name = "Icon_" + child.ID
+                        };
+                        image.MouseUp += delegate (object sender, MouseButtonEventArgs args)
+                        {
+                            ImageGrade_Click(sender as Image);
+                        };
+                        if (!_gradesDictionary.ContainsKey(image.Name))
+                        {
+                            _gradesDictionary[image.Name] = child.ID;
+                        }
+                        WrapPanelGrades.Children.Add(image);  
+                    }
                 }
             }
-        }
-
-        private List<Grade> GetChildrenGrades()
-        {
-            List<Grade> grades = new List<Grade>();
-            EducationalLevel level = (_availableCourses.Find(x => x.ID == _courseImagesCache[_selectedLanguage.Name]) as CompositeComponent)
-                .Components.Find(g => g.ID == _educationalLevelDictionary[_selectedEducationalLevel.Name]) as EducationalLevel;
-            foreach (Grade grade in level.Components)
-            {
-                grades.Add(grade);
-            }
-            return grades;
         }
 
         private void ImageGrade_Click(Image image)
@@ -207,7 +198,6 @@ namespace Diction_Master.UserControls
             }
             image.Opacity = 1;
             _selectedGrade = image;
-            long id = _gradesDictionary[image.Name];
         }
 
         public long GetGradeID()

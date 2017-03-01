@@ -8,7 +8,7 @@
     <Border BorderBrush="DarkGray" BorderThickness="0, 0, 2, 2" CornerRadius="0,3,0,5" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
         <Grid Margin="0,0,0,-0.2">
             <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Margin="10,10,10.2,29.4" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <WrapPanel x:Name="WrapPanelLanguages" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" Margin="0" Height="544" Width="760" >
+                <WrapPanel x:Name="WrapPanelLanguages" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" Margin="0" Height="544" Width="706" >
                     <Image x:Name="imageArg" Height="100" Width="100" Margin="20" ToolTip="Italian" Source="../Resources/Flag of Argentina.png" Opacity="0.5" Visibility="Visible" MouseUp="image_MouseUp"/>
                     <Image x:Name="imageAut" Height="100" Width="100" Margin="20" ToolTip="Italian" Source="../Resources/Flag of Australia.png" Opacity="0.5" Visibility="Visible" MouseUp="image_MouseUp"/>
                     <Image x:Name="imageAst" Height="100" Width="100" Margin="20" ToolTip="Italian" Source="../Resources/Flag of Austria.png" Opacity="0.5" Visibility="Visible" MouseUp="image_MouseUp"/>
@@ -16,7 +16,7 @@
                     <Image x:Name="imageCan" Height="100" Width="100" Margin="20" ToolTip="Italian" Source="../Resources/Flag of Canada.png" Opacity="0.5" Visibility="Visible" MouseUp="image_MouseUp"/>
                     <Image x:Name="imageChi" Height="100" Width="100" Margin="20" ToolTip="Italian" Source="../Resources/Flag of China.png" Opacity="0.5" Visibility="Visible" MouseUp="image_MouseUp"/>
                     <Image x:Name="imageDen" Height="100" Width="100" Margin="20" ToolTip="Italian" Source="../Resources/Flag of Denmark.png" Opacity="0.5" Visibility="Visible" MouseUp="image_MouseUp"/>
-                    <Image x:Name="imageAFin" Height="100" Width="100" Margin="20" ToolTip="Italian" Source="../Resources/Flag of Finland.png" Opacity="0.5" Visibility="Visible" MouseUp="image_MouseUp"/>
+                    <Image x:Name="imageFin" Height="100" Width="100" Margin="20" ToolTip="Italian" Source="../Resources/Flag of Finland.png" Opacity="0.5" Visibility="Visible" MouseUp="image_MouseUp"/>
                     <Image x:Name="imageFra" Height="100" Width="100" Margin="20" ToolTip="Italian" Source="../Resources/Flag of France.png" Opacity="0.5" Visibility="Visible" MouseUp="image_MouseUp"/>
                     <Image x:Name="imageGer" Height="100" Width="100" Margin="20" ToolTip="Russian" Source="../Resources/Flag of Germany.png" Opacity="0.5" Visibility="Visible" MouseUp="image_MouseUp"/>
                     <Image x:Name="imageGre" Height="100" Width="100" Margin="20" ToolTip="Serbian" Source="../Resources/Flag of Greece.png" Opacity="0.5" Visibility="Visible" MouseUp="image_MouseUp"/>

@@ -13,12 +13,16 @@
             <ColumnDefinition x:Name="Content" Width="0.75*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Border BorderThickness="2" BorderBrush="CornflowerBlue"></Border>
-        <Border x:Name="Border" Grid.Column="0" BorderThickness="3,3,0,0" BorderBrush="#FF7F8CA2" Margin="10,50,9.6,9.8">
-            <WrapPanel Margin="-0.2,-0.2,0.4,-0.2" Background="#FFA8B2C3">
+        <WrapPanel x:Name="Weeks" Margin="10,50,9.6,9.6" Background="#FF5DB1F6" Height="598.4" Width="230.4" VerticalAlignment="Top" HorizontalAlignment="Left">
+            <!--<Grid  Height="598" Width="230">
+
+            </Grid>-->
+        </WrapPanel>
+        <Border BorderThickness="2" BorderBrush="CornflowerBlue" Grid.Column="1">
+            <WrapPanel x:Name="WrapPanel" Margin="8.4,8.4,7.4,7.2">
 
             </WrapPanel>
         </Border>
-        <Border BorderThickness="2" BorderBrush="CornflowerBlue" Grid.Column="1"></Border>
         <Button x:Name="Menu" Grid.Column="0" BorderThickness="0" HorizontalAlignment="Right"  VerticalAlignment="Top" Width="40" Height="40" Background="{x:Null}" Click="Menu_OnClick" Margin="5">
             <StackPanel>
                 <Image Source="../Resources/menu.png"/>

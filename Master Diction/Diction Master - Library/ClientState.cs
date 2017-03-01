@@ -19,6 +19,10 @@ namespace Diction_Master___Library
         public Client clientProfile { get; set; }
         public List<Subscription> _pendingSubscriptions { get; set; }
         public List<Component> _availableCourses;
+        public List<Component> _enabledCourses;
+        public List<Component> _enabledEduLevels;
+        public List<Component> _enabledGrades;
+        public List<KeyValuePair<long, int>> _enabledTerms;
         public List<PendingNotification> _notifications;
         public bool _pendingNotification;
 
@@ -39,6 +43,10 @@ namespace Diction_Master___Library
             _pendingSubscriptions = new List<Subscription>();
             _notifications = new List<PendingNotification>();
             _availableCourses = new List<Component>();
+            _enabledCourses = new List<Component>();
+            _enabledEduLevels = new List<Component>();
+            _enabledGrades = new List<Component>();
+            _enabledTerms = new List<KeyValuePair<long, int>>();
         }
 
         public void SetNotification(PendingNotification notification)

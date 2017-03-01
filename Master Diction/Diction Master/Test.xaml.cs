@@ -24,6 +24,11 @@ namespace Diction_Master
         public Test()
         {
             InitializeComponent();
+            WrapPanel.Children.Add(new Diction_Master___Library.UserControls.ContentContainer
+            {
+                Width = WrapPanel.Width,
+                Height = WrapPanel.Height
+            });
         }
 
         private void button_Click(object sender, RoutedEventArgs e)

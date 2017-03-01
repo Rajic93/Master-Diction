@@ -44,10 +44,12 @@ namespace Diction_Master___Library
         private long _courseID;
         private long _eduLevelID;
         private long _gradeID;
-        private long _termID;
+        private int _termID;
         private DateTime _expirationDateTime;
         private string _key;
         private Authentication _auth;
+        private Authentication _authNotifications;
+        private bool _running = true;
 
         private Subscription _currentSubscription;
         private readonly List<Subscription> _subscriptions;
@@ -106,6 +108,7 @@ namespace Diction_Master___Library
 
         private void SaveConfig()
         {
+            //CreateContent();
             _state._loggedIn = false;
             FileStream fs = new FileStream("ClMan.dat", FileMode.Create, FileAccess.Write);
             BinaryFormatter formatter = new BinaryFormatter();
@@ -131,7 +134,7 @@ namespace Diction_Master___Library
         {
             _listeningThread = new Thread(() => ListenForNotifications());
             _listeningThread.Start();
-            while (true)
+            while (_running)
             {
                 if (_state._registered && _state.LocalRegistration)
                 {
@@ -155,9 +158,9 @@ namespace Diction_Master___Library
 
         private void ListenForNotifications()
         {
-            Authentication auth = new Authentication(SocketType.Stream, AddressFamily.InterNetwork, ProtocolType.Tcp);
-            auth.SetNotificationHandler(_state);
-            auth.Listen(_state._serverIPAdd, 50000, null);
+            _authNotifications = new Authentication(SocketType.Stream, AddressFamily.InterNetwork, ProtocolType.Tcp);
+            _authNotifications.SetNotificationHandler(_state);
+            _authNotifications.Listen(_state._serverIPAdd, 50000, null);
         }
 
         private void TryRegister()
@@ -209,8 +212,10 @@ namespace Diction_Master___Library
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            _backgroundWorker.Abort();
-            _listeningThread.Abort();
+            _running = false;
+            //_backgroundWorker.Abort();
+            //_listeningThread.Abort(); //does not pass
+            _authNotifications.Terminate();
             SaveConfig();
         }
 
@@ -345,7 +350,12 @@ namespace Diction_Master___Library
         {
             Authentication auth = new Authentication(SocketType.Stream, AddressFamily.InterNetwork, ProtocolType.Tcp);
             auth.Connect(_state._serverIPAdd, _state._port);
-            auth.
+            //auth.CheckUpdatesClientSide()
+        }
+
+        public void AddSubscription_OnClick(object sender, RoutedEventArgs e)
+        {
+            ChooseContent();
         }
 
         #endregion
@@ -450,6 +460,7 @@ namespace Diction_Master___Library
                                 }
                                 catch (Exception e)
                                 {
+                                    //failed to connect to server
                                     _state.clientProfile = new Client
                                     {
                                         Username = reg.Username.Text,
@@ -460,11 +471,12 @@ namespace Diction_Master___Library
                                     _state.LocalRegistration = true;
                                     _state._firstStart = false;
                                     _state._pass = reg.Password.Text;
-                                    MessageBox.Show("Failed to connect to server: " + e.Message);
+                                    //MessageBox.Show("Failed to connect to server: " + e.Message);
                                 }
                             }
                             else
                             {
+                                //offline
                                 _state.clientProfile = new Client
                                 {
                                     Username = reg.Username.Text,
@@ -477,7 +489,6 @@ namespace Diction_Master___Library
                                 _state._pass = reg.Password.Text;
                             }
                             Login();
-                            
                         }
                         else
                         {
@@ -535,8 +546,8 @@ namespace Diction_Master___Library
                     }
                     catch (Exception)
                     {
-                        //offline mode
-                        MessageBox.Show("Login failed: server error.");
+                        //failed to connect to server
+                        //MessageBox.Show("Login failed: server error.");
                         if (login.textBox.Text == _state.clientProfile.Username &&
                         _state.clientProfile.Password.SequenceEqual(Authentication.CreateHashedPassword(Encoding.Unicode.GetBytes(login.textBox1.Text), _state.clientProfile.Salt)))
                         {
@@ -555,6 +566,7 @@ namespace Diction_Master___Library
                         ShowContent();
                     }
                 }
+
             };
             if (_currentControl == null)
             {
@@ -596,14 +608,15 @@ namespace Diction_Master___Library
             if (_state._contentEnabled)
             {
                 //list all available content
-                _previousControls.Push(Panel.Children[0] as UserControl);
                 Back.IsEnabled = true;
-                HomePage home = new HomePage(_state._availableCourses)
+                HomePage home = new HomePage(_state)
                 {
                     VerticalAlignment = VerticalAlignment.Stretch,
                     HorizontalAlignment = HorizontalAlignment.Stretch
                 };
+                _previousControls.Push(_currentControl);
                 NextControlAnimation(_currentControl, home);
+                _currentControl = home;
                 home.ShowContent.Click += delegate (object sender, RoutedEventArgs args)
                 {
                     _previousControls.Push(Panel.Children[0] as UserControl);
@@ -632,27 +645,51 @@ namespace Diction_Master___Library
                 VerticalAlignment = VerticalAlignment.Center,
                 Opacity = 0
             };
+            selection.SetAvailableLanguages(_state._availableCourses);
+            //selection.SetAvailableLanguages(Differention(_state._availableCourses, _state._enabledCourses));
             selection.button.Click += delegate (object sender1, RoutedEventArgs args1)
             {
                 //set CourseID
+                Component language = selection.GetSelectedLanguage();
+                _courseID = language.ID;
+                //--------------------------------------------------------
+                if (!_state._enabledCourses.Exists(x => x.ID == _courseID))
+                    _state._enabledCourses.Add(language);
+                //--------------------------------------------------------
                 LevelSelection level = new LevelSelection()
                 {
                     HorizontalAlignment = HorizontalAlignment.Center,
                     VerticalAlignment = VerticalAlignment.Center,
                     Opacity = 0
                 };
+                level.SetAvailableLevels((_state._enabledCourses.Find(x => x.ID == _courseID) as CompositeComponent).Components);
+                //level.SetAvailableLevels(Differention((_state._enabledCourses.Find(x => x.ID == _courseID) as CompositeComponent).Components, _state._enabledEduLevels));
                 level.button.Click += delegate (object sender2, RoutedEventArgs args2)
                 {
                     //set EduLevelID
+                    Component selectedLevel = level.GetSelectedComponent();
+                    _eduLevelID = selectedLevel.ID;
+                    //--------------------------------------------------------
+                    if (!_state._enabledEduLevels.Exists(x => x.ID == _eduLevelID))
+                        _state._enabledEduLevels.Add(selectedLevel); 
+                    //--------------------------------------------------------
                     GradeSelection grade = new GradeSelection(level.GetSelectedEducationalLevel())
                     {
                         HorizontalAlignment = HorizontalAlignment.Center,
                         VerticalAlignment = VerticalAlignment.Center,
                         Opacity = 0
                     };
+                    grade.SetAvailableGrades((_state._enabledEduLevels.Find(x => x.ID == _eduLevelID) as CompositeComponent).Components);
+                    //grade.SetAvailableGrades(Differention((_state._enabledEduLevels.Find(x => x.ID == _eduLevelID) as CompositeComponent).Components, _state._enabledGrades));
                     grade.button.Click += delegate (object sender3, RoutedEventArgs args3)
                     {
                         //set GradeID
+                        Component selectedGrade = grade.GetSelectedGrade();
+                        _gradeID = selectedGrade.ID;
+                        //--------------------------------------------------------
+                        if (!_state._enabledGrades.Exists(x => x.ID == _gradeID))
+                            _state._enabledGrades.Add(selectedGrade);
+                        //--------------------------------------------------------
                         if (_keyType == KeyValidation.ValidOneTerm)
                         {
                             TermSelection term = new TermSelection()
@@ -661,9 +698,18 @@ namespace Diction_Master___Library
                                 VerticalAlignment = VerticalAlignment.Center,
                                 Opacity = 0
                             };
+                            term.SetAvailableTerms((_state._enabledGrades.Find(x => x.ID == _gradeID) as Grade).Components);
+                            //term.SetAvailableTerms(Differention((_state._enabledGrades.Find(x => x.ID == _gradeID) as Grade).Components, _state._enabledTerms));
                             term.button.Click += delegate (object ob, RoutedEventArgs eventAr)
                             {
                                 //set TermID and ExpDate
+                                int selectedTerm = term.GetSelectedTerm();
+                                _termID = selectedTerm;
+                                //--------------------------------------------------------
+                                if (!_state._enabledTerms.Exists(x => ((KeyValuePair<long, int>)x).Key == _gradeID && ((KeyValuePair<long, int>)x).Value == _termID))
+                                    _state._enabledTerms.Add(new KeyValuePair<long, int>(_gradeID, _termID));
+                                //ExpDate
+                                //--------------------------------------------------------
                                 Confirm(true);
                             };
                             _previousControls.Push(grade);
@@ -707,8 +753,8 @@ namespace Diction_Master___Library
                 try
                 {
                     //ids and key are hardcoded
-                    long clID, crsID, eduID, grID, tmID;
-                    clID = crsID = eduID = grID = tmID = 0;
+                    long crsID, eduID, grID, tmID;
+                    crsID = eduID = grID = tmID = 0;
                     KeyValuePair<long, DateTime> ret = _auth.SubscribeClientSide(_state.clientProfile.Username, _state._pass, _state.clientProfile.Salt,
                         _key, _state.clientProfile.ID, crsID, eduID, grID, tmID);
 
@@ -721,28 +767,1347 @@ namespace Diction_Master___Library
                     }
                     else
                     {
+                        //failed to create sub
                         _state._contentEnabled = true;
                         _state._pendingSubscriptions.Add(subscription);
                     }
                 }
                 catch (Exception)
                 {
-                    //failed to create subsc on server
+                    //failed to connect to server
                     _state._contentEnabled = true;
                     _state._pendingSubscriptions.Add(subscription);
                 }
             }
             else
             {
+                //offline
                 _state._contentEnabled = true;
                 _state._pendingSubscriptions.Add(subscription);
+            }
+            _previousControls.Push(Panel.Children[0] as UserControl);
+            int num = term ? 4 : 3;
+            for (int i = 0; i < num; i++)
+            {
+                _previousControls.Pop();
             }
             ShowContent();
         }
 
+        private List<Component> Differention(List<Component> listA, List<Component> listB)
+        {
+            List<Component> listC = new List<Component>();
+            foreach (Component itemA in listA)
+            {
+                if (!listB.Exists(x => x.ID == itemA.ID))
+                {
+                    listC.Add(itemA);
+                }
+            }
+            return listC;
+        }
+
+        //private List<Component> Differention(List<Component> listA, List<KeyValuePair<long, int>> listB)
+        //{
+        //    List<Component> listC = new List<Component>();
+        //    foreach (Component itemA in listA)
+        //    {
+        //        if (!listB.Exists(x => (x as KeyValuePair<long, int>).Key == itemA.ID))
+        //        {
+        //            listC.Add(itemA);
+        //        }
+        //    }
+        //    return listC;
+        //}
+
         #endregion
 
         #region Potential Delete
+
+        public void CreateContent()
+        {
+
+            _state._availableCourses.Add(new Course
+            {
+                Icon = "../Resources/Flag of Serbia.png",
+                ID = 1,
+                Name = "Serbian",
+                ParentID = 0,
+            });
+                (_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Add(new EducationalLevel
+                {
+                    ID = 5,
+                    ParentID = 1,
+                    Level = EducationalLevelType.Nursery,
+                    Icon = "../Resources/nursery.jpg"
+                });
+                    ((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 5) as EducationalLevel)
+                    .Components.Add(new Grade
+                    {
+                        ID = 17,
+                        ParentID = 5,
+                        GradeNum = GradeType.NurseryI,
+                        Icon = "../Resources/nursery1.png"
+                    });
+                        (((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 5) as EducationalLevel)
+                        .Components.Find(z => z.ID == 17) as Grade).Components.Add(new Week
+                        {
+                            ID = 73,
+                            ParentID = 17,
+                            Term = 1,
+                            Num = 1,
+                            Title = "Week 1"
+                        });
+                        (((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 5) as EducationalLevel)
+                        .Components.Find(z => z.ID == 17) as Grade).Components.Add(new Week
+                        {
+                            ID = 74,
+                            ParentID = 17,
+                            Term = 1,
+                            Num = 2,
+                            Title = "Week 2"
+                        });
+                        (((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 5) as EducationalLevel)
+                        .Components.Find(z => z.ID == 17) as Grade).Components.Add(new Week
+                        {
+                            ID = 75,
+                            ParentID = 17,
+                            Term = 1,
+                            Num = 3,
+                            Title = "Week 3"
+                        });
+                        (((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 5) as EducationalLevel)
+                        .Components.Find(z => z.ID == 17) as Grade).Components.Add(new Week
+                        {
+                            ID = 76,
+                            ParentID = 17,
+                            Term = 2,
+                            Num = 4,
+                            Title = "Week 4"
+                        });
+                        (((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 5) as EducationalLevel)
+                        .Components.Find(z => z.ID == 17) as Grade).Components.Add(new Week
+                        {
+                            ID = 77,
+                            ParentID = 17,
+                            Term = 2,
+                            Num = 5,
+                            Title = "Week 5"
+                        });
+                        (((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 5) as EducationalLevel)
+                        .Components.Find(z => z.ID == 17) as Grade).Components.Add(new Week
+                        {
+                            ID = 78,
+                            ParentID = 17,
+                            Term = 2,
+                            Num = 6,
+                            Title = "Week 6"
+                        });
+                        (((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 5) as EducationalLevel)
+                        .Components.Find(z => z.ID == 17) as Grade).Components.Add(new Week
+                        {
+                            ID = 79,
+                            ParentID = 17,
+                            Term = 3,
+                            Num = 7,
+                            Title = "Week 7"
+                        });
+                        (((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 5) as EducationalLevel)
+                        .Components.Find(z => z.ID == 17) as Grade).Components.Add(new Week
+                        {
+                            ID = 80,
+                            ParentID = 17,
+                            Term = 3,
+                            Num = 8,
+                            Title = "Week 8"
+                        });
+                        (((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 5) as EducationalLevel)
+                        .Components.Find(z => z.ID == 17) as Grade).Components.Add(new Week
+                        {
+                            ID = 81,
+                            ParentID = 17,
+                            Term = 3,
+                            Num = 9,
+                            Title = "Week 9"
+                        });
+                        (((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 5) as EducationalLevel)
+                        .Components.Find(z => z.ID == 17) as Grade).Components.Add(new Week
+                        {
+                            ID = 82,
+                            ParentID = 17,
+                            Term = 3,
+                            Num = 10,
+                            Title = "Week 10"
+                        });
+                    ((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 5) as EducationalLevel)
+                    .Components.Add(new Grade
+                    {
+                        ID = 18,
+                        ParentID = 5,
+                        GradeNum = GradeType.NurseryII,
+                        Icon = "../Resources/nursery2.png"
+                    });
+                        (((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 5) as EducationalLevel)
+                        .Components.Find(z => z.ID == 18) as Grade).Components.Add(new Week
+                        {
+                            ID = 83,
+                            ParentID = 18,
+                            Term = 1,
+                            Num = 1,
+                            Title = "Week 1"
+                        });
+                        (((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 5) as EducationalLevel)
+                        .Components.Find(z => z.ID == 18) as Grade).Components.Add(new Week
+                        {
+                            ID = 84,
+                            ParentID = 18,
+                            Term = 1,
+                            Num = 2,
+                            Title = "Week 2"
+                        });
+                        (((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 5) as EducationalLevel)
+                        .Components.Find(z => z.ID == 18) as Grade).Components.Add(new Week
+                        {
+                            ID = 85,
+                            ParentID = 18,
+                            Term = 1,
+                            Num = 3,
+                            Title = "Week 3"
+                        });
+                        (((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 5) as EducationalLevel)
+                        .Components.Find(z => z.ID == 18) as Grade).Components.Add(new Week
+                        {
+                            ID = 86,
+                            ParentID = 18,
+                            Term = 2,
+                            Num = 4,
+                            Title = "Week 4"
+                        });
+                        (((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 5) as EducationalLevel)
+                        .Components.Find(z => z.ID == 18) as Grade).Components.Add(new Week
+                        {
+                            ID = 87,
+                            ParentID = 18,
+                            Term = 2,
+                            Num = 5,
+                            Title = "Week 5"
+                        });
+                        (((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 5) as EducationalLevel)
+                        .Components.Find(z => z.ID == 18) as Grade).Components.Add(new Week
+                        {
+                            ID = 88,
+                            ParentID = 18,
+                            Term = 2,
+                            Num = 6,
+                            Title = "Week 6"
+                        });
+                        (((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 5) as EducationalLevel)
+                        .Components.Find(z => z.ID == 18) as Grade).Components.Add(new Week
+                        {
+                            ID = 89,
+                            ParentID = 18,
+                            Term = 3,
+                            Num = 7,
+                            Title = "Week 7"
+                        });
+                        (((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 5) as EducationalLevel)
+                        .Components.Find(z => z.ID == 18) as Grade).Components.Add(new Week
+                        {
+                            ID = 90,
+                            ParentID = 18,
+                            Term = 3,
+                            Num = 8,
+                            Title = "Week 8"
+                        });
+                        (((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 5) as EducationalLevel)
+                        .Components.Find(z => z.ID == 18) as Grade).Components.Add(new Week
+                        {
+                            ID = 91,
+                            ParentID = 18,
+                            Term = 3,
+                            Num = 9,
+                            Title = "Week 9"
+                        });
+                        (((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 5) as EducationalLevel)
+                        .Components.Find(z => z.ID == 18) as Grade).Components.Add(new Week
+                        {
+                            ID = 92,
+                            ParentID = 18,
+                            Term = 3,
+                            Num = 10,
+                            Title = "Week 10"
+                        });
+                (_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Add(new EducationalLevel
+                {
+                    ID = 6,
+                    ParentID = 1,
+                    Level = EducationalLevelType.Primary,
+                    Icon = "../Resources/primary.jpg"
+                });
+                    ((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 6) as EducationalLevel)
+                    .Components.Add(new Grade
+                    {
+                        ID = 25,
+                        ParentID = 6,
+                        GradeNum = GradeType.PrimaryI,
+                        Icon = "../Resources/1st Grade.png"
+                    });
+                        (((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 6) as EducationalLevel)
+                        .Components.Find(z => z.ID == 25) as Grade).Components.Add(new Week
+                        {
+                            ID = 93,
+                            ParentID = 25,
+                            Term = 1,
+                            Num = 1,
+                            Title = "Week 10"
+                        });
+                        (((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 6) as EducationalLevel)
+                        .Components.Find(z => z.ID == 25) as Grade).Components.Add(new Week
+                        {
+                            ID = 94,
+                            ParentID = 25,
+                            Term = 1,
+                            Num = 2,
+                            Title = "Week 10"
+                        });
+                        (((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 6) as EducationalLevel)
+                        .Components.Find(z => z.ID == 25) as Grade).Components.Add(new Week
+                        {
+                            ID = 95,
+                            ParentID = 25,
+                            Term = 1,
+                            Num = 3,
+                            Title = "Week 10"
+                        });
+                        (((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 6) as EducationalLevel)
+                        .Components.Find(z => z.ID == 25) as Grade).Components.Add(new Week
+                        {
+                            ID = 96,
+                            ParentID = 25,
+                            Term = 2,
+                            Num = 4,
+                            Title = "Week 10"
+                        });
+                        (((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 6) as EducationalLevel)
+                        .Components.Find(z => z.ID == 25) as Grade).Components.Add(new Week
+                        {
+                            ID = 97,
+                            ParentID = 25,
+                            Term = 2,
+                            Num = 5,
+                            Title = "Week 10"
+                        });
+                        (((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 6) as EducationalLevel)
+                        .Components.Find(z => z.ID == 25) as Grade).Components.Add(new Week
+                        {
+                            ID = 98,
+                            ParentID = 25,
+                            Term = 2,
+                            Num = 6,
+                            Title = "Week 10"
+                        });
+                        (((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 6) as EducationalLevel)
+                        .Components.Find(z => z.ID == 25) as Grade).Components.Add(new Week
+                        {
+                            ID = 99,
+                            ParentID = 25,
+                            Term = 3,
+                            Num = 7,
+                            Title = "Week 10"
+                        });
+                        (((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 6) as EducationalLevel)
+                        .Components.Find(z => z.ID == 25) as Grade).Components.Add(new Week
+                        {
+                            ID = 100,
+                            ParentID = 25,
+                            Term = 3,
+                            Num = 8,
+                            Title = "Week 10"
+                        });
+                        (((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 6) as EducationalLevel)
+                        .Components.Find(z => z.ID == 25) as Grade).Components.Add(new Week
+                        {
+                            ID = 101,
+                            ParentID = 25,
+                            Term = 3,
+                            Num = 9,
+                            Title = "Week 10"
+                        });
+                        (((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 6) as EducationalLevel)
+                        .Components.Find(z => z.ID == 25) as Grade).Components.Add(new Week
+                        {
+                            ID = 102,
+                            ParentID = 25,
+                            Term = 3,
+                            Num = 10,
+                            Title = "Week 10"
+                        });
+                    ((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 6) as EducationalLevel)
+                    .Components.Add(new Grade
+                    {
+                        ID = 26,
+                        ParentID = 6,
+                        GradeNum = GradeType.PrimaryII,
+                        Icon = "../Resources/2nd Grade.png"
+                    });
+                        (((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 6) as EducationalLevel)
+                        .Components.Find(z => z.ID == 26) as Grade).Components.Add(new Week
+                        {
+                            ID = 103,
+                            ParentID = 26,
+                            Term = 1,
+                            Num = 1,
+                            Title = "Week 10"
+                        });
+                        (((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 6) as EducationalLevel)
+                        .Components.Find(z => z.ID == 26) as Grade).Components.Add(new Week
+                        {
+                            ID = 104,
+                            ParentID = 26,
+                            Term = 1,
+                            Num = 2,
+                            Title = "Week 10"
+                        });
+                        (((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 6) as EducationalLevel)
+                        .Components.Find(z => z.ID == 26) as Grade).Components.Add(new Week
+                        {
+                            ID = 105,
+                            ParentID = 26,
+                            Term = 1,
+                            Num = 3,
+                            Title = "Week 10"
+                        });
+                        (((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 6) as EducationalLevel)
+                        .Components.Find(z => z.ID == 26) as Grade).Components.Add(new Week
+                        {
+                            ID = 106,
+                            ParentID = 26,
+                            Term = 2,
+                            Num = 4,
+                            Title = "Week 10"
+                        });
+                        (((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 6) as EducationalLevel)
+                        .Components.Find(z => z.ID == 26) as Grade).Components.Add(new Week
+                        {
+                            ID = 107,
+                            ParentID = 26,
+                            Term = 2,
+                            Num = 5,
+                            Title = "Week 10"
+                        });
+                        (((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 6) as EducationalLevel)
+                        .Components.Find(z => z.ID == 26) as Grade).Components.Add(new Week
+                        {
+                            ID = 108,
+                            ParentID = 26,
+                            Term = 2,
+                            Num = 6,
+                            Title = "Week 10"
+                        });
+                        (((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 6) as EducationalLevel)
+                        .Components.Find(z => z.ID == 26) as Grade).Components.Add(new Week
+                        {
+                            ID = 109,
+                            ParentID = 26,
+                            Term = 3,
+                            Num = 7,
+                            Title = "Week 10"
+                        });
+                        (((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 6) as EducationalLevel)
+                        .Components.Find(z => z.ID == 26) as Grade).Components.Add(new Week
+                        {
+                            ID = 110,
+                            ParentID = 26,
+                            Term = 3,
+                            Num = 8,
+                            Title = "Week 10"
+                        });
+                        (((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 6) as EducationalLevel)
+                        .Components.Find(z => z.ID == 26) as Grade).Components.Add(new Week
+                        {
+                            ID = 111,
+                            ParentID = 26,
+                            Term = 3,
+                            Num = 9,
+                            Title = "Week 10"
+                        });
+                        (((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 6) as EducationalLevel)
+                        .Components.Find(z => z.ID == 26) as Grade).Components.Add(new Week
+                        {
+                            ID = 112,
+                            ParentID = 26,
+                            Term = 3,
+                            Num = 10,
+                            Title = "Week 10"
+                        });
+                    ((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 6) as EducationalLevel)
+                    .Components.Add(new Grade
+                    {
+                        ID = 27,
+                        ParentID = 6,
+                        GradeNum = GradeType.PrimaryIII,
+                        Icon = "../Resources/3rd Grade.png"
+                    });
+                        (((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 6) as EducationalLevel)
+                        .Components.Find(z => z.ID == 27) as Grade).Components.Add(new Week
+                        {
+                            ID = 113,
+                            ParentID = 27,
+                            Term = 1,
+                            Num = 1,
+                            Title = "Week 10"
+                        });
+                        (((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 6) as EducationalLevel)
+                        .Components.Find(z => z.ID == 27) as Grade).Components.Add(new Week
+                        {
+                            ID = 114,
+                            ParentID = 27,
+                            Term = 1,
+                            Num = 2,
+                            Title = "Week 10"
+                        });
+                        (((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 6) as EducationalLevel)
+                        .Components.Find(z => z.ID == 27) as Grade).Components.Add(new Week
+                        {
+                            ID = 115,
+                            ParentID = 27,
+                            Term = 1,
+                            Num = 3,
+                            Title = "Week 10"
+                        });
+                        (((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 6) as EducationalLevel)
+                        .Components.Find(z => z.ID == 27) as Grade).Components.Add(new Week
+                        {
+                            ID = 116,
+                            ParentID = 27,
+                            Term = 2,
+                            Num = 4,
+                            Title = "Week 10"
+                        });
+                        (((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 6) as EducationalLevel)
+                        .Components.Find(z => z.ID == 27) as Grade).Components.Add(new Week
+                        {
+                            ID = 117,
+                            ParentID = 27,
+                            Term = 2,
+                            Num = 5,
+                            Title = "Week 10"
+                        });
+                        (((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 6) as EducationalLevel)
+                        .Components.Find(z => z.ID == 27) as Grade).Components.Add(new Week
+                        {
+                            ID = 118,
+                            ParentID = 27,
+                            Term = 2,
+                            Num = 6,
+                            Title = "Week 10"
+                        });
+                        (((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 6) as EducationalLevel)
+                        .Components.Find(z => z.ID == 27) as Grade).Components.Add(new Week
+                        {
+                            ID = 119,
+                            ParentID = 27,
+                            Term = 3,
+                            Num = 7,
+                            Title = "Week 10"
+                        });
+                        (((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 6) as EducationalLevel)
+                        .Components.Find(z => z.ID == 27) as Grade).Components.Add(new Week
+                        {
+                            ID = 120,
+                            ParentID = 27,
+                            Term = 3,
+                            Num = 8,
+                            Title = "Week 10"
+                        });
+                        (((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 6) as EducationalLevel)
+                        .Components.Find(z => z.ID == 27) as Grade).Components.Add(new Week
+                        {
+                            ID = 121,
+                            ParentID = 27,
+                            Term = 3,
+                            Num = 9,
+                            Title = "Week 10"
+                        });
+                        (((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 6) as EducationalLevel)
+                        .Components.Find(z => z.ID == 27) as Grade).Components.Add(new Week
+                        {
+                            ID = 122,
+                            ParentID = 27,
+                            Term = 3,
+                            Num = 10,
+                            Title = "Week 10"
+                        });
+                    ((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 6) as EducationalLevel)
+                    .Components.Add(new Grade
+                    {
+                        ID = 28,
+                        ParentID = 6,
+                        GradeNum = GradeType.PrimaryIV,
+                        Icon = "../Resources/4th Grade.png"
+                    });
+                        (((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 6) as EducationalLevel)
+                        .Components.Find(z => z.ID == 28) as Grade).Components.Add(new Week
+                        {
+                            ID = 123,
+                            ParentID = 28,
+                            Term = 1,
+                            Num = 1,
+                            Title = "Week 10"
+                        });
+                        (((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 6) as EducationalLevel)
+                        .Components.Find(z => z.ID == 28) as Grade).Components.Add(new Week
+                        {
+                            ID = 124,
+                            ParentID = 28,
+                            Term = 1,
+                            Num = 2,
+                            Title = "Week 10"
+                        });
+                        (((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 6) as EducationalLevel)
+                        .Components.Find(z => z.ID == 28) as Grade).Components.Add(new Week
+                        {
+                            ID = 125,
+                            ParentID = 28,
+                            Term = 1,
+                            Num = 3,
+                            Title = "Week 10"
+                        });
+                        (((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 6) as EducationalLevel)
+                        .Components.Find(z => z.ID == 28) as Grade).Components.Add(new Week
+                        {
+                            ID = 126,
+                            ParentID = 28,
+                            Term = 2,
+                            Num = 4,
+                            Title = "Week 10"
+                        });
+                        (((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 6) as EducationalLevel)
+                        .Components.Find(z => z.ID == 28) as Grade).Components.Add(new Week
+                        {
+                            ID = 127,
+                            ParentID = 28,
+                            Term = 2,
+                            Num = 5,
+                            Title = "Week 10"
+                        });
+                        (((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 6) as EducationalLevel)
+                        .Components.Find(z => z.ID == 28) as Grade).Components.Add(new Week
+                        {
+                            ID = 128,
+                            ParentID = 28,
+                            Term = 2,
+                            Num = 6,
+                            Title = "Week 10"
+                        });
+                        (((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 6) as EducationalLevel)
+                        .Components.Find(z => z.ID == 28) as Grade).Components.Add(new Week
+                        {
+                            ID = 129,
+                            ParentID = 28,
+                            Term = 3,
+                            Num = 7,
+                            Title = "Week 10"
+                        });
+                        (((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 6) as EducationalLevel)
+                        .Components.Find(z => z.ID == 28) as Grade).Components.Add(new Week
+                        {
+                            ID = 130,
+                            ParentID = 28,
+                            Term = 3,
+                            Num = 8,
+                            Title = "Week 10"
+                        });
+                        (((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 6) as EducationalLevel)
+                        .Components.Find(z => z.ID == 28) as Grade).Components.Add(new Week
+                        {
+                            ID = 131,
+                            ParentID = 28,
+                            Term = 3,
+                            Num = 9,
+                            Title = "Week 10"
+                        });
+                        (((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 6) as EducationalLevel)
+                        .Components.Find(z => z.ID == 28) as Grade).Components.Add(new Week
+                        {
+                            ID = 132,
+                            ParentID = 28,
+                            Term = 3,
+                            Num = 10,
+                            Title = "Week 10"
+                        });
+                    ((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 6) as EducationalLevel)
+                    .Components.Add(new Grade
+                    {
+                        ID = 29,
+                        ParentID = 6,
+                        GradeNum = GradeType.PrimaryV,
+                        Icon = "../Resources/5th Grade.png"
+                    });
+                        (((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 6) as EducationalLevel)
+                        .Components.Find(z => z.ID == 29) as Grade).Components.Add(new Week
+                        {
+                            ID = 133,
+                            ParentID = 29,
+                            Term = 1,
+                            Num = 1,
+                            Title = "Week 10"
+                        });
+                        (((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 6) as EducationalLevel)
+                        .Components.Find(z => z.ID == 29) as Grade).Components.Add(new Week
+                        {
+                            ID = 134,
+                            ParentID = 29,
+                            Term = 1,
+                            Num = 2,
+                            Title = "Week 10"
+                        });
+                        (((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 6) as EducationalLevel)
+                        .Components.Find(z => z.ID == 29) as Grade).Components.Add(new Week
+                        {
+                            ID = 135,
+                            ParentID = 29,
+                            Term = 1,
+                            Num = 3,
+                            Title = "Week 10"
+                        });
+                        (((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 6) as EducationalLevel)
+                        .Components.Find(z => z.ID == 29) as Grade).Components.Add(new Week
+                        {
+                            ID = 136,
+                            ParentID = 29,
+                            Term = 2,
+                            Num = 4,
+                            Title = "Week 10"
+                        });
+                        (((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 6) as EducationalLevel)
+                        .Components.Find(z => z.ID == 29) as Grade).Components.Add(new Week
+                        {
+                            ID = 137,
+                            ParentID = 29,
+                            Term = 2,
+                            Num = 5,
+                            Title = "Week 10"
+                        });
+                        (((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 6) as EducationalLevel)
+                        .Components.Find(z => z.ID == 29) as Grade).Components.Add(new Week
+                        {
+                            ID = 139,
+                            ParentID = 29,
+                            Term = 2,
+                            Num = 6,
+                            Title = "Week 10"
+                        });
+                        (((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 6) as EducationalLevel)
+                        .Components.Find(z => z.ID == 29) as Grade).Components.Add(new Week
+                        {
+                            ID = 139,
+                            ParentID = 29,
+                            Term = 3,
+                            Num = 7,
+                            Title = "Week 10"
+                        });
+                        (((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 6) as EducationalLevel)
+                        .Components.Find(z => z.ID == 29) as Grade).Components.Add(new Week
+                        {
+                            ID = 140,
+                            ParentID = 29,
+                            Term = 3,
+                            Num = 8,
+                            Title = "Week 10"
+                        });
+                        (((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 6) as EducationalLevel)
+                        .Components.Find(z => z.ID == 29) as Grade).Components.Add(new Week
+                        {
+                            ID = 141,
+                            ParentID = 29,
+                            Term = 3,
+                            Num = 9,
+                            Title = "Week 10"
+                        });
+                        (((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 6) as EducationalLevel)
+                        .Components.Find(z => z.ID == 29) as Grade).Components.Add(new Week
+                        {
+                            ID = 142,
+                            ParentID = 29,
+                            Term = 3,
+                            Num = 10,
+                            Title = "Week 10"
+                        });
+                    ((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 6) as EducationalLevel)
+                    .Components.Add(new Grade
+                    {
+                        ID = 30,
+                        ParentID = 6,
+                        GradeNum = GradeType.PrimaryVI,
+                        Icon = "../Resources/6th Grade.png"
+                    });
+                        (((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 6) as EducationalLevel)
+                        .Components.Find(z => z.ID == 30) as Grade).Components.Add(new Week
+                        {
+                            ID = 143,
+                            ParentID = 30,
+                            Term = 1,
+                            Num = 1,
+                            Title = "Week 10"
+                        });
+                        (((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 6) as EducationalLevel)
+                        .Components.Find(z => z.ID == 30) as Grade).Components.Add(new Week
+                        {
+                            ID = 144,
+                            ParentID = 30,
+                            Term = 1,
+                            Num = 2,
+                            Title = "Week 10"
+                        });
+                        (((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 6) as EducationalLevel)
+                        .Components.Find(z => z.ID == 30) as Grade).Components.Add(new Week
+                        {
+                            ID = 145,
+                            ParentID = 30,
+                            Term = 1,
+                            Num = 3,
+                            Title = "Week 10"
+                        });
+                        (((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 6) as EducationalLevel)
+                        .Components.Find(z => z.ID == 30) as Grade).Components.Add(new Week
+                        {
+                            ID = 146,
+                            ParentID = 30,
+                            Term = 2,
+                            Num = 4,
+                            Title = "Week 10"
+                        });
+                        (((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 6) as EducationalLevel)
+                        .Components.Find(z => z.ID == 30) as Grade).Components.Add(new Week
+                        {
+                            ID = 147,
+                            ParentID = 30,
+                            Term = 2,
+                            Num = 5,
+                            Title = "Week 10"
+                        });
+                        (((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 6) as EducationalLevel)
+                        .Components.Find(z => z.ID == 30) as Grade).Components.Add(new Week
+                        {
+                            ID = 149,
+                            ParentID = 30,
+                            Term = 2,
+                            Num = 6,
+                            Title = "Week 10"
+                        });
+                        (((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 6) as EducationalLevel)
+                        .Components.Find(z => z.ID == 30) as Grade).Components.Add(new Week
+                        {
+                            ID = 149,
+                            ParentID = 30,
+                            Term = 3,
+                            Num = 7,
+                            Title = "Week 10"
+                        });
+                        (((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 6) as EducationalLevel)
+                        .Components.Find(z => z.ID == 30) as Grade).Components.Add(new Week
+                        {
+                            ID = 150,
+                            ParentID = 30,
+                            Term = 3,
+                            Num = 8,
+                            Title = "Week 10"
+                        });
+                        (((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 6) as EducationalLevel)
+                        .Components.Find(z => z.ID == 30) as Grade).Components.Add(new Week
+                        {
+                            ID = 151,
+                            ParentID = 30,
+                            Term = 3,
+                            Num = 9,
+                            Title = "Week 10"
+                        });
+                        (((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 6) as EducationalLevel)
+                        .Components.Find(z => z.ID == 30) as Grade).Components.Add(new Week
+                        {
+                            ID = 152,
+                            ParentID = 30,
+                            Term = 3,
+                            Num = 10,
+                            Title = "Week 10"
+                        });
+                (_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Add(new EducationalLevel
+                {
+                    ID = 7,
+                    ParentID = 1,
+                    Level = EducationalLevelType.Secondary,
+                    Icon = "../Resources/secondary.jpg"
+                });
+                    ((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 7) as EducationalLevel)
+                    .Components.Add(new Grade
+                    {
+                        ID = 49,
+                        ParentID = 7,
+                        GradeNum = GradeType.SecondaryJuniorI,
+                        Icon = "../Resources/1st Grade sec.png"
+                    });
+                    ((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 7) as EducationalLevel)
+                    .Components.Add(new Grade
+                    {
+                        ID = 50,
+                        ParentID = 7,
+                        GradeNum = GradeType.SecondaryJuniorII,
+                        Icon = "../Resources/2nd Grade sec.png"
+                    });
+                    ((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 7) as EducationalLevel)
+                    .Components.Add(new Grade
+                    {
+                        ID = 51,
+                        ParentID = 7,
+                        GradeNum = GradeType.SecondaryJuniorIII,
+                        Icon = "../Resources/3rd Grade sec.png"
+                    });
+                    ((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 7) as EducationalLevel)
+                    .Components.Add(new Grade
+                    {
+                        ID = 52,
+                        ParentID = 7,
+                        GradeNum = GradeType.SecondarySeniorI,
+                        Icon = "../Resources/4th Grade sec.png"
+                    });
+                    ((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 7) as EducationalLevel)
+                    .Components.Add(new Grade
+                    {
+                        ID = 53,
+                        ParentID = 7,
+                        GradeNum = GradeType.SecondarySeniorII,
+                        Icon = "../Resources/5th Grade sec.png"
+                    });
+                    ((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 7) as EducationalLevel)
+                    .Components.Add(new Grade
+                    {
+                        ID = 54,
+                        ParentID = 7,
+                        GradeNum = GradeType.SecondarySeniorIII,
+                        Icon = "../Resources/6th Grade sec.png"
+                    });
+            _state._availableCourses.Add(new Course
+            {
+                Icon = "../Resources/Flag of Spain.png",
+                ID = 2,
+                Name = "Spanish",
+                ParentID = 0
+            });
+                (_state._availableCourses.Find(x => x.ID == 2) as Course).Components.Add(new EducationalLevel
+                {
+                    ID = 8,
+                    ParentID = 2,
+                    Level = EducationalLevelType.Nursery,
+                    Icon = "../Resources/nursery.jpg"
+                });
+                    ((_state._availableCourses.Find(x => x.ID == 2) as Course).Components.Find(y => (y as EducationalLevel).ID == 8) as EducationalLevel)
+                    .Components.Add(new Grade
+                    {
+                        ID = 19,
+                        ParentID = 8,
+                        GradeNum = GradeType.NurseryI,
+                        Icon = "../Resources/nursery1.png"
+                    });
+                    ((_state._availableCourses.Find(x => x.ID == 2) as Course).Components.Find(y => (y as EducationalLevel).ID == 8) as EducationalLevel)
+                    .Components.Add(new Grade
+                    {
+                        ID = 20,
+                        ParentID = 8,
+                        GradeNum = GradeType.NurseryII,
+                        Icon = "../Resources/nursery2.png"
+                    });
+                (_state._availableCourses.Find(x => x.ID == 2) as Course).Components.Add(new EducationalLevel
+                {
+                    ID = 9,
+                    ParentID = 2,
+                    Level = EducationalLevelType.Primary,
+                    Icon = "../Resources/primary.jpg"
+                });
+                    ((_state._availableCourses.Find(x => x.ID == 2) as Course).Components.Find(y => (y as EducationalLevel).ID == 9) as EducationalLevel)
+                    .Components.Add(new Grade
+                    {
+                        ID = 31,
+                        ParentID = 9,
+                        GradeNum = GradeType.PrimaryI,
+                        Icon = "../Resources/1st Grade.png"
+                    });
+                    ((_state._availableCourses.Find(x => x.ID == 2) as Course).Components.Find(y => (y as EducationalLevel).ID == 9) as EducationalLevel)
+                    .Components.Add(new Grade
+                    {
+                        ID = 32,
+                        ParentID = 9,
+                        GradeNum = GradeType.PrimaryII,
+                        Icon = "../Resources/2nd Grade.png"
+                    });
+                    ((_state._availableCourses.Find(x => x.ID == 2) as Course).Components.Find(y => (y as EducationalLevel).ID == 9) as EducationalLevel)
+                    .Components.Add(new Grade
+                    {
+                        ID = 33,
+                        ParentID = 9,
+                        GradeNum = GradeType.PrimaryIII,
+                        Icon = "../Resources/3rd Grade.png"
+                    });
+                    ((_state._availableCourses.Find(x => x.ID == 2) as Course).Components.Find(y => (y as EducationalLevel).ID == 9) as EducationalLevel)
+                    .Components.Add(new Grade
+                    {
+                        ID = 34,
+                        ParentID = 9,
+                        GradeNum = GradeType.PrimaryIV,
+                        Icon = "../Resources/4th Grade.png"
+                    });
+                    ((_state._availableCourses.Find(x => x.ID == 2) as Course).Components.Find(y => (y as EducationalLevel).ID == 9) as EducationalLevel)
+                    .Components.Add(new Grade
+                    {
+                        ID = 35,
+                        ParentID = 9,
+                        GradeNum = GradeType.PrimaryV,
+                        Icon = "../Resources/5th Grade.png"
+                    });
+                    ((_state._availableCourses.Find(x => x.ID == 2) as Course).Components.Find(y => (y as EducationalLevel).ID == 9) as EducationalLevel)
+                    .Components.Add(new Grade
+                    {
+                        ID = 36,
+                        ParentID = 9,
+                        GradeNum = GradeType.PrimaryVI,
+                        Icon = "../Resources/6th Grade.png"
+                    });
+                (_state._availableCourses.Find(x => x.ID == 2) as Course).Components.Add(new EducationalLevel
+                {
+                    ID = 10,
+                    ParentID = 2,
+                    Level = EducationalLevelType.Secondary,
+                    Icon = "../Resources/secondary.jpg"
+                });
+                    ((_state._availableCourses.Find(x => x.ID == 2) as Course).Components.Find(y => (y as EducationalLevel).ID == 10) as EducationalLevel)
+                    .Components.Add(new Grade
+                    {
+                        ID = 55,
+                        ParentID = 10,
+                        GradeNum = GradeType.SecondaryJuniorI,
+                        Icon = "../Resources/1st Grade sec.png"
+                    });
+                    ((_state._availableCourses.Find(x => x.ID == 2) as Course).Components.Find(y => (y as EducationalLevel).ID == 10) as EducationalLevel)
+                    .Components.Add(new Grade
+                    {
+                        ID = 56,
+                        ParentID = 10,
+                        GradeNum = GradeType.SecondaryJuniorII,
+                        Icon = "../Resources/2nd Grade sec.png"
+                    });
+                    ((_state._availableCourses.Find(x => x.ID == 2) as Course).Components.Find(y => (y as EducationalLevel).ID == 10) as EducationalLevel)
+                    .Components.Add(new Grade
+                    {
+                        ID = 57,
+                        ParentID = 10,
+                        GradeNum = GradeType.SecondaryJuniorIII,
+                        Icon = "../Resources/3rd Grade sec.png"
+                    });
+                    ((_state._availableCourses.Find(x => x.ID == 2) as Course).Components.Find(y => (y as EducationalLevel).ID == 10) as EducationalLevel)
+                    .Components.Add(new Grade
+                    {
+                        ID = 58,
+                        ParentID = 10,
+                        GradeNum = GradeType.SecondarySeniorI,
+                        Icon = "../Resources/4th Grade sec.png"
+                    });
+                    ((_state._availableCourses.Find(x => x.ID == 2) as Course).Components.Find(y => (y as EducationalLevel).ID == 10) as EducationalLevel)
+                    .Components.Add(new Grade
+                    {
+                        ID = 59,
+                        ParentID = 10,
+                        GradeNum = GradeType.SecondarySeniorII,
+                        Icon = "../Resources/5th Grade sec.png"
+                    });
+                    ((_state._availableCourses.Find(x => x.ID == 2) as Course).Components.Find(y => (y as EducationalLevel).ID == 10) as EducationalLevel)
+                    .Components.Add(new Grade
+                    {
+                        ID = 60,
+                        ParentID = 10,
+                        GradeNum = GradeType.SecondarySeniorIII,
+                        Icon = "../Resources/6th Grade sec.png"
+                    });
+            _state._availableCourses.Add(new Course
+            {
+                Icon = "../Resources/Flag of United Kingdom.png",
+                ID = 3,
+                Name = "English",
+                ParentID = 0
+            });
+                (_state._availableCourses.Find(x => x.ID == 3) as Course).Components.Add(new EducationalLevel
+                {
+                    ID = 11,
+                    ParentID = 3,
+                    Level = EducationalLevelType.Nursery,
+                    Icon = "../Resources/nursery.jpg"
+                });
+                    ((_state._availableCourses.Find(x => x.ID == 3) as Course).Components.Find(y => (y as EducationalLevel).ID == 11) as EducationalLevel)
+                    .Components.Add(new Grade
+                    {
+                        ID = 21,
+                        ParentID = 11,
+                        GradeNum = GradeType.NurseryI,
+                        Icon = "../Resources/nursery1.png"
+                    });
+                    ((_state._availableCourses.Find(x => x.ID == 3) as Course).Components.Find(y => (y as EducationalLevel).ID == 11) as EducationalLevel)
+                    .Components.Add(new Grade
+                    {
+                        ID = 22,
+                        ParentID = 11,
+                        GradeNum = GradeType.NurseryII,
+                        Icon = "../Resources/nursery2.png"
+                    });
+                (_state._availableCourses.Find(x => x.ID == 3) as Course).Components.Add(new EducationalLevel
+                {
+                    ID = 12,
+                    ParentID = 3,
+                    Level = EducationalLevelType.Primary,
+                    Icon = "../Resources/primary.jpg"
+                });
+                    ((_state._availableCourses.Find(x => x.ID == 3) as Course).Components.Find(y => (y as EducationalLevel).ID == 12) as EducationalLevel)
+                    .Components.Add(new Grade
+                    {
+                        ID = 37,
+                        ParentID = 12,
+                        GradeNum = GradeType.PrimaryI,
+                        Icon = "../Resources/1st Grade.png"
+                    });
+                    ((_state._availableCourses.Find(x => x.ID == 3) as Course).Components.Find(y => (y as EducationalLevel).ID == 12) as EducationalLevel)
+                    .Components.Add(new Grade
+                    {
+                        ID = 38,
+                        ParentID = 12,
+                        GradeNum = GradeType.PrimaryII,
+                        Icon = "../Resources/2nd Grade.png"
+                    });
+                    ((_state._availableCourses.Find(x => x.ID == 3) as Course).Components.Find(y => (y as EducationalLevel).ID == 12) as EducationalLevel)
+                    .Components.Add(new Grade
+                    {
+                        ID = 39,
+                        ParentID = 12,
+                        GradeNum = GradeType.PrimaryIII,
+                        Icon = "../Resources/3rd Grade.png"
+                    });
+                    ((_state._availableCourses.Find(x => x.ID == 3) as Course).Components.Find(y => (y as EducationalLevel).ID == 12) as EducationalLevel)
+                    .Components.Add(new Grade
+                    {
+                        ID = 40,
+                        ParentID = 12,
+                        GradeNum = GradeType.PrimaryIV,
+                        Icon = "../Resources/4th Grade.png"
+                    });
+                    ((_state._availableCourses.Find(x => x.ID == 3) as Course).Components.Find(y => (y as EducationalLevel).ID == 12) as EducationalLevel)
+                    .Components.Add(new Grade
+                    {
+                        ID = 41,
+                        ParentID = 12,
+                        GradeNum = GradeType.PrimaryV,
+                        Icon = "../Resources/5th Grade.png"
+                    });
+                    ((_state._availableCourses.Find(x => x.ID == 3) as Course).Components.Find(y => (y as EducationalLevel).ID == 12) as EducationalLevel)
+                    .Components.Add(new Grade
+                    {
+                        ID = 42,
+                        ParentID = 12,
+                        GradeNum = GradeType.PrimaryVI,
+                        Icon = "../Resources/6th Grade.png"
+                    });
+                (_state._availableCourses.Find(x => x.ID == 3) as Course).Components.Add(new EducationalLevel
+                {
+                    ID = 13,
+                    ParentID = 3,
+                    Level = EducationalLevelType.Secondary,
+                    Icon = "../Resources/secondary.jpg"
+                });
+                    ((_state._availableCourses.Find(x => x.ID == 3) as Course).Components.Find(y => (y as EducationalLevel).ID == 13) as EducationalLevel)
+                    .Components.Add(new Grade
+                    {
+                        ID = 61,
+                        ParentID = 13,
+                        GradeNum = GradeType.SecondaryJuniorI,
+                        Icon = "../Resources/1st Grade sec.png"
+                    });
+                    ((_state._availableCourses.Find(x => x.ID == 3) as Course).Components.Find(y => (y as EducationalLevel).ID == 13) as EducationalLevel)
+                    .Components.Add(new Grade
+                    {
+                        ID = 62,
+                        ParentID = 13,
+                        GradeNum = GradeType.SecondaryJuniorII,
+                        Icon = "../Resources/2nd Grade sec.png"
+                    });
+                    ((_state._availableCourses.Find(x => x.ID == 3) as Course).Components.Find(y => (y as EducationalLevel).ID == 13) as EducationalLevel)
+                    .Components.Add(new Grade
+                    {
+                        ID = 63,
+                        ParentID = 13,
+                        GradeNum = GradeType.SecondaryJuniorIII,
+                        Icon = "../Resources/3rd Grade sec.png"
+                    });
+                    ((_state._availableCourses.Find(x => x.ID == 3) as Course).Components.Find(y => (y as EducationalLevel).ID == 13) as EducationalLevel)
+                    .Components.Add(new Grade
+                    {
+                        ID = 64,
+                        ParentID = 13,
+                        GradeNum = GradeType.SecondarySeniorI,
+                        Icon = "../Resources/4th Grade sec.png"
+                    });
+                    ((_state._availableCourses.Find(x => x.ID == 3) as Course).Components.Find(y => (y as EducationalLevel).ID == 13) as EducationalLevel)
+                    .Components.Add(new Grade
+                    {
+                        ID = 65,
+                        ParentID = 13,
+                        GradeNum = GradeType.SecondarySeniorII,
+                        Icon = "../Resources/5th Grade sec.png"
+                    });
+                    ((_state._availableCourses.Find(x => x.ID == 3) as Course).Components.Find(y => (y as EducationalLevel).ID == 13) as EducationalLevel)
+                    .Components.Add(new Grade
+                    {
+                        ID = 66,
+                        ParentID = 13,
+                        GradeNum = GradeType.SecondarySeniorIII,
+                        Icon = "../Resources/6th Grade sec.png"
+                    });
+            _state._availableCourses.Add(new Course
+            {
+                Icon = "../Resources/Flag of United States.png",
+                ID = 4,
+                Name = "English(American)",
+                ParentID = 0
+            });
+                (_state._availableCourses.Find(x => x.ID == 4) as Course).Components.Add(new EducationalLevel
+                {
+                    ID = 14,
+                    ParentID = 4,
+                    Level = EducationalLevelType.Nursery,
+                    Icon = "../Resources/nursery.jpg"
+                });
+                    ((_state._availableCourses.Find(x => x.ID == 4) as Course).Components.Find(y => (y as EducationalLevel).ID == 14) as EducationalLevel)
+                    .Components.Add(new Grade
+                    {
+                        ID = 23,
+                        ParentID = 14,
+                        GradeNum = GradeType.NurseryI,
+                        Icon = "../Resources/nursery1.png"
+                    });
+                    ((_state._availableCourses.Find(x => x.ID == 4) as Course).Components.Find(y => (y as EducationalLevel).ID == 14) as EducationalLevel)
+                    .Components.Add(new Grade
+                    {
+                        ID = 24,
+                        ParentID = 14,
+                        GradeNum = GradeType.NurseryII,
+                        Icon = "../Resources/nursery2.png"
+                    });
+                (_state._availableCourses.Find(x => x.ID == 4) as Course).Components.Add(new EducationalLevel
+                {
+                    ID = 15,
+                    ParentID = 4,
+                    Level = EducationalLevelType.Primary,
+                    Icon = "../Resources/primary.jpg"
+                });
+                    ((_state._availableCourses.Find(x => x.ID == 4) as Course).Components.Find(y => (y as EducationalLevel).ID == 15) as EducationalLevel)
+                    .Components.Add(new Grade
+                    {
+                        ID = 43,
+                        ParentID = 15,
+                        GradeNum = GradeType.PrimaryI,
+                        Icon = "../Resources/1st Grade.png"
+                    });
+                    ((_state._availableCourses.Find(x => x.ID == 4) as Course).Components.Find(y => (y as EducationalLevel).ID == 15) as EducationalLevel)
+                    .Components.Add(new Grade
+                    {
+                        ID = 44,
+                        ParentID = 15,
+                        GradeNum = GradeType.PrimaryII,
+                        Icon = "../Resources/2nd Grade.png"
+                    });
+                    ((_state._availableCourses.Find(x => x.ID == 4) as Course).Components.Find(y => (y as EducationalLevel).ID == 15) as EducationalLevel)
+                    .Components.Add(new Grade
+                    {
+                        ID = 45,
+                        ParentID = 15,
+                        GradeNum = GradeType.PrimaryIII,
+                        Icon = "../Resources/3rd Grade.png"
+                    });
+                    ((_state._availableCourses.Find(x => x.ID == 4) as Course).Components.Find(y => (y as EducationalLevel).ID == 15) as EducationalLevel)
+                    .Components.Add(new Grade
+                    {
+                        ID = 46,
+                        ParentID = 15,
+                        GradeNum = GradeType.PrimaryIV,
+                        Icon = "../Resources/4th Grade.png"
+                    });
+                    ((_state._availableCourses.Find(x => x.ID == 4) as Course).Components.Find(y => (y as EducationalLevel).ID == 15) as EducationalLevel)
+                    .Components.Add(new Grade
+                    {
+                        ID = 47,
+                        ParentID = 15,
+                        GradeNum = GradeType.PrimaryV,
+                        Icon = "../Resources/5th Grade.png"
+                    });
+                    ((_state._availableCourses.Find(x => x.ID == 4) as Course).Components.Find(y => (y as EducationalLevel).ID == 15) as EducationalLevel)
+                    .Components.Add(new Grade
+                    {
+                        ID = 48,
+                        ParentID = 15,
+                        GradeNum = GradeType.PrimaryVI,
+                        Icon = "../Resources/6th Grade.png"
+                    });
+                (_state._availableCourses.Find(x => x.ID == 4) as Course).Components.Add(new EducationalLevel
+                {
+                    ID = 16,
+                    ParentID = 4,
+                    Level = EducationalLevelType.Secondary,
+                    Icon = "../Resources/secondary.jpg"
+                });
+                    ((_state._availableCourses.Find(x => x.ID == 4) as Course).Components.Find(y => (y as EducationalLevel).ID == 16) as EducationalLevel)
+                    .Components.Add(new Grade
+                    {
+                        ID = 67,
+                        ParentID = 16,
+                        GradeNum = GradeType.SecondaryJuniorI,
+                        Icon = "../Resources/1st Grade sec.png"
+                    });
+                    ((_state._availableCourses.Find(x => x.ID == 4) as Course).Components.Find(y => (y as EducationalLevel).ID == 16) as EducationalLevel)
+                    .Components.Add(new Grade
+                    {
+                        ID = 68,
+                        ParentID = 16,
+                        GradeNum = GradeType.SecondaryJuniorII,
+                        Icon = "../Resources/2nd Grade sec.png"
+                    });
+                    ((_state._availableCourses.Find(x => x.ID == 4) as Course).Components.Find(y => (y as EducationalLevel).ID == 16) as EducationalLevel)
+                    .Components.Add(new Grade
+                    {
+                        ID = 69,
+                        ParentID = 16,
+                        GradeNum = GradeType.SecondaryJuniorIII,
+                        Icon = "../Resources/3rd Grade sec.png"
+                    });
+                    ((_state._availableCourses.Find(x => x.ID == 4) as Course).Components.Find(y => (y as EducationalLevel).ID == 16) as EducationalLevel)
+                    .Components.Add(new Grade
+                    {
+                        ID = 70,
+                        ParentID = 16,
+                        GradeNum = GradeType.SecondarySeniorI,
+                        Icon = "../Resources/4th Grade sec.png"
+                    });
+                    ((_state._availableCourses.Find(x => x.ID == 4) as Course).Components.Find(y => (y as EducationalLevel).ID == 16) as EducationalLevel)
+                    .Components.Add(new Grade
+                    {
+                        ID = 71,
+                        ParentID = 16,
+                        GradeNum = GradeType.SecondarySeniorII,
+                        Icon = "../Resources/5th Grade sec.png"
+                    });
+                    ((_state._availableCourses.Find(x => x.ID == 4) as Course).Components.Find(y => (y as EducationalLevel).ID == 16) as EducationalLevel)
+                    .Components.Add(new Grade
+                    {
+                        ID = 72,
+                        ParentID = 16,
+                        GradeNum = GradeType.SecondarySeniorIII,
+                        Icon = "../Resources/6th Grade sec.png"
+                    });
+        }
 
         private void GetValue()
         {

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Runtime.Remoting.Messaging;
+using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Security;
 using System.Security.Cryptography;
@@ -84,10 +85,12 @@ namespace Diction_Master___Library
             }
             catch (SocketException se)
             {
+                ///
                 return -1;
             }
             catch (ObjectDisposedException ode)
             {
+                ///
                 return -1;
             }
             catch (InvalidOperationException ioe)
@@ -630,40 +633,54 @@ namespace Diction_Master___Library
                         formatter.Serialize(ms, change);
                         changeBytes = ms.GetBuffer();
                     }
-                    catch { }
-                    if (changeBytes != null)
+                    catch (SerializationException se)
                     {
-                        int numOfBlocks;
-                        if (changeBytes.Length > 8000)
+
+                    }
+                    try
+                    {
+                        if (changeBytes != null)
                         {
-                            float len = changeBytes.Length / 8000;
-                            numOfBlocks = (int)len;
-                       
-                            if (len - (int)len > 0)
-                                numOfBlocks++;
-                            for (int i = 0; i < numOfBlocks; ++i)
+                            int numOfBlocks;
+                            if (changeBytes.Length > 8000)
                             {
-                                byte[] block = new byte[8000];
-                                Array.Copy(changeBytes, 8000 * i, block, 0, 8000);
-                                socket.Send(block);
-                                byte[] echo = new byte[8000];
+                                float len = changeBytes.Length / 8000;
+                                numOfBlocks = (int)len;
+                                if (len - (int)len > 0)
+                                    numOfBlocks++;
+                                //send number of blocks
+                                socket.Send(BitConverter.GetBytes(numOfBlocks));
+                                //send data block by block
+                                for (int i = 0; i < numOfBlocks; ++i)
+                                {
+                                    byte[] block = new byte[8000];
+                                    Array.Copy(changeBytes, 8000 * i, block, 0, 8000);
+                                    socket.Send(block);
+                                    byte[] echo = new byte[8000];
+                                    socket.Receive(echo);
+                                    if (!echo.SequenceEqual(block))
+                                        --i;
+                                }
+                            }
+                            else
+                            {
+                            label:
+                                socket.Send(BitConverter.GetBytes(1));
+                                socket.Send(changeBytes);
+                                byte[] echo = new byte[changeBytes.Length];
                                 socket.Receive(echo);
-                                if (!echo.SequenceEqual(block))
-                                    --i;
+                                if (!echo.SequenceEqual(changeBytes))
+                                    goto label;
                             }
                         }
-                        else
-                        {
-                        label:
-                            socket.Send(changeBytes);
-                            byte[] echo = new byte[changeBytes.Length];
-                            socket.Receive(echo);
-                            if (!echo.SequenceEqual(changeBytes))
-                                goto label;
-                        }
+                    }
+                    catch (SocketException sockExc)
+                    {
+                        
                     }
                 }
             }
+            socket.Send(Encoding.Unicode.GetBytes("EOS"));
         }
 
         public List<ContentVersionInfo> ReceiveChanges()
@@ -671,7 +688,13 @@ namespace Diction_Master___Library
             byte[] buffer = new byte[4];
             _socket.Receive(buffer);
             int num = BitConverter.ToInt32(buffer, 0);
-
+            for (int i = 0; i < num; i++)
+            {
+                //receive number of blocks to receive
+                _socket.Receive(buffer);
+                int numOfBlocks = BitConverter.ToInt32(buffer, 0);
+                //ContentVersionInfo info = (ContentVersionInfo)
+            }
             return null;
         }
 

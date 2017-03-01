@@ -8,8 +8,6 @@ D:\Projects\Upwork\Master Diction\Master Diction\Diction Master\obj\Debug\MainWi
 D:\Projects\Upwork\Master Diction\Master Diction\Diction Master\obj\Debug\Test.g.cs
 D:\Projects\Upwork\Master Diction\Master Diction\Diction Master\obj\Debug\UserControls\Content.g.cs
 D:\Projects\Upwork\Master Diction\Master Diction\Diction Master\obj\Debug\UserControls\ContentContainer.g.cs
-D:\Projects\Upwork\Master Diction\Master Diction\Diction Master\obj\Debug\UserControls\ContentViewer.g.cs
-D:\Projects\Upwork\Master Diction\Master Diction\Diction Master\obj\Debug\UserControls\DropDown.g.cs
 D:\Projects\Upwork\Master Diction\Master Diction\Diction Master\obj\Debug\UserControls\GradeSelection.g.cs
 D:\Projects\Upwork\Master Diction\Master Diction\Diction Master\obj\Debug\UserControls\LanguageSelection.g.cs
 D:\Projects\Upwork\Master Diction\Master Diction\Diction Master\obj\Debug\UserControls\LevelSelection.g.cs
@@ -25,8 +23,6 @@ D:\Projects\Upwork\Master Diction\Master Diction\Diction Master\obj\Debug\MainWi
 D:\Projects\Upwork\Master Diction\Master Diction\Diction Master\obj\Debug\Test.baml
 D:\Projects\Upwork\Master Diction\Master Diction\Diction Master\obj\Debug\UserControls\Content.baml
 D:\Projects\Upwork\Master Diction\Master Diction\Diction Master\obj\Debug\UserControls\ContentContainer.baml
-D:\Projects\Upwork\Master Diction\Master Diction\Diction Master\obj\Debug\UserControls\ContentViewer.baml
-D:\Projects\Upwork\Master Diction\Master Diction\Diction Master\obj\Debug\UserControls\DropDown.baml
 D:\Projects\Upwork\Master Diction\Master Diction\Diction Master\obj\Debug\UserControls\GradeSelection.baml
 D:\Projects\Upwork\Master Diction\Master Diction\Diction Master\obj\Debug\UserControls\LanguageSelection.baml
 D:\Projects\Upwork\Master Diction\Master Diction\Diction Master\obj\Debug\UserControls\LevelSelection.baml
@@ -42,3 +38,11 @@ D:\Projects\Upwork\Master Diction\Master Diction\Diction Master\obj\Debug\Dictio
 D:\Projects\Upwork\Master Diction\Master Diction\Diction Master\obj\Debug\Diction Master.pdb
 D:\Projects\Upwork\Master Diction\Master Diction\Diction Master\obj\Debug\UserControls\HomePage.g.cs
 D:\Projects\Upwork\Master Diction\Master Diction\Diction Master\obj\Debug\UserControls\HomePage.baml
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master\obj\Debug\UserControls\DocumentViewer.g.cs
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master\obj\Debug\UserControls\MediaViewer.g.cs
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master\obj\Debug\UserControls\Question.g.cs
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master\obj\Debug\UserControls\QuizViewer.g.cs
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master\obj\Debug\UserControls\DocumentViewer.baml
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master\obj\Debug\UserControls\MediaViewer.baml
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master\obj\Debug\UserControls\Question.baml
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master\obj\Debug\UserControls\QuizViewer.baml
