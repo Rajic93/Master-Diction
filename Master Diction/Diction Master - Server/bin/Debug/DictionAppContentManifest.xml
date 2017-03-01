@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfComponent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Component xsi:type="Course">
+    <ID>1</ID>
+    <ParentID>0</ParentID>
+    <Components>
+      <Component xsi:type="EducationalLevel">
+        <ID>3</ID>
+        <ParentID>1</ParentID>
+        <Components>
+          <Component xsi:type="Grade">
+            <ID>8</ID>
+            <ParentID>3</ParentID>
+            <Components />
+            <Icon>pack://application:,,,/Resources/nusery1.png</Icon>
+            <GradeNum>NurseryI</GradeNum>
+          </Component>
+          <Component xsi:type="Grade">
+            <ID>9</ID>
+            <ParentID>3</ParentID>
+            <Components>
+              <Component xsi:type="Week">
+                <ID>16</ID>
+                <ParentID>9</ParentID>
+                <Components>
+                  <Component xsi:type="Lesson">
+                    <ID>24</ID>
+                    <ParentID>16</ParentID>
+                    <Components>
+                      <Component xsi:type="ContentFile">
+                        <ID>34</ID>
+                        <ParentID>24</ParentID>
+                        <Title>Diction Exercise.mp4</Title>
+                        <URI>Diction Exercise.mp4</URI>
+                        <Size>6159686</Size>
+                        <Description />
+                        <ComponentType>Video</ComponentType>
+                        <icon>pack://application:,,,/Resources/video.png</icon>
+                      </Component>
+                    </Components>
+                    <Title>Lesson 1</Title>
+                    <Num>1</Num>
+                  </Component>
+                  <Component xsi:type="Lesson">
+                    <ID>25</ID>
+                    <ParentID>16</ParentID>
+                    <Components>
+                      <Component xsi:type="ContentFile">
+                        <ID>35</ID>
+                        <ParentID>25</ParentID>
+                        <Title>Diction Exercise.mp4</Title>
+                        <URI>Diction Exercise.mp4</URI>
+                        <Size>6159686</Size>
+                        <Description />
+                        <ComponentType>Video</ComponentType>
+                        <icon>pack://application:,,,/Resources/video.png</icon>
+                      </Component>
+                    </Components>
+                    <Title>Lesson 2</Title>
+                    <Num>2</Num>
+                  </Component>
+                </Components>
+                <Title>Week 1</Title>
+                <Num>1</Num>
+                <Term>1</Term>
+              </Component>
+              <Component xsi:type="Week">
+                <ID>17</ID>
+                <ParentID>9</ParentID>
+                <Components>
+                  <Component xsi:type="Lesson">
+                    <ID>26</ID>
+                    <ParentID>17</ParentID>
+                    <Components>
+                      <Component xsi:type="ContentFile">
+                        <ID>36</ID>
+                        <ParentID>26</ParentID>
+                        <Title>Diction Exercise.mp4</Title>
+                        <URI>Diction Exercise.mp4</URI>
+                        <Size>6159686</Size>
+                        <Description />
+                        <ComponentType>Video</ComponentType>
+                        <icon>pack://application:,,,/Resources/video.png</icon>
+                      </Component>
+                    </Components>
+                    <Title>Lesson 3</Title>
+                    <Num>3</Num>
+                  </Component>
+                </Components>
+                <Title>Week 2</Title>
+                <Num>2</Num>
+                <Term>1</Term>
+              </Component>
+              <Component xsi:type="Week">
+                <ID>18</ID>
+                <ParentID>9</ParentID>
+                <Components>
+                  <Component xsi:type="Lesson">
+                    <ID>27</ID>
+                    <ParentID>18</ParentID>
+                    <Components>
+                      <Component xsi:type="ContentFile">
+                        <ID>37</ID>
+                        <ParentID>27</ParentID>
+                        <Title>Diction Exercise.mp4</Title>
+                        <URI>Diction Exercise.mp4</URI>
+                        <Size>6159686</Size>
+                        <Description />
+                        <ComponentType>Video</ComponentType>
+                        <icon>pack://application:,,,/Resources/video.png</icon>
+                      </Component>
+                    </Components>
+                    <Title>Lesson 4</Title>
+                    <Num>4</Num>
+                  </Component>
+                </Components>
+                <Title>Week 3</Title>
+                <Num>3</Num>
+                <Term>1</Term>
+              </Component>
+              <Component xsi:type="Week">
+                <ID>19</ID>
+                <ParentID>9</ParentID>
+                <Components>
+                  <Component xsi:type="Lesson">
+                    <ID>28</ID>
+                    <ParentID>19</ParentID>
+                    <Components>
+                      <Component xsi:type="ContentFile">
+                        <ID>38</ID>
+                        <ParentID>28</ParentID>
+                        <Title>Diction Exercise.mp4</Title>
+                        <URI>Diction Exercise.mp4</URI>
+                        <Size>6159686</Size>
+                        <Description />
+                        <ComponentType>Video</ComponentType>
+                        <icon>pack://application:,,,/Resources/video.png</icon>
+                      </Component>
+                    </Components>
+                    <Title>Lesson 5</Title>
+                    <Num>5</Num>
+                  </Component>
+                </Components>
+                <Title>Week 4</Title>
+                <Num>4</Num>
+                <Term>2</Term>
+              </Component>
+              <Component xsi:type="Week">
+                <ID>20</ID>
+                <ParentID>9</ParentID>
+                <Components>
+                  <Component xsi:type="Lesson">
+                    <ID>29</ID>
+                    <ParentID>20</ParentID>
+                    <Components>
+                      <Component xsi:type="ContentFile">
+                        <ID>39</ID>
+                        <ParentID>29</ParentID>
+                        <Title>Diction Exercise.mp4</Title>
+                        <URI>Diction Exercise.mp4</URI>
+                        <Size>6159686</Size>
+                        <Description />
+                        <ComponentType>Video</ComponentType>
+                        <icon>pack://application:,,,/Resources/video.png</icon>
+                      </Component>
+                    </Components>
+                    <Title>Lesson 6</Title>
+                    <Num>6</Num>
+                  </Component>
+                </Components>
+                <Title>Week 5</Title>
+                <Num>5</Num>
+                <Term>2</Term>
+              </Component>
+              <Component xsi:type="Week">
+                <ID>21</ID>
+                <ParentID>9</ParentID>
+                <Components>
+                  <Component xsi:type="Lesson">
+                    <ID>30</ID>
+                    <ParentID>21</ParentID>
+                    <Components>
+                      <Component xsi:type="ContentFile">
+                        <ID>40</ID>
+                        <ParentID>30</ParentID>
+                        <Title>Diction Exercise.mp4</Title>
+                        <URI>Diction Exercise.mp4</URI>
+                        <Size>6159686</Size>
+                        <Description />
+                        <ComponentType>Video</ComponentType>
+                        <icon>pack://application:,,,/Resources/video.png</icon>
+                      </Component>
+                    </Components>
+                    <Title>Lesson 7</Title>
+                    <Num>7</Num>
+                  </Component>
+                </Components>
+                <Title>Week 6</Title>
+                <Num>6</Num>
+                <Term>3</Term>
+              </Component>
+              <Component xsi:type="Week">
+                <ID>22</ID>
+                <ParentID>9</ParentID>
+                <Components>
+                  <Component xsi:type="Lesson">
+                    <ID>31</ID>
+                    <ParentID>22</ParentID>
+                    <Components>
+                      <Component xsi:type="ContentFile">
+                        <ID>41</ID>
+                        <ParentID>31</ParentID>
+                        <Title>Diction Exercise.mp4</Title>
+                        <URI>Diction Exercise.mp4</URI>
+                        <Size>6159686</Size>
+                        <Description />
+                        <ComponentType>Video</ComponentType>
+                        <icon>pack://application:,,,/Resources/video.png</icon>
+                      </Component>
+                    </Components>
+                    <Title>Lesson 8</Title>
+                    <Num>8</Num>
+                  </Component>
+                </Components>
+                <Title>Week 7</Title>
+                <Num>7</Num>
+                <Term>3</Term>
+              </Component>
+              <Component xsi:type="Week">
+                <ID>23</ID>
+                <ParentID>9</ParentID>
+                <Components>
+                  <Component xsi:type="Lesson">
+                    <ID>32</ID>
+                    <ParentID>23</ParentID>
+                    <Components>
+                      <Component xsi:type="ContentFile">
+                        <ID>42</ID>
+                        <ParentID>32</ParentID>
+                        <Title>Diction Exercise.mp4</Title>
+                        <URI>Diction Exercise.mp4</URI>
+                        <Size>6159686</Size>
+                        <Description />
+                        <ComponentType>Video</ComponentType>
+                        <icon>pack://application:,,,/Resources/video.png</icon>
+                      </Component>
+                    </Components>
+                    <Title>Lesson 9</Title>
+                    <Num>9</Num>
+                  </Component>
+                  <Component xsi:type="Lesson">
+                    <ID>33</ID>
+                    <ParentID>23</ParentID>
+                    <Components>
+                      <Component xsi:type="Quiz">
+                        <ID>43</ID>
+                        <ParentID>33</ParentID>
+                        <Components>
+                          <Component xsi:type="Question">
+                            <ID>44</ID>
+                            <ParentID>43</ParentID>
+                            <Size>0</Size>
+                            <Text>What is the name of the founder of Diction Master</Text>
+                            <Answer>Jonathan Onah</Answer>
+                            <Type>Text</Type>
+                            <WrongAnswers />
+                          </Component>
+                          <Component xsi:type="Question">
+                            <ID>45</ID>
+                            <ParentID>43</ParentID>
+                            <Size>0</Size>
+                            <Text>What is the name of the developer who implemented it?</Text>
+                            <Answer>Aleksandar Rajic</Answer>
+                            <Type>Puzzle</Type>
+                            <WrongAnswers />
+                          </Component>
+                        </Components>
+                        <Title>Finals</Title>
+                      </Component>
+                    </Components>
+                    <Title>Lesson 10</Title>
+                    <Num>10</Num>
+                  </Component>
+                </Components>
+                <Title>Week 8</Title>
+                <Num>8</Num>
+                <Term>3</Term>
+              </Component>
+            </Components>
+            <Icon>pack://application:,,,/Resources/nusery2.png</Icon>
+            <GradeNum>NurseryII</GradeNum>
+          </Component>
+        </Components>
+        <Icon>pack://application:,,,/Diction Master - Server;component/Resources/nursery.jpg</Icon>
+        <Level>Nursery</Level>
+      </Component>
+      <Component xsi:type="EducationalLevel">
+        <ID>4</ID>
+        <ParentID>1</ParentID>
+        <Components>
+          <Component xsi:type="Grade">
+            <ID>10</ID>
+            <ParentID>4</ParentID>
+            <Components />
+            <Icon>pack://application:,,,/Resources/1st Grade.png</Icon>
+            <GradeNum>PrimaryI</GradeNum>
+          </Component>
+          <Component xsi:type="Grade">
+            <ID>11</ID>
+            <ParentID>4</ParentID>
+            <Components />
+            <Icon>pack://application:,,,/Resources/2nd Grade.png</Icon>
+            <GradeNum>PrimaryII</GradeNum>
+          </Component>
+          <Component xsi:type="Grade">
+            <ID>12</ID>
+            <ParentID>4</ParentID>
+            <Components />
+            <Icon>pack://application:,,,/Resources/3rd Grade.png</Icon>
+            <GradeNum>PrimaryIII</GradeNum>
+          </Component>
+        </Components>
+        <Icon>pack://application:,,,/Diction Master - Server;component/Resources/primary.jpg</Icon>
+        <Level>Primary</Level>
+      </Component>
+    </Components>
+    <Name>Serbian</Name>
+    <Icon>pack://application:,,,/Diction Master - Server;component/Resources/Flag of Serbia.png</Icon>
+  </Component>
+  <Component xsi:type="Course">
+    <ID>2</ID>
+    <ParentID>0</ParentID>
+    <Components>
+      <Component xsi:type="EducationalLevel">
+        <ID>5</ID>
+        <ParentID>2</ParentID>
+        <Components>
+          <Component xsi:type="Grade">
+            <ID>13</ID>
+            <ParentID>5</ParentID>
+            <Components />
+            <Icon>pack://application:,,,/Resources/nusery1.png</Icon>
+            <GradeNum>NurseryI</GradeNum>
+          </Component>
+        </Components>
+        <Icon>pack://application:,,,/Diction Master - Server;component/Resources/nursery.jpg</Icon>
+        <Level>Nursery</Level>
+      </Component>
+      <Component xsi:type="EducationalLevel">
+        <ID>6</ID>
+        <ParentID>2</ParentID>
+        <Components>
+          <Component xsi:type="Grade">
+            <ID>14</ID>
+            <ParentID>6</ParentID>
+            <Components />
+            <Icon>pack://application:,,,/Resources/1st Grade.png</Icon>
+            <GradeNum>PrimaryI</GradeNum>
+          </Component>
+        </Components>
+        <Icon>pack://application:,,,/Diction Master - Server;component/Resources/primary.jpg</Icon>
+        <Level>Primary</Level>
+      </Component>
+      <Component xsi:type="EducationalLevel">
+        <ID>7</ID>
+        <ParentID>2</ParentID>
+        <Components>
+          <Component xsi:type="Grade">
+            <ID>15</ID>
+            <ParentID>7</ParentID>
+            <Components />
+            <Icon>pack://application:,,,/Resources/6th Grade sec.png</Icon>
+            <GradeNum>SecondarySeniorIII</GradeNum>
+          </Component>
+        </Components>
+        <Icon>pack://application:,,,/Diction Master - Server;component/Resources/secondary.jpg</Icon>
+        <Level>Secondary</Level>
+      </Component>
+    </Components>
+    <Name>English</Name>
+    <Icon>pack://application:,,,/Diction Master - Server;component/Resources/Flag of United Kingdom.png</Icon>
+  </Component>
+</ArrayOfComponent>

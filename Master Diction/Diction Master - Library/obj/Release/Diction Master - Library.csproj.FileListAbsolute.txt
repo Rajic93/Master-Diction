@@ -1,0 +1,5 @@
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Library\bin\Release\Diction Master - Library.dll
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Library\bin\Release\Diction Master - Library.pdb
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Library\obj\Release\Diction Master - Library.csprojResolveAssemblyReference.cache
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Library\obj\Release\Diction Master - Library.dll
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Library\obj\Release\Diction Master - Library.pdb

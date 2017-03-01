@@ -11,8 +11,8 @@
 
         <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="10,58,0,0" TextWrapping="Wrap" Text="Uploaded content" VerticalAlignment="Top"/>
         <ComboBox x:Name="comboBox" HorizontalAlignment="Left" Margin="10,31,0,0" VerticalAlignment="Top" Width="345" SelectionChanged="comboBox_SelectionChanged"/>
-        <TextBlock x:Name="textBlock2" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Week" VerticalAlignment="Top"/>
-        <Button x:Name="Save" Content="Save" HorizontalAlignment="Left" Margin="705,561,0,0" VerticalAlignment="Top" Width="75" Click="Save_OnClick"/>
+        <TextBlock x:Name="textBlock2" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Lesson" VerticalAlignment="Top"/>
+        <Button x:Name="Save" Content="Save" HorizontalAlignment="Left" Margin="705,561,0,0" VerticalAlignment="Top" Width="75" Click="Save_OnClick" IsEnabled="False"/>
         <WrapPanel x:Name="Files" HorizontalAlignment="Left" Height="501" Margin="10,79,0,0" VerticalAlignment="Top" Width="345" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"/>
         <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="365,10,0,0" TextWrapping="Wrap" Text="Type" VerticalAlignment="Top"/>
         <RadioButton x:Name="radioButtonAudio" Content="Audio" HorizontalAlignment="Left" Margin="365,31,0,0" VerticalAlignment="Top" IsEnabled="False"/>

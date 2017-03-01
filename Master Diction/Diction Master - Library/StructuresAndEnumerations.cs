@@ -1,7 +1,9 @@
 ﻿
 
 
+using System;
 using System.Collections.Generic;
+using System.Security.Permissions;
 
 namespace Diction_Master___Library
 {
@@ -31,10 +33,12 @@ namespace Diction_Master___Library
         Teachers
     }
 
+    [Serializable]
     public enum ContentStatus
     {
-        OutDated,
-        UpToDate
+        Add,
+        Edit,
+        Delete
     }
 
     public enum NetworkAvailability
@@ -65,10 +69,72 @@ namespace Diction_Master___Library
         Choice
     }
 
+    public enum ApplicationType
+    {
+        Diction,
+        Teachers,
+        Audio
+    }
+
+    public enum SubscriptionType
+    {
+        Term,
+        Year
+    }
+
+    public enum Action
+    {
+        Login,
+        Register
+    }
+
+    public enum KeyValidation
+    {
+        ValidOneTerm,
+        ValidFullYear,
+        Invalid
+    }
+
+    [Serializable]
+    public enum NotificationType
+    {
+        SubscriptionExpired,
+        UpdateAvailable
+    }
+
+    [Serializable]
     public struct ContentVersionInfo
     {
-        public int ComponentID;
+        public long ComponentID;
+        public long ParentID;
         public ContentStatus Status;
+        public Component Component;
+        public DateTime Date;
+    }
+
+    [Serializable]
+    public struct PendingNotification
+    {
+        public NotificationType NotificationType;
+        public long SubscriptionID;
+        public DateTime UpdateVersion;
+        public long ClientID;
+        public string IPAddress;
+        public int Port;
+    }
+
+    [Serializable]
+    public struct Subscription
+    {
+        public long ID { get; set; }
+        public long ClientID { get; set; }
+        public long CourseID { get; set; }
+        public long EduLevelID { get; set; }
+        public long GradeID { get; set; }
+        public long TermID { get; set; }
+        public SubscriptionType SubscriptionType { get; set; }
+        public DateTime ExpirationDateTime { get; set; }
+        public string Key { get; set; }
     }
 
     public static class Icons

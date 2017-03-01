@@ -37,6 +37,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -55,6 +56,54 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Test.xaml.cs">
+      <DependentUpon>Test.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Content.xaml.cs">
+      <DependentUpon>Content.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ContentContainer.xaml.cs">
+      <DependentUpon>ContentContainer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\DocumentViewer.xaml.cs">
+      <DependentUpon>DocumentViewer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\MediaViewer.xaml.cs">
+      <DependentUpon>MediaViewer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\GradeSelection.xaml.cs">
+      <DependentUpon>GradeSelection.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\HomePage.xaml.cs">
+      <DependentUpon>HomePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\LanguageSelection.xaml.cs">
+      <DependentUpon>LanguageSelection.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\LevelSelection.xaml.cs">
+      <DependentUpon>LevelSelection.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Login.xaml.cs">
+      <DependentUpon>Login.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\TextQuestion.xaml.cs">
+      <DependentUpon>TextQuestion.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\QuizViewer.xaml.cs">
+      <DependentUpon>QuizViewer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Register.xaml.cs">
+      <DependentUpon>Register.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\RegistrationKey.xaml.cs">
+      <DependentUpon>RegistrationKey.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\TermSelection.xaml.cs">
+      <DependentUpon>TermSelection.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\TreeNavigation.xaml.cs">
+      <DependentUpon>TreeNavigation.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -67,6 +116,70 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Test.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Content.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\ContentContainer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\DocumentViewer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\MediaViewer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\GradeSelection.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\HomePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\LanguageSelection.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\LevelSelection.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Login.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\TextQuestion.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\QuizViewer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Register.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\RegistrationKey.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\TermSelection.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\TreeNavigation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -94,6 +207,198 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Diction Master - Library\Diction Master - Library.csproj">
+      <Project>{dffc9696-8df3-4362-8ded-48500e0c3366}</Project>
+      <Name>Diction Master - Library</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flag of Argentina.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flag of Australia.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flag of Austria.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flag of Brazil.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flag of Canada.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flag of China.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flag of Denmark.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flag of Finland.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flag of France.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flag of Germany.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flag of Greece.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flag of Italy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flag of Mexico.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flag of Nigeria.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flag of Norway.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flag of Poland.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flag of Portugal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flag of Russia.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flag of Serbia.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flag of Spain.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flag of Sweden.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flag of United Kingdom.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flag of United States.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\nursery.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\primary.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\secondary.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\6th Grade.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\1st Grade sec.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\1st Grade.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\2nd Grade sec.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\2nd Grade.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\3rd Grade sec.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\3rd Grade.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\4th Grade sec.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\4th Grade.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\5th Grade sec.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\5th Grade.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\6th Grade sec.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\next.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\previous.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\login.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\logout.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\register.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\properties.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\menu.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\down.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\up.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\download.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\background.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\plus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\nursery1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\nursery2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\right.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\left.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\quiz.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\video.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\audio.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\document.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\play.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\fullscreen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\stop.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\pause.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

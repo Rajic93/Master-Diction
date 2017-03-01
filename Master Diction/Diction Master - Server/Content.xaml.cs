@@ -20,9 +20,6 @@ using Component = Diction_Master___Library.Component;
 
 namespace Diction_Master___Server
 {
-    /// <summary>
-    /// Interaction logic for Content.xaml
-    /// </summary>
     public partial class Content : Window
     {
         /// <summary>
@@ -33,11 +30,11 @@ namespace Diction_Master___Server
         /// <summary>
         /// 
         /// </summary>
-        private readonly LanguagesHashTable _languages;
+        private readonly LanguagesDictionary _languages;
         /// <summary>
         /// 
         /// </summary>
-        private readonly Dictionary<string, int> _courseImagesCache;
+        private readonly Dictionary<string, long> _courseImagesCache;
         /// <summary>
         /// 
         /// </summary>
@@ -46,7 +43,7 @@ namespace Diction_Master___Server
         /// <summary>
         /// 
         /// </summary>
-        private readonly Dictionary<string, int> _educationalLevelDictionary;
+        private readonly Dictionary<string, long> _educationalLevelDictionary;
         /// <summary>
         /// 
         /// </summary>
@@ -55,20 +52,23 @@ namespace Diction_Master___Server
         /// <summary>
         /// 
         /// </summary>
-        private readonly Dictionary<string, int> _gradesDictionary;
+        private readonly Dictionary<string, long> _gradesDictionary;
         /// <summary>
         /// 
         /// </summary>
         private Image _selectedGrade;
 
-        public Content()
+        public Dictionary<ApplicationType, ClientManager> _clientManagers;
+
+        public Content(Diction_Master___Library.ContentManager manager)
         {
-            _contentManager = Diction_Master___Library.ContentManager.CreateInstance();
-            _languages = new LanguagesHashTable();
-            _courseImagesCache = new Dictionary<string, int>();
-            _educationalLevelDictionary = new Dictionary<string, int>();
-            _gradesDictionary = new Dictionary<string, int>();
+            _contentManager = manager;
+            _languages = new LanguagesDictionary();
+            _courseImagesCache = new Dictionary<string, long>();
+            _educationalLevelDictionary = new Dictionary<string, long>();
+            _gradesDictionary = new Dictionary<string, long>();
             InitializeComponent();
+            LoadCourses();
         }
 
         private void TMP()
@@ -107,6 +107,37 @@ namespace Diction_Master___Server
         
 
         #region Course
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void LoadCourses()
+        {
+            foreach (Course course in _contentManager.GetAllCourses())
+            {
+                Image image = new Image()
+                {
+                    Source = new BitmapImage(new Uri(course.Icon)),
+                    RenderSize = new Size(100, 100),
+                    MaxHeight = 100,
+                    MaxWidth = 100,
+                    Margin = new Thickness(10),
+                    Opacity = 0.5,
+                    Name = "Image_" + course.ID
+                };
+                image.MouseUp += delegate (object senderImage, MouseButtonEventArgs eventArgs)
+                {
+                    ImageCourse_Click(senderImage as Image);
+                };
+                if (!_courseImagesCache.ContainsKey(image.Name))
+                {
+                    _courseImagesCache[image.Name] = course.ID;
+                    Courses.Children.Add(image);
+                    
+                    
+                }
+            }
+        }
         /// <summary>
         /// Add new Course
         /// </summary>
@@ -137,7 +168,7 @@ namespace Diction_Master___Server
                     string selectedLanguage = _languages.GetLanguageName(nation);
                     if (selectedLanguage != null)
                     {
-                        int id = _contentManager.AddCourse(selectedLanguage, control.GetSelectedLanguageIcon());
+                        long id = _contentManager.AddCourse(selectedLanguage, control.GetSelectedLanguageIcon());
                         if (id > 0) //new course created
                         {
                             string uri = control.GetSelectedLanguageIcon();
@@ -202,7 +233,7 @@ namespace Diction_Master___Server
                 language.button.Click += delegate (object obj, RoutedEventArgs Args)
                 {
                     LanguageSelection control = (LanguageSelection)window.Content;
-                    int id = _courseImagesCache[_selectedLanguage.Name];
+                    long id = _courseImagesCache[_selectedLanguage.Name];
                     string nation = control.GetSelectedNation();
                     string selectedLanguage = _languages.GetLanguageName(nation);
                     if (selectedLanguage != null)
@@ -257,7 +288,7 @@ namespace Diction_Master___Server
         /// <param name="e"></param>
         private void DeleteCourse_Click(object sender, RoutedEventArgs e)
         {
-            int id = _courseImagesCache[_selectedLanguage.Name];
+            long id = _courseImagesCache[_selectedLanguage.Name];
             _contentManager.DeleteCourse(id);
             _courseImagesCache.Remove(_selectedLanguage.Source.ToString());
             Courses.Children.Remove(_selectedLanguage);
@@ -291,7 +322,7 @@ namespace Diction_Master___Server
             }
             image.Opacity = 1;
             _selectedLanguage = image;
-            int id = _courseImagesCache[image.Name];
+            long id = _courseImagesCache[image.Name];
             EditCourse.IsEnabled = true;
             DeleteCourse.IsEnabled = true;
             AddEducationalLevel.IsEnabled = true;
@@ -306,10 +337,10 @@ namespace Diction_Master___Server
         /// 
         /// </summary>
         /// <param name="id"></param>
-        private void LoadEducationalLevels(int id)
+        private void LoadEducationalLevels(long id)
         {
             WrapPanelEducationaLevel.Children.Clear();
-            List<int> childrenIDs = _contentManager.GetChildrenIDs(id);
+            List<long> childrenIDs = _contentManager.GetChildrenIDs(id);
             if (childrenIDs != null)
             {
                 foreach (int childID in childrenIDs)
@@ -323,7 +354,8 @@ namespace Diction_Master___Server
                         MaxWidth = 100,
                         Margin = new Thickness(15),
                         Opacity = 0.5,
-                        Visibility = Visibility.Visible
+                        Visibility = Visibility.Visible,
+                        Name = "Icon_" + level.ID
                     };
                     image.MouseUp += delegate(object sender, MouseButtonEventArgs args)
                     {
@@ -351,9 +383,9 @@ namespace Diction_Master___Server
             }
             sender.Opacity = 1;
             _selectedEducationalLevel = sender;
-            if (_educationalLevelDictionary.ContainsKey(sender.Source.ToString()))
+            if (_educationalLevelDictionary.ContainsKey(sender.Name))
             {
-                int id = _educationalLevelDictionary[sender.Name];
+                long id = _educationalLevelDictionary[sender.Name];
                 EditEducationalLevel.IsEnabled = true;
                 DeleteEducationalLevel.IsEnabled = true;
                 AddGrade.IsEnabled = true;
@@ -393,7 +425,7 @@ namespace Diction_Master___Server
                     {
                         if (_selectedLanguage != null)
                         {
-                            int id = _contentManager.AddEducationalLevel(_courseImagesCache[_selectedLanguage.Name], icon, type);
+                            long id = _contentManager.AddEducationalLevel(_courseImagesCache[_selectedLanguage.Name], icon, type);
                             if (id > 0) //new edu level created
                             {
                                 Image image = new Image()
@@ -458,7 +490,7 @@ namespace Diction_Master___Server
                 level.button.Click += delegate (object obj, RoutedEventArgs Args)
                 {
                     LevelSelection control = window.Content as LevelSelection;
-                    int id = _educationalLevelDictionary[_selectedEducationalLevel.Name];
+                    long id = _educationalLevelDictionary[_selectedEducationalLevel.Name];
                     string icon = control.GetSelectedIcon();
                     EducationalLevelType type = control.GetSelectedEducationalLevel();
                     if (icon != "")
@@ -541,10 +573,10 @@ namespace Diction_Master___Server
         /// 
         /// </summary>
         /// <param name="id"></param>
-        private void LoadGrades(int id)
+        private void LoadGrades(long id)
         {
             WrapPanelGrades.Children.Clear();
-            List<int> childrenIDs = _contentManager.GetChildrenIDs(id);
+            List<long> childrenIDs = _contentManager.GetChildrenIDs(id);
             if (childrenIDs != null)
             {
                 foreach (int childID in childrenIDs)
@@ -585,7 +617,7 @@ namespace Diction_Master___Server
             }
             image.Opacity = 1;
             _selectedGrade = image;
-            int id = _gradesDictionary[image.Name];
+            long id = _gradesDictionary[image.Name];
             int num = _contentManager.GetNoOfWeeks(id);
             NoOfWeeks.Text = num.ToString();
             num = _contentManager.GetNoOfLessons(id);
@@ -617,9 +649,9 @@ namespace Diction_Master___Server
             {
                 if (_selectedEducationalLevel != null)
                 {
-                    EducationalLevelType type =
-                    (_contentManager.GetComponent(_educationalLevelDictionary[_selectedEducationalLevel.Name])
-                        as EducationalLevel).Level;
+                    long value = _educationalLevelDictionary[_selectedEducationalLevel.Name];
+                    Component component = _contentManager.GetComponent(value);
+                    EducationalLevelType type = (component as EducationalLevel).Level;
                     GradeSelection grade = new GradeSelection(type)
                     {
                         VerticalAlignment = VerticalAlignment.Stretch,
@@ -637,7 +669,7 @@ namespace Diction_Master___Server
                         {
                             if (_selectedEducationalLevel != null)
                             {
-                                int id = _contentManager.AddGrade(_educationalLevelDictionary[_selectedEducationalLevel.Name], icon, gradeType);
+                                long id = _contentManager.AddGrade(_educationalLevelDictionary[_selectedEducationalLevel.Name], icon, gradeType);
                                 if (id > 0) //new edu level created
                                 {
                                     Image image = new Image()
@@ -706,7 +738,7 @@ namespace Diction_Master___Server
                     grade.button.Click += delegate (object obj, RoutedEventArgs Args)
                     {
                         GradeSelection control = window.Content as GradeSelection;
-                        int id = _gradesDictionary[_selectedGrade.Name];
+                        long id = _gradesDictionary[_selectedGrade.Name];
                         string icon = control.GetSelectedIcon();
                         GradeType gradeType = control.GetSelectedGrade();
                         if (icon != "")
@@ -765,7 +797,7 @@ namespace Diction_Master___Server
         /// <param name="e"></param>
         private void DeleteGrade_Click(object sender, RoutedEventArgs e)
         {
-            int id = _gradesDictionary[_selectedGrade.Name];
+            long id = _gradesDictionary[_selectedGrade.Name];
             _contentManager.DeleteGrade(id, _educationalLevelDictionary[_selectedEducationalLevel.Name]);
             _gradesDictionary.Remove(_selectedGrade.Name);
             WrapPanelGrades.Children.Remove(_selectedGrade);
@@ -781,6 +813,7 @@ namespace Diction_Master___Server
         }
 
         #endregion
+
         /// <summary>
         /// 
         /// </summary>
@@ -852,7 +885,7 @@ namespace Diction_Master___Server
             {
                 if (_selectedEducationalLevel != null)
                 {
-                    LessonsCreation lessonsCreation = new LessonsCreation(_gradesDictionary[_selectedGrade.Name], _contentManager)
+                    LessonsCreation lessonsCreation = new LessonsCreation(_gradesDictionary[_selectedGrade.Name], _contentManager, false)
                     {
                         VerticalAlignment = VerticalAlignment.Stretch,
                         HorizontalAlignment = HorizontalAlignment.Stretch,
@@ -906,7 +939,7 @@ namespace Diction_Master___Server
             {
                 if (_selectedEducationalLevel != null)
                 {
-                    ContentUpload contentUpload= new ContentUpload(_gradesDictionary[_selectedGrade.Name], _contentManager)
+                    ContentUpload contentUpload= new ContentUpload(_gradesDictionary[_selectedGrade.Name], _contentManager, false)
                     {
                         VerticalAlignment = VerticalAlignment.Stretch,
                         HorizontalAlignment = HorizontalAlignment.Stretch,

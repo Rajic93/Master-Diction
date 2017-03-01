@@ -1,0 +1,16 @@
+D:\Projects\Upwork\Master Diction\Master Diction\Server\bin\Debug\Server.exe.config
+D:\Projects\Upwork\Master Diction\Master Diction\Server\bin\Debug\Server.exe
+D:\Projects\Upwork\Master Diction\Master Diction\Server\bin\Debug\Server.pdb
+D:\Projects\Upwork\Master Diction\Master Diction\Server\bin\Debug\Interop.WMPLib.dll
+D:\Projects\Upwork\Master Diction\Master Diction\Server\bin\Debug\AxInterop.WMPLib.dll
+D:\Projects\Upwork\Master Diction\Master Diction\Server\obj\Debug\Server.csprojResolveAssemblyReference.cache
+D:\Projects\Upwork\Master Diction\Master Diction\Server\obj\Debug\Interop.WMPLib.dll
+D:\Projects\Upwork\Master Diction\Master Diction\Server\obj\Debug\AxInterop.WMPLib.dll
+D:\Projects\Upwork\Master Diction\Master Diction\Server\obj\Debug\Server.csproj.ResolveComReference.cache
+D:\Projects\Upwork\Master Diction\Master Diction\Server\obj\Debug\Server.ClientIcon.resources
+D:\Projects\Upwork\Master Diction\Master Diction\Server\obj\Debug\Server.Dashboard.resources
+D:\Projects\Upwork\Master Diction\Master Diction\Server\obj\Debug\Server.Form1.resources
+D:\Projects\Upwork\Master Diction\Master Diction\Server\obj\Debug\Server.Properties.Resources.resources
+D:\Projects\Upwork\Master Diction\Master Diction\Server\obj\Debug\Server.csproj.GenerateResource.Cache
+D:\Projects\Upwork\Master Diction\Master Diction\Server\obj\Debug\Server.exe
+D:\Projects\Upwork\Master Diction\Master Diction\Server\obj\Debug\Server.pdb

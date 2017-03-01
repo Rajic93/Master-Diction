@@ -1,0 +1,48 @@
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master\bin\Debug\Diction Master.exe.config
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master\bin\Debug\Diction Master.exe
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master\bin\Debug\Diction Master.pdb
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master\bin\Debug\Diction Master - Library.dll
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master\bin\Debug\Diction Master - Library.pdb
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master\obj\Debug\Diction Master - Client.csprojResolveAssemblyReference.cache
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master\obj\Debug\MainWindow.g.cs
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master\obj\Debug\Test.g.cs
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master\obj\Debug\UserControls\Content.g.cs
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master\obj\Debug\UserControls\ContentContainer.g.cs
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master\obj\Debug\UserControls\GradeSelection.g.cs
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master\obj\Debug\UserControls\LanguageSelection.g.cs
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master\obj\Debug\UserControls\LevelSelection.g.cs
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master\obj\Debug\UserControls\Login.g.cs
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master\obj\Debug\UserControls\Register.g.cs
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master\obj\Debug\UserControls\RegistrationKey.g.cs
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master\obj\Debug\UserControls\TermSelection.g.cs
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master\obj\Debug\UserControls\TreeNavigation.g.cs
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master\obj\Debug\App.g.cs
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master\obj\Debug\Diction Master_MarkupCompile.cache
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master\obj\Debug\Diction Master_MarkupCompile.lref
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master\obj\Debug\MainWindow.baml
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master\obj\Debug\Test.baml
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master\obj\Debug\UserControls\Content.baml
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master\obj\Debug\UserControls\ContentContainer.baml
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master\obj\Debug\UserControls\GradeSelection.baml
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master\obj\Debug\UserControls\LanguageSelection.baml
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master\obj\Debug\UserControls\LevelSelection.baml
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master\obj\Debug\UserControls\Login.baml
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master\obj\Debug\UserControls\Register.baml
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master\obj\Debug\UserControls\RegistrationKey.baml
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master\obj\Debug\UserControls\TermSelection.baml
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master\obj\Debug\UserControls\TreeNavigation.baml
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master\obj\Debug\Diction Master.g.resources
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master\obj\Debug\Diction_Master.Properties.Resources.resources
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master\obj\Debug\Diction Master - Client.csproj.GenerateResource.Cache
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master\obj\Debug\Diction Master.exe
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master\obj\Debug\Diction Master.pdb
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master\obj\Debug\UserControls\HomePage.g.cs
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master\obj\Debug\UserControls\HomePage.baml
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master\obj\Debug\UserControls\DocumentViewer.g.cs
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master\obj\Debug\UserControls\MediaViewer.g.cs
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master\obj\Debug\UserControls\Question.g.cs
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master\obj\Debug\UserControls\QuizViewer.g.cs
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master\obj\Debug\UserControls\DocumentViewer.baml
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master\obj\Debug\UserControls\MediaViewer.baml
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master\obj\Debug\UserControls\Question.baml
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master\obj\Debug\UserControls\QuizViewer.baml

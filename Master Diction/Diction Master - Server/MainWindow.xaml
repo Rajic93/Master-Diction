@@ -3,46 +3,79 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:dv="clr-namespace:System.Windows.Controls.DataVisualization;assembly=System.Windows.Controls.DataVisualization.Toolkit"
+        xmlns:dvc="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit"
         xmlns:local="clr-namespace:Diction_Master___Server"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="800" Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
+        Title="Diction Master Dashboard" Height="600" Width="800" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded" ResizeMode="NoResize" Closing="Window_Closing">
     <Grid>
-        <ToolBar x:Name="toolBar" HorizontalAlignment="Left" VerticalAlignment="Top" Width="794" Margin="0,0,-0.4,0" Height="60" Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}">
-            <Button x:Name="button" Content="Content" Height="40" VerticalAlignment="Top" Width="52" Margin="0,10,0,0" Click="button_Click"/>
-        </ToolBar>
-        <Grid Margin="0,60,-0.4,0.4">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="22*"/>
+            <ColumnDefinition Width="39*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Margin="0,60,-0.4,0.4" Grid.ColumnSpan="2">
             <Grid.RowDefinitions>
-                <RowDefinition Height="0.5*"></RowDefinition>
-                <RowDefinition Height="0.5*"></RowDefinition>
+                <RowDefinition Height="255.2"/>
+                <RowDefinition/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="0.35*"></ColumnDefinition>
-                <ColumnDefinition Width="0.65*"></ColumnDefinition>
+                <ColumnDefinition Width="0.35*"/>
+                <ColumnDefinition Width="0.65*"/>
             </Grid.ColumnDefinitions>
             <!--Server Status-->
-            <TextBlock Grid.Row="0" Grid.Column="0" Margin="10"><Underline><Bold>Server Info:</Bold></Underline></TextBlock>
-            <TextBlock Grid.Row="0" Grid.Column="0" Margin="15, 30">Server IP:</TextBlock>
-            <TextBlock Grid.Row="0" Grid.Column="0" Margin="15, 50">Server port:</TextBlock>
-            <TextBlock Grid.Row="0" Grid.Column="0" Margin="15, 71">Server location:</TextBlock>
-            <TextBlock Grid.Row="0" Grid.Column="0" Margin="15, 91">Last update:</TextBlock>
-            <TextBlock Grid.Row="0" Grid.Column="0" Margin="15, 112">Server status:</TextBlock>
-            <TextBlock Grid.Row="0" Grid.Column="0" Margin="150,30, 0, 0">192.0.0.1</TextBlock>
-            <TextBlock Grid.Row="0" Grid.Column="0" Margin="150, 50, 0, 0">30000</TextBlock>
-            <TextBlock Grid.Row="0" Grid.Column="0" Margin="150, 71, 0, 0">Lagos, Nigeria</TextBlock>
-            <TextBlock Grid.Row="0" Grid.Column="0" Margin="150, 91, 0, 0">04/01/2017</TextBlock>
-            <TextBlock Grid.Row="0" Grid.Column="0" Margin="150, 112, 0, 0">Running</TextBlock>
+            <StackPanel Grid.Column="1" HorizontalAlignment="Left" Height="235" Margin="9.4,10,0,0" VerticalAlignment="Top" Width="185" Background="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}"/>
+            <StackPanel HorizontalAlignment="Left" Height="235" Margin="10,10,0,0" VerticalAlignment="Top" Width="262" Background="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}"/>
+            <StackPanel HorizontalAlignment="Left" Height="235" Margin="10,9.8,0,0" VerticalAlignment="Top" Width="262" Background="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" Grid.Row="1"/>
+            <!--Server Status-->
+            <TextBlock Grid.Row="0" Grid.Column="0" Margin="16,10,152.6,225.2"><Underline><Bold><Run Text="Server Info:"/></Bold></Underline></TextBlock>
+            <TextBlock Grid.Row="0" Grid.Column="0" Margin="15,30,132.6,205.2"><Run Text="Server IP:"/></TextBlock>
+            <TextBlock Grid.Row="0" Grid.Column="0" Margin="15,50,132.6,184.2"><Run Text="Server port:"/></TextBlock>
+            <TextBlock Grid.Row="0" Grid.Column="0" Margin="15,71,132.6,164.2"><Run Text="Server location:"/></TextBlock>
+            <TextBlock Grid.Row="0" Grid.Column="0" Margin="15,91,132.6,143.2"><Run Text="Last update:"/></TextBlock>
+            <TextBlock Grid.Row="0" Grid.Column="0" Margin="15,112,132.6,120.2"><Run Text="Server status:"/></TextBlock>
+            <TextBlock Grid.Row="0" Grid.Column="0" Margin="150,30,9.6,205.2"><Run Text="192.0.0.1"/></TextBlock>
+            <TextBlock Grid.Row="0" Grid.Column="0" Margin="150,50,10.6,184.2"><Run Text="30000"/></TextBlock>
+            <TextBlock Grid.Row="0" Grid.Column="0" Margin="150,71,9.6,164.2"><Run Text="Lagos, Nigeria"/></TextBlock>
+            <TextBlock Grid.Row="0" Grid.Column="0" Margin="150,91,9.6,143.2"><Run Text="04/01/2017"/></TextBlock>
+            <TextBlock Grid.Row="0" Grid.Column="0" Margin="150,112,9.6,120.2"><Run Text="Running"/></TextBlock>
             <!--Clients Status-->
-            <TextBlock Grid.Row="0" Grid.Column="1" Margin="10"><Underline><Bold>Clients info</Bold></Underline></TextBlock>
-            <TextBlock Grid.Row="0" Grid.Column="1" Margin="15, 30"> Number of Clients:</TextBlock>
-            <TextBlock Grid.Row="0" Grid.Column="1" Margin="15, 50"> Number of Online Clients:</TextBlock>
-            <TextBlock Grid.Row="0" Grid.Column="1" Margin="15, 71"> Number of Offline Clients:</TextBlock>
-            <TextBlock Grid.Row="0" Grid.Column="1" Margin="175, 30, 0, 0"> 100</TextBlock>
-            <TextBlock Grid.Row="0" Grid.Column="1" Margin="175, 50, 0, 0"> 46</TextBlock>
-            <TextBlock Grid.Row="0" Grid.Column="1" Margin="175, 71, 0, 0"> 54</TextBlock>
-            <TextBlock Grid.Row="0" Grid.Column="1" Margin="245, 30, 0, 0"> Number of Up-to-date Clients:</TextBlock>
-            <TextBlock Grid.Row="0" Grid.Column="1" Margin="245, 50, 0, 0"> Number of Out-date Clients:</TextBlock>
-            <TextBlock Grid.Row="0" Grid.Column="1" Margin="445, 30, 0, 0"> 66</TextBlock>
-            <TextBlock Grid.Row="0" Grid.Column="1" Margin="445, 50, 0, 0"> 34</TextBlock>
+            <TextBlock Grid.Row="0" Grid.Column="1" Margin="15.4,10,378.6,225.2"><Underline><Bold><Run Text="Clients info"/></Bold></Underline></TextBlock>
+            <TextBlock Grid.Row="0" Grid.Column="1" Margin="15.4,30,377.6,205.2"><Run Text="No. of Clients:"/></TextBlock>
+            <TextBlock Grid.Row="0" Grid.Column="1" Margin="15.4,50,377.6,184.2"><Run Text="No. of Online Clients:"/></TextBlock>
+            <TextBlock Grid.Row="0" Grid.Column="1" Margin="15.4,71,377.6,161.2"><Run Text="Nuo. of Offline Clients:"/></TextBlock>
+            <TextBlock Grid.Row="0" Grid.Column="1" Margin="143.4,30,321.6,205.2" Text="100"/>
+            <TextBlock Grid.Row="0" Grid.Column="1" Margin="143.4,50,321.6,184.2"><Run Text="46"/></TextBlock>
+            <TextBlock Grid.Row="0" Grid.Column="1" Margin="143.4,71,321.6,161.2"><Run Text="54"/></TextBlock>
+
+            <TextBlock Grid.Row="1" Grid.Column="0" Margin="15,10.8,4.6,209.4"><Underline><Bold><Run Text="Diction app:"/></Bold></Underline></TextBlock>
+            <Grid Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Height="245" VerticalAlignment="Top" Width="516" Margin="0" Grid.ColumnSpan="2" Grid.RowSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <StackPanel HorizontalAlignment="Left" Height="235" Margin="10,10,0,0" VerticalAlignment="Top" Width="240" Background="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}"/>
+                <StackPanel Grid.Column="1" HorizontalAlignment="Left" Height="235" Margin="5,10,0,0" VerticalAlignment="Top" Width="238" Background="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}"/>
+                <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="13,10,0,0" TextWrapping="Wrap"  VerticalAlignment="Top"><Underline><Bold><Run Text="Audio app:"/></Bold></Underline></TextBlock>
+                <TextBlock x:Name="textBlock1" Grid.Column="1" HorizontalAlignment="Left" Margin="13,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Underline><Bold><Run Text="Teachers app:"/></Bold></Underline></TextBlock>
+            </Grid>
+            <TextBlock x:Name="textBlock2" HorizontalAlignment="Left" Margin="16,29.8,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Number of courses:" VerticalAlignment="Top"/>
+            <TextBlock x:Name="textBlock3" HorizontalAlignment="Left" Margin="16,50.8,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Number of subscribed: courses:" VerticalAlignment="Top"/>
+            <TextBlock x:Name="textBlock4" TextAlignment="Center" HorizontalAlignment="Left" Margin="15,81.8,0,0" Grid.Row="1" TextWrapping="Wrap" Text="The most popular course:" VerticalAlignment="Top" Height="54" Width="104"/>
+            <TextBlock x:Name="textBlock5" TextAlignment="Center" HorizontalAlignment="Left" Margin="164,81.8,0,0" Grid.Row="1" TextWrapping="Wrap" Text="The least popular course:" VerticalAlignment="Top" Height="54" Width="104"/>
+            <Image x:Name="imageTheMostPopularCourse" HorizontalAlignment="Left" Height="104" Margin="15,140.8,0,0" Grid.Row="1" VerticalAlignment="Top" Width="104" Source="Resources/Flag of Serbia.png"/>
+            <Image x:Name="imageTheLeastPopularCourse" HorizontalAlignment="Left" Height="104" Margin="164,140.8,0,0" Grid.Row="1" VerticalAlignment="Top" Width="104" Source="Resources/Flag of United Kingdom.png"/>
+            <dvc:Chart Grid.Column="1" Canvas.Top="80" Canvas.Left="10" x:Name="mcChart" Background="LightSteelBlue" Margin="199.4,10,9.6,10.2">
+                <dvc:PieSeries Title="Clients status" IndependentValueBinding="{Binding Key}" DependentValueBinding="{Binding Value}" Margin="10,10,9.8,10"/>
+            </dvc:Chart>
+            <TextBlock x:Name="NoOfCoursesDictionApp" TextWrapping="Wrap" Text="50" Margin="212,29.8,10.6,188.4" Grid.Row="1"/>
+            <TextBlock x:Name="NoOfSubscribedCoursesDictionApp" HorizontalAlignment="Left" Margin="212,50.8,0,0" Grid.Row="1" TextWrapping="Wrap" Text="0" VerticalAlignment="Top"/>
         </Grid>
+        <StackPanel Height="54" VerticalAlignment="Top" Margin="10,3,9.6,0" Grid.ColumnSpan="2" Orientation="Horizontal">
+            <Button x:Name="Diction" Content="Diction app" Width="80" Height="40" VerticalAlignment="Top" Margin="0,5,5,0" Click="buttonDiction_Click"/>
+            <Button x:Name="Teachers" Content="Teachers app" Width="80" Height="40" VerticalAlignment="Top" Margin="5,5,5,0" Click="buttonTeachers_Click"/>
+            <Button x:Name="Audio" Content="Audio app" Width="80" Height="40" VerticalAlignment="Top" Margin="5,5,5,0" Click="buttonAudio_Click"/>
+            <Button x:Name="Updates" Content="Updates" Width="80" Height="40" VerticalAlignment="Top" Margin="5,5,5,0" Click="Updates_Click"/>
+            <Button x:Name="Subscriptions" Content="Subscriptions" Width="80" Height="40" VerticalAlignment="Top" Margin="5,5,5,0" Click="Subscriptions_Click"/>
+        </StackPanel>
     </Grid>
 </Window>

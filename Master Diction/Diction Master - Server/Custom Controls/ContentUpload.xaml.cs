@@ -35,18 +35,20 @@ namespace Diction_Master___Server.Custom_Controls
         public ObservableCollection<Lesson> lessons;
         private ObservableCollection<Component> lessonContent;
         private Diction_Master___Library.ContentManager _contentManager;
-        private Dictionary<string, int> _imagesCache;
+        private Dictionary<string, long> _imagesCache;
 
-        private int _selectedGrade;
+        private long _selectedGrade;
         private Image _selectedFile;
-        private bool _saved;
+        private bool _saved = true;
+        private bool _topics;
 
-        public ContentUpload(int parent, Diction_Master___Library.ContentManager manager)
+        public ContentUpload(long parent, Diction_Master___Library.ContentManager manager, bool topics)
         {
             _contentManager = manager;
             _selectedGrade = parent;
+            _topics = topics;
             lessonContent = new ObservableCollection<Component>();
-            _imagesCache = new Dictionary<string, int>();
+            _imagesCache = new Dictionary<string, long>();
             //---------------------
             lessons = new ObservableCollection<Lesson>();
             //---------------------
@@ -57,7 +59,10 @@ namespace Diction_Master___Server.Custom_Controls
 
         private void LoadLessons()
         {
-            lessons = _contentManager.GetAllLessons(_contentManager.GetComponent(_selectedGrade));
+            if (_topics)
+                lessons = _contentManager.GetAllTopicsLessons();
+            else
+                lessons = _contentManager.GetAllLessons(_contentManager.GetComponent(_selectedGrade));
             comboBox.ItemsSource = lessons;
             comboBox.DisplayMemberPath = "Title";
         }
@@ -138,7 +143,7 @@ namespace Diction_Master___Server.Custom_Controls
             }
         }
 
-        private void LoadContentInfo(int id)
+        private void LoadContentInfo(long id)
         {
             Component content = _contentManager.GetComponent(id);
             if (content.GetType().Name == "ContentFile")
@@ -210,7 +215,7 @@ namespace Diction_Master___Server.Custom_Controls
                     string name = selectedFile.Split('\\').Last();
                     long size = new FileInfo(dialog.FileName).Length;
                     //change path
-                    int id = _contentManager.AddContentFile(((Lesson)comboBox.SelectedItem).ID, CheckType(selectedFile), name, name, selectedFile, size, "");
+                    long id = _contentManager.AddContentFile(((Lesson)comboBox.SelectedItem).ID, CheckType(selectedFile), name, name, selectedFile, size, "");
                     if (id > 0)
                     {
                         string icon = "";
@@ -374,7 +379,7 @@ namespace Diction_Master___Server.Custom_Controls
                     {
                         if (quiz.NewQuizCreated())
                         {
-                            int id = quiz.NewQuizID();
+                            long id = quiz.NewQuizID();
                             Quiz newQuiz = _contentManager.GetComponent(id) as Quiz;
                             newQuiz.Title = quiz.GetTitle();
                             Image image = new Image()

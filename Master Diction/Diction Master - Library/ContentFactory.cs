@@ -11,7 +11,7 @@ namespace Diction_Master___Library
 {
     public static class ContentFactory
     {
-        public static Component CreateLeafComponent(ComponentType type, int id)
+        public static Component CreateLeafComponent(ComponentType type, long id)
         {
             switch (type)
             {
@@ -26,7 +26,7 @@ namespace Diction_Master___Library
             }   
         }
 
-        public static Component CreateLeafComponent(int id, int parentID,
+        public static Component CreateLeafComponent(long id, long parentID,
             string text, string answer, QuestionType type)
         {
             return new Question()
@@ -39,7 +39,7 @@ namespace Diction_Master___Library
             };
         }
 
-        public static Component CreateLeafComponent(int id, int parentID,
+        public static Component CreateLeafComponent(long id, long parentID,
             string text, string answer, QuestionType type, ObservableCollection<string> wrongAnswers)
         {
             return new Question()
@@ -64,7 +64,7 @@ namespace Diction_Master___Library
         /// <param name="desc">Description of file.</param>
         /// <param name="icon">Icon path.</param>
         /// <returns>New Audio, Video or Document component.</returns>
-        public static Component CreateLeafComponent(int id, int parentID, ComponentType type,
+        public static Component CreateLeafComponent(long id, long parentID, ComponentType type,
             string title, string uri, long size, string desc, string icon)
         {
             if (type == ComponentType.Audio)
@@ -139,7 +139,7 @@ namespace Diction_Master___Library
         /// <param name="name">Course name.</param>
         /// <param name="icon">Course icon.</param>
         /// <returns>New Course object.</returns>
-        public static Component CreateCompositeComponent(int id, int parent, string name, string icon)
+        public static Component CreateCompositeComponent(long id, long parent, string name, string icon)
         {
             return new Course()
             {
@@ -150,13 +150,30 @@ namespace Diction_Master___Library
             };
         }
         /// <summary>
+        /// Creates new Topic object and sets all properties.
+        /// </summary>
+        /// <param name="id">ID of component.</param>
+        /// <param name="name">Course name.</param>
+        /// <param name="icon">Course icon.</param>
+        /// <returns>New Topic object.</returns>
+        public static Topic CreateCompositeComponent(long id, long parent, string title, int num, bool topic = true)
+        {
+            return new Topic()
+            {
+                ID = id,
+                ParentID = parent,
+                Title = title,
+                Num = num
+            };
+        }
+        /// <summary>
         /// Creates new EducationalLevel object and sets all properties.
         /// </summary>
         /// <param name="id">ID of component.</param>
         /// <param name="level">EducationalLevel type.</param>
         /// <param name="icon">EducationalLevel icon.</param>
         /// <returns>New EducationalLevel object.</returns>
-        public static Component CreateCompositeComponent(int id, int parent, EducationalLevelType level, string icon)
+        public static Component CreateCompositeComponent(long id, long parent, EducationalLevelType level, string icon)
         {
             return new EducationalLevel()
             {
@@ -173,7 +190,7 @@ namespace Diction_Master___Library
         /// <param name="icon"></param>
         /// <param name="num">No. of Grade.</param>
         /// <returns>New Grade object.</returns>
-        public static Component CreateCompositeComponent(int id, int parent, string icon, GradeType num)
+        public static Component CreateCompositeComponent(long id, long parent, string icon, GradeType num)
         {
             return new Grade()
             {
@@ -191,7 +208,7 @@ namespace Diction_Master___Library
         /// <param name="num">No. of Week.</param>
         /// <param name="term">No. of Term.</param>
         /// <returns>New Week object.</returns>
-        public static Component CreateCompositeComponent(int id, int parent, string title, int num, int term)
+        public static Component CreateCompositeComponent(long id, long parent, string title, int num, int term)
         {
             return new Week()
             {
@@ -209,7 +226,7 @@ namespace Diction_Master___Library
         /// <param name="title">Lesson title.</param>
         /// <param name="num">No. of Lesson.</param>
         /// <returns>New Lesson object.</returns>
-        public static Component CreateCompositeComponent(int id, int parent, string title, int num)
+        public static Component CreateCompositeComponent(long id, long parent, string title, int num)
         {
             return new Lesson()
             {
@@ -225,7 +242,7 @@ namespace Diction_Master___Library
         /// <param name="id">ID of component.</param>
         /// <param name="title">Quiz title.</param>
         /// <returns>New Quiz object.</returns>
-        public static Component CreateCompositeComponent(int id, int parent, string title)
+        public static Component CreateCompositeComponent(long id, long parent, string title)
         {
             return new Quiz()
             {

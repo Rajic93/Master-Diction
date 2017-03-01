@@ -7,11 +7,14 @@ using System.Xml.Serialization;
 
 namespace Diction_Master___Library
 {
+    [Serializable]
     [XmlInclude(typeof(Course))]
     [XmlInclude(typeof(EducationalLevel))]
     [XmlInclude(typeof(Grade))]
     [XmlInclude(typeof(Week))]
     [XmlInclude(typeof(Lesson))]
+    [XmlInclude(typeof(Topic))]
+    [XmlInclude(typeof(Quiz))]
     public abstract class CompositeComponent : Component
     {
         public List<Component> Components { get; set; }
@@ -25,33 +28,9 @@ namespace Diction_Master___Library
         {
             Components.Add(component);
         }
+    }
 
-        public void Delete(Component component)
-        {
-            if (Components.Exists(x => x.ID == component.ID))
-            {
-                Components.Remove(component);
-            }
-            else
-            {
-                throw new Exception("Component does not exist!");
-            }
-        }
-
-        public void Update(Component oldComponent, Component newComponent)
-        {
-            if (Components.Exists(x => x.ID == oldComponent.ID))
-            {
-                //check if it needs to be deleted first
-                Components.Insert(Components.IndexOf(oldComponent), newComponent);
-            }
-            else
-            {
-                throw new Exception("Component does not exist!");
-            }
-        }
-        }
-
+    [Serializable]
     public class Course : CompositeComponent
     {
         public string Name { get; set; }
@@ -67,6 +46,7 @@ namespace Diction_Master___Library
         }
     }
 
+    [Serializable]
     public class EducationalLevel : CompositeComponent
     {
         public string Icon { get; set; }
@@ -82,6 +62,7 @@ namespace Diction_Master___Library
         }
     }
 
+    [Serializable]
     public class Grade : CompositeComponent
     {
         public string Icon { get; set; }
@@ -94,6 +75,20 @@ namespace Diction_Master___Library
         }
     }
 
+    [Serializable]
+    public class Topic : CompositeComponent
+    {
+        public string Title { get; set; }
+        public int Num { get; set; }
+
+        public Lesson FindLesson(string title, int num)
+        {
+            return Components.Find(x => (x as Lesson).Title == title
+            || (x as Lesson).Num == num) as Lesson;
+        }
+    }
+
+    [Serializable]
     public class Week : CompositeComponent
     {
         public string Title { get; set; }
@@ -107,6 +102,7 @@ namespace Diction_Master___Library
         }
     }
 
+    [Serializable]
     public class Lesson : CompositeComponent
     {
         public string Title { get; set; }
@@ -127,6 +123,7 @@ namespace Diction_Master___Library
         }
     }
 
+    [Serializable]
     public class Quiz : CompositeComponent
     {
         public string Title { get; set; }

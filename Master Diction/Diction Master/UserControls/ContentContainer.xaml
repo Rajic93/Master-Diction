@@ -1,0 +1,33 @@
+﻿<UserControl x:Class="Diction_Master___Library.UserControls.ContentContainer"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Diction_Master___Library.UserControls"
+             mc:Ignorable="d" 
+             Height="658" Width="998" MinHeight="658" MinWidth="998" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}">
+    <Grid x:Name="Grid">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition x:Name="Navigation" Width="0.25*"></ColumnDefinition>
+            <!--MinWidth="0.04*" MaxWidth="0.25*"-->
+            <ColumnDefinition x:Name="Content" Width="0.75*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Border BorderThickness="2" BorderBrush="CornflowerBlue"></Border>
+        <WrapPanel x:Name="Weeks" Margin="10,50,9.6,9.6" Background="#FF5DB1F6" Height="598.4" Width="230.4" VerticalAlignment="Top" HorizontalAlignment="Left">
+            <!--<Grid  Height="598" Width="230">
+
+            </Grid>-->
+        </WrapPanel>
+        <Border BorderThickness="2" BorderBrush="CornflowerBlue" Grid.Column="1">
+            <WrapPanel x:Name="WrapPanel" Margin="8.4,8.4,7.4,7.2">
+
+            </WrapPanel>
+        </Border>
+        <Button x:Name="Menu" Grid.Column="0" BorderThickness="0" HorizontalAlignment="Right"  VerticalAlignment="Top" Width="40" Height="40" Background="{x:Null}" Click="Menu_OnClick" Margin="5">
+            <StackPanel>
+                <Image Source="../Resources/menu.png"/>
+            </StackPanel>
+        </Button>
+    </Grid>
+</UserControl>
+
