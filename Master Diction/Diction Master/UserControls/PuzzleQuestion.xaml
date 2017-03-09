@@ -1,0 +1,19 @@
+﻿<UserControl x:Class="Diction_Master.UserControls.PuzzleQuestion"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Diction_Master.UserControls"
+             xmlns:dragDrop="urn:gong-wpf-dragdrop"
+             mc:Ignorable="d" 
+             MinHeight="350" MinWidth="350" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" HorizontalAlignment="Center" VerticalAlignment="Center">
+    <Grid>
+
+        <Button x:Name="button" Content="Next" HorizontalAlignment="Right" Margin="0,0,10.4,10.2" VerticalAlignment="Bottom" Width="75"/>
+        <TextBlock x:Name="textBlock" Margin="10,10,10.4,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="95"/>
+        <WrapPanel x:Name="PiecesContainer" Margin="10,131,10.4,143.2" Width="410"/>
+        <WrapPanel x:Name="Answer" Margin="10,238,10.4,36.2" Width="410"/>
+        <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="10,110,0,0" TextWrapping="Wrap" Text="Puzzle:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlock2" HorizontalAlignment="Left" Margin="10,217,0,0" TextWrapping="Wrap" Text="Solution:" VerticalAlignment="Top"/>
+    </Grid>
+</UserControl>

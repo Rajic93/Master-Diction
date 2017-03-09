@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Security.Permissions;
+using System.Security.Policy;
 
 namespace Diction_Master___Library
 {
@@ -156,5 +157,27 @@ namespace Diction_Master___Library
         public const string SecondarySeniorI = "";
         public const string SecondarySeniorII = "";
         public const string SecondarySeniorIII = "";
+    }
+    [Serializable]
+    public struct Configuration
+    {
+
+    }
+
+    public struct NetworkOperationResult
+    {
+        public NetworkOperationStatus Status;
+        public KeyValuePair<byte[], long> Credetials;
+        public string Suggestions;
+        public KeyValuePair<long, DateTime> ValidUntil;
+    }
+
+    public enum NetworkOperationStatus
+    {
+        Success,
+        Failed,
+        InvalidCredetials,
+        UnavailableUsername,
+        UnableToConnectToServer
     }
 }

@@ -1,0 +1,13 @@
+﻿<Window x:Class="Diction_Master.UserControls.FullScreenVideo"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Diction_Master.UserControls"
+        mc:Ignorable="d"
+        Title="FullScreenVideo" Height="300" Width="300" WindowStartupLocation="CenterOwner" WindowStyle="None" WindowState="Maximized" KeyUp="Window_KeyUp" SizeChanged="Window_SizeChanged">
+    <Grid>
+        <MediaElement x:Name="MediaElement" Height="300" Width="300" Margin="0" MouseUp="MediaElement_MouseUp"/>
+
+    </Grid>
+</Window>

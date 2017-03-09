@@ -1,0 +1,14 @@
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Teachers\bin\Debug\Diction Master - Teachers.exe.config
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Teachers\bin\Debug\Diction Master - Teachers.exe
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Teachers\bin\Debug\Diction Master - Teachers.pdb
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Teachers\obj\Debug\Diction Master - Teachers.csprojResolveAssemblyReference.cache
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Teachers\obj\Debug\MainWindow.g.cs
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Teachers\obj\Debug\App.g.cs
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Teachers\obj\Debug\Diction Master - Teachers_MarkupCompile.cache
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Teachers\obj\Debug\Diction Master - Teachers_MarkupCompile.lref
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Teachers\obj\Debug\MainWindow.baml
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Teachers\obj\Debug\Diction Master - Teachers.g.resources
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Teachers\obj\Debug\Diction_Master___Teachers.Properties.Resources.resources
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Teachers\obj\Debug\Diction Master - Teachers.csproj.GenerateResource.Cache
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Teachers\obj\Debug\Diction Master - Teachers.exe
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Teachers\obj\Debug\Diction Master - Teachers.pdb

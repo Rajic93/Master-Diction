@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Diction_Master___Library.UserControls"
              mc:Ignorable="d" 
-             Height="480" Width="620" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
+             MinHeight="480" MinWidth="620" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}">
 
     <Grid Margin="10">
         <Grid.RowDefinitions>
@@ -14,7 +14,7 @@
         </Grid.RowDefinitions>
         <Border Grid.Row="0" BorderThickness="2,2,2,0" BorderBrush="CornflowerBlue"/>
         <Border Grid.Row="1" BorderThickness="2,2,2,2" BorderBrush="CornflowerBlue">
-            <TextBox x:Name="Desrciption" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center" Height="164" Margin="8.4,8.4,7.6,7.6" Width="580" IsEnabled="False" />
+            <TextBox x:Name="Desrciption" TextWrapping="Wrap" Margin="8.4,8.4,7.6,7.6" IsEnabled="False" />
         </Border>
         <Grid>
             <Grid.ColumnDefinitions>
@@ -28,14 +28,14 @@
             <Border Grid.Column="2" BorderThickness="2,0,0,0" BorderBrush="CornflowerBlue">
                 <Image x:Name="right" HorizontalAlignment="Center" Height="30" VerticalAlignment="Center" Width="30" Source="../Resources/right.png"/>
             </Border>
-            <MediaElement x:Name="MediaElement" Grid.Column="1" Margin="29.4,10,24.4,33" Visibility="Visible" />
-            <Image x:Name="play" Grid.Column="1" HorizontalAlignment="Left" Height="16" Margin="24.4,250,0,0" VerticalAlignment="Top" Width="16" Source="../Resources/play.png" MouseUp="Play_OnMouseUp"/>
-            <Image x:Name="pause" Grid.Column="1" HorizontalAlignment="Left" Height="16" Margin="45.4,250,0,0" VerticalAlignment="Top" Width="16" Source="../Resources/pause.png" MouseUp="Pause_OnMouseUp"/>
-            <Image x:Name="stop" Grid.Column="1" HorizontalAlignment="Left" Height="16" Margin="66.4,250,0,0" VerticalAlignment="Top" Width="16" Source="../Resources/stop.png" MouseUp="Stop_OnMouseUp"/>
-            <Image x:Name="fullscreen" Grid.Column="1" HorizontalAlignment="Left" Height="16" Margin="388.4,250,0,0" VerticalAlignment="Top" Width="16" Source="../Resources/fullscreen.png" MouseUp="Fullscreen_OnMouseUp"/>
-            <Slider x:Name="slider" Grid.Column="1" HorizontalAlignment="Left" Margin="94.4,250,0,0" VerticalAlignment="Top" Width="97" Height="21" ValueChanged="slider_ValueChanged" Maximum="20" SmallChange="0.5" Cursor="Hand"/>
-            <ProgressBar x:Name="ProgressBar" Grid.Column="1" HorizontalAlignment="Left" Height="3" Margin="29.4,245,0,0" VerticalAlignment="Top" Width="375"/>
-            <Image x:Name="image" Grid.Column="1" HorizontalAlignment="Left" Height="100" Margin="167.4,75,0,0" VerticalAlignment="Top" Width="100" Visibility="Collapsed" MouseUp="Image_OnMouseUp" Source="/Diction Master;component/Resources/play.png"/>
+            <MediaElement x:Name="MediaElement" Grid.Column="1" Margin="29.4,10,24.4,39"/>
+            <Image x:Name="play" Grid.Column="1" HorizontalAlignment="Left" Height="16" Margin="29.4,0,0,10" VerticalAlignment="Bottom" Width="16" Source="../Resources/play.png" MouseUp="Play_OnMouseUp"/>
+            <Image x:Name="pause" Grid.Column="1" HorizontalAlignment="Left" Height="16" Margin="50.4,0,0,10" VerticalAlignment="Bottom" Width="16" Source="../Resources/pause.png" MouseUp="Pause_OnMouseUp"/>
+            <Image x:Name="stop" Grid.Column="1" HorizontalAlignment="Left" Height="16" Margin="71.4,0,0,10" VerticalAlignment="Bottom" Width="16" Source="../Resources/stop.png" MouseUp="Stop_OnMouseUp"/>
+            <Image x:Name="fullscreen" Grid.Column="1" HorizontalAlignment="Right" Height="16" Margin="0,0,24.4,10" VerticalAlignment="Bottom" Width="16" Source="../Resources/fullscreen.png" MouseUp="Fullscreen_OnMouseUp"/>
+            <Slider x:Name="slider" Grid.Column="1" HorizontalAlignment="Left" Margin="99.4,0,0,5" VerticalAlignment="Bottom" Width="97" Height="21" ValueChanged="slider_ValueChanged" Maximum="20" SmallChange="0.5" Cursor="Hand"/>
+            <ProgressBar x:Name="ProgressBar" Grid.Column="1" Height="3" Margin="29.4,0,24.4,31" VerticalAlignment="Bottom" Foreground="#FF0657B0"/>
+            <Image x:Name="image" Grid.Column="1" HorizontalAlignment="Center" Height="100" Margin="174.4,80,154.4,96" VerticalAlignment="Center" Width="100" MouseUp="Image_OnMouseUp" Source="/Diction Master;component/Resources/play.png" Visibility="Collapsed"/>
         </Grid>
     </Grid>
 </UserControl>

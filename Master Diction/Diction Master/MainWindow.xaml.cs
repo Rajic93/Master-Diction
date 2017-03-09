@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Net;
@@ -26,6 +27,7 @@ using System.Runtime.Serialization;
 using Diction_Master;
 using System.Threading;
 using Diction_Master.UserControls;
+using FontAwesome.WPF;
 
 namespace Diction_Master___Library
 {
@@ -47,8 +49,8 @@ namespace Diction_Master___Library
         private int _termID;
         private DateTime _expirationDateTime;
         private string _key;
-        private Authentication _auth;
-        private Authentication _authNotifications;
+        private NetworkOperations _auth;
+        private NetworkOperations _authNotifications;
         private bool _running = true;
 
         private Subscription _currentSubscription;
@@ -59,14 +61,15 @@ namespace Diction_Master___Library
 
         private Thread _backgroundWorker;
         private Thread _listeningThread;
-        
+        private bool _loginEnable;
+
 
         public MainWindow()
         {
             _previousControls = new Stack<UserControl>();
             _nextControls = new Stack<UserControl>();
             _subscriptions = new List<Subscription>();
-            _auth = new Authentication(SocketType.Stream, AddressFamily.InterNetwork, ProtocolType.Tcp);
+            _auth = new NetworkOperations(SocketType.Stream, AddressFamily.InterNetwork, ProtocolType.Tcp);
 
             LoadConfig();
             InitializeComponent();
@@ -77,10 +80,7 @@ namespace Diction_Master___Library
                     Login();
                 else
                     Register();
-            _backgroundWorker = new Thread(() =>
-            {
-                BackgroundWork();
-            });
+            _backgroundWorker = new Thread(BackgroundWork);
             _backgroundWorker.Start();
         }
 
@@ -132,7 +132,9 @@ namespace Diction_Master___Library
 
         private void BackgroundWork()
         {
-            _listeningThread = new Thread(() => ListenForNotifications());
+            while (!_state._loggedIn)
+            {}
+            _listeningThread = new Thread(ListenForNotifications);
             _listeningThread.Start();
             while (_running)
             {
@@ -148,17 +150,70 @@ namespace Diction_Master___Library
                 {
                     //show notifications
                     int num = _state._notifications.Count;
-                    string notif = num + " Total Notification";
+                    string notif = "Total " + num + " Notification";
                     if (num > 1)
                         notif += "s";
-                    Notification.Text = notif;
+                    if (_running)
+                    {
+                        Dispatcher.Invoke(() =>
+                                    {
+                                        Notification.Text = notif;
+                                    }); 
+                    }
+                }
+                if (_state._lastSubscriptionCheck.AddDays(1) <= DateTime.Now)
+                {
+                    CheckSubscriptions(_state.clientProfile.ActiveSubscriptions);
+                    CheckSubscriptions(_state._pendingSubscriptions);
+                    _state._lastSubscriptionCheck = DateTime.Now;
+                }
+            }
+        }
+
+        private void CheckSubscriptions(List<Subscription> subscriptions)
+        {
+            foreach (Subscription subscription in new List<Subscription>(subscriptions))
+            {
+                if (subscription.ExpirationDateTime < DateTime.Now)
+                {
+                    if (_state._enabledTerms.Exists(x => x.Key == subscription.GradeID && x.Value == subscription.TermID))
+                    {
+                        _state._enabledTerms.RemoveAll(x => x.Key == subscription.GradeID && x.Value == subscription.TermID);
+                    }
+                    foreach (var component in new List<Component>(_state._enabledGrades))
+                    {
+                        var grade = (Grade) component;
+                        if (!_state._enabledTerms.Exists(x => x.Key == grade.ID))
+                            _state._enabledGrades.Remove(grade);
+                    }
+                    foreach (var component in new List<Component>(_state._enabledEduLevels))
+                    {
+                        var level = (EducationalLevel)component;
+                        if (!_state._enabledGrades.Exists(x => x.ParentID == level.ID))
+                            _state._enabledEduLevels.Remove(level);
+                    }
+                    foreach (var component in new List<Component>(_state._enabledCourses))
+                    {
+                        var course = (Course)component;
+                        if (!_state._enabledGrades.Exists(x => x.ParentID == course.ID))
+                            _state._enabledCourses.Remove(course);
+                    }
+                    _state.clientProfile.ExpiredSubscription.Add(subscription);
+                    subscriptions.Remove(subscription);
+                    _state._notifications.Add(new PendingNotification
+                    {
+                        ClientID = _state.clientProfile.ID,
+                        NotificationType = NotificationType.SubscriptionExpired,
+                        SubscriptionID = subscription.ID
+                    });
+                    _state._pendingNotification = true;
                 }
             }
         }
 
         private void ListenForNotifications()
         {
-            _authNotifications = new Authentication(SocketType.Stream, AddressFamily.InterNetwork, ProtocolType.Tcp);
+            _authNotifications = new NetworkOperations(SocketType.Stream, AddressFamily.InterNetwork, ProtocolType.Tcp);
             _authNotifications.SetNotificationHandler(_state);
             _authNotifications.Listen(_state._serverIPAdd, 50000, null);
         }
@@ -167,12 +222,15 @@ namespace Diction_Master___Library
         {
             try
             {
-                Authentication auth = new Authentication(SocketType.Stream, AddressFamily.InterNetwork, ProtocolType.Tcp);
+                NetworkOperations auth = new NetworkOperations(SocketType.Stream, AddressFamily.InterNetwork, ProtocolType.Tcp);
                 auth.Connect(_state._serverIPAdd, _state._port);
-                KeyValuePair<byte[], long> ret = auth.RegisterClientSide(_state.clientProfile.Username, _state._pass, _state.clientProfile.Salt);
-                _state.clientProfile.Password = ret.Key;
-                _state.clientProfile.ID = ret.Value;
-                _state.LocalRegistration = false;
+                NetworkOperationResult ret = auth.RegisterClientSide(_state.clientProfile.Username, _state._pass, _state.clientProfile.Salt);
+                if (ret.Status == NetworkOperationStatus.Success)
+                {
+                    _state.clientProfile.Password = ret.Credetials.Key;
+                    _state.clientProfile.ID = ret.Credetials.Value;
+                    _state.LocalRegistration = false; 
+                }
             }
             catch (Exception)
             {
@@ -185,14 +243,14 @@ namespace Diction_Master___Library
         {
             try
             {
-                Authentication auth = new Authentication(SocketType.Stream, AddressFamily.InterNetwork, ProtocolType.Tcp);
+                NetworkOperations auth = new NetworkOperations(SocketType.Stream, AddressFamily.InterNetwork, ProtocolType.Tcp);
                 auth.Connect(_state._serverIPAdd, _state._port);
-                KeyValuePair<long, DateTime> ret = auth.SubscribeClientSide(_state.clientProfile.Username, _state._pass, _state.clientProfile.Salt, subscription.Key,
+                NetworkOperationResult ret = auth.SubscribeClientSide(_state.clientProfile.Username, _state._pass, _state.clientProfile.Salt, subscription.Key,
                     _state.clientProfile.ID, subscription.CourseID, subscription.EduLevelID, subscription.GradeID, subscription.TermID);
-                if (ret.Key != 0)
+                if (ret.Status == NetworkOperationStatus.Success)
                 {
-                    subscription.ID = ret.Key;
-                    subscription.ExpirationDateTime = ret.Value;
+                    subscription.ID = ret.ValidUntil.Key;
+                    subscription.ExpirationDateTime = ret.ValidUntil.Value;
                     _state.clientProfile.ActiveSubscriptions.Add(subscription);
                     _state._pendingSubscriptions.Remove(subscription); 
                 }
@@ -210,20 +268,37 @@ namespace Diction_Master___Library
 
         #region Events
 
+        private void MainWindow_OnContentRendered(object sender, EventArgs e)
+        {
+            System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
+            dispatcherTimer.Tick += delegate
+            {
+                Awesome.Visibility = Visibility.Collapsed;
+                Awesome.Spin = false;
+                GridContent.Visibility = Visibility.Visible;
+                GridContent.Opacity = 0;
+                DoubleAnimation animation2 = new DoubleAnimation(1, TimeSpan.FromSeconds(0.3));
+                GridContent.BeginAnimation(OpacityProperty, animation2);
+            };
+            dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 3, 0);
+            dispatcherTimer.Start();
+        }
+
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             _running = false;
             //_backgroundWorker.Abort();
             //_listeningThread.Abort(); //does not pass
-            _authNotifications.Terminate();
+            _authNotifications?.Terminate();
             SaveConfig();
         }
 
-        private void Notification_MouseUp(object sender, MouseButtonEventArgs e)
+        private void Notification_OnMouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (Notification.Text != "")
+            if (e.LeftButton == MouseButtonState.Pressed && e.ClickCount == 2)
             {
-
+                Notifications notifications = new Notifications(_state);
+                notifications.ShowDialog();
             }
         }
 
@@ -297,6 +372,8 @@ namespace Diction_Master___Library
                 _currentControl = login;
                 Back.IsEnabled = true;
                 NextControlAnimation(temp, _currentControl);
+                Loggin.Visibility = Visibility.Collapsed;
+                Loggout.Visibility = Visibility.Visible;
             }
             else
             {
@@ -338,17 +415,31 @@ namespace Diction_Master___Library
 
         private void Loggout_OnClick(object sender, RoutedEventArgs e)
         {
-
+            if (MessageBox.Show("Do you want to logout?", "Logout", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            {
+                _nextControls.Clear();// Push(_currentControl);
+                UserControl prev = _currentControl;
+                _currentControl = _previousControls.Pop();
+                NextControlAnimation(prev, _currentControl);
+                Next.IsEnabled = false;
+                if (_previousControls.Count == 0)
+                    Back.IsEnabled = false;
+                _state._loggedIn = false;
+                Loggout.Visibility = Visibility.Collapsed;
+                Loggin.Visibility = Visibility.Visible;
+                RegisterUser.Visibility = Visibility.Visible;
+            }
         }
 
         private void Properties_OnClick(object sender, RoutedEventArgs e)
         {
-
+            Options options = new Options(_state);
+            options.ShowDialog();
         }
 
         private void CheckForUpdates_OnClick(object sender, RoutedEventArgs e)
         {
-            Authentication auth = new Authentication(SocketType.Stream, AddressFamily.InterNetwork, ProtocolType.Tcp);
+            NetworkOperations auth = new NetworkOperations(SocketType.Stream, AddressFamily.InterNetwork, ProtocolType.Tcp);
             auth.Connect(_state._serverIPAdd, _state._port);
             //auth.CheckUpdatesClientSide()
         }
@@ -379,13 +470,15 @@ namespace Diction_Master___Library
 
         #region Register
 
-        public void Register()
+        private void Register()
         {
-            RegistrationKey regKey = new RegistrationKey();
-            regKey.HorizontalAlignment = HorizontalAlignment.Center;
-            regKey.VerticalAlignment = VerticalAlignment.Center;
+            RegistrationKey regKey = new RegistrationKey
+            {
+                HorizontalAlignment = HorizontalAlignment.Center,
+                VerticalAlignment = VerticalAlignment.Center,
+                Opacity = 1
+            };
 
-            regKey.Opacity = 1;
             regKey.button.Click += delegate (object sender, RoutedEventArgs args)
             {
                 string key = regKey.textBox.Text + regKey.textBox1.Text + regKey.textBox2.Text + regKey.textBox3.Text +
@@ -427,34 +520,42 @@ namespace Diction_Master___Library
                                 try
                                 {
                                     _auth.Connect(_state._serverIPAdd, _state._port);
-                                    KeyValuePair<byte[], long> info = _auth.RegisterClientSide(reg.Username.Text, reg.Password.Text, null);
-                                    if (info.Key != null && info.Value != 0)
+                                    NetworkOperationResult info = _auth.RegisterClientSide(reg.Username.Text, reg.Password.Text, null);
+                                    if (info.Status == NetworkOperationStatus.Success)
                                     {
                                         //success/createClientProfile
                                         _state.clientProfile = new Client
                                         {
-                                            ID = info.Value,
+                                            ID = info.Credetials.Value,
                                             Username = reg.Username.Text,
-                                            Salt = info.Key
+                                            Salt = info.Credetials.Key
                                         };
-                                        _state.clientProfile.Password = Authentication.CreateHashedPassword(Encoding.Unicode.GetBytes(reg.Password.Text), _state.clientProfile.Salt);
+                                        _state.clientProfile.Password = NetworkOperations.CreateHashedPassword(Encoding.Unicode.GetBytes(reg.Password.Text), _state.clientProfile.Salt);
                                         _state._registered = true;
                                         _state.LocalRegistration = false;
                                         _state._firstStart = false;
                                         _state._pass = reg.Password.Text;
+                                        reg.StatusBox.Text = "";
                                     }
-                                    else
+                                    else if (info.Status == NetworkOperationStatus.UnavailableUsername)
+                                    {
+                                        reg.StatusBox.Text = "Username is not available. Try:";
+                                        //reg.Suggestions.Text
+                                        _loginEnable = false;
+                                    }
+                                    else if (info.Status == NetworkOperationStatus.UnableToConnectToServer || info.Status == NetworkOperationStatus.Failed)
                                     {
                                         _state.clientProfile = new Client
                                         {
                                             Username = reg.Username.Text,
-                                            Salt = Authentication.GenerateSalt()
+                                            Salt = NetworkOperations.GenerateSalt()
                                         };
-                                        _state.clientProfile.Password = Authentication.CreateHashedPassword(Encoding.Unicode.GetBytes(reg.Password.Text), _state.clientProfile.Salt);
+                                        _state.clientProfile.Password = NetworkOperations.CreateHashedPassword(Encoding.Unicode.GetBytes(reg.Password.Text), _state.clientProfile.Salt);
                                         _state._registered = true;
                                         _state.LocalRegistration = true;
                                         _state._firstStart = false;
                                         _state._pass = reg.Password.Text;
+                                        _loginEnable = true;
                                         MessageBox.Show("Failed to register.");
                                     }
                                 }
@@ -464,13 +565,14 @@ namespace Diction_Master___Library
                                     _state.clientProfile = new Client
                                     {
                                         Username = reg.Username.Text,
-                                        Salt = Authentication.GenerateSalt()
+                                        Salt = NetworkOperations.GenerateSalt()
                                     };
-                                    _state.clientProfile.Password = Authentication.CreateHashedPassword(Encoding.Unicode.GetBytes(reg.Password.Text), _state.clientProfile.Salt);
+                                    _state.clientProfile.Password = NetworkOperations.CreateHashedPassword(Encoding.Unicode.GetBytes(reg.Password.Text), _state.clientProfile.Salt);
                                     _state._registered = true;
                                     _state.LocalRegistration = true;
                                     _state._firstStart = false;
                                     _state._pass = reg.Password.Text;
+                                    _loginEnable = true;
                                     //MessageBox.Show("Failed to connect to server: " + e.Message);
                                 }
                             }
@@ -480,19 +582,21 @@ namespace Diction_Master___Library
                                 _state.clientProfile = new Client
                                 {
                                     Username = reg.Username.Text,
-                                    Salt = Authentication.GenerateSalt()
+                                    Salt = NetworkOperations.GenerateSalt()
                                 };
-                                _state.clientProfile.Password = Authentication.CreateHashedPassword(Encoding.Unicode.GetBytes(reg.Password.Text), _state.clientProfile.Salt);
+                                _state.clientProfile.Password = NetworkOperations.CreateHashedPassword(Encoding.Unicode.GetBytes(reg.Password.Text), _state.clientProfile.Salt);
                                 _state._registered = true;
                                 _state.LocalRegistration = true;
                                 _state._firstStart = false;
                                 _state._pass = reg.Password.Text;
+                                _loginEnable = true;
                             }
-                            Login();
+                            if (_loginEnable)
+                                Login();
                         }
                         else
                         {
-                            MessageBox.Show("Username or password not valid");
+                            reg.StatusBox.Text = "Passwords do not match.";
                         }
                     };
                     _previousControls.Push(regKey);
@@ -528,19 +632,26 @@ namespace Diction_Master___Library
                     try
                     {
                         _auth.Connect(_state._serverIPAdd, _state._port);
-                        if (_auth.LoginClientSide(login.textBox.Text, login.textBox1.Text))
+                        NetworkOperationResult result = _auth.LoginClientSide(login.textBox.Text, login.textBox1.Text);
+                        if (result.Status == NetworkOperationStatus.Success)
                         {
                             ShowContent();
                             _state._loggedIn = true;
+                            RegisterUser.Visibility = Visibility.Collapsed;
+                            Loggin.Visibility = Visibility.Collapsed;
+                            Loggout.Visibility = Visibility.Visible; 
                         }
-                        else
+                        else if (result.Status == NetworkOperationStatus.InvalidCredetials)
                         {
                             MessageBox.Show("Login failed: bad credetials");
                             if (login.textBox.Text == _state.clientProfile.Username &&
-                            _state.clientProfile.Password.SequenceEqual(Authentication.CreateHashedPassword(Encoding.Unicode.GetBytes(login.textBox1.Text), _state.clientProfile.Salt)))
+                            _state.clientProfile.Password.SequenceEqual(NetworkOperations.CreateHashedPassword(Encoding.Unicode.GetBytes(login.textBox1.Text), _state.clientProfile.Salt)))
                             {
                                 _state._loggedIn = true;
                                 ShowContent();
+                                RegisterUser.Visibility = Visibility.Collapsed;
+                                Loggin.Visibility = Visibility.Collapsed;
+                                Loggout.Visibility = Visibility.Visible;
                             }
                         }
                     }
@@ -549,10 +660,13 @@ namespace Diction_Master___Library
                         //failed to connect to server
                         //MessageBox.Show("Login failed: server error.");
                         if (login.textBox.Text == _state.clientProfile.Username &&
-                        _state.clientProfile.Password.SequenceEqual(Authentication.CreateHashedPassword(Encoding.Unicode.GetBytes(login.textBox1.Text), _state.clientProfile.Salt)))
+                        _state.clientProfile.Password.SequenceEqual(NetworkOperations.CreateHashedPassword(Encoding.Unicode.GetBytes(login.textBox1.Text), _state.clientProfile.Salt)))
                         {
                             _state._loggedIn = true;
                             ShowContent();
+                            RegisterUser.Visibility = Visibility.Collapsed;
+                            Loggin.Visibility = Visibility.Collapsed;
+                            Loggout.Visibility = Visibility.Visible;
                         }
                     } 
                 }
@@ -560,9 +674,12 @@ namespace Diction_Master___Library
                 {
                     //offline mode
                     if (login.textBox.Text == _state.clientProfile.Username &&
-                    _state.clientProfile.Password.SequenceEqual(Authentication.CreateHashedPassword(Encoding.Unicode.GetBytes(login.textBox1.Text), _state.clientProfile.Salt)))
+                    _state.clientProfile.Password.SequenceEqual(NetworkOperations.CreateHashedPassword(Encoding.Unicode.GetBytes(login.textBox1.Text), _state.clientProfile.Salt)))
                     {
                         _state._loggedIn = true;
+                        RegisterUser.Visibility = Visibility.Collapsed;
+                        Loggin.Visibility = Visibility.Collapsed;
+                        Loggout.Visibility = Visibility.Visible;
                         ShowContent();
                     }
                 }
@@ -583,7 +700,7 @@ namespace Diction_Master___Library
         }
 
         #endregion
-
+        
         #region Subscribe
 
         public void Subscribe()
@@ -621,10 +738,11 @@ namespace Diction_Master___Library
                 {
                     _previousControls.Push(Panel.Children[0] as UserControl);
                     Back.IsEnabled = true;
-                    ContentContainer container = new ContentContainer()
+                    ContentContainer container = new ContentContainer(_state)
                     {
                         VerticalAlignment = VerticalAlignment.Stretch,
-                        HorizontalAlignment = HorizontalAlignment.Stretch
+                        HorizontalAlignment = HorizontalAlignment.Stretch,
+                        Margin = new Thickness(10)
                     };
                     NextControlAnimation(_currentControl, container);
                     _currentControl = container;
@@ -652,83 +770,129 @@ namespace Diction_Master___Library
                 //set CourseID
                 Component language = selection.GetSelectedLanguage();
                 _courseID = language.ID;
-                //--------------------------------------------------------
-                if (!_state._enabledCourses.Exists(x => x.ID == _courseID))
-                    _state._enabledCourses.Add(language);
-                //--------------------------------------------------------
                 LevelSelection level = new LevelSelection()
                 {
                     HorizontalAlignment = HorizontalAlignment.Center,
                     VerticalAlignment = VerticalAlignment.Center,
                     Opacity = 0
                 };
-                level.SetAvailableLevels((_state._enabledCourses.Find(x => x.ID == _courseID) as CompositeComponent).Components);
-                //level.SetAvailableLevels(Differention((_state._enabledCourses.Find(x => x.ID == _courseID) as CompositeComponent).Components, _state._enabledEduLevels));
-                level.button.Click += delegate (object sender2, RoutedEventArgs args2)
+                var compositeComponent = language as CompositeComponent;
+                if (compositeComponent != null && compositeComponent.Components.Count != 0)
                 {
-                    //set EduLevelID
-                    Component selectedLevel = level.GetSelectedComponent();
-                    _eduLevelID = selectedLevel.ID;
-                    //--------------------------------------------------------
-                    if (!_state._enabledEduLevels.Exists(x => x.ID == _eduLevelID))
-                        _state._enabledEduLevels.Add(selectedLevel); 
-                    //--------------------------------------------------------
-                    GradeSelection grade = new GradeSelection(level.GetSelectedEducationalLevel())
+                    level.SetAvailableLevels(compositeComponent.Components);
+                    //level.SetAvailableLevels(Differention((_state._enabledCourses.Find(x => x.ID == _courseID) as CompositeComponent).Components, _state._enabledEduLevels));
+                    level.button.Click += delegate(object sender2, RoutedEventArgs args2)
                     {
-                        HorizontalAlignment = HorizontalAlignment.Center,
-                        VerticalAlignment = VerticalAlignment.Center,
-                        Opacity = 0
-                    };
-                    grade.SetAvailableGrades((_state._enabledEduLevels.Find(x => x.ID == _eduLevelID) as CompositeComponent).Components);
-                    //grade.SetAvailableGrades(Differention((_state._enabledEduLevels.Find(x => x.ID == _eduLevelID) as CompositeComponent).Components, _state._enabledGrades));
-                    grade.button.Click += delegate (object sender3, RoutedEventArgs args3)
-                    {
-                        //set GradeID
-                        Component selectedGrade = grade.GetSelectedGrade();
-                        _gradeID = selectedGrade.ID;
-                        //--------------------------------------------------------
-                        if (!_state._enabledGrades.Exists(x => x.ID == _gradeID))
-                            _state._enabledGrades.Add(selectedGrade);
-                        //--------------------------------------------------------
-                        if (_keyType == KeyValidation.ValidOneTerm)
+                        //set EduLevelID
+                        Component selectedLevel = level.GetSelectedComponent();
+                        _eduLevelID = selectedLevel.ID;
+                        GradeSelection grade = new GradeSelection(level.GetSelectedEducationalLevel())
                         {
-                            TermSelection term = new TermSelection()
+                            HorizontalAlignment = HorizontalAlignment.Center,
+                            VerticalAlignment = VerticalAlignment.Center,
+                            Opacity = 0
+                        };
+                        var component = selectedLevel as CompositeComponent;
+                        if (component != null && component.Components.Count != 0)
+                        {
+                            grade.SetAvailableGrades(component.Components);
+                            //grade.SetAvailableGrades(Differention((_state._enabledEduLevels.Find(x => x.ID == _eduLevelID) as CompositeComponent).Components, _state._enabledGrades));
+                            grade.button.Click += delegate(object sender3, RoutedEventArgs args3)
                             {
-                                HorizontalAlignment = HorizontalAlignment.Center,
-                                VerticalAlignment = VerticalAlignment.Center,
-                                Opacity = 0
+                                //set GradeID
+                                Component selectedGrade = grade.GetSelectedGrade();
+                                _gradeID = selectedGrade.ID;
+                                if (_keyType == KeyValidation.ValidOneTerm)
+                                {
+                                    TermSelection term = new TermSelection
+                                    {
+                                        HorizontalAlignment = HorizontalAlignment.Center,
+                                        VerticalAlignment = VerticalAlignment.Center,
+                                        Opacity = 0
+                                    };
+                                    var component1 = selectedGrade as CompositeComponent;
+                                    if (component1 != null)
+                                    {
+                                        var o = component1.Components.Find(x => x.ID == _gradeID) as Grade;
+                                        if (o != null)
+                                        {
+                                            term.SetAvailableTerms(o.Components);
+                                            //term.SetAvailableTerms(Differention((_state._enabledGrades.Find(x => x.ID == _gradeID) as Grade).Components, _state._enabledTerms));
+                                            term.button.Click += delegate(object ob, RoutedEventArgs eventAr)
+                                            {
+                                                if (component1.Components.Count != 0)
+                                                {
+                                                    //--------------------------------------------------------
+                                                    if (!_state._enabledCourses.Exists(x => x.ID == _courseID))
+                                                        _state._enabledCourses.Add(language);
+                                                    //--------------------------------------------------------
+                                                    //--------------------------------------------------------
+                                                    if (!_state._enabledEduLevels.Exists(x => x.ID == _eduLevelID))
+                                                        _state._enabledEduLevels.Add(selectedLevel);
+                                                    //--------------------------------------------------------
+                                                    //--------------------------------------------------------
+                                                    if (!_state._enabledGrades.Exists(x => x.ID == _gradeID))
+                                                        _state._enabledGrades.Add(selectedGrade);
+                                                    //--------------------------------------------------------
+
+                                                    //set TermID and ExpDate
+                                                    int selectedTerm = term.GetSelectedTerm();
+                                                    _termID = selectedTerm;
+                                                    //--------------------------------------------------------
+                                                    if (!_state._enabledTerms.Exists(x => x.Key == _gradeID && x.Value == _termID))
+                                                        _state._enabledTerms.Add(new KeyValuePair<long, int>(_gradeID, _termID));
+                                                    //ExpDate
+                                                    //--------------------------------------------------------
+                                                    Confirm(true);
+                                                }
+                                                else
+                                                    MessageBox.Show("There is no available content for this grade.");
+                                            };
+                                            _previousControls.Push(grade);
+                                            _currentControl = term;
+                                            NextControlAnimation(grade, term);
+                                        }
+                                        else
+                                            MessageBox.Show("There is no available  content for this grade.");
+                                    }
+                                }
+                                else
+                                {
+                                    var o = selectedGrade as CompositeComponent;
+                                    if (o != null && o.Components.Count != 0)
+                                    {
+                                        //--------------------------------------------------------
+                                        if (!_state._enabledCourses.Exists(x => x.ID == _courseID))
+                                            _state._enabledCourses.Add(language);
+                                        //--------------------------------------------------------
+                                        //--------------------------------------------------------
+                                        if (!_state._enabledEduLevels.Exists(x => x.ID == _eduLevelID))
+                                            _state._enabledEduLevels.Add(selectedLevel);
+                                        //--------------------------------------------------------
+                                        //--------------------------------------------------------
+                                        if (!_state._enabledGrades.Exists(x => x.ID == _gradeID))
+                                            _state._enabledGrades.Add(selectedGrade);
+                                        //--------------------------------------------------------
+                                        //set ExpDate
+                                        Confirm(false);
+                                    }
+                                    else
+                                        MessageBox.Show("There is no available content for this grade.");
+                                }
                             };
-                            term.SetAvailableTerms((_state._enabledGrades.Find(x => x.ID == _gradeID) as Grade).Components);
-                            //term.SetAvailableTerms(Differention((_state._enabledGrades.Find(x => x.ID == _gradeID) as Grade).Components, _state._enabledTerms));
-                            term.button.Click += delegate (object ob, RoutedEventArgs eventAr)
-                            {
-                                //set TermID and ExpDate
-                                int selectedTerm = term.GetSelectedTerm();
-                                _termID = selectedTerm;
-                                //--------------------------------------------------------
-                                if (!_state._enabledTerms.Exists(x => ((KeyValuePair<long, int>)x).Key == _gradeID && ((KeyValuePair<long, int>)x).Value == _termID))
-                                    _state._enabledTerms.Add(new KeyValuePair<long, int>(_gradeID, _termID));
-                                //ExpDate
-                                //--------------------------------------------------------
-                                Confirm(true);
-                            };
-                            _previousControls.Push(grade);
-                            _currentControl = term;
-                            NextControlAnimation(grade, term);
+                            _previousControls.Push(level);
+                            _currentControl = grade;
+                            NextControlAnimation(level, grade);
                         }
                         else
-                        {
-                            //set ExpDate
-                            Confirm(false);
-                        }
+                            MessageBox.Show("There is no available content for this educational level.");
                     };
-                    _previousControls.Push(level);
-                    _currentControl = grade;
-                    NextControlAnimation(level, grade);
-                };
-                _previousControls.Push(selection);
-                _currentControl = level;
-                NextControlAnimation(selection, level);
+                    _previousControls.Push(selection);
+                    _currentControl = level;
+                    NextControlAnimation(selection, level);
+                }
+                else
+                    MessageBox.Show("There is no available content for this course.");
             };
             _previousControls.Push(_currentControl);
             NextControlAnimation(_currentControl, selection);
@@ -755,13 +919,13 @@ namespace Diction_Master___Library
                     //ids and key are hardcoded
                     long crsID, eduID, grID, tmID;
                     crsID = eduID = grID = tmID = 0;
-                    KeyValuePair<long, DateTime> ret = _auth.SubscribeClientSide(_state.clientProfile.Username, _state._pass, _state.clientProfile.Salt,
+                    NetworkOperationResult ret = _auth.SubscribeClientSide(_state.clientProfile.Username, _state._pass, _state.clientProfile.Salt,
                         _key, _state.clientProfile.ID, crsID, eduID, grID, tmID);
 
-                    if (ret.Key != 0)
+                    if (ret.Status == NetworkOperationStatus.Success)
                     {
-                        subscription.ID = ret.Key;
-                        subscription.ExpirationDateTime = ret.Value; //not good date - it should be this plus something
+                        subscription.ID = ret.ValidUntil.Key;
+                        subscription.ExpirationDateTime = ret.ValidUntil.Value; //not good date - it should be this plus something
                         _state._contentEnabled = true;
                         _state.clientProfile.ActiveSubscriptions.Add(subscription); 
                     }
@@ -793,32 +957,6 @@ namespace Diction_Master___Library
             }
             ShowContent();
         }
-
-        private List<Component> Differention(List<Component> listA, List<Component> listB)
-        {
-            List<Component> listC = new List<Component>();
-            foreach (Component itemA in listA)
-            {
-                if (!listB.Exists(x => x.ID == itemA.ID))
-                {
-                    listC.Add(itemA);
-                }
-            }
-            return listC;
-        }
-
-        //private List<Component> Differention(List<Component> listA, List<KeyValuePair<long, int>> listB)
-        //{
-        //    List<Component> listC = new List<Component>();
-        //    foreach (Component itemA in listA)
-        //    {
-        //        if (!listB.Exists(x => (x as KeyValuePair<long, int>).Key == itemA.ID))
-        //        {
-        //            listC.Add(itemA);
-        //        }
-        //    }
-        //    return listC;
-        //}
 
         #endregion
 
@@ -858,7 +996,102 @@ namespace Diction_Master___Library
                             Num = 1,
                             Title = "Week 1"
                         });
-                        (((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 5) as EducationalLevel)
+            ((((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 5) as EducationalLevel)
+                        .Components.Find(z => z.ID == 17) as Grade).Components.Find(k => k.ID == 73) as Week).Components.Add(new Lesson
+            {
+                ID = 83,
+                ParentID = 17,
+                Num = 1,
+                Title = "Lesson 1"
+            });
+            (((((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 5) as EducationalLevel)
+                        .Components.Find(z => z.ID == 17) as Grade).Components.Find(k => k.ID == 73) as Week).Components.Find(l => l.ID == 83) as Lesson)
+                        .Components.Add(new ContentFile
+                {
+                    ID = 88,
+                    ParentID = 83,
+                    URI = "Artist - Black - Wonderful life HD.mp3",
+                    icon = "../Resources/audio.png",
+                    Title = "Audio 1",
+                    Description = "Wonderful life song from Black.",
+                    ComponentType = ComponentType.Audio
+                });
+            (((((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 5) as EducationalLevel)
+                        .Components.Find(z => z.ID == 17) as Grade).Components.Find(k => k.ID == 73) as Week).Components.Find(l => l.ID == 83) as Lesson)
+                        .Components.Add(new ContentFile
+                {
+                    ID = 89,
+                    ParentID = 83,
+                    URI = "Content definition.avi",
+                    icon = "../Resources/video.png",
+                    Title = "Video 1",
+                    Description = "Video that explains how to define content on server",
+                    ComponentType = ComponentType.Video
+                });
+            (((((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 5) as EducationalLevel)
+                        .Components.Find(z => z.ID == 17) as Grade).Components.Find(k => k.ID == 73) as Week).Components.Find(l => l.ID == 83) as Lesson)
+                        .Components.Add(new ContentFile
+                {
+                    ID = 90,
+                    ParentID = 83,
+                    URI = "hgignore_global.txt",
+                    icon = "../Resources/document.png",
+                    Title = "Document 1",
+                    Description = "Git local ignore file",
+                    ComponentType = ComponentType.Document
+                });
+            (((((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 5) as EducationalLevel)
+                        .Components.Find(z => z.ID == 17) as Grade).Components.Find(k => k.ID == 73) as Week).Components.Find(l => l.ID == 83) as Lesson)
+                        .Components.Add(new Quiz
+                {
+                    ID = 91,
+                    ParentID = 83,
+                    Title = "Quiz 1"
+                });
+            ((((((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 5) as EducationalLevel)
+                        .Components.Find(z => z.ID == 17) as Grade).Components.Find(k => k.ID == 73) as Week).Components.Find(l => l.ID == 83) as Lesson)
+                        .Components.Find(m => m.ID == 91) as Quiz).Components.Add(new Question
+                {
+                    ID = 92,
+                    ParentID = 91,
+                    Type = QuestionType.Text,
+                    Text = "Hello! What is your name, how old are you and where are you from?",
+                    Answer = "Hello! My name is Aleksandar Rajic. I am 23-year old and i am coming from Serbia."
+                });
+            ((((((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 5) as EducationalLevel)
+                       .Components.Find(z => z.ID == 17) as Grade).Components.Find(k => k.ID == 73) as Week).Components.Find(l => l.ID == 83) as Lesson)
+                       .Components.Find(m => m.ID == 91) as Quiz).Components.Add(new Question
+                {
+                    ID = 93,
+                    ParentID = 91,
+                    Type = QuestionType.Choice,
+                    Text = "Hello! What is your name, how old are you and where are you from?",
+                    Answer = "Hello! My name is Aleksandar Rajic. I am 23-year old and i am coming from Serbia.",
+                    WrongAnswers = new ObservableCollection<string>(new[]
+                    {
+                        "Hello! My name is Aleksandar Rajic and am coming from Serbia.",
+                        "Hello! I am 23-year old and i am coming from Serbia.",
+                        "Hello! My name is Aleksandar Rajic."
+                    })
+                });
+            ((((((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 5) as EducationalLevel)
+                       .Components.Find(z => z.ID == 17) as Grade).Components.Find(k => k.ID == 73) as Week).Components.Find(l => l.ID == 83) as Lesson)
+                       .Components.Find(m => m.ID == 91) as Quiz).Components.Add(new Question
+                {
+                    ID = 94,
+                    ParentID = 91,
+                    Type = QuestionType.Puzzle,
+                    Text = "Hello! What is your name, how old are you and where are you from?",
+                    Answer = "Hello! My name is Aleksandar Rajic. I am 23-year old and i am coming from Serbia.",
+                    Pieces = new ObservableCollection<string>(new[]
+                    {
+                        "Hello!",
+                        "My name is Aleksandar Rajic.",
+                        "I am 23-year old",
+                        "and i am coming from Serbia."
+                    })
+                });
+            (((_state._availableCourses.Find(x => x.ID == 1) as Course).Components.Find(y => (y as EducationalLevel).ID == 5) as EducationalLevel)
                         .Components.Find(z => z.ID == 17) as Grade).Components.Add(new Week
                         {
                             ID = 74,
@@ -2234,7 +2467,32 @@ namespace Diction_Master___Library
             sub.Key = Encoding.Unicode.GetString(keyBytes);
         }
 
-        #endregion
+        //private List<Component> Differention(List<Component> listA, List<Component> listB)
+        //{
+        //    List<Component> listC = new List<Component>();
+        //    foreach (Component itemA in listA)
+        //    {
+        //        if (!listB.Exists(x => x.ID == itemA.ID))
+        //        {
+        //            listC.Add(itemA);
+        //        }
+        //    }
+        //    return listC;
+        //}
 
+        //private List<Component> Differention(List<Component> listA, List<KeyValuePair<long, int>> listB)
+        //{
+        //    List<Component> listC = new List<Component>();
+        //    foreach (Component itemA in listA)
+        //    {
+        //        if (!listB.Exists(x => (x as KeyValuePair<long, int>).Key == itemA.ID))
+        //        {
+        //            listC.Add(itemA);
+        //        }
+        //    }
+        //    return listC;
+        //}
+
+        #endregion
     }
 }

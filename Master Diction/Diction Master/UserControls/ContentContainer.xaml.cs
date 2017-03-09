@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -38,13 +39,14 @@ namespace Diction_Master___Library.UserControls
         
         private ClientState _state = new ClientState();
 
-        public ContentContainer()
+        public ContentContainer(ClientState state)
         {
+            _state = state;
             _termI = new List<Week>();
             _termII = new List<Week>();
             _termIII = new List<Week>();
             InitializeComponent();
-            CreateContent();
+            //CreateContent();
             foreach (Week item in (_state._enabledGrades.First() as CompositeComponent).Components)
             {
                 switch (item.Term)
@@ -85,16 +87,20 @@ namespace Diction_Master___Library.UserControls
                 {
                     Name = "panel_" + name,
                     Height = 30,
-                    Width = Weeks.Width// - Weeks.Margin.Left - Weeks.Margin.Right
+                    MinWidth = Weeks.MinWidth// - Weeks.Margin.Left - Weeks.Margin.Right
                 };
+                panel.HorizontalAlignment = HorizontalAlignment.Stretch;
                 Button button = new Button
                 {
                     Name = "button_" + name,
                     Height = 30,
-                    Width = panel.Width,
-                    Margin = new Thickness(0),
-                    Content = item.Title
+                    MinWidth = panel.MinWidth,
+                    Margin = new Thickness(0, 2, 0, 0),
+                    Content = item.Title,
+                    BorderThickness = new Thickness(0),
+                    Background = new SolidColorBrush(Color.FromRgb(93, 177, 246))
                 };
+                button.HorizontalAlignment = HorizontalAlignment.Stretch;
                 button.Click += delegate (object sender, RoutedEventArgs args)
                 {
                     WeekClicked(sender as Button);
@@ -111,25 +117,29 @@ namespace Diction_Master___Library.UserControls
             {
                 string name = item.Title.Replace(' ', '_') + "_num_" + item.Num + "_" + item.ID;
                 BrushConverter bc = new BrushConverter();
-                Brush brush = (Brush)bc.ConvertFrom("#FCFCFC");
+                Brush brush = (Brush)bc.ConvertFrom("#F2F2F2F2");
                 brush.Freeze();
                 WrapPanel panel = new WrapPanel
                 {
                     Name = "panel_" + name,
                     Height = 30,
-                    Width = Weeks.Width - Weeks.Margin.Left - Weeks.Margin.Right,
+                    MinWidth = Weeks.MinWidth - Weeks.Margin.Left - Weeks.Margin.Right,
                     Margin = new Thickness(Weeks.Margin.Left, 0, 0, 0),
                     Visibility = Visibility.Collapsed,
                     Background = brush
                 };
+                panel.HorizontalAlignment = HorizontalAlignment.Stretch;
                 Button button = new Button
                 {
                     Name = "button_" + name,
                     Height = 30,
-                    Width = panel.Width,
-                    Margin = new Thickness(0),
-                    Content = item.Title
+                    MinWidth = panel.MinWidth,
+                    Margin = new Thickness(0, 2, 0, 0),
+                    Content = item.Title,
+                    BorderThickness = new Thickness(0),
+                    Background = new SolidColorBrush(Color.FromRgb(136, 201, 255))
                 };
+                button.HorizontalAlignment = HorizontalAlignment.Stretch;
                 button.Click += delegate (object sender, RoutedEventArgs args)
                 {
                     LessonClicked(sender as Button);
@@ -263,7 +273,7 @@ namespace Diction_Master___Library.UserControls
                     string sub = clickedPanel.Name.Substring(clickedPanel.Name.IndexOf("num_"));
                     string idStr = sub.Split('_')[2];
                     long id = Convert.ToInt64(idStr);
-                    double r1 = clickedPanel.Width / 30;
+                    double r1 = clickedPanel.ActualWidth / 30;
                     double r2 = (double)(clickedPanel.Children.Count - 1)/ (r1 - (r1 - (int)(r1)));
                     int num = (int)(r2);
                     if (r2 - num > 0)
@@ -334,9 +344,9 @@ namespace Diction_Master___Library.UserControls
 
         private void CreateContentViewer(long id, Component component)
         {
-            if (component != null)
+            if (component != null && id != 0)
             {
-                WrapPanel.Children.Clear();
+                GridContent.Children.Clear();
                 if (component.GetType().Name == "ContentFile")
                 {
                     ContentFile file = component as ContentFile;
@@ -348,10 +358,12 @@ namespace Diction_Master___Library.UserControls
                             case ComponentType.Video:
                                 MediaViewer viewer = new MediaViewer
                                 {
-                                    RenderSize = WrapPanel.RenderSize
+                                    RenderSize = GridContent.RenderSize,
+                                    HorizontalAlignment = HorizontalAlignment.Stretch,
+                                    VerticalAlignment = VerticalAlignment.Stretch
                                 };
                                 viewer.SetContent(_choosenLesson.Components.Find(x => x.ID == id) as ContentFile);
-                                viewer.right.MouseUp += delegate (object sender, MouseButtonEventArgs args)
+                                viewer.right.MouseUp += delegate
                                 {
                                     Component next = NextFile(_choosenLesson.Components.Find(x => x.ID == id));
                                     if (next != null)
@@ -359,7 +371,7 @@ namespace Diction_Master___Library.UserControls
                                         CreateContentViewer(next.ID, next);
                                     }
                                 };
-                                viewer.left.MouseUp += delegate (object sender, MouseButtonEventArgs args)
+                                viewer.left.MouseUp += delegate
                                 {
                                     Component next = PreviousFile(_choosenLesson.Components.Find(x => x.ID == id));
                                     if (next != null)
@@ -367,15 +379,17 @@ namespace Diction_Master___Library.UserControls
                                         CreateContentViewer(next.ID, next);
                                     }
                                 };
-                                WrapPanel.Children.Add(viewer);
+                                GridContent.Children.Add(viewer);
                                 break;
                             case ComponentType.Document:
                                 Diction_Master.UserControls.DocumentViewer docViewer = new Diction_Master.UserControls.DocumentViewer
                                 {
-                                    RenderSize = WrapPanel.RenderSize
+                                    RenderSize = GridContent.RenderSize,
+                                    HorizontalAlignment = HorizontalAlignment.Stretch,
+                                    VerticalAlignment = VerticalAlignment.Stretch
                                 };
                                 docViewer.SetContent(_choosenLesson.Components.Find(x => x.ID == id) as ContentFile);
-                                docViewer.right.MouseUp += delegate (object sender, MouseButtonEventArgs args)
+                                docViewer.right.MouseUp += delegate
                                 {
                                     //choosen lesson null
                                     Component next = NextFile(_choosenLesson.Components.Find(x => x.ID == id));
@@ -384,15 +398,15 @@ namespace Diction_Master___Library.UserControls
                                         CreateContentViewer(next.ID, next);
                                     }
                                 };
-                                docViewer.left.MouseUp += delegate (object sender, MouseButtonEventArgs args)
+                                docViewer.left.MouseUp += delegate
                                 {
-                                    Component next = PreviousFile(_choosenLesson.Components.Find(x => x.ID == id));
-                                    if (next != null)
+                                    Component previous = PreviousFile(_choosenLesson.Components.Find(x => x.ID == id));
+                                    if (previous != null)
                                     {
-                                        CreateContentViewer(next.ID, next);
+                                        CreateContentViewer(previous.ID, previous);
                                     }
                                 };
-                                WrapPanel.Children.Add(docViewer);
+                                GridContent.Children.Add(docViewer);
                                 break;
                         }
                     }
@@ -401,27 +415,43 @@ namespace Diction_Master___Library.UserControls
                 {
                     QuizViewer viewer = new QuizViewer
                     {
-                        RenderSize = WrapPanel.RenderSize
+                        RenderSize = GridContent.RenderSize,
+                        HorizontalAlignment = HorizontalAlignment.Stretch,
+                        VerticalAlignment = VerticalAlignment.Stretch
                     };
                     viewer.SetContent(component as Quiz);
-                    viewer.right.MouseUp += delegate (object sender, MouseButtonEventArgs args)
+                    viewer.right.MouseUp += delegate
                     {
                         Component next = NextFile(_choosenLesson.Components.Find(x => x.ID == id));
                         if (next != null)
-                        {
                             CreateContentViewer(next.ID, next);
-                        }
+                        else
+                            CreateContentViewer(0, null);
                     };
-                    viewer.left.MouseUp += delegate (object sender, MouseButtonEventArgs args)
+                    viewer.left.MouseUp += delegate
                     {
-                        Component next = PreviousFile(_choosenLesson.Components.Find(x => x.ID == id));
-                        if (next != null)
+                        Component previous = PreviousFile(_choosenLesson.Components.Find(x => x.ID == id));
+                        if (previous != null)
                         {
-                            CreateContentViewer(next.ID, next);
+                            CreateContentViewer(previous.ID, previous);
                         }
                     };
-                    WrapPanel.Children.Add(viewer);
+                    GridContent.Children.Add(viewer);
                 }
+            }
+            else
+            {
+                ContentEnd end = new ContentEnd();
+                end.left.MouseUp += delegate
+                {
+                    Component previous = PreviousFile(null);
+                    if (previous != null)
+                    {
+                        CreateContentViewer(previous.ID, previous);
+                    }
+                };
+                GridContent.Children.Clear();
+                GridContent.Children.Add(end);
             }
         }
 
@@ -481,7 +511,8 @@ namespace Diction_Master___Library.UserControls
                     //set next  panel
                     if (_choosenLesson?.Components.Count != 0)
                         return _choosenLesson?.Components.ElementAt(0); //null propagation
-                    return contentFile;
+                    else
+                        return null;
                 }
             }
             return null;
@@ -489,59 +520,105 @@ namespace Diction_Master___Library.UserControls
 
         private Component PreviousFile(Component contentFile)
         {
-            int index = _choosenLesson.Components.IndexOf(contentFile);
-            if (index > 0) //this week, this lesson, just previous file
-                return _choosenLesson.Components.ElementAt(--index);
-            if (index == 0)
+            if (contentFile != null)
             {
-                //choose previous lesson
-                int lessonIndex = _choosenWeek.Components.IndexOf(_choosenLesson);
-                if (lessonIndex == 0)
+                int index = _choosenLesson.Components.IndexOf(contentFile);
+                if (index > 0) //this week, this lesson, just previous file
+                    return _choosenLesson.Components.ElementAt(--index);
+                if (index == 0)
                 {
-                    //choose previous week
-                    switch (_choosenWeek.Term)
+                    //choose previous lesson
+                    int lessonIndex = _choosenWeek.Components.IndexOf(_choosenLesson);
+                    if (lessonIndex == 0)
                     {
-                        //find week
-                        case 1:
-                            if (0 == _choosenWeek.Num - 1)
-                            {
-                                //first week, first lesson, first file - start
-                                //_choosenWeek = null;
-                                //_choosenLesson = null;
-                                return null;
-                            }
-                            //this term, previous week
-                            _choosenWeek = _termI.ElementAt(_termI.IndexOf(_choosenWeek) - 1);
-                            break;
-                        case 2:
-                            if (0 == _choosenWeek.Num - 1) //previous term, last week
-                                _choosenWeek = _termI.ElementAt(_termI.Count - 1);
-                            //this term, previous week
-                            _choosenWeek = _termII.ElementAt(_termII.IndexOf(_choosenWeek) - 1);
-                            break;
-                        case 3:
-                            if (0 == _choosenWeek.Num - 1) //previous term, last week
-                                _choosenWeek = _termII.ElementAt(_termII.Count - 1);
-                            //this term, previous week
-                            _choosenWeek = _termIII.ElementAt(_termIII.IndexOf(_choosenWeek) - 1);
-                            break;
+                        //choose previous week
+                        switch (_choosenWeek.Term)
+                        {
+                            //find week
+                            case 1:
+                                if (0 == _choosenWeek.Num - 1)
+                                {
+                                    //first week, first lesson, first file - start
+                                    //_choosenWeek = null;
+                                    //_choosenLesson = null;
+                                    return null;
+                                }
+                                //this term, previous week
+                                _choosenWeek = _termI.ElementAt(_termI.IndexOf(_choosenWeek) - 1);
+                                break;
+                            case 2:
+                                if (0 == _choosenWeek.Num - 1) //previous term, last week
+                                    _choosenWeek = _termI.ElementAt(_termI.Count - 1);
+                                //this term, previous week
+                                _choosenWeek = _termII.ElementAt(_termII.IndexOf(_choosenWeek) - 1);
+                                break;
+                            case 3:
+                                if (0 == _choosenWeek.Num - 1) //previous term, last week
+                                    _choosenWeek = _termII.ElementAt(_termII.Count - 1);
+                                //this term, previous week
+                                _choosenWeek = _termIII.ElementAt(_termIII.IndexOf(_choosenWeek) - 1);
+                                break;
+                        }
+                        if (_choosenWeek.Components.Count != 0)
+                            _choosenLesson = _choosenWeek.Components.ElementAt(_choosenWeek.Components.Count - 1) as Lesson;
+                        else
+                            _choosenLesson = null;
+                        //set previous  panel
+                        return _choosenLesson?.Components.ElementAt(0);
                     }
+                    //this week, previous lesson, last file
                     if (_choosenWeek.Components.Count != 0)
-                        _choosenLesson = _choosenWeek.Components.ElementAt(_choosenWeek.Components.Count - 1) as Lesson;
+                        _choosenLesson = _choosenWeek.Components.ElementAt(--lessonIndex) as Lesson;
                     else
                         _choosenLesson = null;
                     //set previous  panel
-                    return _choosenLesson?.Components.ElementAt(0);
+                    return _choosenLesson?.Components.Last(); //null propagation
                 }
-                //this week, previous lesson, last file
-                if (_choosenWeek.Components.Count != 0)
-                    _choosenLesson = _choosenWeek.Components.ElementAt(--lessonIndex) as Lesson;
-                else
-                    _choosenLesson = null;
-                //set previous  panel
-                return _choosenLesson?.Components.ElementAt(0); //null propagation
+                return null; 
             }
-            return null;
+            if (_choosenLesson != null)
+            {
+                int indexLesson = _choosenWeek.Components.IndexOf(_choosenLesson);
+                if (indexLesson != -1)
+                {
+                    if (_choosenWeek.Components.Count != 0)
+                        _choosenLesson = _choosenWeek.Components.ElementAt(--indexLesson) as Lesson;
+                    else
+                        _choosenLesson = null; 
+                }
+                return null;
+            }
+            if (_choosenWeek != null)
+                if (_choosenWeek.Components.Count != 0)
+                    _choosenLesson = _choosenWeek.Components.Last() as Lesson;
+                else
+                {
+                    if (_choosenWeek.Term == 1)
+                    {
+                        if (_termI.IndexOf(_choosenWeek) > 0)
+                            _choosenWeek = _termI.ElementAt(_termI.IndexOf(_choosenWeek) - 1);
+                        else
+                            return null;
+                    }
+                    else if (_choosenWeek.Term == 2)
+                    {
+                        _choosenWeek = _termII.IndexOf(_choosenWeek) > 0
+                            ? _termII.ElementAt(_termII.IndexOf(_choosenWeek) - 1)
+                            : _termI.Last();
+                    }
+                    else if (_choosenWeek.Term == 3)
+                    {
+                        _choosenWeek = _termIII.IndexOf(_choosenWeek) > 0
+                            ? _termIII.ElementAt(_termIII.IndexOf(_choosenWeek) - 1)
+                            : _termII.Last();
+                    }
+                    _choosenLesson = _choosenWeek.Components.Last() as Lesson;
+                }
+            else
+                _choosenLesson = null;
+            //
+            //set previous  panel
+            return _choosenLesson?.Components.Last(); //null propagation
         }
 
         private void Menu_OnClick(object sender, RoutedEventArgs e)
@@ -622,6 +699,46 @@ namespace Diction_Master___Library.UserControls
                     ID = 91,
                     ParentID = 83,
                     Title = "Quiz 1"
+                });
+            ((((_state._enabledGrades.Find(x => x.ID == 17) as Grade).Components.Find(y => y.ID == 73) as Week).Components.Find(z => z.ID == 83) as Lesson)
+                .Components.Find(k => k.ID == 91 ) as Quiz).Components.Add(new Question
+                {
+                    ID = 92,
+                    ParentID = 91,
+                    Type = QuestionType.Text,
+                    Text = "Hello! What is your name, how old are you and where are you from?",
+                    Answer = "Hello! My name is Aleksandar Rajic. I am 23-year old and i am coming from Serbia."
+                });
+            ((((_state._enabledGrades.Find(x => x.ID == 17) as Grade).Components.Find(y => y.ID == 73) as Week).Components.Find(z => z.ID == 83) as Lesson)
+                .Components.Find(k => k.ID == 91) as Quiz).Components.Add(new Question
+                {
+                    ID = 93,
+                    ParentID = 91,
+                    Type = QuestionType.Choice,
+                    Text = "Hello! What is your name, how old are you and where are you from?",
+                    Answer = "Hello! My name is Aleksandar Rajic. I am 23-year old and i am coming from Serbia.",
+                    WrongAnswers = new ObservableCollection<string>(new []
+                    {
+                        "Hello! My name is Aleksandar Rajic and am coming from Serbia.",
+                        "Hello! I am 23-year old and i am coming from Serbia.",
+                        "Hello! My name is Aleksandar Rajic."
+                    })
+                });
+            ((((_state._enabledGrades.Find(x => x.ID == 17) as Grade).Components.Find(y => y.ID == 73) as Week).Components.Find(z => z.ID == 83) as Lesson)
+                .Components.Find(k => k.ID == 91) as Quiz).Components.Add(new Question
+                {
+                    ID = 94,
+                    ParentID = 91,
+                    Type = QuestionType.Puzzle,
+                    Text = "Hello! What is your name, how old are you and where are you from?",
+                    Answer = "Hello! My name is Aleksandar Rajic. I am 23-year old and i am coming from Serbia.",
+                    Pieces = new ObservableCollection<string>(new[]
+                    {
+                        "Hello!",
+                        "My name is Aleksandar Rajic.",
+                        "I am 23-year old",
+                        "and i am coming from Serbia."
+                    })
                 });
             ((_state._enabledGrades.Find(x => x.ID == 17) as Grade).Components.Find(y => y.ID == 73) as Week).Components.Add(new Lesson
             {

@@ -28,13 +28,12 @@ namespace Diction_Master.UserControls
         {
             _question = question;
             InitializeComponent();
-            Typeface myTypeface = new Typeface("Segoe UI");
-            FormattedText ft = new FormattedText(_question.Text, CultureInfo.CurrentCulture,
-                    FlowDirection.LeftToRight, myTypeface, 16, Brushes.Black);
-            Size textSize = new Size(ft.Width, ft.Height);
-            QuestionText.Width = textSize.Width;
-            QuestionText.Height = textSize.Height;
-            Answer.Margin = new Thickness(10, QuestionText.Height + 20, 10, 10);
+            QuestionText.Text = question.Text;
+        }
+
+        public string GetAnswer()
+        {
+            return Answer.Text;
         }
 
     }

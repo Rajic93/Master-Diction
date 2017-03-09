@@ -28,6 +28,7 @@ namespace Diction_Master___Server.Custom_Controls
         private bool _edit;
         private ObservableCollection<Question> questions;
         private ObservableCollection<string> _wrongAnswers;
+        private ObservableCollection<string> _pieces;
         private Question _selectedQuestion;
         private bool _newQuiz;
         private long _newQuizID;
@@ -40,6 +41,7 @@ namespace Diction_Master___Server.Custom_Controls
             _selectedLesson = parent;
             _edit = edit;
             _wrongAnswers = new ObservableCollection<string>();
+            _pieces = new ObservableCollection<string>();
             InitializeComponent();
             if (edit)
             {
@@ -126,17 +128,17 @@ namespace Diction_Master___Server.Custom_Controls
             if (radioButtonText.IsChecked.Value)
             {
                 type = QuestionType.Text;
-                id = _contentManager.AddQuestion(_selectedQuiz, textBoxQuestion.Text, textBoxAnswer.Text, type, null);
+                id = _contentManager.AddQuestion(_selectedQuiz, textBoxQuestion.Text, textBoxAnswer.Text, type, null, null);
             }
             else if (radioButtonPuzzle.IsChecked.Value)
             {
                 type = QuestionType.Puzzle;
-                id = _contentManager.AddQuestion(_selectedQuiz, textBoxQuestion.Text, textBoxAnswer.Text, type, null);
+                id = _contentManager.AddQuestion(_selectedQuiz, textBoxQuestion.Text, textBoxAnswer.Text, type, null, _pieces);
             }
             else
             {
                 type = QuestionType.Choice;
-                id = _contentManager.AddQuestion(_selectedQuiz, textBoxQuestion.Text, textBoxAnswer.Text, type, _wrongAnswers);
+                id = _contentManager.AddQuestion(_selectedQuiz, textBoxQuestion.Text, textBoxAnswer.Text, type, _wrongAnswers, null);
             }
             if (id > 0)
             {
@@ -155,17 +157,17 @@ namespace Diction_Master___Server.Custom_Controls
                 if (radioButtonText.IsChecked.Value)
                 {
                     type = QuestionType.Text;
-                     _contentManager.EditQuestion((listBox.SelectedItem as Component).ID, textBoxQuestion.Text, textBoxAnswer.Text, type, null);
+                     _contentManager.EditQuestion((listBox.SelectedItem as Component).ID, textBoxQuestion.Text, textBoxAnswer.Text, type, null, null);
                 }
                 else if (radioButtonPuzzle.IsChecked.Value)
                 {
                     type = QuestionType.Puzzle;
-                    _contentManager.EditQuestion((listBox.SelectedItem as Component).ID, textBoxQuestion.Text, textBoxAnswer.Text, type, null);
+                    _contentManager.EditQuestion((listBox.SelectedItem as Component).ID, textBoxQuestion.Text, textBoxAnswer.Text, type, null, _pieces);
                 }
                 else
                 {
                     type = QuestionType.Choice;
-                    _contentManager.EditQuestion((listBox.SelectedItem as Component).ID, textBoxQuestion.Text, textBoxAnswer.Text, type, _wrongAnswers);
+                    _contentManager.EditQuestion((listBox.SelectedItem as Component).ID, textBoxQuestion.Text, textBoxAnswer.Text, type, _wrongAnswers, null);
                 }
                 //_contentManager.EditQuestion((listBox.SelectedItem as Question).ID, textBoxQuestion.Text, textBoxAnswer.Text, type, _wrongAnswers);
                 listBox.Items.Refresh();

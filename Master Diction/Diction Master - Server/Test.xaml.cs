@@ -37,7 +37,7 @@ namespace Diction_Master___Server
         private void ButtonBase_OnClick()
         {
             //DictionMasterServer server = NetworkModuleFactory.CreateTcpServer(IPAddress.Any, 30000, new ClientManager(ApplicationType.Diction));
-            Authentication auth = new Authentication(System.Net.Sockets.SocketType.Stream, System.Net.Sockets.AddressFamily.InterNetwork, System.Net.Sockets.ProtocolType.Tcp);
+            NetworkOperations auth = new NetworkOperations(System.Net.Sockets.SocketType.Stream, System.Net.Sockets.AddressFamily.InterNetwork, System.Net.Sockets.ProtocolType.Tcp);
             auth.Listen("127.0.0.1", 30000, new ClientManager(ApplicationType.Diction));
         }
     } 

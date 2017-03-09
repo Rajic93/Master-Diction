@@ -5,37 +5,35 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Diction_Master.UserControls"
              mc:Ignorable="d" 
-             Height="480" Width="620" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
+             MinHeight="480" MinWidth="620" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}">
 
     <Grid Margin="10" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="0.05*"></RowDefinition>
-            <RowDefinition Height="0.95*"></RowDefinition>
-        </Grid.RowDefinitions>
         <Grid Margin="0,0.4,0,0" Grid.Row="1" Background="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0.2*"></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition Width="0.2*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <WrapPanel x:Name="WrapPanel" Margin="10.4,27,10.4,10.4" Grid.Column="1" Background="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}"/>
 
-            <Border Grid.Column="0" BorderThickness="2,0,2,2" BorderBrush="CornflowerBlue">
+            <Border Grid.Column="0" BorderThickness="1,1,0,1" BorderBrush="CornflowerBlue">
                 <Image x:Name="left" HorizontalAlignment="Center" Height="30" VerticalAlignment="Center" Width="30" Source="../Resources/left.png"/>
             </Border>
-            <Border Grid.Column="2" BorderThickness="2,0,2,2" BorderBrush="CornflowerBlue">
+            <Border Grid.Column="2" BorderThickness="0,1,1,1" BorderBrush="CornflowerBlue">
                 <Image x:Name="right" HorizontalAlignment="Center" Height="30" VerticalAlignment="Center" Width="30" Source="../Resources/right.png"/>
             </Border>
-            <ProgressBar x:Name="ProgressBar" HorizontalAlignment="Left" Height="9" Margin="9.4,8,0,0" VerticalAlignment="Top" Width="410" RenderTransformOrigin="0.5,0.5" Grid.Column="1">
-                <ProgressBar.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform ScaleY="-1"/>
-                        <SkewTransform/>
-                        <RotateTransform/>
-                        <TranslateTransform/>
-                    </TransformGroup>
-                </ProgressBar.RenderTransform>
-            </ProgressBar>
+            <Border Grid.Column="1" BorderThickness="1" BorderBrush="CornflowerBlue">
+                <ProgressBar x:Name="ProgressBar" Height="9" Margin="9.4,7,9.4,420.4" Width="410" RenderTransformOrigin="0.5,0.5" Grid.Column="1" Foreground="#FF064BB0" VerticalAlignment="Top">
+                    <ProgressBar.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleY="-1"/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </ProgressBar.RenderTransform>
+                </ProgressBar>
+            </Border>
+            <Grid x:Name="Grid" Grid.Column="1" Margin="10.4,27,10.4,10.4"/>
         </Grid>
 
     </Grid>

@@ -862,7 +862,7 @@ namespace Diction_Master___Library
         #region Question
 
         public long AddQuestion(long parentID, string text, string answer, QuestionType type,
-            ObservableCollection<string> wrongAnswers)
+            ObservableCollection<string> wrongAnswers, ObservableCollection<string> pieces)
         {
             if (ComponentsCache.ContainsKey(parentID))
             {
@@ -875,7 +875,7 @@ namespace Diction_Master___Library
                     else
                         //mozda u factory treba da se promeni lista
                         question =
-                            ContentFactory.CreateLeafComponent(id, parentID, text, answer, type, wrongAnswers) as
+                            ContentFactory.CreateLeafComponent(id, parentID, text, answer, type, wrongAnswers, pieces) as
                                 Question;
                     (ComponentsCache[parentID] as Quiz).Components.Add(question);
                     ComponentsCache[id] = question;
@@ -888,7 +888,7 @@ namespace Diction_Master___Library
         }
 
         public void EditQuestion(long id, string text, string answer, QuestionType type,
-            ObservableCollection<string> wrongAnswers)
+            ObservableCollection<string> wrongAnswers, ObservableCollection<string> pieces)
         {
             if (ComponentsCache.ContainsKey(id))
             {
@@ -897,6 +897,7 @@ namespace Diction_Master___Library
                 question.Answer = answer ?? question.Answer;
                 question.Type = type;
                 question.WrongAnswers = wrongAnswers;
+                question.Pieces = pieces;
                 LogChange(question, ContentStatus.Edit);
             }
         }

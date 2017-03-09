@@ -24,6 +24,7 @@ namespace Diction_Master___Library
         public string Answer { get; set; }
         public QuestionType Type { get; set; }
         public ObservableCollection<string> WrongAnswers { get; set; }
+        public ObservableCollection<string> Pieces { get; set; }
     }
 
     [Serializable]

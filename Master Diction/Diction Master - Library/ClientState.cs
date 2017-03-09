@@ -25,6 +25,9 @@ namespace Diction_Master___Library
         public List<KeyValuePair<long, int>> _enabledTerms;
         public List<PendingNotification> _notifications;
         public bool _pendingNotification;
+        public DateTime _lastSubscriptionCheck;
+
+        public Configuration Configuration;
 
         public string _serverIPAdd = "192.168.56.1";
         public int _port = 30012;
@@ -47,6 +50,7 @@ namespace Diction_Master___Library
             _enabledEduLevels = new List<Component>();
             _enabledGrades = new List<Component>();
             _enabledTerms = new List<KeyValuePair<long, int>>();
+            Configuration = new Configuration();
         }
 
         public void SetNotification(PendingNotification notification)

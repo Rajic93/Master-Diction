@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Diction_Master___Library.UserControls"
              mc:Ignorable="d" 
-             Height="658" Width="998" MinHeight="658" MinWidth="998" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}">
+             MinHeight="618" MinWidth="978" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}">
     <Grid x:Name="Grid">
         <Grid.ColumnDefinitions>
             <ColumnDefinition x:Name="Navigation" Width="0.25*"></ColumnDefinition>
@@ -13,15 +13,17 @@
             <ColumnDefinition x:Name="Content" Width="0.75*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Border BorderThickness="2" BorderBrush="CornflowerBlue"></Border>
-        <WrapPanel x:Name="Weeks" Margin="10,50,9.6,9.6" Background="#FF5DB1F6" Height="598.4" Width="230.4" VerticalAlignment="Top" HorizontalAlignment="Left">
+        <StackPanel x:Name="Weeks" Margin="10,50,9.6,9.6" MinHeight="588.8" MinWidth="230.4">
             <!--<Grid  Height="598" Width="230">
 
             </Grid>-->
-        </WrapPanel>
+        </StackPanel>
         <Border BorderThickness="2" BorderBrush="CornflowerBlue" Grid.Column="1">
-            <WrapPanel x:Name="WrapPanel" Margin="8.4,8.4,7.4,7.2">
-
-            </WrapPanel>
+            <Grid x:Name="GridContent">
+                <Grid.Background>
+                    <ImageBrush ImageSource="/Diction Master;component/Resources/Diction Masters.png" Stretch="Uniform"/>
+                </Grid.Background>
+            </Grid>
         </Border>
         <Button x:Name="Menu" Grid.Column="0" BorderThickness="0" HorizontalAlignment="Right"  VerticalAlignment="Top" Width="40" Height="40" Background="{x:Null}" Click="Menu_OnClick" Margin="5">
             <StackPanel>

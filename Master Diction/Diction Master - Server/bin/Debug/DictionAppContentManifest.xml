@@ -264,6 +264,7 @@
                             <Answer>Jonathan Onah</Answer>
                             <Type>Text</Type>
                             <WrongAnswers />
+                            <Pieces />
                           </Component>
                           <Component xsi:type="Question">
                             <ID>45</ID>
@@ -273,6 +274,7 @@
                             <Answer>Aleksandar Rajic</Answer>
                             <Type>Puzzle</Type>
                             <WrongAnswers />
+                            <Pieces />
                           </Component>
                         </Components>
                         <Title>Finals</Title>

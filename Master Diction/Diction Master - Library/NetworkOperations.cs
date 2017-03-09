@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace Diction_Master___Library
 {
-    public class Authentication
+    public class NetworkOperations
     {
         public delegate bool Subscribe(Socket socket, string username);
 
@@ -23,9 +23,9 @@ namespace Diction_Master___Library
 
 
         private Socket _socket;
-        private AddressFamily _addressFamily;
-        private SocketType _socketType;
-        private ProtocolType _protocolType;
+        private readonly AddressFamily _addressFamily;
+        private readonly SocketType _socketType;
+        private readonly ProtocolType _protocolType;
         private IPAddress _ipAddress;
         private IPEndPoint _ipEndPoint;
 
@@ -33,7 +33,7 @@ namespace Diction_Master___Library
 
         private ClientState _state;
 
-        public Authentication(SocketType socketType, AddressFamily family, ProtocolType protocolType)
+        public NetworkOperations(SocketType socketType, AddressFamily family, ProtocolType protocolType)
         {
             _addressFamily = family;
             _socketType = socketType;
@@ -49,7 +49,6 @@ namespace Diction_Master___Library
         {
             try
             {
-                _addressFamily = AddressFamily.InterNetwork;
                 _ipAddress = IPAddress.Parse(ipAdd);
                 _ipEndPoint = new IPEndPoint(_ipAddress, port);
                 _socket = new Socket(_addressFamily, _socketType, _protocolType);
@@ -165,10 +164,13 @@ namespace Diction_Master___Library
 
         #region Login
 
-        public bool LoginClientSide(string username, string password)
+        public NetworkOperationResult LoginClientSide(string username, string password)
         {
             if (_socket == null)
-                return false;
+                return new NetworkOperationResult
+                {
+                    Status = NetworkOperationStatus.Failed
+                };
             //send action
             byte[] login = Encoding.Unicode.GetBytes("LOGIN");
             _socket.Send(BitConverter.GetBytes(login.Length));
@@ -192,10 +194,16 @@ namespace Diction_Master___Library
                     _socket.Send(hashedPassword);
                     _socket.Receive(ok);
                     if (Encoding.Unicode.GetString(ok) == "OK")
-                        return true;
+                        return new NetworkOperationResult
+                        {
+                            Status = NetworkOperationStatus.Success
+                        };
                 }
             }
-            return false;
+            return new NetworkOperationResult
+            {
+                Status = NetworkOperationStatus.InvalidCredetials
+            };
         }
 
         private void LoginServerSide(ref Socket socket, ClientManager clientManager)
@@ -236,7 +244,7 @@ namespace Diction_Master___Library
 
         #region Register
 
-        public KeyValuePair<byte[], long> RegisterClientSide(string username, string password, byte[] saltBytes)
+        public NetworkOperationResult RegisterClientSide(string username, string password, byte[] saltBytes)
         {
             if (_socket == null)
                 throw new Exception("Socket not initialized");
@@ -275,15 +283,36 @@ namespace Diction_Master___Library
                             _socket.Receive(idBytes);
                             long id = BitConverter.ToInt64(idBytes, 0);
                             //created new user
-                            return new KeyValuePair<byte[], long>(salt, id);
+                            return new NetworkOperationResult
+                            {
+                                Status = NetworkOperationStatus.Success,
+                                Credetials = new KeyValuePair<byte[], long>(salt, id)
+                            };
                         }
                         //server error
                     }
                     //server error
                 }
-                //username exists
+                else
+                {
+                    if (Encoding.Unicode.GetString(ok) == "ER")
+                    {
+                        byte[] buffer = new byte[1];
+                        _socket.Receive(buffer);
+                        buffer = new byte[BitConverter.ToInt16(buffer, 0)];
+                        _socket.Receive(buffer);
+                        return new NetworkOperationResult
+                        {
+                            Status = NetworkOperationStatus.UnavailableUsername,
+                            Suggestions = BitConverter.ToString(buffer, 0)
+                        }; 
+                    }
+                }
             }
-            return new KeyValuePair<byte[], long>();
+            return new NetworkOperationResult
+            {
+                Status = NetworkOperationStatus.Failed,
+            };
         }
 
         private void RegisterServerSide(Socket socket, ClientManager clientManager)
@@ -322,14 +351,20 @@ namespace Diction_Master___Library
                 socket.Send(BitConverter.GetBytes(id));
             }
             else
+            {
                 socket.Send(err);
+                string suggestions = clientManager.GetUsernameSuggestions(username);
+                byte[] suggestionsBytes = Encoding.UTF8.GetBytes(suggestions);
+                socket.Send(BitConverter.GetBytes(suggestionsBytes.Length));
+                socket.Send(suggestionsBytes);
+            }
         }
 
         #endregion
 
         #region Subscribe
 
-        public KeyValuePair<long, DateTime> SubscribeClientSide(string username, string password, byte[] salt, string key,
+        public NetworkOperationResult SubscribeClientSide(string username, string password, byte[] salt, string key,
             long clientID, long courseID, long eduLevelID, long gradeID, long termID)
         {
             if (_socket == null)
@@ -391,16 +426,22 @@ namespace Diction_Master___Library
                                 int month = BitConverter.ToInt32(intBytes, 0);
                                 Array.Copy(buffer, 16, intBytes, 0, 4);
                                 int year = BitConverter.ToInt32(intBytes, 0);
-                                return new KeyValuePair<long, DateTime>(id, new DateTime(year, month, day));
+                                return new NetworkOperationResult
+                                {
+                                    ValidUntil = new KeyValuePair<long, DateTime>(id, new DateTime(year, month, day))
+                                };
                             }
                         }
                     }
                 }
             }
-            return new KeyValuePair<long, DateTime>();
+            return new NetworkOperationResult
+            {
+                Status = NetworkOperationStatus.Failed
+            };
         }
 
-        public void SubscribeServerSide(Socket socket, ClientManager clientManager)
+        private void SubscribeServerSide(Socket socket, ClientManager clientManager)
         {
             byte[] ok = Encoding.Unicode.GetBytes("OK");
             byte[] err = Encoding.Unicode.GetBytes("ER");
@@ -517,7 +558,6 @@ namespace Diction_Master___Library
 
         public void NotifyServerSide(PendingNotification notification, string ipAdd, int port)
         {
-            _addressFamily = AddressFamily.InterNetwork;
             _ipAddress = IPAddress.Parse(ipAdd);
             _ipEndPoint = new IPEndPoint(_ipAddress, port);
             _socket = new Socket(_addressFamily, _socketType, _protocolType);

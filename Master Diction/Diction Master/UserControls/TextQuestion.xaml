@@ -5,10 +5,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Diction_Master.UserControls"
              mc:Ignorable="d" 
-             Height="300" Width="300" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}">
+             MinHeight="300" MinWidth="300" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}">
     <Grid>
-        <TextBlock x:Name="QuestionText" Margin="10,10,10,155" TextWrapping="Wrap" Text="" Width="280"/>
-        <TextBox x:Name="Answer" Margin="10,150,10,10" TextWrapping="Wrap" Text=""/>
+        <TextBlock x:Name="QuestionText" Margin="10,10,11,180" TextWrapping="Wrap" Text=""/>
+        <TextBox x:Name="Answer" Margin="10,125,11,35" TextWrapping="Wrap" Text=""/>
+        <Button x:Name="button" Content="Next" Margin="0,0,11,11" VerticalAlignment="Bottom" Width="65" HorizontalAlignment="Right"/>
 
     </Grid>
 </UserControl>

@@ -32,7 +32,12 @@ namespace Diction_Master.UserControls
 
         private void Download_OnMouseUp(object sender, MouseButtonEventArgs e)
         {
+            string extension = _contentFile.URI.Split('\\').Last().Split('.').Last();
             SaveFileDialog dialog = new SaveFileDialog();
+            dialog.Filter = "All Files (*.*)|*.*";
+            dialog.AddExtension = true;
+            dialog.DefaultExt = "." + extension;
+            dialog.FileName = _contentFile.Title;
             bool? res = dialog.ShowDialog();
             if (res != null && res == true)
             {
@@ -43,14 +48,18 @@ namespace Diction_Master.UserControls
 
         private void Download_OnMouseEnter(object sender, MouseEventArgs e)
         {
-            var image = sender as Image;
-            if (image != null) image.Opacity = 1;
+            var docImage = sender as Image;
+            if (docImage == null) return;
+            docImage.Opacity = 1;
+            image.Opacity = docImage.Opacity;
         }
 
         private void Download_OnMouseLeave(object sender, MouseEventArgs e)
         {
-            var image = sender as Image;
-            if (image != null) image.Opacity = 0.8;
+            var docImage = sender as Image;
+            if (docImage == null) return;
+            docImage.Opacity = 0.8;
+            image.Opacity = docImage.Opacity;
         }
 
         public void SetContent(ContentFile contentFile)

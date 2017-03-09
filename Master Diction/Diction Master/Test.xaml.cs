@@ -24,17 +24,17 @@ namespace Diction_Master
         public Test()
         {
             InitializeComponent();
-            WrapPanel.Children.Add(new Diction_Master___Library.UserControls.ContentContainer
+            WrapPanel.Children.Add(new Diction_Master___Library.UserControls.ContentContainer(new ClientState())
             {
-                Width = WrapPanel.Width,
-                Height = WrapPanel.Height
+                HorizontalAlignment = HorizontalAlignment.Stretch,
+                VerticalAlignment = VerticalAlignment.Stretch
             });
         }
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
             //DictionMasterClient client = NetworkModuleFactory.CreateTcpClient(IPAddress.Parse("127.0.0.1"), 30000);
-            Authentication auth = new Authentication(System.Net.Sockets.SocketType.Stream, System.Net.Sockets.AddressFamily.InterNetwork, System.Net.Sockets.ProtocolType.Tcp);
+            NetworkOperations auth = new NetworkOperations(System.Net.Sockets.SocketType.Stream, System.Net.Sockets.AddressFamily.InterNetwork, System.Net.Sockets.ProtocolType.Tcp);
             auth.Connect("127.0.0.1", 30000);
         }
     }

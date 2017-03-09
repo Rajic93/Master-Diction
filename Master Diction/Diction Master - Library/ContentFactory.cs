@@ -40,7 +40,7 @@ namespace Diction_Master___Library
         }
 
         public static Component CreateLeafComponent(long id, long parentID,
-            string text, string answer, QuestionType type, ObservableCollection<string> wrongAnswers)
+            string text, string answer, QuestionType type, ObservableCollection<string> wrongAnswers, ObservableCollection<string> pieces)
         {
             return new Question()
             {
@@ -49,7 +49,8 @@ namespace Diction_Master___Library
                 Text = text,
                 Type = type,
                 Answer = answer,
-                WrongAnswers = wrongAnswers
+                WrongAnswers = wrongAnswers,
+                Pieces = pieces
             };
         }
         /// <summary>

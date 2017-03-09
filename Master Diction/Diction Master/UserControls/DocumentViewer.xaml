@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Diction_Master.UserControls"
              mc:Ignorable="d" 
-             Height="480" Width="620" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
+             MinHeight="480" MinWidth="620" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}">
 
     <Grid Margin="10">
         <Grid.RowDefinitions>
@@ -14,7 +14,7 @@
         </Grid.RowDefinitions>
         <Border Grid.Row="0" BorderThickness="2,2,2,0" BorderBrush="CornflowerBlue"/>
         <Border Grid.Row="1" BorderThickness="2,2,2,2" BorderBrush="CornflowerBlue">
-            <TextBox x:Name="Desrciption" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center" Height="164" Margin="8.4,8.4,7.6,7.6" Width="580" IsEnabled="False" />
+            <TextBox x:Name="Desrciption" TextWrapping="Wrap" Margin="8.4,8.4,7.6,7.6" IsEnabled="False" />
         </Border>
         <Grid>
             <Grid.ColumnDefinitions>
@@ -29,6 +29,7 @@
                 <Image x:Name="right" HorizontalAlignment="Center" Height="30" VerticalAlignment="Center" Width="30" Source="../Resources/right.png"/>
             </Border>
             <Image x:Name="download" Grid.Column="1" Height="100" Width="100" Margin="164.4,88" Source="/Diction Master;component/Resources/document.png" MouseUp="Download_OnMouseUp" MouseEnter="Download_OnMouseEnter" MouseLeave="Download_OnMouseLeave" Opacity="0.8"/>
+            <Image x:Name="image" Grid.Column="1" Height="20" Margin="204.4,155,204.4,101" Width="20" Source="/Diction Master;component/Resources/download.png" Opacity="0.8"/>
         </Grid>
     </Grid>
 </UserControl>

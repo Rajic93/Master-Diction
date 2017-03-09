@@ -28,7 +28,7 @@ namespace Diction_Master___Library
 
         private List<PendingNotification> _pendingNotifications { get; set; }
 
-        private Authentication _auth;
+        private NetworkOperations _auth;
         private string _IPAddress = "192.168.56.1";
         private int _port;
         private ApplicationType _clientsType;
@@ -385,7 +385,7 @@ namespace Diction_Master___Library
             //manage exceptions
             try
             {
-                _auth = new Authentication(SocketType.Stream, AddressFamily.InterNetwork, ProtocolType.Tcp);
+                _auth = new NetworkOperations(SocketType.Stream, AddressFamily.InterNetwork, ProtocolType.Tcp);
                 _auth.Listen(_IPAddress, _port, this);
             }
             catch (ArgumentNullException ae)
@@ -465,7 +465,7 @@ namespace Diction_Master___Library
                 try
                 {
                     //try to connect to client
-                    Authentication auth = new Authentication(SocketType.Stream, AddressFamily.InterNetwork, ProtocolType.Tcp);
+                    NetworkOperations auth = new NetworkOperations(SocketType.Stream, AddressFamily.InterNetwork, ProtocolType.Tcp);
                     auth.NotifyServerSide(new PendingNotification
                     {
                         ClientID = client.ID,
@@ -586,7 +586,7 @@ namespace Diction_Master___Library
                     //send notification
                     try
                     {
-                        Authentication auth = new Authentication(SocketType.Stream, AddressFamily.InterNetwork, ProtocolType.Tcp);
+                        NetworkOperations auth = new NetworkOperations(SocketType.Stream, AddressFamily.InterNetwork, ProtocolType.Tcp);
                         auth.NotifyServerSide(notification, client.IpAddress.ToString(), 50000);
                     }
                     catch (Exception)
@@ -616,6 +616,11 @@ namespace Diction_Master___Library
         public List<ContentVersionInfo> GetChanges()
         {
             return new List<ContentVersionInfo>(_changes);
+        }
+
+        public string GetUsernameSuggestions(string username)
+        {
+            return "";
         }
     }
 }

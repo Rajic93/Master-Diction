@@ -1,0 +1,14 @@
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Audio\bin\Debug\Diction Master - Audio.exe.config
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Audio\bin\Debug\Diction Master - Audio.exe
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Audio\bin\Debug\Diction Master - Audio.pdb
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Audio\obj\Debug\Diction Master - Audio.csprojResolveAssemblyReference.cache
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Audio\obj\Debug\MainWindow.g.cs
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Audio\obj\Debug\App.g.cs
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Audio\obj\Debug\Diction Master - Audio_MarkupCompile.cache
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Audio\obj\Debug\Diction Master - Audio_MarkupCompile.lref
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Audio\obj\Debug\MainWindow.baml
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Audio\obj\Debug\Diction Master - Audio.g.resources
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Audio\obj\Debug\Diction_Master___Audio.Properties.Resources.resources
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Audio\obj\Debug\Diction Master - Audio.csproj.GenerateResource.Cache
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Audio\obj\Debug\Diction Master - Audio.exe
+D:\Projects\Upwork\Master Diction\Master Diction\Diction Master - Audio\obj\Debug\Diction Master - Audio.pdb
